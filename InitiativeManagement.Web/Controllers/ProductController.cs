@@ -1,27 +1,27 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Script.Serialization;
 using InitiativeManagement.Common;
 using InitiativeManagement.Model.Models;
 using InitiativeManagement.Service;
 using InitiativeManagement.Web.Infrastructure.Core;
 using InitiativeManagement.Web.Models;
+using System;
+using System.Collections.Generic;
+using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace InitiativeManagement.Web.Controllers
 {
     public class ProductController : Controller
     {
-        IProductService _productService;
-        IProductCategoryService _productCategoryService;
+        private IProductService _productService;
+        private IProductCategoryService _productCategoryService;
+
         public ProductController(IProductService productService, IProductCategoryService productCategoryService)
         {
             this._productService = productService;
             this._productCategoryService = productCategoryService;
         }
+
         // GET: Product
         public ActionResult Detail(int productId)
         {
@@ -59,6 +59,7 @@ namespace InitiativeManagement.Web.Controllers
 
             return View(paginationSet);
         }
+
         public ActionResult Search(string keyword, int page = 1, string sort = "")
         {
             int pageSize = int.Parse(ConfigHelper.GetByKey("PageSize"));
@@ -79,6 +80,7 @@ namespace InitiativeManagement.Web.Controllers
 
             return View(paginationSet);
         }
+
         public ActionResult ListByTag(string tagId, int page = 1)
         {
             int pageSize = int.Parse(ConfigHelper.GetByKey("PageSize"));
@@ -87,7 +89,7 @@ namespace InitiativeManagement.Web.Controllers
             var productViewModel = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(productModel);
             int totalPage = (int)Math.Ceiling((double)totalRow / pageSize);
 
-            ViewBag.Tag = Mapper.Map<Tag,TagViewModel>(_productService.GetTag(tagId));
+            ViewBag.Tag = Mapper.Map<Tag, TagViewModel>(_productService.GetTag(tagId));
             var paginationSet = new PaginationSet<ProductViewModel>()
             {
                 Items = productViewModel,
@@ -99,6 +101,7 @@ namespace InitiativeManagement.Web.Controllers
 
             return View(paginationSet);
         }
+
         public JsonResult GetListProductByName(string keyword)
         {
             var model = _productService.GetListProductByName(keyword);

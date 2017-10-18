@@ -1,12 +1,12 @@
-﻿using System;
+﻿using InitiativeManagement.Model.Models;
+using InitiativeManagement.Service;
+using System;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using InitiativeManagement.Model.Models;
-using InitiativeManagement.Service;
 
 namespace InitiativeManagement.Web.Infrastructure.Core
 {

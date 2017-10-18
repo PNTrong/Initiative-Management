@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace InitiativeManagement.Web.Models
 {
@@ -10,6 +6,7 @@ namespace InitiativeManagement.Web.Models
     {
         public string ReturnUrl { get; set; }
     }
+
     public class ExternalLoginConfirmationViewModel
     {
         [Required]

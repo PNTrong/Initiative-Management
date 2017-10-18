@@ -1,26 +1,23 @@
 ﻿using AutoMapper;
-using Microsoft.AspNet.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Script.Serialization;
 using InitiativeManagement.Common;
 using InitiativeManagement.Model.Models;
 using InitiativeManagement.Service;
 using InitiativeManagement.Web.App_Start;
 using InitiativeManagement.Web.Infrastructure.Extensions;
-
 using InitiativeManagement.Web.Infrastructure.NganLuongAPI;
 using InitiativeManagement.Web.Models;
+using Microsoft.AspNet.Identity;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace InitiativeManagement.Web.Controllers
 {
     public class ShoppingCartController : Controller
     {
-        IProductService _productService;
-        IOrderService _orderService;
+        private IProductService _productService;
+        private IOrderService _orderService;
         private ApplicationUserManager _userManager;
 
         private string merchantId = ConfigHelper.GetByKey("MerchantId");
@@ -33,6 +30,7 @@ namespace InitiativeManagement.Web.Controllers
             this._userManager = userManager;
             this._orderService = orderService;
         }
+
         // GET: ShoppingCart
         public ActionResult Index()
         {
@@ -49,6 +47,7 @@ namespace InitiativeManagement.Web.Controllers
             }
             return View();
         }
+
         public JsonResult GetUser()
         {
             if (Request.IsAuthenticated)
@@ -66,6 +65,7 @@ namespace InitiativeManagement.Web.Controllers
                 status = false
             });
         }
+
         public ActionResult CreateOrder(string orderViewModel)
         {
             var order = new JavaScriptSerializer().Deserialize<OrderViewModel>(orderViewModel);
@@ -108,14 +108,11 @@ namespace InitiativeManagement.Web.Controllers
                 }
                 else
                 {
-                  
                     var currentLink = ConfigHelper.GetByKey("CurrentLink");
                     RequestInfo info = new RequestInfo();
                     info.Merchant_id = merchantId;
                     info.Merchant_password = merchantPassword;
                     info.Receiver_email = merchantEmail;
-
-
 
                     info.cur_code = "vnd";
                     info.bank_code = order.BankCode;
@@ -150,7 +147,6 @@ namespace InitiativeManagement.Web.Controllers
                             message = result.Description
                         });
                 }
-
             }
             else
             {
@@ -160,8 +156,8 @@ namespace InitiativeManagement.Web.Controllers
                     message = "Không đủ hàng."
                 });
             }
-
         }
+
         public JsonResult GetAll()
         {
             if (Session[CommonConstants.SessionCart] == null)
@@ -173,6 +169,7 @@ namespace InitiativeManagement.Web.Controllers
                 status = true
             }, JsonRequestBehavior.AllowGet);
         }
+
         [HttpPost]
         public JsonResult Add(int productId)
         {
@@ -293,6 +290,7 @@ namespace InitiativeManagement.Web.Controllers
             }
             return View();
         }
+
         public ActionResult CancelOrder()
         {
             return View();

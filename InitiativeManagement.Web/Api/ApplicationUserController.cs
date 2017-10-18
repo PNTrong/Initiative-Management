@@ -1,11 +1,4 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Web.Http;
 using InitiativeManagement.Common.Exceptions;
 using InitiativeManagement.Model.Models;
 using InitiativeManagement.Service;
@@ -13,6 +6,12 @@ using InitiativeManagement.Web.App_Start;
 using InitiativeManagement.Web.Infrastructure.Core;
 using InitiativeManagement.Web.Infrastructure.Extensions;
 using InitiativeManagement.Web.Models;
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace InitiativeManagement.Web.Api
 {
@@ -23,6 +22,7 @@ namespace InitiativeManagement.Web.Api
         private ApplicationUserManager _userManager;
         private IApplicationGroupService _appGroupService;
         private IApplicationRoleService _appRoleService;
+
         public ApplicationUserController(
             IApplicationGroupService appGroupService,
             IApplicationRoleService appRoleService,
@@ -34,9 +34,10 @@ namespace InitiativeManagement.Web.Api
             _appGroupService = appGroupService;
             _userManager = userManager;
         }
+
         [Route("getlistpaging")]
         [HttpGet]
-        [Authorize(Roles ="ViewUser")]
+        [Authorize(Roles = "ViewUser")]
         public HttpResponseMessage GetListPaging(HttpRequestMessage request, int page, int pageSize, string filter = null)
         {
             return CreateHttpResponse(request, () =>
@@ -67,7 +68,6 @@ namespace InitiativeManagement.Web.Api
         {
             if (string.IsNullOrEmpty(id))
             {
-
                 return request.CreateErrorResponse(HttpStatusCode.BadRequest, nameof(id) + " không có giá trị.");
             }
             var user = _userManager.FindByIdAsync(id);
@@ -82,7 +82,6 @@ namespace InitiativeManagement.Web.Api
                 applicationUserViewModel.Groups = Mapper.Map<IEnumerable<ApplicationGroup>, IEnumerable<ApplicationGroupViewModel>>(listGroup);
                 return request.CreateResponse(HttpStatusCode.OK, applicationUserViewModel);
             }
-
         }
 
         [HttpPost]
@@ -101,7 +100,7 @@ namespace InitiativeManagement.Web.Api
                     if (result.Succeeded)
                     {
                         var listAppUserGroup = new List<ApplicationUserGroup>();
-                        foreach(var group in applicationUserViewModel.Groups)
+                        foreach (var group in applicationUserViewModel.Groups)
                         {
                             listAppUserGroup.Add(new ApplicationUserGroup()
                             {
@@ -119,9 +118,7 @@ namespace InitiativeManagement.Web.Api
                         _appGroupService.AddUserToGroups(listAppUserGroup, newAppUser.Id);
                         _appGroupService.Save();
 
-                      
                         return request.CreateResponse(HttpStatusCode.OK, applicationUserViewModel);
-
                     }
                     else
                         return request.CreateErrorResponse(HttpStatusCode.BadRequest, string.Join(",", result.Errors));
@@ -174,7 +171,6 @@ namespace InitiativeManagement.Web.Api
                         _appGroupService.AddUserToGroups(listAppUserGroup, applicationUserViewModel.Id);
                         _appGroupService.Save();
                         return request.CreateResponse(HttpStatusCode.OK, applicationUserViewModel);
-
                     }
                     else
                         return request.CreateErrorResponse(HttpStatusCode.BadRequest, string.Join(",", result.Errors));
@@ -192,7 +188,7 @@ namespace InitiativeManagement.Web.Api
 
         [HttpDelete]
         [Route("delete")]
-        [Authorize(Roles ="DeleteUser")]
+        [Authorize(Roles = "DeleteUser")]
         public async Task<HttpResponseMessage> Delete(HttpRequestMessage request, string id)
         {
             var appUser = await _userManager.FindByIdAsync(id);
@@ -202,6 +198,5 @@ namespace InitiativeManagement.Web.Api
             else
                 return request.CreateErrorResponse(HttpStatusCode.OK, string.Join(",", result.Errors));
         }
-
     }
 }

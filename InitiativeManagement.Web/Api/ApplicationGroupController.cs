@@ -1,4 +1,11 @@
 ﻿using AutoMapper;
+using InitiativeManagement.Common.Exceptions;
+using InitiativeManagement.Model.Models;
+using InitiativeManagement.Service;
+using InitiativeManagement.Web.App_Start;
+using InitiativeManagement.Web.Infrastructure.Core;
+using InitiativeManagement.Web.Infrastructure.Extensions;
+using InitiativeManagement.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,14 +14,6 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Script.Serialization;
-using InitiativeManagement.Common.Exceptions;
-using InitiativeManagement.Data.Infrastructure;
-using InitiativeManagement.Model.Models;
-using InitiativeManagement.Service;
-using InitiativeManagement.Web.App_Start;
-using InitiativeManagement.Web.Infrastructure.Core;
-using InitiativeManagement.Web.Infrastructure.Extensions;
-using InitiativeManagement.Web.Models;
 
 namespace InitiativeManagement.Web.Api
 {
@@ -35,11 +34,11 @@ namespace InitiativeManagement.Web.Api
             _appRoleService = appRoleService;
             _userManager = userManager;
         }
+
         [Route("getlistpaging")]
         [HttpGet]
         public HttpResponseMessage GetListPaging(HttpRequestMessage request, int page, int pageSize, string filter = null)
         {
-
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
@@ -60,6 +59,7 @@ namespace InitiativeManagement.Web.Api
                 return response;
             });
         }
+
         [Route("getlistall")]
         [HttpGet]
         public HttpResponseMessage GetAll(HttpRequestMessage request)
@@ -75,6 +75,7 @@ namespace InitiativeManagement.Web.Api
                 return response;
             });
         }
+
         [Route("detail/{id:int}")]
         [HttpGet]
         public HttpResponseMessage Details(HttpRequestMessage request, int id)
@@ -90,7 +91,7 @@ namespace InitiativeManagement.Web.Api
                 return request.CreateErrorResponse(HttpStatusCode.NoContent, "No group");
             }
             var listRole = _appRoleService.GetListRoleByGroupId(appGroupViewModel.ID);
-            appGroupViewModel.Roles = Mapper.Map<IEnumerable<ApplicationRole>,IEnumerable<ApplicationRoleViewModel>>(listRole);
+            appGroupViewModel.Roles = Mapper.Map<IEnumerable<ApplicationRole>, IEnumerable<ApplicationRoleViewModel>>(listRole);
             return request.CreateResponse(HttpStatusCode.OK, appGroupViewModel);
         }
 
@@ -120,16 +121,12 @@ namespace InitiativeManagement.Web.Api
                     _appRoleService.AddRolesToGroup(listRoleGroup, appGroup.ID);
                     _appRoleService.Save();
 
-
                     return request.CreateResponse(HttpStatusCode.OK, appGroupViewModel);
-
-
                 }
                 catch (NameDuplicatedException dex)
                 {
                     return request.CreateErrorResponse(HttpStatusCode.BadRequest, dex.Message);
                 }
-
             }
             else
             {
@@ -181,7 +178,6 @@ namespace InitiativeManagement.Web.Api
                 {
                     return request.CreateErrorResponse(HttpStatusCode.BadRequest, dex.Message);
                 }
-
             }
             else
             {

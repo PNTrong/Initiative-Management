@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
+using InitiativeManagement.Model.Models;
+using InitiativeManagement.Service;
+using InitiativeManagement.Web.Infrastructure.Core;
+using InitiativeManagement.Web.Infrastructure.Extensions;
+using InitiativeManagement.Web.Models;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using InitiativeManagement.Model.Models;
-using InitiativeManagement.Service;
-using InitiativeManagement.Web.Infrastructure.Core;
-using InitiativeManagement.Web.Models;
-using InitiativeManagement.Web.Infrastructure.Extensions;
 
 namespace InitiativeManagement.Web.Api
 {
@@ -15,7 +15,7 @@ namespace InitiativeManagement.Web.Api
     [Authorize]
     public class PostCategoryController : ApiControllerBase
     {
-        IPostCategoryService _postCategoryService;
+        private IPostCategoryService _postCategoryService;
 
         public PostCategoryController(IErrorService errorService, IPostCategoryService postCategoryService) :
             base(errorService)
@@ -57,7 +57,6 @@ namespace InitiativeManagement.Web.Api
                     _postCategoryService.Save();
 
                     response = request.CreateResponse(HttpStatusCode.Created, category);
-
                 }
                 return response;
             });
@@ -81,7 +80,6 @@ namespace InitiativeManagement.Web.Api
                     _postCategoryService.Save();
 
                     response = request.CreateResponse(HttpStatusCode.OK);
-
                 }
                 return response;
             });
@@ -102,7 +100,6 @@ namespace InitiativeManagement.Web.Api
                     _postCategoryService.Save();
 
                     response = request.CreateResponse(HttpStatusCode.OK);
-
                 }
                 return response;
             });

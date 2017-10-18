@@ -1,22 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Security.Cryptography;
-using System.Text;
 using System.IO;
 using System.Net;
+using System.Security.Cryptography;
+using System.Text;
 using System.Xml;
-
 
 namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
 {
     public class APICheckoutV3
     {
-
         public ResponseInfo GetUrlCheckout(RequestInfo requestContent, string payment_method = "NL")
         {
-
             requestContent.Payment_method = payment_method;
             String requestinfo = GetParamPost(requestContent);
             String result = HttpPost(requestinfo);
@@ -36,8 +30,6 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
 
         public ResponseCheckOrder GetTransactionDetail(RequestCheckOrder info)
         {
-
-
             String request = "";
             request += "function=" + info.Funtion;
             request += "&version=" + info.Version;
@@ -51,7 +43,6 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             XmlNodeList root = dom.DocumentElement.ChildNodes;
 
             ResponseCheckOrder objResult = new ResponseCheckOrder();
-
 
             objResult.errorCode = root.Item(0).InnerText;
             objResult.token = root.Item(1).InnerText;
@@ -75,7 +66,6 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             //objResult.buyer_address = root.Item(19).InnerText; //buyer_address
             //objResult.affiliate_code = root.Item(20).InnerText; //affiliate_code
             objResult.transactionId = root.Item(21).InnerText;
-
 
             objResult.errorCode = root.Item(0).InnerText;
             objResult.token = root.Item(1).InnerText;
@@ -102,7 +92,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             String fee_shipping =root.Item(13).InnerText;
             String return_url =root.Item(14).InnerText;
             String cancel_url =root.Item(15).InnerText;
-            String buyer_fullname =root.Item(16).InnerText;            
+            String buyer_fullname =root.Item(16).InnerText;
             String buyer_email =root.Item(17).InnerText;
             String buyer_mobile =root.Item(18).InnerText;
             String buyer_address =root.Item(19).InnerText;
@@ -114,7 +104,6 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
 
         private static String GetParamPost(RequestInfo info)
         {
-
             String request = "";
 
             request += "function=" + info.Funtion;
@@ -141,10 +130,8 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             return request;
         }
 
-
         private static String HttpPost(string postData)
         {
-
             ASCIIEncoding encoding = new ASCIIEncoding();
             byte[] data = encoding.GetBytes(postData);
 
@@ -190,66 +177,87 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
                 case "00":
                     _Message = "Giao dịch thành công";
                     break;
+
                 case "01":
                     _Message = "Lỗi, địa chỉ IP truy cập API của NgânLượng.vn bị từ chối";
                     break;
+
                 case "02":
                     _Message = "Lỗi, tham số gửi từ merchant tới NgânLượng.vn chưa chính xác.";
                     break;
+
                 case "03":
                     _Message = "Lỗi, mã merchant không tồn tại hoặc merchant đang bị khóa kết nối tới NgânLượng.vn";
                     break;
+
                 case "04":
                     _Message = "Lỗi, mã checksum không chính xác";
                     break;
+
                 case "05":
                     _Message = "Tài khoản nhận tiền nạp của merchant không tồn tại";
                     break;
+
                 case "06":
                     _Message = "Tài khoản nhận tiền nạp của  merchant đang bị khóa hoặc bị phong tỏa, không thể thực hiện được giao dịch nạp tiền";
                     break;
+
                 case "07":
                     _Message = "Thẻ đã được sử dụng";
                     break;
+
                 case "08":
                     _Message = "Thẻ bị khóa";
                     break;
+
                 case "09":
                     _Message = "Thẻ hết hạn sử dụng";
                     break;
+
                 case "10":
                     _Message = "Thẻ chưa được kích hoạt hoặc không tồn tại";
                     break;
+
                 case "11":
                     _Message = "Mã thẻ sai định dạng";
                     break;
+
                 case "12":
                     _Message = "Sai số serial của thẻ";
                     break;
+
                 case "13":
                     _Message = "Mã thẻ và số serial không khớp";
                     break;
+
                 case "14":
                     _Message = "Thẻ không tồn tại";
                     break;
+
                 case "15":
                     _Message = "Thẻ không sử dụng được";
                     break;
+
                 case "16":
                     _Message = "Số lần tưử của thẻ vượt quá giới hạn cho phép";
                     break;
+
                 case "17":
                     _Message = "Hệ thống Telco bị lỗi hoặc quá tải, thẻ chưa bị trừ";
                     break;
+
                 case "18":
                     _Message = "Hệ thống Telco  bị lỗi hoặc quá tải, thẻ có thể bị trừ, cần phối hợp với nhà mạng để đối soát";
                     break;
+
                 case "19":
                     _Message = "Kết nối NgânLượng với Telco bị lỗi, thẻ chưa bị trừ.";
                     break;
+
                 case "20":
                     _Message = "Kết nối tới Telco thành công, thẻ bị trừ nhưng chưa cộng tiền trên NgânLượng.vn";
                     break;
+
                 case "99":
                     _Message = "Lỗi tuy nhiên lỗi chưa được định nghĩa hoặc chưa xác định được nguyên nhân";
                     break;
@@ -259,6 +267,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
     }
 
     #region entity RequestCheckOrder
+
     public class RequestCheckOrder
     {
         private String _Funtion = "GetTransactionDetail";
@@ -274,12 +283,15 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
         {
             get { return _Version; }
         }
+
         private String _Merchant_id = String.Empty;
+
         public String Merchant_id
         {
             get { return _Merchant_id; }
             set { _Merchant_id = value; }
         }
+
         private String _Merchant_password = String.Empty;
 
         public String Merchant_password
@@ -287,6 +299,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             get { return _Merchant_password; }
             set { _Merchant_password = value; }
         }
+
         private String _token = String.Empty;
 
         public String Token
@@ -295,7 +308,6 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             set { _token = value; }
         }
     }
-
 
     public class ResponseCheckOrder
     {
@@ -306,6 +318,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             get { return error_code; }
             set { error_code = value; }
         }
+
         private string error_description = string.Empty;
 
         public string description
@@ -313,6 +326,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             get { return error_description; }
             set { error_description = value; }
         }
+
         private string time_limit = string.Empty;
 
         public string timeLimit
@@ -320,6 +334,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             get { return time_limit; }
             set { time_limit = value; }
         }
+
         private string _token = string.Empty;
 
         public string token
@@ -327,6 +342,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             get { return _token; }
             set { _token = value; }
         }
+
         private string transaction_id = string.Empty;
 
         public string transactionId
@@ -334,6 +350,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             get { return transaction_id; }
             set { transaction_id = value; }
         }
+
         private string amount = string.Empty;
 
         public string paymentAmount
@@ -341,6 +358,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             get { return amount; }
             set { amount = value; }
         }
+
         private string _order_code = string.Empty;
 
         public string order_code
@@ -348,6 +366,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             get { return _order_code; }
             set { _order_code = value; }
         }
+
         private string transaction_type = string.Empty;
 
         public string transactionType
@@ -355,6 +374,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             get { return transaction_type; }
             set { transaction_type = value; }
         }
+
         private string transaction_status = string.Empty;
 
         public string transactionStatus
@@ -362,6 +382,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             get { return transaction_status; }
             set { transaction_status = value; }
         }
+
         private string payer_name = string.Empty;
 
         public string payerName
@@ -369,6 +390,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             get { return payer_name; }
             set { payer_name = value; }
         }
+
         private string payer_email = string.Empty;
 
         public string payerEmail
@@ -376,6 +398,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             get { return payer_email; }
             set { payer_email = value; }
         }
+
         private string payer_mobile = string.Empty;
 
         public string payerMobile
@@ -383,6 +406,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             get { return payer_mobile; }
             set { payer_mobile = value; }
         }
+
         private string receiver_name = string.Empty;
 
         public string merchantName
@@ -390,6 +414,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             get { return receiver_name; }
             set { receiver_name = value; }
         }
+
         private string receiver_address = string.Empty;
 
         public string merchantAddress
@@ -397,6 +422,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             get { return receiver_address; }
             set { receiver_address = value; }
         }
+
         private string receiver_mobile = string.Empty;
 
         public string merchantMobile
@@ -404,6 +430,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             get { return receiver_mobile; }
             set { receiver_mobile = value; }
         }
+
         private string payment_method = string.Empty;
 
         public string paymentMethod
@@ -413,9 +440,10 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
         }
     }
 
-    #endregion
+    #endregion entity RequestCheckOrder
 
     #region Entity RequestInfo
+
     public class RequestInfo
     {
         private String _Funtion = "SetExpressCheckout";
@@ -433,6 +461,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
         }
 
         private String _cur_code = String.Empty;
+
         public String cur_code
         {
             get { return _cur_code; }
@@ -440,6 +469,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
         }
 
         private String _discount_amount = String.Empty;
+
         public String Discount_amount
         {
             get { return _discount_amount; }
@@ -447,11 +477,13 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
         }
 
         private String _Merchant_id = String.Empty;
+
         public String Merchant_id
         {
             get { return _Merchant_id; }
             set { _Merchant_id = value; }
         }
+
         private String _Receiver_email = String.Empty;
 
         public String Receiver_email
@@ -459,6 +491,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             get { return _Receiver_email; }
             set { _Receiver_email = value; }
         }
+
         private String _Merchant_password = String.Empty;
 
         public String Merchant_password
@@ -466,6 +499,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             get { return _Merchant_password; }
             set { _Merchant_password = value; }
         }
+
         private String _Order_code = String.Empty;
 
         public String Order_code
@@ -473,6 +507,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             get { return _Order_code; }
             set { _Order_code = value; }
         }
+
         private String _Total_amount = String.Empty;
 
         public String Total_amount
@@ -480,6 +515,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             get { return _Total_amount; }
             set { _Total_amount = value; }
         }
+
         private String _Payment_method = String.Empty;
 
         public String Payment_method
@@ -487,6 +523,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             get { return _Payment_method; }
             set { _Payment_method = value; }
         }
+
         private String _Payment_type = String.Empty;
 
         public String Payment_type
@@ -494,6 +531,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             get { return _Payment_type; }
             set { _Payment_type = value; }
         }
+
         private String _bank_code = String.Empty;
 
         public String bank_code
@@ -501,6 +539,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             get { return _bank_code; }
             set { _bank_code = value; }
         }
+
         private String _order_description = String.Empty;
 
         public String order_description
@@ -508,6 +547,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             get { return _order_description; }
             set { _order_description = value; }
         }
+
         private String _fee_shipping = String.Empty;
 
         public String fee_shipping
@@ -515,6 +555,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             get { return _fee_shipping; }
             set { _fee_shipping = value; }
         }
+
         private String _tax_amount = String.Empty;
 
         public String tax_amount
@@ -530,6 +571,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             get { return _return_url; }
             set { _return_url = value; }
         }
+
         private String _cancel_url = String.Empty;
 
         public String cancel_url
@@ -537,6 +579,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             get { return _cancel_url; }
             set { _cancel_url = value; }
         }
+
         private String _time_limit = String.Empty;
 
         public String time_limit
@@ -544,6 +587,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             get { return _time_limit; }
             set { _time_limit = value; }
         }
+
         private String _Buyer_fullname = String.Empty;
 
         public String Buyer_fullname
@@ -551,6 +595,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             get { return _Buyer_fullname; }
             set { _Buyer_fullname = value; }
         }
+
         private String _Buyer_email = String.Empty;
 
         public String Buyer_email
@@ -558,6 +603,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             get { return _Buyer_email; }
             set { _Buyer_email = value; }
         }
+
         private String _Buyer_mobile = String.Empty;
 
         public String Buyer_mobile
@@ -566,6 +612,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             set { _Buyer_mobile = value; }
         }
     }
+
     public class ResponseInfo
     {
         private String _error_code = string.Empty;
@@ -575,6 +622,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             get { return _error_code; }
             set { _error_code = value; }
         }
+
         private String _checkout_url = String.Empty;
 
         public String Checkout_url
@@ -582,6 +630,7 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             get { return _checkout_url; }
             set { _checkout_url = value; }
         }
+
         private String _Token = String.Empty;
 
         public String Token
@@ -598,5 +647,6 @@ namespace InitiativeManagement.Web.Infrastructure.NganLuongAPI
             set { _description = value; }
         }
     }
-    #endregion
+
+    #endregion Entity RequestInfo
 }

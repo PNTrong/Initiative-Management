@@ -1,5 +1,4 @@
-﻿
-@model InitiativeManagement.Web.Models.ExternalLoginConfirmationViewModel
+﻿@model InitiativeManagement.Web.Models.ExternalLoginConfirmationViewModel
 @{
     ViewBag.Title = "ExternalLoginConfirmation";
     Layout = "~/Views/Shared/Layouts.cshtml";
@@ -19,7 +18,6 @@
         <p class="text-info">
           Bạn vừa chứng thực thành công với <strong>@ViewBag.LoginProvider</strong>.
           Xin hãy nhập tên tài khoản mà bạn muốn đăng ký trên TEDU dưới đây để kết thúc quá trình login. Những lần sau bạn sẽ không phải thực hiện bước này.
-
         </p>
         <div class="form-group">
           @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })

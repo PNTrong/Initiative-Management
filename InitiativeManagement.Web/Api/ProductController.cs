@@ -1,4 +1,9 @@
 ﻿using AutoMapper;
+using InitiativeManagement.Model.Models;
+using InitiativeManagement.Service;
+using InitiativeManagement.Web.Infrastructure.Core;
+using InitiativeManagement.Web.Infrastructure.Extensions;
+using InitiativeManagement.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,11 +11,6 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Script.Serialization;
-using InitiativeManagement.Model.Models;
-using InitiativeManagement.Service;
-using InitiativeManagement.Web.Infrastructure.Core;
-using InitiativeManagement.Web.Infrastructure.Extensions;
-using InitiativeManagement.Web.Models;
 
 namespace InitiativeManagement.Web.Api
 {
@@ -19,6 +19,7 @@ namespace InitiativeManagement.Web.Api
     public class ProductController : ApiControllerBase
     {
         #region Initialize
+
         private IProductService _productService;
 
         public ProductController(IErrorService errorService, IProductService productService)
@@ -27,7 +28,7 @@ namespace InitiativeManagement.Web.Api
             this._productService = productService;
         }
 
-        #endregion
+        #endregion Initialize
 
         [Route("getallparents")]
         [HttpGet]
@@ -44,6 +45,7 @@ namespace InitiativeManagement.Web.Api
             };
             return CreateHttpResponse(request, func);
         }
+
         [Route("getbyid/{id:int}")]
         [HttpGet]
         public HttpResponseMessage GetById(HttpRequestMessage request, int id)
@@ -85,7 +87,6 @@ namespace InitiativeManagement.Web.Api
                 return response;
             });
         }
-
 
         [Route("create")]
         [HttpPost]
@@ -170,6 +171,7 @@ namespace InitiativeManagement.Web.Api
                 return response;
             });
         }
+
         [Route("deletemulti")]
         [HttpDelete]
         [AllowAnonymous]

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using InitiativeManagement.Service;
+﻿using InitiativeManagement.Service;
 using InitiativeManagement.Web.Infrastructure.Core;
+using System.Web.Http;
 
 namespace InitiativeManagement.Web.Api
 {
@@ -13,7 +8,8 @@ namespace InitiativeManagement.Web.Api
     [Authorize]
     public class HomeController : ApiControllerBase
     {
-        IErrorService _errorService;
+        private IErrorService _errorService;
+
         public HomeController(IErrorService errorService) : base(errorService)
         {
             this._errorService = errorService;

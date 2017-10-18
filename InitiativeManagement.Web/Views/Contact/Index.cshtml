@@ -56,10 +56,9 @@
             @Html.TextBoxFor(model => model.Email, new { @class = "textbox" });
             @Html.TextAreaFor(model => model.Message);
 
-
           MvcCaptcha contactCaptcha = new MvcCaptcha("contactCaptcha");
             @Html.Captcha(contactCaptcha)
-            @Html.TextBox("CaptchaCode") 
+            @Html.TextBox("CaptchaCode")
 
         <input type="submit" value="Gửi đi">
         <div class="clearfix"> </div>

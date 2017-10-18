@@ -1,6 +1,5 @@
-﻿using System.Web;
+﻿using InitiativeManagement.Common;
 using System.Web.Optimization;
-using InitiativeManagement.Common;
 
 namespace InitiativeManagement.Web
 {
@@ -9,7 +8,7 @@ namespace InitiativeManagement.Web
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/js/jquery").Include( "~/Assets/client/js/jquery.min.js"));
+            bundles.Add(new ScriptBundle("~/js/jquery").Include("~/Assets/client/js/jquery.min.js"));
 
             bundles.Add(new ScriptBundle("~/js/plugins").Include(
                  "~/Assets/admin/libs/jquery-ui/jquery-ui.min.js",
@@ -20,7 +19,7 @@ namespace InitiativeManagement.Web
                 ));
 
             bundles.Add(new StyleBundle("~/css/base")
-                .Include("~/Assets/client/css/bootstrap.css",new CssRewriteUrlTransform())
+                .Include("~/Assets/client/css/bootstrap.css", new CssRewriteUrlTransform())
                 .Include("~/Assets/client/font-awesome-4.6.3/css/font-awesome.css", new CssRewriteUrlTransform())
                 .Include("~/Assets/admin/libs/jquery-ui/themes/smoothness/jquery-ui.min.css", new CssRewriteUrlTransform())
                 .Include("~/Assets/client/css/style.css", new CssRewriteUrlTransform())

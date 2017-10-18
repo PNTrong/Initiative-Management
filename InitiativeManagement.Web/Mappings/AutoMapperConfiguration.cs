@@ -4,7 +4,7 @@ using InitiativeManagement.Web.Models;
 
 namespace InitiativeManagement.Web.Mappings
 {
-    public class AutoMapperConfiguration :Profile
+    public class AutoMapperConfiguration : Profile
     {
         //public static void Configure()
         //{

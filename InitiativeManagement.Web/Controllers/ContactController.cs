@@ -1,32 +1,28 @@
 ﻿using AutoMapper;
 using BotDetect.Web.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web;
-using System.Web.Mvc;
 using InitiativeManagement.Common;
 using InitiativeManagement.Model.Models;
 using InitiativeManagement.Service;
 using InitiativeManagement.Web.Infrastructure.Extensions;
 using InitiativeManagement.Web.Models;
+using System.Web.Mvc;
 
 namespace InitiativeManagement.Web.Controllers
 {
     public class ContactController : Controller
     {
-        IContactDetailService _contactDetailService;
-        IFeedbackService _feedbackService;
+        private IContactDetailService _contactDetailService;
+        private IFeedbackService _feedbackService;
+
         public ContactController(IContactDetailService contactDetailService, IFeedbackService feedbackService)
         {
             this._contactDetailService = contactDetailService;
             this._feedbackService = feedbackService;
         }
+
         // GET: Contact
         public ActionResult Index()
         {
-
             FeedbackViewModel viewModel = new FeedbackViewModel();
             viewModel.ContactDetail = GetDetail();
             return View(viewModel);
@@ -44,7 +40,6 @@ namespace InitiativeManagement.Web.Controllers
                 _feedbackService.Save();
 
                 ViewData["SuccessMsg"] = "Gửi phản hồi thành công";
-             
 
                 string content = System.IO.File.ReadAllText(Server.MapPath("/Assets/client/template/contact_template.html"));
                 content = content.Replace("{{Name}}", feedbackViewModel.Name);
@@ -58,7 +53,6 @@ namespace InitiativeManagement.Web.Controllers
                 feedbackViewModel.Email = "";
             }
             feedbackViewModel.ContactDetail = GetDetail();
-
 
             return View("Index", feedbackViewModel);
         }

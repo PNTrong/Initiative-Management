@@ -1,8 +1,5 @@
 ﻿using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web.Http;
 
 namespace InitiativeManagement.Web
@@ -26,7 +23,7 @@ namespace InitiativeManagement.Web
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
-                
+
             );
         }
     }

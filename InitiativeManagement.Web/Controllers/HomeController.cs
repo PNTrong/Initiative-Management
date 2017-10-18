@@ -1,21 +1,18 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 using InitiativeManagement.Common;
 using InitiativeManagement.Model.Models;
 using InitiativeManagement.Service;
 using InitiativeManagement.Web.Models;
+using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace InitiativeManagement.Web.Controllers
 {
     public class HomeController : Controller
     {
-        IProductCategoryService _productCategoryService;
-        IProductService _productService;
-        ICommonService _commonService;
+        private IProductCategoryService _productCategoryService;
+        private IProductService _productService;
+        private ICommonService _commonService;
 
         public HomeController(IProductCategoryService productCategoryService,
             IProductService productService,
@@ -49,12 +46,10 @@ namespace InitiativeManagement.Web.Controllers
             }
             catch
             {
-               
             }
 
             return View(homeViewModel);
         }
-
 
         [ChildActionOnly]
         [OutputCache(Duration = 3600)]

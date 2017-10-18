@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using InitiativeManagement.Service;
+using InitiativeManagement.Web.Infrastructure.Core;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using InitiativeManagement.Service;
-using InitiativeManagement.Web.Infrastructure.Core;
 
 namespace InitiativeManagement.Web.Api
 {
-  
     [RoutePrefix("api/statistic")]
     public class StatisticController : ApiControllerBase
     {
-        IStatisticService _statisticService;
+        private IStatisticService _statisticService;
+
         public StatisticController(IErrorService errorService, IStatisticService statisticService) : base(errorService)
         {
             _statisticService = statisticService;
@@ -23,7 +20,6 @@ namespace InitiativeManagement.Web.Api
         [HttpGet]
         public HttpResponseMessage GetRevenueStatistic(HttpRequestMessage request, string fromDate, string toDate)
         {
-
             return CreateHttpResponse(request, () =>
             {
                 var model = _statisticService.GetRevenueStatistic(fromDate, toDate);
@@ -31,6 +27,5 @@ namespace InitiativeManagement.Web.Api
                 return response;
             });
         }
-
     }
 }

@@ -48,10 +48,11 @@ namespace InitiativeManagement.Web.Controllers
                 _userManager = value;
             }
         }
+
         public AccountController()
         {
-
         }
+
         // GET: Account
         public ActionResult Login(string returnUrl)
         {
@@ -99,7 +100,6 @@ namespace InitiativeManagement.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
-
             // Request a redirect to the external login provider
             return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
         }
@@ -121,6 +121,7 @@ namespace InitiativeManagement.Web.Controllers
             {
                 case SignInStatus.Success:
                     return RedirectToLocal(returnUrl);
+
                 case SignInStatus.Failure:
                 default:
                     // If the user does not have an account, then prompt the user to create an account
@@ -129,12 +130,12 @@ namespace InitiativeManagement.Web.Controllers
                     return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
             }
         }
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
         {
-
             if (ModelState.IsValid)
             {
                 // Get the information about the user from the external login provider
@@ -160,6 +161,7 @@ namespace InitiativeManagement.Web.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
         }
+
         [HttpGet]
         public ActionResult Register()
         {
@@ -193,11 +195,9 @@ namespace InitiativeManagement.Web.Controllers
                     FullName = model.FullName,
                     PhoneNumber = model.PhoneNumber,
                     Address = model.Address
-
                 };
 
                 await _userManager.CreateAsync(user, model.Password);
-
 
                 var adminUser = await _userManager.FindByEmailAsync(model.Email);
                 if (adminUser != null)
@@ -209,7 +209,6 @@ namespace InitiativeManagement.Web.Controllers
 
                 MailHelper.SendMail(adminUser.Email, "Đăng ký thành công", content);
 
-
                 ViewData["SuccessMsg"] = "Đăng ký thành công";
             }
 
@@ -217,16 +216,16 @@ namespace InitiativeManagement.Web.Controllers
         }
 
         [HttpPost]
-
         [ValidateAntiForgeryToken]
         public ActionResult LogOut()
         {
             IAuthenticationManager authenticationManager = HttpContext.GetOwinContext().Authentication;
             authenticationManager.SignOut();
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
 
         #region Helpers
+
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -283,6 +282,7 @@ namespace InitiativeManagement.Web.Controllers
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
         }
-        #endregion
+
+        #endregion Helpers
     }
 }
