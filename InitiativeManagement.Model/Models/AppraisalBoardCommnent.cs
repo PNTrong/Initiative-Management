@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace InitiativeManagement.Model.Models
+{
+    [Table("AppraisalBoardCommnents")]
+    public class AppraisalBoardCommnent
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ID { set; get; }
+
+        public string GeneralComment { set; get; }
+
+        public string GPA { set; get; }
+
+        public virtual IEnumerable<AppraisalBoardMemberCommnent> AppraisalBoardMemberCommnents { set; get; }
+    }
+}
