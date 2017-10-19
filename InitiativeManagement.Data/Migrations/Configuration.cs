@@ -16,7 +16,7 @@
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(InitiativeManagement.Data.TeduShopDbContext context)
@@ -28,9 +28,8 @@
             CreateContactDetail(context);
 
             CreateConfigTitle(context);
-
-
         }
+
         private void CreateConfigTitle(TeduShopDbContext context)
         {
             if (!context.SystemConfigs.Any(x => x.Code == "HomeTitle"))
@@ -39,7 +38,6 @@
                 {
                     Code = "HomeTitle",
                     ValueString = "Trang chủ TeduShop",
-
                 });
             }
             if (!context.SystemConfigs.Any(x => x.Code == "HomeMetaKeyword"))
@@ -48,7 +46,6 @@
                 {
                     Code = "HomeMetaKeyword",
                     ValueString = "Trang chủ TeduShop",
-
                 });
             }
             if (!context.SystemConfigs.Any(x => x.Code == "HomeMetaDescription"))
@@ -57,10 +54,10 @@
                 {
                     Code = "HomeMetaDescription",
                     ValueString = "Trang chủ TeduShop",
-
                 });
             }
         }
+
         private void CreateUser(TeduShopDbContext context)
         {
             //var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new TeduShopDbContext()));
@@ -89,6 +86,7 @@
 
             //manager.AddToRoles(adminUser.Id, new string[] { "Admin", "User" });
         }
+
         private void CreateProductCategorySample(InitiativeManagement.Data.TeduShopDbContext context)
         {
             if (context.ProductCategories.Count() == 0)
@@ -103,8 +101,8 @@
                 context.ProductCategories.AddRange(listProductCategory);
                 context.SaveChanges();
             }
-
         }
+
         private void CreateFooter(TeduShopDbContext context)
         {
             if (context.Footers.Count(x => x.ID == CommonConstants.DefaultFooterId) == 0)
@@ -127,7 +125,7 @@
                         Image ="/Assets/client/images/bag.jpg",
                         Content =@"	<h2>FLAT 50% 0FF</h2>
                                 <label>FOR ALL PURCHASE <b>VALUE</b></label>
-                                <p>Lorem ipsum dolor sit amet, consectetur 
+                                <p>Lorem ipsum dolor sit amet, consectetur
                             adipisicing elit, sed do eiusmod tempor incididunt ut labore et </ p >
                         <span class=""on-get"">GET NOW</span>" },
                     new Slide() {
@@ -160,7 +158,6 @@
                         Alias = "gioi-thieu",
                         Content = @"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium ",
                         Status = true
-
                     };
                     context.Pages.Add(page);
                     context.SaveChanges();
@@ -176,7 +173,6 @@
                         }
                     }
                 }
-
             }
         }
 
@@ -192,12 +188,11 @@
                         Address = "Ngõ 77 Xuân La",
                         Email = "tedu@gmail.com",
                         Lat = 21.0633645,
-                        Lng= 105.8053274,
+                        Lng = 105.8053274,
                         Phone = "095423233",
                         Website = "http://tedu.com.vn",
                         Other = "",
                         Status = true
-
                     };
                     context.ContactDetails.Add(contactDetail);
                     context.SaveChanges();
@@ -213,7 +208,6 @@
                         }
                     }
                 }
-
             }
         }
     }

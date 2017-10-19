@@ -12,7 +12,7 @@ namespace InitiativeManagement.Model.Models
         public int Id { set; get; }
 
         [Required]
-        public string AuthorGroupId { set; get; }
+        public int AuthorGroupId { set; get; }
 
         [ForeignKey("AuthorGroupId")]
         public virtual AuthorGroup AuthorGroup { set; get; }

@@ -128,6 +128,10 @@
     <Compile Include="Migrations\201606140015263_RevenuesStatisticSP.Designer.cs">
       <DependentUpon>201606140015263_RevenuesStatisticSP.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710181947270_NewDb.cs" />
+    <Compile Include="Migrations\201710181947270_NewDb.Designer.cs">
+      <DependentUpon>201710181947270_NewDb.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ApplicationGroupRepository.cs" />
@@ -220,6 +224,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606140015263_RevenuesStatisticSP.resx">
       <DependentUpon>201606140015263_RevenuesStatisticSP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710181947270_NewDb.resx">
+      <DependentUpon>201710181947270_NewDb.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -8,12 +8,10 @@ namespace InitiativeManagement.Model.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { set; get; }
-
-        public string MemberId { set; get; }
+        public int Id { set; get; }
 
         [Required]
-        public string AppraisalBoardCommnentId { set; get; }
+        public int AppraisalBoardCommnentId { set; get; }
 
         [ForeignKey("AppraisalBoardCommnentId")]
         public virtual AppraisalBoardCommnent AppraisalBoardCommnent { set; get; }

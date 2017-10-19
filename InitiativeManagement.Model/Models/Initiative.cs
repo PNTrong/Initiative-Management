@@ -12,18 +12,18 @@ namespace InitiativeManagement.Model.Models
         public int Id { set; get; }
 
         [Required]
-        public string FielId { set; get; }
+        public int FielId { set; get; }
 
         [ForeignKey("FielId")]
         public virtual Field Field { set; get; }
 
         [Required]
-        public string AuthorGroupId { set; get; }
+        public int AuthorGroupId { set; get; }
 
         [ForeignKey("AuthorGroupId")]
         public virtual AuthorGroup AuthorGroup { set; get; }
 
-        public string AppraisalBoardCommnetId { set; get; }
+        public int AppraisalBoardCommnetId { set; get; }
 
         [ForeignKey("AppraisalBoardCommnetId")]
         public virtual AppraisalBoardCommnent AppraisalBoardCommnent { set; get; }

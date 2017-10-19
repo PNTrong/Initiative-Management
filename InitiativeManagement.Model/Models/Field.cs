@@ -8,7 +8,7 @@ namespace InitiativeManagement.Model.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { set; get; }
+        public int Id { set; get; }
 
         [Required]
         public int FieldGroupId { set; get; }
