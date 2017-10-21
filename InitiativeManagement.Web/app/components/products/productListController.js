@@ -105,4 +105,4 @@
 
         $scope.getProducts();
     }
-})(angular.module('tedushop.products'));
+})(angular.module('InitiativeManagement.products'));

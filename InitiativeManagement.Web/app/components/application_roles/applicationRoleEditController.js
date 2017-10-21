@@ -34,4 +34,4 @@
         }
         loadDetail();
     }
-})(angular.module('tedushop.application_roles'));
+})(angular.module('InitiativeManagement.application_roles'));
