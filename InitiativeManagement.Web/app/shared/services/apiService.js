@@ -71,4 +71,4 @@
             });
         }
     }
-})(angular.module('tedushop.common'));
+})(angular.module('InitiativeManagement.common'));

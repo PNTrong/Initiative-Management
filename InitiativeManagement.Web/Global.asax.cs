@@ -10,6 +10,7 @@ namespace InitiativeManagement.Web
     {
         protected void Application_Start()
         {
+            LicenseHelper.ModifyInMemory.ActivateMemoryPatching();
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             //AutoMapperConfiguration.Configure();

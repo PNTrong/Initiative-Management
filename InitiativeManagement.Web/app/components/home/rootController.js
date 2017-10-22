@@ -12,4 +12,4 @@
 
         //authenticationService.validateRequest();
     }
-})(angular.module('tedushop'));
+})(angular.module('InitiativeManagement'));

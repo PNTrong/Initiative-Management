@@ -1,15 +1,15 @@
-﻿/// <reference path="/Assets/admin/libs/angular/angular.js" />
+/// <reference path="/Assets/admin/libs/angular/angular.js" />
 
 (function () {
-    angular.module('InitiativeManagement.application_users', ['InitiativeManagement.common']).config(config);
+    angular.module('InitiativeManagement.initiatives', ['InitiativeManagement.common']).config(config);
 
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
     function config($stateProvider, $urlRouterProvider) {
 
         $stateProvider.state('application_users', {
-            url: "/application_users",
-            templateUrl: "/app/components/application_users/applicationUserListView.html",
+            url: "/initiatives",
+            templateUrl: "/app/components/initiatives/initiativeListView.html",
             parent: 'base',
             controller: "applicationUserListController"
         })

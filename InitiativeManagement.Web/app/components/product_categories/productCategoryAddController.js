@@ -35,4 +35,4 @@
         loadParentCategory();
     }
 
-})(angular.module('tedushop.product_categories'));
+})(angular.module('InitiativeManagement.product_categories'));
