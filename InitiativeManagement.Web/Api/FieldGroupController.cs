@@ -14,28 +14,30 @@ using System.Web.Script.Serialization;
 
 namespace InitiativeManagement.Web.Api
 {
-    [RoutePrefix("api/field")]
-    public class FieldController : ApiControllerBase
+    [RoutePrefix("api/fieldGroup")]
+    public class FieldGroupController : ApiControllerBase
     {
         #region Initialize
 
+        private IFieldGroupService _fieldGroupService;
         private IFieldService _fieldService;
 
-        public FieldController(IErrorService errorService, IFieldService fieldService)
+        public FieldGroupController(IErrorService errorService, IFieldGroupService fieldGroupService, IFieldService fieldService)
             : base(errorService)
         {
+            this._fieldGroupService = fieldGroupService;
             this._fieldService = fieldService;
         }
 
         #endregion Initialize
 
-        [Route("getallfield")]
+        [Route("getallfieldGroup")]
         [HttpGet]
         public HttpResponseMessage GetAll(HttpRequestMessage request)
         {
             Func<HttpResponseMessage> func = () =>
             {
-                var model = _fieldService.GetAll();
+                var model = _fieldGroupService.GetAll();
                 var response = request.CreateResponse(HttpStatusCode.OK, model);
                 return response;
             };
@@ -48,7 +50,7 @@ namespace InitiativeManagement.Web.Api
         {
             return CreateHttpResponse(request, () =>
             {
-                var model = _fieldService.GetById(id);
+                var model = _fieldGroupService.GetById(id);
                 var response = request.CreateResponse(HttpStatusCode.OK, model);
                 return response;
             });
@@ -60,7 +62,7 @@ namespace InitiativeManagement.Web.Api
         {
             return CreateHttpResponse(request, () =>
             {
-                var model = _fieldService.GetAll(keyword);
+                var model = _fieldGroupService.GetAll(keyword);
 
                 var response = request.CreateResponse(HttpStatusCode.OK, model);
                 return response;
@@ -81,11 +83,11 @@ namespace InitiativeManagement.Web.Api
                 }
                 else
                 {
-                    var newField = new Field();
-                    _fieldService.Add(newField);
-                    _fieldService.Save();
+                    var newFieldGroup = new FieldGroup();
+                    _fieldGroupService.Add(newFieldGroup);
+                    _fieldGroupService.Save();
 
-                    var responseData = _fieldService.Add(newField);
+                    var responseData = _fieldGroupService.Add(newFieldGroup);
                     response = request.CreateResponse(HttpStatusCode.Created, responseData);
                 }
 
@@ -96,7 +98,7 @@ namespace InitiativeManagement.Web.Api
         [Route("update")]
         [HttpPut]
         [AllowAnonymous]
-        public HttpResponseMessage Update(HttpRequestMessage request, Field field)
+        public HttpResponseMessage Update(HttpRequestMessage request, FieldGroup fieldGroup)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -107,17 +109,17 @@ namespace InitiativeManagement.Web.Api
                 }
                 else
                 {
-                    var dbField = _fieldService.GetById(field.Id);
-                    _fieldService.Update(dbField);
-                    _fieldService.Save();
-                    response = request.CreateResponse(HttpStatusCode.Created, dbField);
+                    var dbFieldGroup = _fieldGroupService.GetById(fieldGroup.Id);
+                    _fieldGroupService.Update(dbFieldGroup);
+                    _fieldGroupService.Save();
+                    response = request.CreateResponse(HttpStatusCode.Created, dbFieldGroup);
                 }
 
                 return response;
             });
         }
 
-        [Route("delete")]
+        [Route("delete/{id:int}")]
         [HttpDelete]
         [AllowAnonymous]
         public HttpResponseMessage Delete(HttpRequestMessage request, int id)
@@ -131,9 +133,18 @@ namespace InitiativeManagement.Web.Api
                 }
                 else
                 {
-                    var oldField = _fieldService.Delete(id);
-                    _fieldService.Save();
-                    response = request.CreateResponse(HttpStatusCode.Created, oldField);
+                    Field field = _fieldService.GetById(id);
+                    if (field != null)
+                    {
+                    }
+                    else
+                    {
+                        var fieldGroup = _fieldGroupService.GetById(id);
+                        fieldGroup.IsDeactive = false;
+                        _fieldGroupService.Update(fieldGroup);
+                        _fieldGroupService.Save();
+                        // response = request.CreateResponse(HttpStatusCode.Created, oldFieldGroup);
+                    }
                 }
 
                 return response;

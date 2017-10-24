@@ -29,5 +29,6 @@ namespace InitiativeManagement.Model.Models
         public string AssistedtWorkContent { set; get; }
         public DateTime DateCreate { set; get; }
         public string OrganizationID { set; get; }
+        public bool? IsDeactive { set; get; }
     }
 }

@@ -132,6 +132,10 @@
     <Compile Include="Migrations\201710181947270_NewDb.Designer.cs">
       <DependentUpon>201710181947270_NewDb.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710241834508_Update-deactive-field.cs" />
+    <Compile Include="Migrations\201710241834508_Update-deactive-field.Designer.cs">
+      <DependentUpon>201710241834508_Update-deactive-field.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ApplicationGroupRepository.cs" />
@@ -141,6 +145,7 @@
     <Compile Include="Repositories\ContactDetailRepository.cs" />
     <Compile Include="Repositories\ErrorRepository.cs" />
     <Compile Include="Repositories\FeedbackRepository.cs" />
+    <Compile Include="Repositories\FieldGroupRepository.cs" />
     <Compile Include="Repositories\FieldRepository.cs" />
     <Compile Include="Repositories\FooterRepository.cs" />
     <Compile Include="Repositories\MenuGroupRepository.cs" />
@@ -228,6 +233,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710181947270_NewDb.resx">
       <DependentUpon>201710181947270_NewDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710241834508_Update-deactive-field.resx">
+      <DependentUpon>201710241834508_Update-deactive-field.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
