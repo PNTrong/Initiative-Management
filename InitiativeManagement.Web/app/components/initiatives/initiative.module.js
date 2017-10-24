@@ -12,12 +12,12 @@
             templateUrl: "/app/components/initiatives/initiativeListView.html",
             parent: 'base',
             controller: "initiativeListViewController"
-        })
-            .state('add_initiatives', {
+        }).state('add_initiatives', {
                 url: "/add_initiatives",
                 parent: 'base',
                 templateUrl: "/app/components/initiatives/initiativeAddView.html",
-                controller: "initiativeAddController"
+                controller: "initiativeAddController",
+                css: '/app/components/initiatives/initiativeListView.css'
             });
     }
 })();

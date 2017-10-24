@@ -306,6 +306,7 @@
     <Content Include="app\components\initiatives\initiativeAddController.js" />
     <Content Include="app\components\initiatives\initiativeAddView.html" />
     <Content Include="app\components\initiatives\initiativeController.js" />
+    <Content Include="app\components\initiatives\initiativeListView.css" />
     <Content Include="app\components\initiatives\initiativeListView.html" />
     <Content Include="app\components\initiatives\initiativeListViewController.js" />
     <Content Include="app\components\login\loginController.js" />
