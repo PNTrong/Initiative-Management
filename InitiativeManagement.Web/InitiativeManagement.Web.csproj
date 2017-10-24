@@ -222,6 +222,7 @@
     <Compile Include="Api\ApplicationRoleController.cs" />
     <Compile Include="Api\ApplicationUserController.cs" />
     <Compile Include="Api\FieldController.cs" />
+    <Compile Include="Api\FieldGroupController.cs" />
     <Compile Include="Api\HomeController.cs" />
     <Compile Include="Api\PostCategoryController.cs" />
     <Compile Include="Api\ProductCategoryController.cs" />
@@ -5013,6 +5014,7 @@
     <Folder Include="Assets\admin\libs\checklist-model\test\" />
     <Folder Include="UploadedFiles\" />
     <Folder Include="Views\About\" />
+    <Folder Include="Views\FieldGroup\" />
     <Folder Include="Views\Field\" />
     <Folder Include="Views\Post\" />
   </ItemGroup>
