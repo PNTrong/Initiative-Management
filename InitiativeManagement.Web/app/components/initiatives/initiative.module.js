@@ -7,23 +7,17 @@
 
     function config($stateProvider, $urlRouterProvider) {
 
-        $stateProvider.state('application_users', {
+        $stateProvider.state('initiatives', {
             url: "/initiatives",
             templateUrl: "/app/components/initiatives/initiativeListView.html",
             parent: 'base',
-            controller: "applicationUserListController"
+            controller: "initiativeListViewController"
         })
-            .state('add_application_user', {
-                url: "/add_application_user",
+            .state('add_initiatives', {
+                url: "/add_initiatives",
                 parent: 'base',
-                templateUrl: "/app/components/application_users/applicationUserAddView.html",
-                controller: "applicationUserAddController"
-            })
-            .state('edit_application_user', {
-                url: "/edit_application_user/:id",
-                templateUrl: "/app/components/application_users/applicationUserEditView.html",
-                controller: "applicationUserEditController",
-                parent: 'base',
+                templateUrl: "/app/components/initiatives/initiativeAddView.html",
+                controller: "initiativeAddController"
             });
     }
 })();

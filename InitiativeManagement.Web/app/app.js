@@ -7,7 +7,8 @@
          'InitiativeManagement.product_categories', 
          'InitiativeManagement.application_roles', 
          'InitiativeManagement.application_users', 
-         'InitiativeManagement.statistics', 
+         'InitiativeManagement.statistics',
+         'InitiativeManagement.initiatives',
          'InitiativeManagement.common'])
         .config(config)
         .config(configAuthentication); 

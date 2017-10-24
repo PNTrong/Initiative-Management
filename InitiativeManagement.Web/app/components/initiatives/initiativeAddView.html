@@ -1,1 +1,70 @@
-<h1>hello</h1>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Lập đơn yêu cầu công nhận sáng kiến
+    </h1>
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <i class="fa fa-dashboard"></i> Trang chủ</a>
+        </li>
+        <li class="active">Lập đơn</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+        <!-- left column -->
+        <div class="col-md-7">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Đơn yêu cầu</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form role="form">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="send-to">Gửi đến</label>
+                            <input type="text" class="form-control" id="send-to" placeholder="Đơn được gửi đến ai?">
+                        </div>
+                        <div class="form-group">
+                            <label for="invetor">Chủ đầu tư</label>
+                            <input type="text" class="form-control" id="investor" placeholder="Chủ đầu tư tạo rao sáng kiến là ai? (Nếu có)">
+                        </div>
+                        <div class="form-group">
+                            <label>Lĩnh vực</label>
+                            <select class="form-control">
+                                <option>Quản lý nông sản</option>
+                                <option>Giáo dục</option>
+                                <option>Thể thao</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+
+                            <label for="deployment-time">Ngày áp dụng</label>
+                            <!-- <input type="date" name="birthDate" id="deployment-time" class="form-control" required reqired-message="Ngày sinh bắt buộc."> -->
+                            <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" class="form-control pull-right" id="datepicker">
+                                </div>
+                        </div>
+
+                    </div>
+                    <!-- /.box-body -->
+
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">Lập đơn</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <!-- left column -->
+        <div class="col-md-5">
+        </div>
+    </div>
+</section>
