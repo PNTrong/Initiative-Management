@@ -14,30 +14,29 @@ using System.Web.Script.Serialization;
 
 namespace InitiativeManagement.Web.Api
 {
-    [RoutePrefix("api/fieldGroup")]
-    public class FieldGroupController : ApiControllerBase
+    [RoutePrefix("api/AppraisalBoard")]
+    public class AppraisalBoardCommnentController : ApiControllerBase
     {
         #region Initialize
 
-        private IFieldGroupService _fieldGroupService;
-        private IFieldService _fieldService;
+        private IAppraisalBoardCommnentService _appraisalBoardCommnentService;
+        private IAppraisalBoardMemberCommnentService _appraisalBoardMemberCommnentService;
 
-        public FieldGroupController(IErrorService errorService, IFieldGroupService fieldGroupService, IFieldService fieldService)
+        public AppraisalBoardCommnentController(IErrorService errorService, IAppraisalBoardCommnentService appraisalBoardCommnentService)
             : base(errorService)
         {
-            this._fieldGroupService = fieldGroupService;
-            this._fieldService = fieldService;
+            this._appraisalBoardCommnentService = appraisalBoardCommnentService;
         }
 
         #endregion Initialize
 
-        [Route("getallfieldGroup")]
+        [Route("getallAppraisalBoard")]
         [HttpGet]
         public HttpResponseMessage GetAll(HttpRequestMessage request)
         {
             Func<HttpResponseMessage> func = () =>
             {
-                var model = _fieldGroupService.GetAll();
+                var model = _appraisalBoardCommnentService.GetAll();
                 var response = request.CreateResponse(HttpStatusCode.OK, model);
                 return response;
             };
@@ -50,7 +49,7 @@ namespace InitiativeManagement.Web.Api
         {
             return CreateHttpResponse(request, () =>
             {
-                var model = _fieldGroupService.GetById(id);
+                var model = _appraisalBoardCommnentService.GetById(id);
                 var response = request.CreateResponse(HttpStatusCode.OK, model);
                 return response;
             });
@@ -62,7 +61,7 @@ namespace InitiativeManagement.Web.Api
         {
             return CreateHttpResponse(request, () =>
             {
-                var model = _fieldGroupService.GetAll(keyword);
+                var model = _appraisalBoardCommnentService.GetAll(keyword);
 
                 var response = request.CreateResponse(HttpStatusCode.OK, model);
                 return response;
@@ -83,11 +82,11 @@ namespace InitiativeManagement.Web.Api
                 }
                 else
                 {
-                    var newFieldGroup = new FieldGroup();
-                    _fieldGroupService.Add(newFieldGroup);
-                    _fieldGroupService.Save();
+                    var newAppraisalBoardCommnent = new AppraisalBoardCommnent();
+                    _appraisalBoardCommnentService.Add(newAppraisalBoardCommnent);
+                    _appraisalBoardCommnentService.Save();
 
-                    var responseData = _fieldGroupService.Add(newFieldGroup);
+                    var responseData = _appraisalBoardCommnentService.Add(newAppraisalBoardCommnent);
                     response = request.CreateResponse(HttpStatusCode.Created, responseData);
                 }
 
@@ -98,7 +97,7 @@ namespace InitiativeManagement.Web.Api
         [Route("update")]
         [HttpPut]
         [AllowAnonymous]
-        public HttpResponseMessage Update(HttpRequestMessage request, FieldGroup fieldGroup)
+        public HttpResponseMessage Update(HttpRequestMessage request, AppraisalBoardCommnent appraisalBoardCommnent)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -109,42 +108,35 @@ namespace InitiativeManagement.Web.Api
                 }
                 else
                 {
-                    var dbFieldGroup = _fieldGroupService.GetById(fieldGroup.Id);
-                    _fieldGroupService.Update(dbFieldGroup);
-                    _fieldGroupService.Save();
-                    response = request.CreateResponse(HttpStatusCode.Created, dbFieldGroup);
+                    var dbAppraisalBoardCommnent = _appraisalBoardCommnentService.GetById(appraisalBoardCommnent.Id);
+                    _appraisalBoardCommnentService.Update(dbAppraisalBoardCommnent);
+                    _appraisalBoardCommnentService.Save();
+                    response = request.CreateResponse(HttpStatusCode.Created, dbAppraisalBoardCommnent);
                 }
 
                 return response;
             });
         }
 
-        [Route("delete/{id:int}")]
+        [Route("delete")]
         [HttpDelete]
         [AllowAnonymous]
         public HttpResponseMessage Delete(HttpRequestMessage request, int id)
         {
             return CreateHttpResponse(request, () =>
             {
+                var olddbAppraisalBoardMemberCommnent = _appraisalBoardMemberCommnentService.FindById(id);
                 HttpResponseMessage response = null;
-                if (!ModelState.IsValid)
+                if (olddbAppraisalBoardMemberCommnent != null)
                 {
-                    response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
                 }
                 else
                 {
-                    Field field = _fieldService.FindById(id);
-                    if (field != null)
-                    {
-                    }
-                    else
-                    {
-                        var fieldGroup = _fieldGroupService.GetById(id);
-                        fieldGroup.IsDeactive = false;
-                        _fieldGroupService.Update(fieldGroup);
-                        _fieldGroupService.Save();
-                        // response = request.CreateResponse(HttpStatusCode.Created, oldFieldGroup);
-                    }
+                    var olddbAppraisalBoardCommnent = _appraisalBoardCommnentService.GetById(id);
+                    olddbAppraisalBoardCommnent.IsDeactive = false;
+                    _appraisalBoardCommnentService.Update(olddbAppraisalBoardCommnent);
+                    _appraisalBoardCommnentService.Save();
+                    // response = request.CreateResponse(HttpStatusCode.Created, oldFieldGroup);
                 }
 
                 return response;

@@ -8,9 +8,9 @@ namespace InitiativeManagement.Service
 {
     public interface IFieldService
     {
-        Field Add(Field Product);
+        Field Add(Field Field);
 
-        void Update(Field Product);
+        void Update(Field Field);
 
         Field Delete(int id);
 
@@ -21,6 +21,8 @@ namespace InitiativeManagement.Service
         void Save();
 
         Field GetById(int id);
+
+        Field FindById(int id);
     }
 
     public class FieldService : IFieldService
@@ -73,6 +75,11 @@ namespace InitiativeManagement.Service
         public Field GetById(int id)
         {
             return _fieldRepository.GetSingleById(id);
+        }
+
+        public Field FindById(int id)
+        {
+            return _fieldRepository.GetSingleByCondition(x => x.FieldGroupId == id);
         }
     }
 }

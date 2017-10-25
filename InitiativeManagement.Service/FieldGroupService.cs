@@ -8,9 +8,9 @@ namespace InitiativeManagement.Service
 {
     public interface IFieldGroupService
     {
-        FieldGroup Add(FieldGroup Product);
+        FieldGroup Add(FieldGroup FieldGroup);
 
-        void Update(FieldGroup Product);
+        void Update(FieldGroup FieldGroup);
 
         FieldGroup Delete(int id);
 

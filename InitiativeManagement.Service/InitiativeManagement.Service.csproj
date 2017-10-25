@@ -59,12 +59,16 @@
   <ItemGroup>
     <Compile Include="ApplicationGroupService.cs" />
     <Compile Include="ApplicationRoleService.cs" />
+    <Compile Include="AppraisalBoardCommnentService.cs" />
+    <Compile Include="AppraisalBoardMemberCommnentService.cs" />
+    <Compile Include="AuthorService.cs" />
     <Compile Include="CommonService.cs" />
     <Compile Include="ContactDetailService.cs" />
     <Compile Include="ErrorService.cs" />
     <Compile Include="FeedbackService.cs" />
     <Compile Include="FieldGroupService.cs" />
     <Compile Include="FieldService.cs" />
+    <Compile Include="AuthorGroupService.cs" />
     <Compile Include="OrderService.cs" />
     <Compile Include="PageService.cs" />
     <Compile Include="PostCategoryService.cs" />

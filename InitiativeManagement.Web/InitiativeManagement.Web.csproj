@@ -221,8 +221,12 @@
     <Compile Include="Api\ApplicationGroupController.cs" />
     <Compile Include="Api\ApplicationRoleController.cs" />
     <Compile Include="Api\ApplicationUserController.cs" />
+    <Compile Include="Api\AppraisalBoardCommnentController.cs" />
+    <Compile Include="Api\AppraisalBoardMemberCommnentController.cs" />
+    <Compile Include="Api\AuthorController.cs" />
     <Compile Include="Api\FieldController.cs" />
     <Compile Include="Api\FieldGroupController.cs" />
+    <Compile Include="Api\GroupAuthorController.cs" />
     <Compile Include="Api\HomeController.cs" />
     <Compile Include="Api\PostCategoryController.cs" />
     <Compile Include="Api\ProductCategoryController.cs" />

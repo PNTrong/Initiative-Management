@@ -14,30 +14,28 @@ using System.Web.Script.Serialization;
 
 namespace InitiativeManagement.Web.Api
 {
-    [RoutePrefix("api/fieldGroup")]
-    public class FieldGroupController : ApiControllerBase
+    [RoutePrefix("api/AppraisalBoardMember")]
+    public class AppraisalBoardMemberCommnentController : ApiControllerBase
     {
         #region Initialize
 
-        private IFieldGroupService _fieldGroupService;
-        private IFieldService _fieldService;
+        private IAppraisalBoardMemberCommnentService _appraisalBoardMemberCommnentService;
 
-        public FieldGroupController(IErrorService errorService, IFieldGroupService fieldGroupService, IFieldService fieldService)
+        public AppraisalBoardMemberCommnentController(IErrorService errorService, IAppraisalBoardMemberCommnentService appraisalBoardCommnentService)
             : base(errorService)
         {
-            this._fieldGroupService = fieldGroupService;
-            this._fieldService = fieldService;
+            this._appraisalBoardMemberCommnentService = appraisalBoardCommnentService;
         }
 
         #endregion Initialize
 
-        [Route("getallfieldGroup")]
+        [Route("getallAppraisalBoardMember")]
         [HttpGet]
         public HttpResponseMessage GetAll(HttpRequestMessage request)
         {
             Func<HttpResponseMessage> func = () =>
             {
-                var model = _fieldGroupService.GetAll();
+                var model = _appraisalBoardMemberCommnentService.GetAll();
                 var response = request.CreateResponse(HttpStatusCode.OK, model);
                 return response;
             };
@@ -50,7 +48,7 @@ namespace InitiativeManagement.Web.Api
         {
             return CreateHttpResponse(request, () =>
             {
-                var model = _fieldGroupService.GetById(id);
+                var model = _appraisalBoardMemberCommnentService.GetById(id);
                 var response = request.CreateResponse(HttpStatusCode.OK, model);
                 return response;
             });
@@ -62,7 +60,7 @@ namespace InitiativeManagement.Web.Api
         {
             return CreateHttpResponse(request, () =>
             {
-                var model = _fieldGroupService.GetAll(keyword);
+                var model = _appraisalBoardMemberCommnentService.GetAll(keyword);
 
                 var response = request.CreateResponse(HttpStatusCode.OK, model);
                 return response;
@@ -83,11 +81,11 @@ namespace InitiativeManagement.Web.Api
                 }
                 else
                 {
-                    var newFieldGroup = new FieldGroup();
-                    _fieldGroupService.Add(newFieldGroup);
-                    _fieldGroupService.Save();
+                    var newAppraisalBoardMemberCommnent = new AppraisalBoardMemberCommnent();
+                    _appraisalBoardMemberCommnentService.Add(newAppraisalBoardMemberCommnent);
+                    _appraisalBoardMemberCommnentService.Save();
 
-                    var responseData = _fieldGroupService.Add(newFieldGroup);
+                    var responseData = _appraisalBoardMemberCommnentService.Add(newAppraisalBoardMemberCommnent);
                     response = request.CreateResponse(HttpStatusCode.Created, responseData);
                 }
 
@@ -98,7 +96,7 @@ namespace InitiativeManagement.Web.Api
         [Route("update")]
         [HttpPut]
         [AllowAnonymous]
-        public HttpResponseMessage Update(HttpRequestMessage request, FieldGroup fieldGroup)
+        public HttpResponseMessage Update(HttpRequestMessage request, AppraisalBoardMemberCommnent appraisalBoardMemberCommnent)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -109,17 +107,17 @@ namespace InitiativeManagement.Web.Api
                 }
                 else
                 {
-                    var dbFieldGroup = _fieldGroupService.GetById(fieldGroup.Id);
-                    _fieldGroupService.Update(dbFieldGroup);
-                    _fieldGroupService.Save();
-                    response = request.CreateResponse(HttpStatusCode.Created, dbFieldGroup);
+                    var dbAppraisalBoardCommnent = _appraisalBoardMemberCommnentService.GetById(appraisalBoardMemberCommnent.Id);
+                    _appraisalBoardMemberCommnentService.Update(dbAppraisalBoardCommnent);
+                    _appraisalBoardMemberCommnentService.Save();
+                    response = request.CreateResponse(HttpStatusCode.Created, dbAppraisalBoardCommnent);
                 }
 
                 return response;
             });
         }
 
-        [Route("delete/{id:int}")]
+        [Route("delete")]
         [HttpDelete]
         [AllowAnonymous]
         public HttpResponseMessage Delete(HttpRequestMessage request, int id)
@@ -133,18 +131,9 @@ namespace InitiativeManagement.Web.Api
                 }
                 else
                 {
-                    Field field = _fieldService.FindById(id);
-                    if (field != null)
-                    {
-                    }
-                    else
-                    {
-                        var fieldGroup = _fieldGroupService.GetById(id);
-                        fieldGroup.IsDeactive = false;
-                        _fieldGroupService.Update(fieldGroup);
-                        _fieldGroupService.Save();
-                        // response = request.CreateResponse(HttpStatusCode.Created, oldFieldGroup);
-                    }
+                    var olddbAppraisalBoardCommnent = _appraisalBoardMemberCommnentService.Delete(id);
+                    _appraisalBoardMemberCommnentService.Save();
+                    response = request.CreateResponse(HttpStatusCode.Created, olddbAppraisalBoardCommnent);
                 }
 
                 return response;
