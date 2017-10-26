@@ -7,3 +7,7 @@
     width: 100%;
     border-bottom: 1px solid #eeeeee;
 }
+
+table.row-style td{
+    padding-left: 5px;
+}

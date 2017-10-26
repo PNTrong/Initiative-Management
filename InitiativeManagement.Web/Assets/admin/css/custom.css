@@ -1,3 +1,11 @@
 ﻿.has-error{
     color:red;
 }
+
+.display-hidden{
+    visibility:hidden;
+}
+
+.display-none{
+    display:none;
+}

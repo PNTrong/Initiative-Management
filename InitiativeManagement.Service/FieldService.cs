@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using InitiativeManagement.Data.Infrastructure;
 using InitiativeManagement.Data.Repositories;
 using InitiativeManagement.Model.Models;
+using System.Linq;
 
 namespace InitiativeManagement.Service
 {
@@ -15,6 +16,8 @@ namespace InitiativeManagement.Service
         Field Delete(int id);
 
         IEnumerable<Field> GetAll();
+
+        IEnumerable<Field> GetAll(int page, int pageSize, out int totalRow, string filter);
 
         IEnumerable<Field> GetAll(string keyword);
 
@@ -80,6 +83,16 @@ namespace InitiativeManagement.Service
         public Field FindById(int id)
         {
             return _fieldRepository.GetSingleByCondition(x => x.FieldGroupId == id);
+        }
+
+        public IEnumerable<Field> GetAll(int page, int pageSize, out int totalRow, string filter)
+        {
+            var query = _fieldRepository.GetAll();
+            if (!string.IsNullOrEmpty(filter))
+                query = query.Where(x => x.FieldName.Contains(filter));
+
+            totalRow = query.Count();
+            return query.OrderBy(x => x.FieldName).Skip(page * pageSize).Take(pageSize);
         }
     }
 }

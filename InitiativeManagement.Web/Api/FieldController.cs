@@ -1,45 +1,60 @@
-﻿using AutoMapper;
-using InitiativeManagement.Model.Models;
+﻿using InitiativeManagement.Model.Models;
 using InitiativeManagement.Service;
 using InitiativeManagement.Web.Infrastructure.Core;
-using InitiativeManagement.Web.Infrastructure.Extensions;
-using InitiativeManagement.Web.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Script.Serialization;
 
 namespace InitiativeManagement.Web.Api
 {
     [RoutePrefix("api/field")]
     public class FieldController : ApiControllerBase
     {
-        #region Initialize
-
         private IFieldService _fieldService;
+        private IFieldGroupService _fieldGroupService;
 
-        public FieldController(IErrorService errorService, IFieldService fieldService)
+        public FieldController(IErrorService errorService, IFieldService fieldService, IFieldGroupService fieldGroupService)
             : base(errorService)
         {
             this._fieldService = fieldService;
+            this._fieldGroupService = fieldGroupService;
         }
 
-        #endregion Initialize
-
-        [Route("getallfield")]
+        [Route("getall")]
         [HttpGet]
         public HttpResponseMessage GetAll(HttpRequestMessage request)
         {
-            Func<HttpResponseMessage> func = () =>
+            return CreateHttpResponse(request, () =>
             {
                 var model = _fieldService.GetAll();
                 var response = request.CreateResponse(HttpStatusCode.OK, model);
                 return response;
-            };
-            return CreateHttpResponse(request, func);
+            });
+        }
+
+        [Route("getlistpaging")]
+        [HttpGet]
+        public HttpResponseMessage GetListPaging(HttpRequestMessage request, int page, int pageSize, string filter = null)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                int totalRow = 0;
+                var model = _fieldService.GetAll(page, pageSize, out totalRow, filter);
+
+                var pagedSet = new PaginationSet<Field>()
+                {
+                    Page = page,
+                    TotalCount = totalRow,
+                    TotalPages = (int)Math.Ceiling((decimal)totalRow / pageSize),
+                    Items = model
+                };
+
+                response = request.CreateResponse(HttpStatusCode.OK, pagedSet);
+
+                return response;
+            });
         }
 
         [Route("getbyid/{id:int}")]
@@ -67,10 +82,10 @@ namespace InitiativeManagement.Web.Api
             });
         }
 
-        [Route("create")]
+        [Route("add")]
         [HttpPost]
         [AllowAnonymous]
-        public HttpResponseMessage Create(HttpRequestMessage request)
+        public HttpResponseMessage Create(HttpRequestMessage request, Field field)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -81,12 +96,10 @@ namespace InitiativeManagement.Web.Api
                 }
                 else
                 {
-                    var newField = new Field();
-                    _fieldService.Add(newField);
+                    _fieldService.Add(field);
                     _fieldService.Save();
 
-                    var responseData = _fieldService.Add(newField);
-                    response = request.CreateResponse(HttpStatusCode.Created, responseData);
+                    response = request.CreateResponse(HttpStatusCode.Created, field);
                 }
 
                 return response;

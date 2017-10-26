@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using InitiativeManagement.Data.Infrastructure;
 using InitiativeManagement.Data.Repositories;
 using InitiativeManagement.Model.Models;
+using System.Linq;
 
 namespace InitiativeManagement.Service
 {
@@ -15,6 +16,8 @@ namespace InitiativeManagement.Service
         FieldGroup Delete(int id);
 
         IEnumerable<FieldGroup> GetAll();
+
+        IEnumerable<FieldGroup> GetAll(int page, int pageSize, out int totalRow, string filter);
 
         IEnumerable<FieldGroup> GetAll(string keyword);
 
@@ -37,7 +40,6 @@ namespace InitiativeManagement.Service
         public FieldGroup Add(FieldGroup FieldGroup)
         {
             var fieldGroup = _fieldGroupRepository.Add(FieldGroup);
-            _unitOfWork.Commit();
 
             return fieldGroup;
         }
@@ -73,6 +75,16 @@ namespace InitiativeManagement.Service
         public FieldGroup GetById(int id)
         {
             return _fieldGroupRepository.GetSingleById(id);
+        }
+
+        public IEnumerable<FieldGroup> GetAll(int page, int pageSize, out int totalRow, string filter)
+        {
+            var query = _fieldGroupRepository.GetAll();
+            if (!string.IsNullOrEmpty(filter))
+                query = query.Where(x => x.Name.Contains(filter));
+
+            totalRow = query.Count();
+            return query.OrderBy(x => x.Name).Skip(page * pageSize).Take(pageSize);
         }
     }
 }

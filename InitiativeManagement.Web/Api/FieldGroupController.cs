@@ -1,16 +1,10 @@
-﻿using AutoMapper;
-using InitiativeManagement.Model.Models;
+﻿using InitiativeManagement.Model.Models;
 using InitiativeManagement.Service;
 using InitiativeManagement.Web.Infrastructure.Core;
-using InitiativeManagement.Web.Infrastructure.Extensions;
-using InitiativeManagement.Web.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Script.Serialization;
 
 namespace InitiativeManagement.Web.Api
 {
@@ -31,7 +25,7 @@ namespace InitiativeManagement.Web.Api
 
         #endregion Initialize
 
-        [Route("getallfieldGroup")]
+        [Route("getall")]
         [HttpGet]
         public HttpResponseMessage GetAll(HttpRequestMessage request)
         {
@@ -42,6 +36,30 @@ namespace InitiativeManagement.Web.Api
                 return response;
             };
             return CreateHttpResponse(request, func);
+        }
+
+        [Route("getlistpaging")]
+        [HttpGet]
+        public HttpResponseMessage GetListPaging(HttpRequestMessage request, int page, int pageSize, string filter = null)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                int totalRow = 0;
+                var model = _fieldGroupService.GetAll(page, pageSize, out totalRow, filter);
+
+                PaginationSet<FieldGroup> pagedSet = new PaginationSet<FieldGroup>()
+                {
+                    Page = page,
+                    TotalCount = totalRow,
+                    TotalPages = (int)Math.Ceiling((decimal)totalRow / pageSize),
+                    Items = model
+                };
+
+                response = request.CreateResponse(HttpStatusCode.OK, pagedSet);
+
+                return response;
+            });
         }
 
         [Route("getbyid/{id:int}")]
@@ -69,10 +87,10 @@ namespace InitiativeManagement.Web.Api
             });
         }
 
-        [Route("create")]
+        [Route("Add")]
         [HttpPost]
         [AllowAnonymous]
-        public HttpResponseMessage Create(HttpRequestMessage request)
+        public HttpResponseMessage Create(HttpRequestMessage request, FieldGroup fieldGroup)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -83,12 +101,10 @@ namespace InitiativeManagement.Web.Api
                 }
                 else
                 {
-                    var newFieldGroup = new FieldGroup();
-                    _fieldGroupService.Add(newFieldGroup);
+                    _fieldGroupService.Add(fieldGroup);
                     _fieldGroupService.Save();
 
-                    var responseData = _fieldGroupService.Add(newFieldGroup);
-                    response = request.CreateResponse(HttpStatusCode.Created, responseData);
+                    response = request.CreateResponse(HttpStatusCode.Created, fieldGroup);
                 }
 
                 return response;
