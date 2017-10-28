@@ -14,7 +14,7 @@ namespace InitiativeManagement.Model.Models
 
         public DateTime DateCreate { set; get; }
 
-        public virtual IEnumerable<Author> Authors { set; get; }
+        //public virtual IEnumerable<Author> Authors { set; get; }
 
         public bool? IsDeactive { set; get; }
     }

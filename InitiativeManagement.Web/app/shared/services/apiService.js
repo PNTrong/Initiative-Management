@@ -10,7 +10,8 @@
             get: get,
             post: post,
             put: put,
-            del: del
+            del: del,
+            getword:getword
         }
         function del(url, data, success, failure) {
             authenticationService.setHeader();
@@ -68,6 +69,17 @@
                 else if (failure != null) {
                     failure(error);
                 }
+            });
+        }
+
+        function getword(url){
+            var config = { responseType: 'blob' };
+            authenticationService.setHeader();
+            $http.get(url, config).then(function onSuccess(response) {
+                var blob = response.data;
+                var contentType = response.headers("content-type");
+                var fileURL = URL.createObjectURL(blob);
+                window.open(fileURL);
             });
         }
     }

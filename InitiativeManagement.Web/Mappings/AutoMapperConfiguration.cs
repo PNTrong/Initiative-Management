@@ -45,6 +45,7 @@ namespace InitiativeManagement.Web.Mappings
             CreateMap<ApplicationGroup, ApplicationGroupViewModel>();
             CreateMap<ApplicationRole, ApplicationRoleViewModel>();
             CreateMap<ApplicationUser, ApplicationUserViewModel>();
+            CreateMap<InitiativeViewModel, Initiative>();
         }
     }
 }

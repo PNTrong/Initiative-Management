@@ -89,7 +89,6 @@
         }
 
         function dataLoadCompleted(result) {
-            debugger;
             $scope.data = result.data.Items;
             $scope.page = result.data.Page;
             $scope.pagesCount = result.data.TotalPages;

@@ -1,9 +1,9 @@
 (function (app) {
     app.controller('initiativeAddController', initiativeAddController);
 
-    initiativeAddController.$inject = ['apiService', '$scope', 'notificationService', '$state', 'commonService'];
+    initiativeAddController.$inject = ['apiService', '$scope', 'notificationService', '$state','$location', 'commonService'];
 
-    function initiativeAddController(apiService, $scope, notificationService, $state, commonService) {
+    function initiativeAddController(apiService, $scope, notificationService, $state, $location, commonService) {
         // ckeditor config
         $scope.editorOptions = {
             languague: 'vi',
@@ -12,26 +12,27 @@
 
         // author
         $scope.authors = [{
-            'fname': '',
-            'birthDay': '',
-            'organizationId': '',
-            'position':'',
-            'qualitification': '',
-            'contributionRate':''
+            'FullName': '',
+            'BirthDay': null,
+            'OrganizationID': '',
+            'Position': '',
+            'Qualitification': '',
+            'ContributionRate': ''
         }];
 
-        $scope.addNew = function (personalDetail) {
+        $scope.addNewAuthor = function () {
+            debugger;
             $scope.authors.push({
-                'fname': '',
-                'birthDay': '',
-                'organizationId': '',
-                'position':'',
-                'qualitification': '',
-                'contributionRate':''
+                'FullName': '',
+                'BirthDay': null,
+                'OrganizationId': 0,
+                'Position': '',
+                'Qualitification': '',
+                'ContributionRate': ''
             });
         };
 
-        $scope.remove = function () {
+        $scope.removeAuthor = function () {
             var newDataList = [];
             $scope.selectedAll = false;
             angular.forEach($scope.authors, function (selected) {
@@ -49,6 +50,45 @@
         };
 
         // end-author
+
+        //Field
+        function loadFields() {
+            apiService.get('api/field/getall', null, function (result) {
+                $scope.fields = result.data;
+            }, function () {
+                console.log('Cannot get list parent');
+            });
+        }
+
+        loadFields();
+        //end Field
+
+        //initiative
+        $scope.initiative = {
+            Id: 0,
+            FielId: 0,
+            AuthorGroupId: 0,
+            AppraisalBoardCommnetId: 0,
+            Authors: []
+        }
+
+        $scope.addInitiative = addInitiative;
+
+        function addInitiative() {
+            $scope.initiative.Authors = $scope.authors;
+            apiService.post('api/initiative/add', $scope.initiative, addSuccessed, addFailed);
+        }
+
+        function addSuccessed() {
+            notificationService.displaySuccess('đã thêm thành công');
+
+            $location.url('initiatives');
+        }
+
+        function addFailed(response) {
+            notificationService.displayError(response.data.Message);
+        }
+        //end-initiative
 
     }
 })(angular.module('InitiativeManagement.initiatives')); 

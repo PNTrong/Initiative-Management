@@ -69,6 +69,7 @@
     <Compile Include="FieldGroupService.cs" />
     <Compile Include="FieldService.cs" />
     <Compile Include="AuthorGroupService.cs" />
+    <Compile Include="InitiativeService.cs" />
     <Compile Include="OrderService.cs" />
     <Compile Include="PageService.cs" />
     <Compile Include="PostCategoryService.cs" />

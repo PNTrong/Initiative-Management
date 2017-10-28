@@ -136,6 +136,22 @@
     <Compile Include="Migrations\201710241834508_Update-deactive-field.Designer.cs">
       <DependentUpon>201710241834508_Update-deactive-field.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710272148327_update-initiative.cs" />
+    <Compile Include="Migrations\201710272148327_update-initiative.Designer.cs">
+      <DependentUpon>201710272148327_update-initiative.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710272322258_update-initiative-v2.cs" />
+    <Compile Include="Migrations\201710272322258_update-initiative-v2.Designer.cs">
+      <DependentUpon>201710272322258_update-initiative-v2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710272334213_update-initiative-v3.cs" />
+    <Compile Include="Migrations\201710272334213_update-initiative-v3.Designer.cs">
+      <DependentUpon>201710272334213_update-initiative-v3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710280854225_ChangeDataType.cs" />
+    <Compile Include="Migrations\201710280854225_ChangeDataType.Designer.cs">
+      <DependentUpon>201710280854225_ChangeDataType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ApplicationGroupRepository.cs" />
@@ -152,6 +168,7 @@
     <Compile Include="Repositories\FieldGroupRepository.cs" />
     <Compile Include="Repositories\FieldRepository.cs" />
     <Compile Include="Repositories\FooterRepository.cs" />
+    <Compile Include="Repositories\InitiativeRepository.cs" />
     <Compile Include="Repositories\MenuGroupRepository.cs" />
     <Compile Include="Repositories\MenuRepository.cs" />
     <Compile Include="Repositories\OrderDetailRepository.cs" />
@@ -240,6 +257,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710241834508_Update-deactive-field.resx">
       <DependentUpon>201710241834508_Update-deactive-field.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710272148327_update-initiative.resx">
+      <DependentUpon>201710272148327_update-initiative.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710272322258_update-initiative-v2.resx">
+      <DependentUpon>201710272322258_update-initiative-v2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710272334213_update-initiative-v3.resx">
+      <DependentUpon>201710272334213_update-initiative-v3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710280854225_ChangeDataType.resx">
+      <DependentUpon>201710280854225_ChangeDataType.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

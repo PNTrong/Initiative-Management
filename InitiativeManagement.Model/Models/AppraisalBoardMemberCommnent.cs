@@ -19,6 +19,6 @@ namespace InitiativeManagement.Model.Models
         public string Comment { set; get; }
 
         public string Point { set; get; }
-        public bool? IsDeactive { set; get; }
+        public bool IsDeactive { set; get; }
     }
 }

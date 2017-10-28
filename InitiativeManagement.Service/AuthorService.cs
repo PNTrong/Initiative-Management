@@ -79,7 +79,7 @@ namespace InitiativeManagement.Service
 
         public Author FindById(int id)
         {
-            return _authorRepository.GetSingleByCondition(x => x.AuthorGroupId == id);
+            return _authorRepository.GetSingleByCondition(x => x.Id == id);
         }
     }
 }

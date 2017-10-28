@@ -228,6 +228,7 @@
     <Compile Include="Api\FieldGroupController.cs" />
     <Compile Include="Api\GroupAuthorController.cs" />
     <Compile Include="Api\HomeController.cs" />
+    <Compile Include="Api\InitiativeController.cs" />
     <Compile Include="Api\PostCategoryController.cs" />
     <Compile Include="Api\ProductCategoryController.cs" />
     <Compile Include="Api\ProductController.cs" />
@@ -265,6 +266,7 @@
     <Compile Include="Models\FeedbackViewModel.cs" />
     <Compile Include="Models\FooterViewModel.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
+    <Compile Include="Models\InitiativeViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\OrderDetailViewModel.cs" />
     <Compile Include="Models\OrderViewModel.cs" />

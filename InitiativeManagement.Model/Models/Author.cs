@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,14 +12,21 @@ namespace InitiativeManagement.Model.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { set; get; }
 
-        [Required]
-        public int AuthorGroupId { set; get; }
+        //[Required]
+        //public int AuthorGroupId { set; get; }
 
-        [ForeignKey("AuthorGroupId")]
-        public virtual AuthorGroup AuthorGroup { set; get; }
+        //[ForeignKey("AuthorGroupId")]
+        //public virtual AuthorGroup AuthorGroup { set; get; }
+
+        public virtual IEnumerable<Author> Authors { set; get; }
+
+        [Required]
+        public int InitiativeId { get; set; }
+
+        [ForeignKey("InitiativeId")]
+        public virtual Initiative Initiative { get; set; }
 
         public string FullName { set; get; }
-
         public string Address { set; get; }
         public DateTime BirthDay { set; get; }
         public string OfficeAddress { set; get; }

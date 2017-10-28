@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -17,17 +18,12 @@ namespace InitiativeManagement.Model.Models
         [ForeignKey("FielId")]
         public virtual Field Field { set; get; }
 
-        [Required]
-        public int AuthorGroupId { set; get; }
+        //public int AuthorGroupId { set; get; }
 
-        [ForeignKey("AuthorGroupId")]
-        public virtual AuthorGroup AuthorGroup { set; get; }
+        //[ForeignKey("AuthorGroupId")]
+        //public virtual AuthorGroup AuthorGroups { set; get; }
 
         public int AppraisalBoardCommnetId { set; get; }
-
-        [ForeignKey("AppraisalBoardCommnetId")]
-        public virtual AppraisalBoardCommnent AppraisalBoardCommnent { set; get; }
-
         public string Title { set; get; }
         public string SendTo { set; get; }
         public string Investor { set; get; }
@@ -48,6 +44,6 @@ namespace InitiativeManagement.Model.Models
         public string ProvinceLevelGPA { set; get; }
         public string BaseLevelRank { set; get; }
         public string BaseLevelRantingGPA { set; get; }
-        public string IsDeactive { set; get; }
+        public bool? IsDeactive { set; get; }
     }
 }
