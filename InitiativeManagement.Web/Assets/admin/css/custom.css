@@ -9,3 +9,34 @@
 .display-none{
     display:none;
 }
+
+.header-login{
+    color:#336699;
+}
+
+.login-box-body, .register-box-body {
+    background: #fff;
+    padding: 20px;
+    border-top: 0;
+    width: 350px;
+    color: #666;
+    margin: auto;
+}
+
+.login-box, .register-box{
+    width:100%!important;
+}
+
+.login-logo, .register-logo {
+    font-size: 35px;
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 300;
+    color: #336699;
+}
+
+.hot-line {
+    margin-top: 20px;
+    text-align: left;
+    color: red;
+}

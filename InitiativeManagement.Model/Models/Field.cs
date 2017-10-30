@@ -17,6 +17,6 @@ namespace InitiativeManagement.Model.Models
         public virtual FieldGroup FieldGroup { set; get; }
 
         public string FieldName { set; get; }
-        public bool? IsDeactive { set; get; }
+        public bool IsDeactive { set; get; }
     }
 }

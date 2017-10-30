@@ -17,5 +17,13 @@ namespace InitiativeManagement.Common
         public const string HomeTitle = "HomeTitle";
         public const string HomeMetaKeyword = "HomeMetaKeyword";
         public const string HomeMetaDescription = "HomeMetaDescription";
+
+        //
+        //note: Don't edit this value.
+        public const string BaseLevelViewInitiative = "BaseLevelViewInitiative";
+
+        public const string ProvinceLevelViewInitiative = "ProvinceLevelViewInitiative";
+
+        public const int SupperAdminRole = 1;
     }
 }

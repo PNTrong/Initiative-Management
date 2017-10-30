@@ -14,7 +14,7 @@
 <section class="content">
     <div class="row">
         <!-- left column -->
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">Lập đơn yêu cầu công nhận sáng kiến</h3>
@@ -61,12 +61,12 @@
                                             <th style="width: 10px">
                                                 <input type="checkbox" ng-model="selectedAll" ng-click="checkAll()" />
                                             </th>
-                                            <th style="width: 120px">Họ và tên</th>
-                                            <th style="width: 100px">Ngày sinh</th>
-                                            <th style="width: 135px">Nơi công tác (hoặc nơi thường trú)</th>
-                                            <th style="width: 100px">Chức danh</th>
-                                            <th style="width: 95px">Trình độ chuyên môn</th>
-                                            <th>Tỷ lệ đóng góp</th>
+                                            <th style="width: 15%">Họ và tên</th>
+                                            <th style="width: 10%">Ngày sinh</th>
+                                            <th >Nơi công tác (hoặc nơi thường trú)</th>
+                                            <th style="width: 10%">Chức danh</th>
+                                            <th style="width: 10%">Trình độ chuyên môn</th>
+                                            <th style="width: 10%">Tỷ lệ đóng góp</th>
                                         </tr>
                                         <tr ng-repeat="author in authors">
                                             <td>
@@ -99,11 +99,11 @@
                         </ng-form>
 
                 <div class="form-group">
-                    <label for="invetor">Chủ đầu tư</label>
+                    <label for="invetor">1- Chủ đầu tư</label>
                     <input type="text" name="investor"  ng-model="initiative.Investor" class="form-control" placeholder="Chủ đầu tư tạo rao sáng kiến là ai? (Nếu có)">
                 </div>
                 <div class="form-group">
-                    <label>Lĩnh vực</label>
+                    <label>2- Lĩnh vực áp dụng sáng kiến</label>
                     <select name="field" ng-model="initiative.FielId" required class="form-control" ng-model="initiative.FieldId" ng-options="option.Id as option.FieldName for option in fields">
                         <option value="">Chọn nhóm lĩnh vực</option>
                     </select>
@@ -112,62 +112,62 @@
                 </div>
                 <!-- <input type="date" name="birthDate" id="deployment-time" class="form-control" required reqired-message="Ngày sinh bắt buộc."> -->
                 <div class="form-group" ng-class="{ 'has-error' : form.deploytime.$invalid && !form.birthDate.$pristine }">
-                    <label for="deployment-time">Ngày áp dụng</label>
+                    <label for="deployment-time">3- Ngày áp dụng</label>
 
                     <input type="date" ng-model="initiative.DeploymentTime" name="deploytime" class="form-control" required reqired-message="Vui lòng nhập ngày triển khai.">
                 </div>
 
                 <div class="box-inside-header">
-                    Mô tả bản chất sáng kiến
+                    4- Mô tả bản chất sáng kiến
                 </div>
 
                 <div class="form-group">
-                    <label>Phân tích tình trạng của giải pháp đã biết</label>
+                    <label>4.1 Phân tích tình trạng của giải pháp đã biết</label>
                     <!-- <textarea ckeditor="editorOptions" ng-model="modelName"></textarea> -->
                     <textarea class="form-control text-area-custom" name="knowSolution" ng-model="initiative.KnowSolutionContent" required rows="3" placeholder="Nhập văn bản..." ></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label>Nội dung cải tiến</label>
+                    <label>4.2 Nội dung cải tiến</label>
                     <textarea ckeditor="editorOptions" name="improvedContent" ng-model="initiative.ImprovedContent" required ng-model="model"></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label>Điều kiện áp dụng</label>
+                    <label>4.3 Điều kiện áp dụng</label>
                     <!-- <textarea ckeditor="editorOptions" ng-model="modelName"></textarea> -->
                     <textarea class="form-control text-area-custom" name="conditionApply" ng-model="initiative.ConditionApply" required rows="3" placeholder="Nhập văn bản..." ></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label>Các bước thực hiện</label>
+                    <label>4.4 Các bước thực hiện</label>
                     <!-- <textarea ckeditor="editorOptions" ng-model="modelName"></textarea> -->
                     <textarea class="form-control text-area-custom" name="actionSteps" ng-model="initiative.ActionSteps" required rows="3" placeholder="Nhập văn bản..." ></textarea>
 
                 </div>
 
                 <div class="form-group">
-                    <label>Chứng minh khả năng áp dụng</label>
+                    <label>4.5 Chứng minh khả năng áp dụng</label>
                     <!-- <textarea ckeditor="editorOptions" ng-model="modelName"></textarea> -->
                     <textarea class="form-control text-area-custom" name="applicability" ng-model="initiative.InitiativeApplicability" required rows="3" placeholder="Nhập văn bản..." ></textarea>
 
                 </div>
 
                 <div class="form-group">
-                    <label>Thông tin bảo mật</label>
+                    <label>5- Thông tin bảo mật</label>
                     <!-- <textarea ckeditor="editorOptions" ng-model="modelName"></textarea> -->
                     <textarea class="form-control text-area-custom" ng-model="initiative.SecurityInformation" rows="3" placeholder="Nhập văn bản..." ></textarea>
 
                 </div>
 
                 <div class="form-group">
-                    <label>Tác giả đánh giá</label>
+                    <label>6- Tác giả đánh giá</label>
                     <!-- <textarea ckeditor="editorOptions" ng-model="modelName"></textarea> -->
                     <textarea class="form-control text-area-custom" name="achievedByAuthors" ng-model="initiative.AchievedByAuthors" required rows="3" placeholder="Nhập văn bản..." ></textarea>
 
                 </div>
 
                 <div class="form-group text-area-custom">
-                    <label>Tổ chức hoặc cá nhân đánh giá</label>
+                    <label>7- Tổ chức hoặc cá nhân đánh giá</label>
                     <!-- <textarea ckeditor="editorOptions" ng-model="modelName"></textarea> -->
                     <textarea class="form-control" rows="3" ng-model="initiative.AchievedByAnothers" placeholder="Nhập văn bản..." ></textarea>
                 </div>
@@ -187,16 +187,6 @@
                 </form>
             </div>
 
-        </div>
-        <div class="col-md-4">
-            <div class="box box-warning">
-                <div class="box-header with-border">
-                    Giải thích chi tiết
-                </div>
-                <div class="box-body">
-                    giải thích
-                </div>
-            </div>
         </div>
     </div>
 
