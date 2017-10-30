@@ -12,13 +12,12 @@ namespace InitiativeManagement.Data.Repositories
     {
         IEnumerable<ApplicationRole> GetListRoleByGroupId(int groupId);
     }
-
     public class ApplicationRoleRepository : RepositoryBase<ApplicationRole>, IApplicationRoleRepository
     {
         public ApplicationRoleRepository(IDbFactory dbFactory) : base(dbFactory)
         {
-        }
 
+        }
         public IEnumerable<ApplicationRole> GetListRoleByGroupId(int groupId)
         {
             var query = from g in DbContext.ApplicationRoles

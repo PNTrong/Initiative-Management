@@ -1,82 +1,54 @@
-<!-- Content Header (Page header) -->
-<section class="content-header">
-    <h3 class="display-hidden"></h3>
-    <ol class="breadcrumb">
-        <li>
-            <a href="#">
-                <i class="fa fa-dashboard"></i> Trang chủ</a>
-        </li>
-        <li class="active">Danh sách sáng kiến</li>
-    </ol>
-</section>
-<!-- Main content -->
-<section class="content">
-    <!-- Default box -->
-    <div class="box">
-        <div class="box-header with-border">
-            <h3 class="box-title">Danh sách các sáng kiến</h3>
-        </div>
-        <div class="box-body">
-            <di class="row">
-                <div class="col-md-8 row">
-                    <div class="col-md-4">
-                        <select class="form-control" ng-model="filter.Time">
-                            <option value="">Chọn năm</option>
-                            <option value="2017">2017</option>
-                            <option value="2016">2016</option>
-                            <option value="2015">2015</option>
-                            <option value="2014">2014</option>
-                            <option value="2013">2013</option>
-                            <option value="2012">2012</option>
-                            <option value="2011">2011</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        <select name="field" ng-model="filter.Field" class="form-control" ng-options="option.Id as option.FieldName for option in fields">
-                            <option value="">Chọn nhóm lĩnh vực</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+        <h3 class="display-hidden"></h3>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+            <li class="active">Danh sách sáng kiến</li>
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <!-- Default box -->
+        <div class="box">
+            <div class="box-header with-border">
+                <h3 class="box-title">Danh sách các sáng kiến</h3>
+            </div>
+            <div class="box-body">
+                <di class="row">
+                    <div class="col-md-6">
                         <div class="input-group">
-                            <input type="text" class="form-control" ng-model="filter.Keyword" placeholder="Nhập từ khóa...">
+                            <input type="text" class="form-control" ng-model="keyword" placeholder="Nhập từ khóa...">
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="button" ng-click="search()">Tìm kiếm</button>
                             </span>
-                        </div>
-                        <!-- /input-group -->
+                        </div><!-- /input-group -->
                     </div>
-                </div>
-                <div class="col-md-4 text-right">
-                    <button class="btn btn-default" type="button" ng-click="export()">Xuất file</button>
-                    <button class="btn btn-success" ui-sref="add_initiative">Thêm mới</button>
-                    <button class="btn btn-danger" ng-click="deleteMultiple()" id="btnDelete" disabled>Xóa</button>
-                </div>
-            </di>
-            <div class="row">
-                <div class="col-md-12">
-                    <table class="table table-bordered">
-                        <tr>
-                            <th>
-                                <input name="all" type="checkbox" ng-click="selectAll()" />
-                            </th>
-                            <!-- <th style="width:55%">Tên sáng kiến</th> -->
-                            <th style="width:30%">Tên sáng kiến</th>
-                            <th style="width:50%">Mô tả sáng kiến</th>
-                            <th>Lĩnh vực</th>
-                            <th>Thao tác</th </tr>
+                    <div class="col-md-6">
+                        <button class="btn btn-default" type="button" ng-click="export()">Export to word</button>
+                        <button class="btn btn-success" ui-sref="add_field">Thêm mới</button>
+                        <button class="btn btn-danger" ng-click="deleteMultiple()" id="btnDelete" disabled>Xóa</button>
+                    </div>
+                </di>
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th><input name="all" type="checkbox" ng-click="selectAll()" /></th> 
+                                <!-- <th style="width:55%">Tên sáng kiến</th> -->
+                                <th style="width:30%">Tên sáng kiến</th>
+                                <th style="width:50%">Mô tả sáng kiến</th>
+                                <th>Lĩnh vực</th>
+                                <th>Thao tác</th
+                            </tr>
                             <tr ng-repeat="item in data">
+                                <td><input type="checkbox" ng-model="item.checked" name="all" /> </td>
+                                <td><a ui-sref="edit_application_role({id:item.Id})">{{item.Title}}</a></td>
                                 <td>
-                                    <input type="checkbox" ng-model="item.checked" name="all" /> </td>
-                                <td>{{item.Title}}</td>
-                                <td>
-                                    <strong>1.Ngày áp dụng</strong>
-                                    <br /> {{item.DeploymentTime}}
-                                    <br />
-                                    <strong>2.Bản chất sáng kiến</strong>
-                                    <br />
-                                    <i>2.1.Tình trạng giải pháp đã biết</i>
-                                    <br /> {{item.KnowSolutionContent}}
-                                    <br />
+                                    <strong>1.Ngày áp dụng</strong><br />
+                                    {{item.DeploymentTime}}<br />
+                                    <strong>2.Bản chất sáng kiến</strong><br />
+                                    <i>2.1.Tình trạng giải pháp đã biết</i><br />
+                                    {{item.KnowSolutionContent}}<br />
                                     <!--<i>2.1.Nội dung đề nghị</i><br />
                                     {{item.ImprovedContent}}<br />
                                     <i>2.1.Tình trạng giải pháp đã biết</i><br />
@@ -87,29 +59,21 @@
                                     {{item.Field.FieldName}}
                                 </td>
                                 <td>
-                                    <!-- <button class="btn btn-sm btn-primary" ui-sref="edit_application_role({id:item.Id})"><i class="fa fa-pencil"></i></button> -->
-                                    <button class="btn  btn-sm btn-danger" ng-click="deleteItem(item.Id)">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
+                                    <button class="btn btn-sm btn-primary" ui-sref="edit_application_role({id:item.Id})"><i class="fa fa-pencil"></i></button>
+                                    <button class="btn  btn-sm btn-danger" ng-click="deleteItem(item.Id)"><i class="fa fa-trash"></i></button>
                                 </td>
                             </tr>
                             <tfoot>
                                 <tr>
-                                    <td colspan="6">
-                                        <span class="pull-right">Trang: {{page+1}} - Tổng số bản ghi: {{totalCount}}</span>
-                                    </td>
+                                    <td colspan="6"><span class="pull-right">Trang: {{page+1}} - Tổng số bản ghi: {{totalCount}}</span></td>
                                 </tr>
                             </tfoot>
-                    </table>
+                        </table>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <!-- /.box-body -->
-        <div class="box-footer">
-            <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="search(page)"></pager-directive>
-        </div>
-        <!-- /.box-footer-->
-    </div>
-    <!-- /.box -->
-</section>
-<!-- /.content -->
+            </div><!-- /.box-body -->
+            <div class="box-footer">
+                <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="search(page)"></pager-directive>
+            </div><!-- /.box-footer-->
+        </div><!-- /.box -->
+    </section><!-- /.content -->

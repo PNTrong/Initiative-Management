@@ -16,10 +16,9 @@
                     accessToken: response.access_token,
                     userName: userName
                 };
-                // authenticationService.setTokenInfo(userInfo);
+                authenticationService.setTokenInfo(userInfo);
                 authData.authenticationData.IsAuthenticated = true;
                 authData.authenticationData.userName = userName;
-                // localStorage.setItem('userInfo',JSON.stringify(authData.authenticationData));                
                 deferred.resolve(null);
             })
             .error(function (err, status) {

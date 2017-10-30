@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using InitiativeManagement.Common;
 using InitiativeManagement.Common.Exceptions;
 using InitiativeManagement.Model.Models;
 using InitiativeManagement.Service;
@@ -100,11 +99,9 @@ namespace InitiativeManagement.Web.Api
                     var result = await _userManager.CreateAsync(newAppUser, applicationUserViewModel.Password);
                     if (result.Succeeded)
                     {
-                        var isSupperAdmin = false;
                         var listAppUserGroup = new List<ApplicationUserGroup>();
                         foreach (var group in applicationUserViewModel.Groups)
                         {
-                            isSupperAdmin = group.ID == (int)RoleGroup.Admin;
                             listAppUserGroup.Add(new ApplicationUserGroup()
                             {
                                 GroupId = group.ID,
@@ -118,8 +115,6 @@ namespace InitiativeManagement.Web.Api
                                 await _userManager.AddToRoleAsync(newAppUser.Id, role.Name);
                             }
                         }
-                        newAppUser.IsAccountAdmin = isSupperAdmin;
-                        await _userManager.UpdateAsync(newAppUser);
                         _appGroupService.AddUserToGroups(listAppUserGroup, newAppUser.Id);
                         _appGroupService.Save();
 
@@ -157,15 +152,9 @@ namespace InitiativeManagement.Web.Api
                     var result = await _userManager.UpdateAsync(appUser);
                     if (result.Succeeded)
                     {
-                        var isSupperAdmin = false;
                         var listAppUserGroup = new List<ApplicationUserGroup>();
                         foreach (var group in applicationUserViewModel.Groups)
                         {
-                            if (!isSupperAdmin)
-                            {
-                                isSupperAdmin = group.ID == Common.CommonConstants.SupperAdminRole;
-                            }
-
                             listAppUserGroup.Add(new ApplicationUserGroup()
                             {
                                 GroupId = group.ID,
@@ -179,8 +168,6 @@ namespace InitiativeManagement.Web.Api
                                 await _userManager.AddToRoleAsync(appUser.Id, role.Name);
                             }
                         }
-                        appUser.IsAccountAdmin = isSupperAdmin;
-                        await _userManager.UpdateAsync(appUser);
                         _appGroupService.AddUserToGroups(listAppUserGroup, applicationUserViewModel.Id);
                         _appGroupService.Save();
                         return request.CreateResponse(HttpStatusCode.OK, applicationUserViewModel);

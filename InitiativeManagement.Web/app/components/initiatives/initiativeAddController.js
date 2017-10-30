@@ -21,6 +21,7 @@
         }];
 
         $scope.addNewAuthor = function () {
+            debugger;
             $scope.authors.push({
                 'FullName': '',
                 'BirthDay': null,

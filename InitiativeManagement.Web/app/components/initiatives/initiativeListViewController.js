@@ -74,12 +74,6 @@
                 });
         }
 
-        $scope.filter = {
-            Keyword:'',
-            Field:-1,
-            Time:''
-        }
-        // $scope.fieldFilter = -1;
         function search(page) {
             page = page || 0;
 
@@ -88,18 +82,24 @@
                 params: {
                     page: page,
                     pageSize: 10,
-                    filter: JSON.stringify($scope.filter)
-                    // fieldId: $scope.fieldFilter
+                    filter: $scope.keyword
                 }
             }
-            debugger;
+
             apiService.get('api/initiative/getlistpaging', config, dataLoadCompleted, dataLoadFailed);
         }
 
         $scope.export = function () {
-            apiService.getword('api/initiative/export');
+            apiService.getword('api/home/export');
         }
 
+        function success(res) {
+            debugger;
+        }
+
+        function fail(res) {
+            debugger;
+        }
         function dataLoadCompleted(result) {
             $scope.data = result.data.Items;
             $scope.page = result.data.Page;
@@ -119,16 +119,6 @@
             $scope.filterExpression = '';
             search();
         }
-
-        function loadFields() {
-            apiService.get('api/field/getall', null, function (result) {
-                $scope.fields = result.data;
-            }, function () {
-                console.log('Cannot get list parent');
-            });
-        }
-
-        loadFields();
 
         $scope.search();
     }
