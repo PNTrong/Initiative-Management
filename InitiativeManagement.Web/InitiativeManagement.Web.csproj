@@ -256,6 +256,7 @@
     <Compile Include="Infrastructure\Core\ApiControllerBase.cs" />
     <Compile Include="Infrastructure\Core\PaginationSet.cs" />
     <Compile Include="Infrastructure\Extensions\EntityExtensions.cs" />
+    <Compile Include="Infrastructure\Extensions\InitiativeFilter.cs" />
     <Compile Include="Infrastructure\NganLuongAPI\APICheckoutV3.cs" />
     <Compile Include="Mappings\AutoMapperConfiguration.cs" />
     <Compile Include="Models\ApplicationGroupViewModel.cs" />
@@ -351,13 +352,14 @@
     <Content Include="app\shared\directives\pagerDirective.html" />
     <Content Include="app\shared\directives\pagerDirective.js" />
     <Content Include="app\shared\filters\statusFilter.js" />
-    <Content Include="app\shared\modules\tedushop.common.js" />
+    <Content Include="app\shared\modules\InitiativeManagement.common.js" />
     <Content Include="app\shared\services\apiService.js" />
     <Content Include="app\shared\services\authData.js" />
     <Content Include="app\shared\services\authenticationService.js" />
     <Content Include="app\shared\services\commonService.js" />
     <Content Include="app\shared\services\loginService.js" />
     <Content Include="app\shared\services\notificationService.js" />
+    <Content Include="app\shared\services\userService.js" />
     <Content Include="app\shared\views\baseView.html" />
     <Content Include="Assets\admin\css\AdminLTE.css" />
     <Content Include="Assets\admin\css\AdminLTE.min.css" />
@@ -4581,8 +4583,8 @@
     <Content Include="Assets\admin\libs\jquery\src\var\support.js" />
     <Content Include="Assets\admin\libs\jquery\src\var\toString.js" />
     <Content Include="Assets\admin\libs\jquery\src\wrap.js" />
-    <Content Include="Assets\admin\libs\mustache\mustache.js" />
-    <Content Include="Assets\admin\libs\mustache\mustache.min.js" />
+    <!-- <Content Include="Assets\admin\libs\mustache\mustache.js" /> -->
+    <!-- <Content Include="Assets\admin\libs\mustache\mustache.min.js" /> -->
     <Content Include="Assets\admin\libs\mustache\spec\_files\bom_as_whitespace.js" />
     <Content Include="Assets\admin\libs\mustache\spec\_files\bom_as_whitespace.txt" />
     <Content Include="Assets\admin\libs\ng-ckeditor\.gitignore" />
@@ -5477,6 +5479,8 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Properties\PublishProfiles\publish.pubxml" />
     <Content Include="Views\ShoppingCart\CancelOrder.cshtml" />
     <Content Include="Views\ShoppingCart\ConfirmOrder.cshtml" />

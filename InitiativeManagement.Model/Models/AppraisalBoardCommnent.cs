@@ -14,7 +14,8 @@ namespace InitiativeManagement.Model.Models
         public string GeneralComment { set; get; }
 
         public string GPA { set; get; }
-        public bool? IsDeactive { set; get; }
+
+        public bool IsDeactive { set; get; }
 
         public virtual IEnumerable<AppraisalBoardMemberCommnent> AppraisalBoardMemberCommnents { set; get; }
     }

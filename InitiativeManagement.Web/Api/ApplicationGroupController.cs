@@ -17,8 +17,8 @@ using System.Web.Script.Serialization;
 
 namespace InitiativeManagement.Web.Api
 {
+    [Authorize(Roles = "AdminUser")]
     [RoutePrefix("api/applicationGroup")]
-    [Authorize]
     public class ApplicationGroupController : ApiControllerBase
     {
         private IApplicationGroupService _appGroupService;

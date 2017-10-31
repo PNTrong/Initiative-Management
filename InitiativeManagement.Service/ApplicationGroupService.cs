@@ -30,8 +30,13 @@ namespace InitiativeManagement.Service
 
         IEnumerable<ApplicationUser> GetListUserByGroupId(int groupId);
 
+        IEnumerable<ApplicationRole> GetRolesByUserId(string userId);
+
+        bool IsAccountAdmin(string userId);
+
         void Save();
     }
+
     public class ApplicationGroupService : IApplicationGroupService
     {
         private IApplicationGroupRepository _appGroupRepository;
@@ -107,9 +112,19 @@ namespace InitiativeManagement.Service
             return _appGroupRepository.GetListGroupByUserId(userId);
         }
 
+        public bool IsAccountAdmin(string userId)
+        {
+            return _appGroupRepository.IsAccountAdmin(userId);
+        }
+
         public IEnumerable<ApplicationUser> GetListUserByGroupId(int groupId)
         {
             return _appGroupRepository.GetListUserByGroupId(groupId);
+        }
+
+        public IEnumerable<ApplicationRole> GetRolesByUserId(string userId)
+        {
+            return _appGroupRepository.GetRolesByUserId(userId);
         }
     }
 }

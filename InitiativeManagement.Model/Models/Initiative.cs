@@ -13,37 +13,52 @@ namespace InitiativeManagement.Model.Models
         public int Id { set; get; }
 
         [Required]
-        public int FielId { set; get; }
+        public int FieldId { set; get; }
 
-        [ForeignKey("FielId")]
+        [ForeignKey("FieldId")]
         public virtual Field Field { set; get; }
 
-        //public int AuthorGroupId { set; get; }
-
-        //[ForeignKey("AuthorGroupId")]
-        //public virtual AuthorGroup AuthorGroups { set; get; }
+        public string AccountId { get; set; }
 
         public int AppraisalBoardCommnetId { set; get; }
+
         public string Title { set; get; }
+
         public string SendTo { set; get; }
+
         public string Investor { set; get; }
+
         public DateTime DeploymentTime { set; get; }
+
         public string KnowSolutionContent { set; get; }
+
         public string ImprovedContent { set; get; }
+
         public string ConditionApply { set; get; }
+
         public string ActionSteps { set; get; }
+
         public string InitiativeApplicability { set; get; }
+
         public string SecurityInformation { set; get; }
+
         public string AchievedByAuthors { set; get; }
+
         public string AchievedByAnothers { set; get; }
-        public string IsBaselLevelApproved { set; get; }
+
+        //public string IsBaselLevelApproved { set; get; }
         public string IsProvinceLevelApproved { set; get; }
+
         public string TrialApplicantIds { set; get; }
+
         public string Attachments { set; get; }
+
         public string ProvinceLevelRank { set; get; }
+
         public string ProvinceLevelGPA { set; get; }
-        public string BaseLevelRank { set; get; }
-        public string BaseLevelRantingGPA { set; get; }
-        public bool? IsDeactive { set; get; }
+
+        //public string BaseLevelRank { set; get; }
+        //public string BaseLevelRantingGPA { set; get; }
+        public bool IsDeactive { set; get; }
     }
 }

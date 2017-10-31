@@ -5,10 +5,10 @@
 
     function initiativeAddController(apiService, $scope, notificationService, $state, $location, commonService) {
         // ckeditor config
-        $scope.editorOptions = {
-            languague: 'vi',
-            height: '50px'
-        }
+        // $scope.editorOptions = {
+        //     languague: 'vi',
+        //     height: '50px'
+        // }
 
         // author
         $scope.authors = [{
@@ -21,7 +21,6 @@
         }];
 
         $scope.addNewAuthor = function () {
-            debugger;
             $scope.authors.push({
                 'FullName': '',
                 'BirthDay': null,

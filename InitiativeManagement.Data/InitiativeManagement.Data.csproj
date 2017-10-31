@@ -152,6 +152,18 @@
     <Compile Include="Migrations\201710280854225_ChangeDataType.Designer.cs">
       <DependentUpon>201710280854225_ChangeDataType.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710290433184_UpdateUserTable.cs" />
+    <Compile Include="Migrations\201710290433184_UpdateUserTable.Designer.cs">
+      <DependentUpon>201710290433184_UpdateUserTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710290536198_ChangeInitiativeType.cs" />
+    <Compile Include="Migrations\201710290536198_ChangeInitiativeType.Designer.cs">
+      <DependentUpon>201710290536198_ChangeInitiativeType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710292119516_updateFieldAll.cs" />
+    <Compile Include="Migrations\201710292119516_updateFieldAll.Designer.cs">
+      <DependentUpon>201710292119516_updateFieldAll.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ApplicationGroupRepository.cs" />
@@ -269,6 +281,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710280854225_ChangeDataType.resx">
       <DependentUpon>201710280854225_ChangeDataType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710290433184_UpdateUserTable.resx">
+      <DependentUpon>201710290433184_UpdateUserTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710290536198_ChangeInitiativeType.resx">
+      <DependentUpon>201710290536198_ChangeInitiativeType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710292119516_updateFieldAll.resx">
+      <DependentUpon>201710292119516_updateFieldAll.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

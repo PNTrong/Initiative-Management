@@ -4,6 +4,7 @@ using InitiativeManagement.Model.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using InitiativeManagement.Common;
 
 namespace InitiativeManagement.Service
 {
@@ -19,7 +20,7 @@ namespace InitiativeManagement.Service
 
         IEnumerable<Initiative> GetMulti();
 
-        IEnumerable<Initiative> GetAll(int page, int pageSize, out int totalRow, string filter);
+        IEnumerable<Initiative> GetAll(int page, int pageSize, out int totalRow, DynamicFilter filter, IEnumerable<ApplicationGroup> roles, string userId);
 
         IEnumerable<Initiative> GetAll(string keyword);
 
@@ -65,13 +66,31 @@ namespace InitiativeManagement.Service
             return _initiativeRepository.GetAll();
         }
 
-        public IEnumerable<Initiative> GetAll(int page, int pageSize, out int totalRow, string filter)
+        public IEnumerable<Initiative> GetAll(int page, int pageSize, out int totalRow, DynamicFilter filter, IEnumerable<ApplicationGroup> roles, string userId)
         {
-            var query = _initiativeRepository.GetAll(new string[] { "Field" });
-            if (!string.IsNullOrEmpty(filter))
-                query = query.Where(x => x.Title.Contains(filter) || x.Field.ToString() == filter || x.IsDeactive != true);
+            IEnumerable<Initiative> query = Enumerable.Empty<Initiative>();
+
+            if (roles.FirstOrDefault(r => r.ID == (int)RoleGroup.Admin) == null)
+            {
+                query = _initiativeRepository.GetMulti(x => !x.IsDeactive && x.AccountId == userId, new string[] { "Field" });
+            }
+            else
+            {
+                query = _initiativeRepository.GetMulti(x => !x.IsDeactive, new string[] { "Field" });
+            }
+
+            if (!string.IsNullOrEmpty(filter.Keyword))
+                query = query.Where(x => x.Title.ToUpper().Contains(filter.Keyword.ToUpper()) || x.KnowSolutionContent.ToUpper().Contains(filter.Keyword.ToUpper()) ||
+                x.ImprovedContent.ToUpper().Contains(filter.Keyword.ToUpper()));
+
+            if (!string.IsNullOrEmpty(filter.Time))
+                query = query.Where(x => x.Title.ToUpper().Contains(filter.Keyword.ToUpper()));
+
+            if (filter.Field > 0)
+                query = query.Where(x => x.FieldId == filter.Field);
 
             totalRow = query.Count();
+
             return query.OrderBy(x => x.Title).Skip(page * pageSize).Take(pageSize);
         }
 

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using InitiativeManagement.Common;
 using InitiativeManagement.Common.Exceptions;
 using InitiativeManagement.Model.Models;
 using InitiativeManagement.Service;
@@ -15,7 +16,7 @@ using System.Web.Http;
 
 namespace InitiativeManagement.Web.Api
 {
-    [Authorize]
+    [Authorize(Roles = "AdminUser")]
     [RoutePrefix("api/applicationUser")]
     public class ApplicationUserController : ApiControllerBase
     {
@@ -37,7 +38,7 @@ namespace InitiativeManagement.Web.Api
 
         [Route("getlistpaging")]
         [HttpGet]
-        [Authorize(Roles = "ViewUser")]
+        //[Authorize(Roles = "AdminUser")]
         public HttpResponseMessage GetListPaging(HttpRequestMessage request, int page, int pageSize, string filter = null)
         {
             return CreateHttpResponse(request, () =>
@@ -63,7 +64,7 @@ namespace InitiativeManagement.Web.Api
 
         [Route("detail/{id}")]
         [HttpGet]
-        [Authorize(Roles = "ViewUser")]
+        [Authorize(Roles = "AdminUser")]
         public HttpResponseMessage Details(HttpRequestMessage request, string id)
         {
             if (string.IsNullOrEmpty(id))
@@ -86,7 +87,7 @@ namespace InitiativeManagement.Web.Api
 
         [HttpPost]
         [Route("add")]
-        [Authorize(Roles = "AddUser")]
+        [Authorize(Roles = "AdminUser")]
         public async Task<HttpResponseMessage> Create(HttpRequestMessage request, ApplicationUserViewModel applicationUserViewModel)
         {
             if (ModelState.IsValid)
@@ -99,9 +100,11 @@ namespace InitiativeManagement.Web.Api
                     var result = await _userManager.CreateAsync(newAppUser, applicationUserViewModel.Password);
                     if (result.Succeeded)
                     {
+                        var isSupperAdmin = false;
                         var listAppUserGroup = new List<ApplicationUserGroup>();
                         foreach (var group in applicationUserViewModel.Groups)
                         {
+                            isSupperAdmin = group.ID == (int)RoleGroup.Admin;
                             listAppUserGroup.Add(new ApplicationUserGroup()
                             {
                                 GroupId = group.ID,
@@ -115,6 +118,8 @@ namespace InitiativeManagement.Web.Api
                                 await _userManager.AddToRoleAsync(newAppUser.Id, role.Name);
                             }
                         }
+                        newAppUser.IsAccountAdmin = isSupperAdmin;
+                        await _userManager.UpdateAsync(newAppUser);
                         _appGroupService.AddUserToGroups(listAppUserGroup, newAppUser.Id);
                         _appGroupService.Save();
 
@@ -140,7 +145,7 @@ namespace InitiativeManagement.Web.Api
 
         [HttpPut]
         [Route("update")]
-        [Authorize(Roles = "UpdateUser")]
+        [Authorize(Roles = "AdminUser")]
         public async Task<HttpResponseMessage> Update(HttpRequestMessage request, ApplicationUserViewModel applicationUserViewModel)
         {
             if (ModelState.IsValid)
@@ -152,9 +157,15 @@ namespace InitiativeManagement.Web.Api
                     var result = await _userManager.UpdateAsync(appUser);
                     if (result.Succeeded)
                     {
+                        var isSupperAdmin = false;
                         var listAppUserGroup = new List<ApplicationUserGroup>();
                         foreach (var group in applicationUserViewModel.Groups)
                         {
+                            if (!isSupperAdmin)
+                            {
+                                isSupperAdmin = group.ID == Common.CommonConstants.SupperAdminRole;
+                            }
+
                             listAppUserGroup.Add(new ApplicationUserGroup()
                             {
                                 GroupId = group.ID,
@@ -168,6 +179,8 @@ namespace InitiativeManagement.Web.Api
                                 await _userManager.AddToRoleAsync(appUser.Id, role.Name);
                             }
                         }
+                        appUser.IsAccountAdmin = isSupperAdmin;
+                        await _userManager.UpdateAsync(appUser);
                         _appGroupService.AddUserToGroups(listAppUserGroup, applicationUserViewModel.Id);
                         _appGroupService.Save();
                         return request.CreateResponse(HttpStatusCode.OK, applicationUserViewModel);

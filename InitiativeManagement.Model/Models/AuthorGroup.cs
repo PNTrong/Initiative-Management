@@ -16,6 +16,6 @@ namespace InitiativeManagement.Model.Models
 
         //public virtual IEnumerable<Author> Authors { set; get; }
 
-        public bool? IsDeactive { set; get; }
+        public bool IsDeactive { set; get; }
     }
 }

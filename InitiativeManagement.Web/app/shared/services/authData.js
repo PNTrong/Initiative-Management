@@ -5,10 +5,12 @@
 
         var authentication = {
             IsAuthenticated: false,
-            userName: ""
+            userName: "",
+            IsAdmin:false
         };
+        
         authDataFactory.authenticationData = authentication;
-
+        
         return authDataFactory;
     }]);
 })(angular.module('InitiativeManagement.common'));

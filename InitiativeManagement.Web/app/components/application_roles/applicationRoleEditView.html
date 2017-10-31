@@ -11,7 +11,7 @@
 <section class="content">
   <div class="row">
     <div class="col-md-12">
-      <div class="box box-info">
+      <div class="box box-primary">
         <div class="box-header with-border">
           <h3 class="box-title">{{role.Name}}</h3>
         </div><!-- /.box-header -->
@@ -22,7 +22,7 @@
               <div class="form-group" ng-class="{ 'has-error' : frmUpdateAppRole.name.$invalid && !frmUpdateAppRole.name.$pristine }">
                 <label class="col-sm-2 control-label">Tên quyền</label>
                 <div class="col-sm-10">
-                  <input type="text" name="name" class="form-control"
+                  <input type="text" name="name" class="form-control" disabled
                          required reqired-message="Tên quyền bắt buộc." ng-model="role.Name">
                 </div>
               </div>
@@ -36,7 +36,7 @@
 
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                  <a ui-sref="app_roles" class="btn btn-default">Hủy bỏ</a>
+                  <a ui-sref="application_roles" class="btn btn-default">Hủy bỏ</a>
                   <input type="submit" ng-disabled="frmUpdateAppRole.$invalid" class="btn btn-primary" value="Lưu lại" />
                 </div>
               </div>
