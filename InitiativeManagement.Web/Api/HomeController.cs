@@ -12,7 +12,6 @@ using System.Web.Http;
 namespace InitiativeManagement.Web.Api
 {
     [RoutePrefix("api/home")]
-    [Authorize]
     public class HomeController : ApiControllerBase
     {
         private IErrorService _errorService;
@@ -31,27 +30,22 @@ namespace InitiativeManagement.Web.Api
         }
 
         [HttpGet]
-        [Route("permission")]
-        public HttpResponseMessage GetUserRoles(HttpRequestMessage request)
-        {
-            return CreateHttpResponse(request, () =>
-            {
-                HttpResponseMessage response = null;
-                var user = _userManager.FindById(User.Identity.GetUserId());
-
-                var isAdmin = user.IsAccountAdmin;
-
-                response = request.CreateResponse(HttpStatusCode.OK, isAdmin);
-
-                return response;
-            });
-        }
-
-        [HttpGet]
         [Route("TestMethod")]
+        [Authorize]
         public string TestMethod()
         {
             return "Hello, TEDU Member. ";
+        }
+
+        [HttpGet]
+        [Route("permission")]
+        public HttpResponseMessage GetUserRoles(HttpRequestMessage request)
+        {
+            var user = _userManager.FindById(User.Identity.GetUserId());
+
+            var isAmind = user.IsAccountAdmin;
+
+            return request.CreateResponse(HttpStatusCode.OK, new { sucess = true });
         }
 
         [HttpGet]

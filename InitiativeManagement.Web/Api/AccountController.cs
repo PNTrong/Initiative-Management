@@ -1,4 +1,5 @@
 ﻿using InitiativeManagement.Web.App_Start;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System.Net;
 using System.Net.Http;
@@ -71,6 +72,21 @@ namespace InitiativeManagement.Web.Api
             var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
             authenticationManager.SignOut();
             return request.CreateResponse(HttpStatusCode.OK, new { success = true });
+        }
+
+        [HttpGet]
+        [Route("permission")]
+        [AllowAnonymous]
+        public HttpResponseMessage GetUserRoles(HttpRequestMessage request)
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+
+            if (user == null)
+                return request.CreateResponse(HttpStatusCode.OK, false);
+
+            var isAdmin = user.IsAccountAdmin;
+
+            return request.CreateResponse(HttpStatusCode.OK, isAdmin);
         }
     }
 }

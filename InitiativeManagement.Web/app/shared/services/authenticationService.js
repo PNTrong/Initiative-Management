@@ -1,61 +1,65 @@
 ﻿(function (app) {
-    'use strict';
-    app.service('authenticationService', ['$http', '$q', 'localStorageService', 'authData',
+    'use strict'; 
+    app.service('authenticationService', ['$http', '$q', 'localStorageService', 'authData', 
         function ($http, $q, localStorageService, authData, ) {
-            var tokenInfo;
+            var tokenInfo; 
 
             this.setTokenInfo = function (data) {
-                tokenInfo = data;
-                localStorageService.set("TokenInfo", JSON.stringify(tokenInfo));
+                tokenInfo = data; 
+                localStorageService.set("TokenInfo", JSON.stringify(tokenInfo)); 
             }
 
             this.getTokenInfo = function () {
-                return tokenInfo;
+                return tokenInfo; 
             }
 
             this.removeToken = function () {
-                tokenInfo = null;
-                localStorageService.set("TokenInfo", null);
+                tokenInfo = null; 
+                localStorageService.set("TokenInfo", null); 
             }
 
             this.init = function () {
-                var tokenInfo = localStorageService.get("TokenInfo");
+                var tokenInfo = localStorageService.get("TokenInfo"); 
                 if (tokenInfo) {
-                    tokenInfo = JSON.parse(tokenInfo);
-                    authData.authenticationData.IsAuthenticated = true;
-                    authData.authenticationData.userName = tokenInfo.userName;
-                    authData.authenticationData.accessToken = tokenInfo.accessToken;
+                    tokenInfo = JSON.parse(tokenInfo); 
+                    authData.authenticationData.IsAuthenticated = true; 
+                    authData.authenticationData.userName = tokenInfo.userName; 
+                    authData.authenticationData.accessToken = tokenInfo.accessToken; 
                 }
             }
 
             this.setHeader = function () {
-                delete $http.defaults.headers.common['X-Requested-With'];
+                delete $http.defaults.headers.common['X-Requested-With']; 
                 if ((authData.authenticationData != undefined) && (authData.authenticationData.accessToken != undefined) && (authData.authenticationData.accessToken != null) && (authData.authenticationData.accessToken != "")) {
-                    $http.defaults.headers.common['Authorization'] = 'Bearer ' + authData.authenticationData.accessToken;
-                    $http.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+                    $http.defaults.headers.common['Authorization'] = 'Bearer ' + authData.authenticationData.accessToken; 
+                    $http.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8'; 
                 }
             }
 
             this.validateRequest = function () {
-                var url = 'api/home/TestMethod';
-                var deferred = $q.defer();
+                var url = 'api/home/TestMethod'; 
+                var deferred = $q.defer(); 
                 $http.get(url).then(function () {
-                    deferred.resolve(null);
+                    deferred.resolve(null); 
                 }, function (error) {
-                    deferred.reject(error);
-                });
-                return deferred.promise;
+                    deferred.reject(error); 
+                }); 
+                return deferred.promise; 
             }
 
-            this.getRole = function(){
-                return localStorageService.get("role");
-            };
+            this.getRole = function() {
+                return localStorageService.get("role"); 
+            }; 
 
-            this.setRole = function(role){
-                localStorageService.set("role", role);
+            this.removeRole = function() {
+                localStorageService.remove("role"); 
             }
 
-            this.init();
+            this.setRole = function(role) {
+                localStorageService.set("role", role); 
+            }
+
+            this.init(); 
         }
-    ]);
-})(angular.module('InitiativeManagement.common'));
+    ]); 
+})(angular.module('InitiativeManagement.common')); 

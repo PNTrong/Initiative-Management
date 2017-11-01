@@ -206,16 +206,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\InitiativeManagement.Common\InitiativeManagement.Common.csproj">
-      <Project>{300cc7f5-31a6-44b7-8d90-f354ac34b936}</Project>
-      <Name>InitiativeManagement.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\InitiativeManagement.Model\InitiativeManagement.Model.csproj">
-      <Project>{1a60e027-7b3b-4881-9ec3-2666b297cb43}</Project>
-      <Name>InitiativeManagement.Model</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Migrations\201605041425474_InitialDB.resx">
       <DependentUpon>201605041425474_InitialDB.cs</DependentUpon>
     </EmbeddedResource>
@@ -291,6 +281,16 @@
     <EmbeddedResource Include="Migrations\201710292119516_updateFieldAll.resx">
       <DependentUpon>201710292119516_updateFieldAll.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\InitiativeManagement.Common\InitiativeManagement.Common.csproj">
+      <Project>{300cc7f5-31a6-44b7-8d90-f354ac34b936}</Project>
+      <Name>InitiativeManagement.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InitiativeManagement.Model\InitiativeManagement.Model.csproj">
+      <Project>{1a60e027-7b3b-4881-9ec3-2666b297cb43}</Project>
+      <Name>InitiativeManagement.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,13 +1,7 @@
 ﻿(function (app) {
-    app.controller('loginController', ['$scope', 'loginService', '$injector', 'notificationService','apiService','authenticationService',
-        function ($scope, loginService, $injector, notificationService,apiService,authenticationService) {
-
-            function getRole() {
-                apiService.get('/api/home/permission', null, function (res) {
-                    authenticationService.setRole(res.data);
-                }, null);
-            }
-
+    app.controller('loginController', ['$scope', 'loginService', '$injector', 'notificationService', 'apiService', 'authenticationService',
+        function ($scope, loginService, $injector, notificationService, apiService, authenticationService) {
+            
             $scope.loginData = {
                 userName: "",
                 password: ""
@@ -19,11 +13,10 @@
                         notificationService.displayError("Tên hoặc mật khẩu không đúng.");
                     }
                     else {
-                        authenticationService.getRole();
                         var stateService = $injector.get('$state');
                         stateService.go('home');
                     }
                 });
             }
         }]);
-})(angular.module('InitiativeManagement'));
+})(angular.module('InitiativeManagement')); 

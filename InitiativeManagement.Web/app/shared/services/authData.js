@@ -1,6 +1,6 @@
 ﻿(function (app) {
     'use strict';
-    app.factory('authData', [function () {
+    app.factory('authData', ['$http',function ($http) {
         var authDataFactory = {};
 
         var authentication = {

@@ -78,3 +78,31 @@
 .sidebar-menu > li .label, .sidebar-menu > li .badge {
     background: rgba(0,0,0,0.2) !important;
 }
+
+    /*.sidebar-collapse .main-sidebar {
+        -webkit-transform:none;
+    }
+
+   .sidebar-mini.sidebar-collapse .main-sidebar-hide {
+        -webkit-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+        -o-transform: translate(0, 0);
+        transform: translate(0, 0);
+        width: 50px !important;
+        z-index: 850;
+    }
+
+.main-sidebar-hide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-top: 50px;
+    min-height: 100%;
+    width: unset;
+    transition: transform .3s ease-in-out,width .3s ease-in-out;
+    z-index: unset;
+    -webkit-transition: none;
+    -moz-transition: none;
+    -o-transition: none;
+    transition: transform .3s ease-in-out,width .3s ease-in-out;
+}*/

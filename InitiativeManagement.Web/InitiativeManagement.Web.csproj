@@ -37,6 +37,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -45,6 +46,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Aspose.Words, Version=17.1.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
@@ -236,6 +238,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\ModifyInMemory.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\Startup.cs" />
@@ -4583,8 +4586,8 @@
     <Content Include="Assets\admin\libs\jquery\src\var\support.js" />
     <Content Include="Assets\admin\libs\jquery\src\var\toString.js" />
     <Content Include="Assets\admin\libs\jquery\src\wrap.js" />
-    <!-- <Content Include="Assets\admin\libs\mustache\mustache.js" /> -->
-    <!-- <Content Include="Assets\admin\libs\mustache\mustache.min.js" /> -->
+    <Content Include="Assets\admin\libs\mustache\mustache.js" />
+    <Content Include="Assets\admin\libs\mustache\mustache.min.js" />
     <Content Include="Assets\admin\libs\mustache\spec\_files\bom_as_whitespace.js" />
     <Content Include="Assets\admin\libs\mustache\spec\_files\bom_as_whitespace.txt" />
     <Content Include="Assets\admin\libs\ng-ckeditor\.gitignore" />
@@ -5016,7 +5019,9 @@
     <Content Include="Libs\CKFinder.dll" />
     <Content Include="Resources\Aspose.Words.dll" />
     <Content Include="Resources\db.sql" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -5033,6 +5038,7 @@
     <Folder Include="app\shared\navigation\" />
     <Folder Include="Assets\admin\js\pages\" />
     <Folder Include="Assets\admin\libs\checklist-model\test\" />
+    <Folder Include="Assets\admin\libs\mustache\bin\" />
     <Folder Include="UploadedFiles\" />
     <Folder Include="Views\About\" />
     <Folder Include="Views\FieldGroup\" />
@@ -5044,24 +5050,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\InitiativeManagement.Common\InitiativeManagement.Common.csproj">
-      <Project>{300cc7f5-31a6-44b7-8d90-f354ac34b936}</Project>
-      <Name>InitiativeManagement.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\InitiativeManagement.Data\InitiativeManagement.Data.csproj">
-      <Project>{d573cfed-f642-4868-b921-4226cb26cdfe}</Project>
-      <Name>InitiativeManagement.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\InitiativeManagement.Model\InitiativeManagement.Model.csproj">
-      <Project>{1a60e027-7b3b-4881-9ec3-2666b297cb43}</Project>
-      <Name>InitiativeManagement.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\InitiativeManagement.Service\InitiativeManagement.Service.csproj">
-      <Project>{7eb49ce5-4c7a-46d0-b381-eb19a5f8dfaa}</Project>
-      <Name>InitiativeManagement.Service</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include=".bowerrc" />
@@ -5407,7 +5395,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\admin\libs\mustache\.bower.json" />
-    <Content Include="Assets\admin\libs\mustache\bin\mustache" />
     <Content Include="Assets\admin\libs\mustache\bower.json" />
     <Content Include="Assets\admin\libs\mustache\CHANGELOG.md" />
     <Content Include="Assets\admin\libs\mustache\hooks\install-hooks.sh" />
@@ -5488,6 +5475,24 @@
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\ExportToWord\Index.cshtml" />
     <Content Include="Resources\test.docx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\InitiativeManagement.Common\InitiativeManagement.Common.csproj">
+      <Project>{300cc7f5-31a6-44b7-8d90-f354ac34b936}</Project>
+      <Name>InitiativeManagement.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InitiativeManagement.Data\InitiativeManagement.Data.csproj">
+      <Project>{d573cfed-f642-4868-b921-4226cb26cdfe}</Project>
+      <Name>InitiativeManagement.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InitiativeManagement.Model\InitiativeManagement.Model.csproj">
+      <Project>{1a60e027-7b3b-4881-9ec3-2666b297cb43}</Project>
+      <Name>InitiativeManagement.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InitiativeManagement.Service\InitiativeManagement.Service.csproj">
+      <Project>{7eb49ce5-4c7a-46d0-b381-eb19a5f8dfaa}</Project>
+      <Name>InitiativeManagement.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -3,7 +3,7 @@
     <h3 class="display-hidden"></h3>
     <ol class="breadcrumb">
         <li>
-            <a href="#">
+            <a ui-sref="home">
                 <i class="fa fa-dashboard"></i> Trang chủ</a>
         </li>
         <li class="active">Danh sách sáng kiến</li>
@@ -17,7 +17,7 @@
             <h3 class="box-title">Danh sách các sáng kiến</h3>
         </div>
         <div class="box-body">
-            <di class="row">
+            <div class="row">
                 <div class="col-md-8 row">
                     <div class="col-md-4">
                         <select class="form-control" ng-model="filter.Time">
@@ -51,7 +51,7 @@
                     <button class="btn btn-success" ui-sref="add_initiative">Thêm mới</button>
                     <button class="btn btn-danger" ng-click="deleteMultiple()" id="btnDelete" disabled>Xóa</button>
                 </div>
-            </di>
+            </div>
             <div class="row">
                 <div class="col-md-12">
                     <table class="table table-bordered">

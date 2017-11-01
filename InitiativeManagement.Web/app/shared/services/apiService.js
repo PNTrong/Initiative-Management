@@ -13,6 +13,7 @@
             del: del,
             getword:getword
         }
+        
         function del(url, data, success, failure) {
             authenticationService.setHeader();
             $http.delete(url, data).then(function (result) {
@@ -27,12 +28,12 @@
 
             });
         }
+
         function post(url, data, success, failure) {
             authenticationService.setHeader();
             $http.post(url, data).then(function (result) {
                 success(result);
             }, function (error) {
-                console.log(error.status)
                 if (error.status === 401) {
                     notificationService.displayError('Authenticate is required.');
                 }
@@ -42,6 +43,7 @@
 
             });
         }
+
         function put(url, data, success, failure) {
             authenticationService.setHeader();
             $http.put(url, data).then(function (result) {
@@ -57,6 +59,7 @@
 
             });
         }
+
         function get(url, params, success, failure) {
             authenticationService.setHeader();
             $http.get(url, params).then(function (result) {

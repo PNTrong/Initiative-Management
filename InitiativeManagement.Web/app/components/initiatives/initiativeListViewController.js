@@ -75,9 +75,9 @@
         }
 
         $scope.filter = {
-            Keyword:'',
-            Field:-1,
-            Time:''
+            Keyword: '',
+            Field: -1,
+            Time: ''
         }
         // $scope.fieldFilter = -1;
         function search(page) {
