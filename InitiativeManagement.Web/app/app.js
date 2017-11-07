@@ -13,7 +13,16 @@
             'InitiativeManagement.field_groups',
             'InitiativeManagement.common'])
         .config(config)
-        .config(configAuthentication);
+        .config(configAuthentication)
+        .run(['$rootScope', '$location','authData', function ($rootScope, $location,authData) {
+            // $rootScope.$on('$locationChangeStart', function (event, next, current) {
+            // });
+            $rootScope.$on('$stateChangeStart', function (event) {
+                if (!authData.authenticationData.IsAuthenticated) {
+                    $location.path('/login');
+                }
+            });
+        }]);
 
     config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
 
@@ -30,12 +39,17 @@
                 controller: "loginController"
             })
             .state('home', {
+                url: "/trang-chu",
+                parent: 'base',
+                templateUrl: "/app/components/home/homeView.html",
+                controller: "homeController",
+            }).state('newhome', {
                 url: "/",
                 parent: 'base',
                 templateUrl: "/app/components/home/homeView.html",
                 controller: "homeController",
             });
-        $urlRouterProvider.otherwise('/login');
+        $urlRouterProvider.otherwise('/');
     }
 
     function configAuthentication($httpProvider) {
@@ -46,13 +60,11 @@
                 },
                 requestError: function (rejection) {
                     $window.location.reload();
-                    debugger;
                     return $q.reject(rejection);
                 },
                 response: function (response) {
                     if (response.status == "401") {
                         $location.path('/login');
-                        debugger;
                         $window.location.reload();
                     }
                     //the same response/modified/or a new one need to be returned.
@@ -61,7 +73,6 @@
                 responseError: function (rejection) {
                     if (rejection.status == "401") {
                         $location.path('/login');
-                        debugger;
                         $window.location.reload();
                         
                     }

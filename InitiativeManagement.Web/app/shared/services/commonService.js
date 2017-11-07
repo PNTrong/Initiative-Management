@@ -6,8 +6,21 @@
 
     function commonService() {
         return {
-            getSeoTitle: getSeoTitle
+            getSeoTitle: getSeoTitle,
+            getRole: getRole
         }
+        function getRole(roles){
+            if(roles.indexOf("ADMIN") >= 0){
+                return "ADMIN";
+            }
+
+            if(roles.indexOf("ADVANCEDROLE") >= 0){
+                return "ADVANCEDROLE";
+            }
+
+            return "BASEROLE";
+        }
+
         function getSeoTitle(input) {
             if (input == undefined || input == '')
                 return '';

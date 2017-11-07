@@ -82,7 +82,7 @@
             var config = {
                 params: {
                     page: page,
-                    pageSize: 10,
+                    pageSize: 5,
                     filter: $scope.keyword
                 }
             }

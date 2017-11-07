@@ -56,7 +56,6 @@
                 else if (failure != null) {
                     failure(error);
                 }
-
             });
         }
 
@@ -74,14 +73,19 @@
             });
         }
 
-        function getword(url){
-            var config = { responseType: 'blob' };
+        function getword(url, params, success, failure){
+            // var config = { responseType: 'blob',params : params  };
             authenticationService.setHeader();
-            $http.get(url, config).then(function onSuccess(response) {
-                var blob = response.data;
-                var contentType = response.headers("content-type");
-                var fileURL = URL.createObjectURL(blob);
-                window.open(fileURL);
+            // $http.get(url, config).then(function onSuccess(response) {
+            //     var blob = response.data;
+            //     var contentType = response.headers("content-type");
+            //     var fileURL = URL.createObjectURL(blob);
+            //     window.open(fileURL,"_self");
+            // });
+            $http.get(url, params).then(function (res) {
+                success(res);
+            }, function (err){
+                failure(err);
             });
         }
     }

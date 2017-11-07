@@ -15,7 +15,7 @@ using System.Web.Script.Serialization;
 namespace InitiativeManagement.Web.Api
 {
     [RoutePrefix("api/applicationRole")]
-    [Authorize(Roles = "AdminUser")]
+    [Authorize(Roles = "ADMIN")]
     public class ApplicationRoleController : ApiControllerBase
     {
         private IApplicationRoleService _appRoleService;

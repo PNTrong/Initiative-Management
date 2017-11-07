@@ -393,10 +393,8 @@
     <Content Include="Assets\admin\css\skins\skin-yellow.min.css" />
     <Content Include="Assets\admin\css\skins\_all-skins.css" />
     <Content Include="Assets\admin\css\skins\_all-skins.min.css" />
+    <Content Include="Assets\admin\img\avartar.png" />
     <Content Include="Assets\admin\img\avatar.png" />
-    <Content Include="Assets\admin\img\avatar04.png" />
-    <Content Include="Assets\admin\img\avatar2.png" />
-    <Content Include="Assets\admin\img\avatar3.png" />
     <Content Include="Assets\admin\img\avatar5.png" />
     <Content Include="Assets\admin\img\boxed-bg.jpg" />
     <Content Include="Assets\admin\img\boxed-bg.png" />
@@ -409,18 +407,7 @@
     <Content Include="Assets\admin\img\credit\visa.png" />
     <Content Include="Assets\admin\img\default-50x50.gif" />
     <Content Include="Assets\admin\img\icons.png" />
-    <Content Include="Assets\admin\img\photo1.png" />
-    <Content Include="Assets\admin\img\photo2.png" />
-    <Content Include="Assets\admin\img\photo3.jpg" />
-    <Content Include="Assets\admin\img\photo4.jpg" />
-    <Content Include="Assets\admin\img\user1-128x128.jpg" />
-    <Content Include="Assets\admin\img\user2-160x160.jpg" />
-    <Content Include="Assets\admin\img\user3-128x128.jpg" />
-    <Content Include="Assets\admin\img\user4-128x128.jpg" />
-    <Content Include="Assets\admin\img\user5-128x128.jpg" />
-    <Content Include="Assets\admin\img\user6-128x128.jpg" />
-    <Content Include="Assets\admin\img\user7-128x128.jpg" />
-    <Content Include="Assets\admin\img\user8-128x128.jpg" />
+    <Content Include="Assets\admin\img\loading.gif" />
     <Content Include="Assets\admin\js\app.js" />
     <Content Include="Assets\admin\js\app.min.js" />
     <Content Include="Assets\admin\js\demo.js" />
@@ -5017,8 +5004,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Libs\CKFinder.dll" />
-    <Content Include="Resources\Aspose.Words.dll" />
-    <Content Include="Resources\db.sql" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -5192,9 +5177,6 @@
     <Content Include="Assets\admin\libs\slimScroll\README.md" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\AdminLTE-2.3.0.zip" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Assets\admin\libs\toastr\.bower.json" />
     <Content Include="Assets\admin\libs\toastr\bower.json" />
     <Content Include="Assets\admin\libs\toastr\README.md" />
@@ -5302,9 +5284,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\Layouts.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\bigshope-web.zip" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\client\images\Thumbs.db" />
@@ -5474,7 +5453,6 @@
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\ExportToWord\Index.cshtml" />
-    <Content Include="Resources\test.docx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InitiativeManagement.Common\InitiativeManagement.Common.csproj">

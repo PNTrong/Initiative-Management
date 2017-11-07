@@ -8,13 +8,13 @@
     function config($stateProvider, $urlRouterProvider) {
 
         $stateProvider.state('field_groups',  {
-            url:"/field_groups", 
+            url:"/nhom-linh-vuc", 
             templateUrl:"/app/components/field_groups/fieldGroupListView.html", 
             parent:'base', 
             controller:"fieldGroupListController", 
             css:'/app/components/field_groups/fieldGroups.css'
         }).state('add_field_groups',  {
-                url:"/add_field_groups", 
+                url:"/nhom-linh-vuc/tao-moi", 
                 parent:'base', 
                 templateUrl:"/app/components/field_groups/fieldGroupAddView.html", 
                 controller:"fieldGroupAddController", 

@@ -8,6 +8,7 @@ using System.Web.Http;
 
 namespace InitiativeManagement.Web.Api
 {
+    [Authorize]
     [RoutePrefix("api/field")]
     public class FieldController : ApiControllerBase
     {
@@ -69,22 +70,9 @@ namespace InitiativeManagement.Web.Api
             });
         }
 
-        [Route("getallbykeyword")]
-        [HttpGet]
-        public HttpResponseMessage GetAll(HttpRequestMessage request, string keyword)
-        {
-            return CreateHttpResponse(request, () =>
-            {
-                var model = _fieldService.GetAll(keyword);
-
-                var response = request.CreateResponse(HttpStatusCode.OK, model);
-                return response;
-            });
-        }
-
         [Route("add")]
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(Roles = "ADMIN")]
         public HttpResponseMessage Create(HttpRequestMessage request, Field field)
         {
             return CreateHttpResponse(request, () =>
@@ -108,7 +96,6 @@ namespace InitiativeManagement.Web.Api
 
         [Route("update")]
         [HttpPut]
-        [AllowAnonymous]
         public HttpResponseMessage Update(HttpRequestMessage request, Field field)
         {
             return CreateHttpResponse(request, () =>
@@ -132,7 +119,7 @@ namespace InitiativeManagement.Web.Api
 
         [Route("delete")]
         [HttpDelete]
-        [AllowAnonymous]
+        [Authorize(Roles = "ADMIN")]
         public HttpResponseMessage Delete(HttpRequestMessage request, int id)
         {
             return CreateHttpResponse(request, () =>

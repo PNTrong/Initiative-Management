@@ -1,6 +1,8 @@
   <!-- Content Header (Page header) -->
 <section class="content-header">
-    <h3 class="display-hidden"></h3>
+        <h1>
+                Danh mục nhóm lĩnh vực
+            </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
         <li class="active">Nhóm lĩnh vực</li>
@@ -14,8 +16,8 @@
             <h3 class="box-title">Danh sách nhóm lĩnh vực</h3>
         </div>
         <div class="box-body">
-            <di class="row">
-                <div class="col-md-6">
+            <div class="row filter-row">
+                <div class="col-md-6 pd-0">
                     <div class="input-group">
                         <input type="text" class="form-control" ng-model="keyword" placeholder="Nhập từ khóa...">
                         <span class="input-group-btn">
@@ -23,14 +25,14 @@
                         </span>
                     </div><!-- /input-group -->
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 text-right pd-0">
                     <button class="btn btn-success" ui-sref="add_field_groups">Thêm mới</button>
                     <button class="btn btn-danger" ng-click="deleteMultiple()" id="btnDelete" disabled>Xóa</button>
                 </div>
-            </di>
+            </div>
             <div class="row">
                 <div class="col-md-12">
-                    <table class="table table-bordered">
+                    <table class="table">
                         <tr>
                             <td>
                                 <input name="all" type="checkbox" ng-click="selectAll()" />
@@ -58,7 +60,7 @@
                 </div>
             </div>
         </div><!-- /.box-body -->
-        <div class="box-footer">
+        <div class="box-footer text-right pd-0">
             <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="search(page)"></pager-directive>
         </div><!-- /.box-footer-->
     </div><!-- /.box -->

@@ -17,7 +17,7 @@ using System.Web.Script.Serialization;
 
 namespace InitiativeManagement.Web.Api
 {
-    [Authorize(Roles = "AdminUser")]
+    [Authorize(Roles = "ADMIN")]
     [RoutePrefix("api/applicationGroup")]
     public class ApplicationGroupController : ApiControllerBase
     {
@@ -134,7 +134,7 @@ namespace InitiativeManagement.Web.Api
             }
         }
 
-        [HttpPut]
+        [HttpPost]
         [Route("update")]
         public async Task<HttpResponseMessage> Update(HttpRequestMessage request, ApplicationGroupViewModel appGroupViewModel)
         {

@@ -1,7 +1,9 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <h3 class="display-hidden">
-    </h3>
+    <h1>
+        Danh mục sáng kiến
+    </h1>
+    <small></small>
     <ol class="breadcrumb">
         <li>
             <a href="#">
@@ -14,8 +16,8 @@
 <section class="content">
     <div class="row">
         <!-- left column -->
-        <div class="col-md-12">
-            <div class="box box-primary">
+        <div class="col-md-9">
+            <div id ="initiative" class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">Lập đơn yêu cầu công nhận sáng kiến</h3>
                 </div>
@@ -23,24 +25,31 @@
                 <!-- form start -->
                 <form name="form" novalidate role="form" ng-submit="addInitiative()">
                     <div class="box-body">
-                        <div class="form-group"  ng-class="{ 'has-error' : form.title.$invalid && !form.title.$pristine }">
-                            <label for="send-to">Tên sáng kiến kinh nghiệm</label>
+                            <div class="form-group" ng-if="(authentication.Role == 'ADMIN' || authentication.Role == 'ADVANCEDROLE')">
+                                    <label><span class="label-number">*</span> Đơn vị nộp đơn</label>
+                                    <select name="account" required class="form-control" ng-model="initiative.AccountId" ng-options="option.Value as option.Text for option in accounts">
+                                        <option value="">Chọn đơn vị</option>
+                                    </select>
+                                    <span ng-show="form.account.$error.required" class="has-error">Phải chọn đơn vị</span>
+                                </div>
+                        <div class="form-group" ng-class="{ 'has-error' : form.title.$invalid && !form.title.$pristine }">
+                            <label for="send-to"><span class="label-number">1</span>Tên sáng kiến kinh nghiệm</label>
                             <input type="text" name="title" ng-model="initiative.Title" required class="form-control" placeholder="Nhập tại đây...">
-                            <span ng-show="form.title.$error.required" class="has-error">Chưa nhập dữ liệu.</span>
+                            <span ng-show="form.title.$error.required" class="has-error">Dữ liệu không được bỏ trống.</span>
                         </div>
                         <div class="form-group" ng-class="{ 'has-error' : form.SendTo.$invalid && !form.SendTo.$pristine }">
-                            <label for="send-to">Đơn vị nhận đơn</label>
+                            <label for="send-to"><span class="label-number">2</span>Đơn vị nhận đơn</label>
                             <input type="text" name="sendTo" ng-model="initiative.SendTo" required class="form-control" placeholder="Đơn được gửi đến ai?">
-                            <span ng-show="form.sendTo.$error.required" class="has-error">Chưa nhập dữ liệu.</span>
+                            <span ng-show="form.sendTo.$error.required" class="has-error">Dữ liệu không được bỏ trống.</span>
                         </div>
                         <ng-form name="authorform" novalidate>
                             <div class="box-header header-custom">
-                                <h3 class="box-title ">Tác giả (nhóm tác giả)</h3>
+                                <label><span class="label-number">3</span>Tác giả (nhóm tác giả) </label>
                                 <div class="box-tools">
                                     <table class="row-style">
                                         <tr>
                                             <td>
-                                                <button type="button" ng-click="authorform.$valid && addNewAuthor()" class="btn btn-block btn-default btn-sm">
+                                                <button type="button" ng-click="authorform.$valid && addNewAuthor()" class="btn btn-block btn-primary btn-sm">
                                                     <i class="fa fa-plus" aria-hidden="true"></i> Thêm tác giả</button>
                                             </td>
                                             <td>
@@ -53,20 +62,19 @@
                                 </div>
                             </div>
 
-                            <span ng-show="authorform.$invalid" class="has-error">Thông tin tác giả không được để trống.</span>                            
                             <div class="no-padding">
                                 <table class="table ">
                                     <tbody>
                                         <tr>
                                             <th style="width: 10px">
-                                                <input type="checkbox" ng-model="selectedAll" ng-click="checkAll()" />
+                                                <input class="checkbox" type="checkbox" ng-model="selectedAll" ng-click="checkAll()" />
                                             </th>
                                             <th style="width: 15%">Họ và tên</th>
-                                            <th style="width: 10%">Ngày sinh</th>
-                                            <th >Nơi công tác (hoặc nơi thường trú)</th>
-                                            <th style="width: 10%">Chức danh</th>
-                                            <th style="width: 10%">Trình độ chuyên môn</th>
-                                            <th style="width: 10%">Tỷ lệ đóng góp</th>
+                                            <th style="width: 160px">Ngày sinh</th>
+                                            <th>Nơi công tác (hoặc nơi thường trú)</th>
+                                            <th style="width: 85px">Chức danh</th>
+                                            <th style="width: 100px">Trình độ chuyên môn</th>
+                                            <th style="width: 75px">Tỷ lệ đóng góp</th>
                                         </tr>
                                         <tr ng-repeat="author in authors">
                                             <td>
@@ -77,7 +85,7 @@
                                             </td>
                                             <td>
                                                 <!-- <input type="text" class="form-control" ng-model="author.BirthDay" required/> -->
-                                                <input type="date" ng-model="author.BirthDay"  class="form-control" required>
+                                                <input type="date" ng-model="author.BirthDay" class="form-control" required>
                                                 <!-- <input type="text" class="form-control" ng-model="author.BirthDay"  class="form-control" required data-inputmask="'alias': 'dd/mm/yyyy'" data-mask=""> -->
                                             </td>
                                             <td>
@@ -96,98 +104,155 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <span ng-show="authorform.$invalid" class="has-error">Thông tin tác giả không được để trống.</span>
                         </ng-form>
 
-                <div class="form-group">
-                    <label for="invetor">1- Chủ đầu tư</label>
-                    <input type="text" name="investor"  ng-model="initiative.Investor" class="form-control" placeholder="Chủ đầu tư tạo rao sáng kiến là ai? (Nếu có)">
-                </div>
-                <div class="form-group">
-                    <label>2- Lĩnh vực áp dụng sáng kiến</label>
-                    <select name="field" ng-model="initiative.FielId" required class="form-control" ng-model="initiative.FieldId" ng-options="option.Id as option.FieldName for option in fields">
-                        <option value="">Chọn nhóm lĩnh vực</option>
-                    </select>
-                    <span ng-show="form.field.$error.required" class="has-error">Phải chọn danh mục</span>
-                    <!-- <input type="hidden" name="parentId" ng-model="field.FieldGroupId" /> -->
-                </div>
-                <!-- <input type="date" name="birthDate" id="deployment-time" class="form-control" required reqired-message="Ngày sinh bắt buộc."> -->
-                <div class="form-group" ng-class="{ 'has-error' : form.deploytime.$invalid && !form.birthDate.$pristine }">
-                    <label for="deployment-time">3- Ngày áp dụng</label>
+                        <div class="form-group pt-10">
+                            <label for="invetor"><span class="label-number">4</span> Chủ đầu tư</label>
+                            <input type="text" name="investor" ng-model="initiative.Investor" class="form-control" placeholder="Chủ đầu tư tạo rao sáng kiến là ai? (Nếu có)">
+                        </div>
+                        <div class="form-group">
+                            <label><span class="label-number">5</span> Lĩnh vực áp dụng sáng kiến</label>
+                            <select name="field" required class="form-control" ng-model="initiative.FieldId" ng-options="option.Id as option.FieldName for option in fields">
+                                <option value="">Chọn nhóm lĩnh vực</option>
+                            </select>
+                            <span ng-show="form.field.$error.required" class="has-error">Phải chọn danh mục</span>
+                            <!-- <input type="hidden" name="parentId" ng-model="field.FieldGroupId" /> -->
+                        </div>
+                        <!-- <input type="date" name="birthDate" id="deployment-time" class="form-control" required reqired-message="Ngày sinh bắt buộc."> -->
+                        <div class="form-group">
+                            <label><span class="label-number">6</span> Ngày áp dụng</label>
+                            <input style="width:165px;" type="date" ng-model="initiative.DeploymentTime" name="deploytime" class="form-control" required
+                                reqired-message="Vui lòng nhập ngày triển khai.">
+                            <span ng-show="form.deploytime.$invalid && !form.birthDate.$pristine" class="has-error">Ngày áp dụng không được để trống.</span>
+                        </div>
 
-                    <input type="date" ng-model="initiative.DeploymentTime" name="deploytime" class="form-control" required reqired-message="Vui lòng nhập ngày triển khai.">
-                </div>
+                        <div class="box-inside-header">
+                            <span class="label-number">7</span> Mô tả bản chất sáng kiến
+                        </div>
 
-                <div class="box-inside-header">
-                    4- Mô tả bản chất sáng kiến
-                </div>
+                        <div class="form-group">
+                            <label><span class="label-number-mini">7.1</span> Phân tích tình trạng của giải pháp đã biết</label>
+                            <!-- <textarea ckeditor="editorOptions" ng-model="modelName"></textarea> -->
+                            <textarea class="form-control text-area-custom" name="knowSolution" ng-model="initiative.KnowSolutionContent" required rows="3"
+                                placeholder="Nhập văn bản..."></textarea>
+                            <span ng-show="form.knowSolution.$error.required" class="has-error">Dữ liệu không được bỏ trống.</span>
+                        </div>
 
-                <div class="form-group">
-                    <label>4.1 Phân tích tình trạng của giải pháp đã biết</label>
-                    <!-- <textarea ckeditor="editorOptions" ng-model="modelName"></textarea> -->
-                    <textarea class="form-control text-area-custom" name="knowSolution" ng-model="initiative.KnowSolutionContent" required rows="3" placeholder="Nhập văn bản..." ></textarea>
-                </div>
+                        <div class="form-group">
+                            <label><span class="label-number-mini">7.2</span>Nội dung cải tiến</label>
+                            <textarea class="form-control text-area-custom" name="improvedContent" ng-model="initiative.ImprovedContent" required rows="3"
+                                placeholder="Nhập văn bản..."></textarea>
+                            <!-- <textarea ckeditor="editorOptions" name="improvedContent" ng-model="initiative.ImprovedContent" required ng-model="model"></textarea> -->
+                            <span ng-show="form.improvedContent.$error.required" class="has-error">Dữ liệu không được bỏ trống.</span>
+                        </div>
 
-                <div class="form-group">
-                    <label>4.2 Nội dung cải tiến</label>
-                    <textarea class="form-control text-area-custom" name="improvedContent" ng-model="initiative.ImprovedContent" required rows="3" placeholder="Nhập văn bản..." ></textarea>                    
-                    <!-- <textarea ckeditor="editorOptions" name="improvedContent" ng-model="initiative.ImprovedContent" required ng-model="model"></textarea> -->
-                </div>
+                        <div class="form-group">
+                            <label><span class="label-number-mini">7.3</span> Điều kiện áp dụng</label>
+                            <!-- <textarea ckeditor="editorOptions" ng-model="modelName"></textarea> -->
+                            <textarea class="form-control text-area-custom" name="conditionApply" ng-model="initiative.ConditionApply" required rows="3"
+                                placeholder="Nhập văn bản..."></textarea>
+                            <span ng-show="form.conditionApply.$error.required" class="has-error">Dữ liệu không được bỏ trống.</span>
+                        </div>
 
-                <div class="form-group">
-                    <label>4.3 Điều kiện áp dụng</label>
-                    <!-- <textarea ckeditor="editorOptions" ng-model="modelName"></textarea> -->
-                    <textarea class="form-control text-area-custom" name="conditionApply" ng-model="initiative.ConditionApply" required rows="3" placeholder="Nhập văn bản..." ></textarea>
-                </div>
+                        <div class="form-group">
+                            <label><span class="label-number-mini">7.4</span> Các bước thực hiện</label>
+                            <!-- <textarea ckeditor="editorOptions" ng-model="modelName"></textarea> -->
+                            <textarea class="form-control text-area-custom" name="actionSteps" ng-model="initiative.ActionSteps" required rows="3" placeholder="Nhập văn bản..."></textarea>
+                            <span ng-show="form.actionSteps.$error.required" class="has-error">Dữ liệu không được bỏ trống.</span>
+                        </div>
 
-                <div class="form-group">
-                    <label>4.4 Các bước thực hiện</label>
-                    <!-- <textarea ckeditor="editorOptions" ng-model="modelName"></textarea> -->
-                    <textarea class="form-control text-area-custom" name="actionSteps" ng-model="initiative.ActionSteps" required rows="3" placeholder="Nhập văn bản..." ></textarea>
+                        <div class="form-group">
+                            <label><span class="label-number-mini">7.5</span> Chứng minh khả năng áp dụng</label>
+                            <!-- <textarea ckeditor="editorOptions" ng-model="modelName"></textarea> -->
+                            <textarea class="form-control text-area-custom" name="applicability" ng-model="initiative.InitiativeApplicability" required
+                                rows="3" placeholder="Nhập văn bản..."></textarea>
+                            <span ng-show="form.applicability.$error.required" class="has-error">Dữ liệu không được bỏ trống.</span>
+                        </div>
 
-                </div>
+                        <div class="form-group">
+                            <label><span class="label-number">8</span> Thông tin bảo mật</label>
+                            <!-- <textarea ckeditor="editorOptions" ng-model="modelName"></textarea> -->
+                            <textarea class="form-control text-area-custom" ng-model="initiative.SecurityInformation" rows="3" placeholder="Nhập văn bản..."></textarea>
 
-                <div class="form-group">
-                    <label>4.5 Chứng minh khả năng áp dụng</label>
-                    <!-- <textarea ckeditor="editorOptions" ng-model="modelName"></textarea> -->
-                    <textarea class="form-control text-area-custom" name="applicability" ng-model="initiative.InitiativeApplicability" required rows="3" placeholder="Nhập văn bản..." ></textarea>
+                        </div>
 
-                </div>
+                        <div class="form-group">
+                            <label><span class="label-number">9</span> Tác giả đánh giá</label>
+                            <!-- <textarea ckeditor="editorOptions" ng-model="modelName"></textarea> -->
+                            <textarea class="form-control text-area-custom" name="achievedByAuthors" ng-model="initiative.AchievedByAuthors" required
+                                rows="3" placeholder="Nhập văn bản..."></textarea>
+                            <span ng-show="form.achievedByAuthors.$error.required" class="has-error">Dữ liệu không được bỏ trống.</span>
+                        </div>
 
-                <div class="form-group">
-                    <label>5- Thông tin bảo mật</label>
-                    <!-- <textarea ckeditor="editorOptions" ng-model="modelName"></textarea> -->
-                    <textarea class="form-control text-area-custom" ng-model="initiative.SecurityInformation" rows="3" placeholder="Nhập văn bản..." ></textarea>
+                        <div class="form-group text-area-custom">
+                            <label><span class="label-number">10</span> Tổ chức hoặc cá nhân đánh giá</label>
+                            <!-- <textarea ckeditor="editorOptions" ng-model="modelName"></textarea> -->
+                            <textarea class="form-control" rows="3" ng-model="initiative.AchievedByAnothers" placeholder="Nhập văn bản..."></textarea>
+                        </div>
 
-                </div>
-
-                <div class="form-group">
-                    <label>6- Tác giả đánh giá</label>
-                    <!-- <textarea ckeditor="editorOptions" ng-model="modelName"></textarea> -->
-                    <textarea class="form-control text-area-custom" name="achievedByAuthors" ng-model="initiative.AchievedByAuthors" required rows="3" placeholder="Nhập văn bản..." ></textarea>
-
-                </div>
-
-                <div class="form-group text-area-custom">
-                    <label>7- Tổ chức hoặc cá nhân đánh giá</label>
-                    <!-- <textarea ckeditor="editorOptions" ng-model="modelName"></textarea> -->
-                    <textarea class="form-control" rows="3" ng-model="initiative.AchievedByAnothers" placeholder="Nhập văn bản..." ></textarea>
-                </div>
-
-                <div class="form-group">
+                        <!-- <div class="form-group">
                     <label>Tệp thuyết minh đính kèm</label>
                     <input type="file">
-                </div>
+                </div> -->
+                    </div>
+                    <!-- /.box-body -->
 
-                </div>
-                <!-- /.box-body -->
-
-                <div class="box-footer">
-                    <a ui-sref="initiatives" class="btn btn-default">Hủy bỏ</a>
-                    <input type="submit" ng-disabled="form.$invalid" class="btn btn-primary" value="Nộp đơn" />
-                </div>
+                    <div class="box-footer">
+                        <!-- <a ui-sref="initiatives" class="btn btn-default">Hủy bỏ</a> -->
+                        <input type="submit" ng-disabled="form.$invalid" class="custom-submit" value="Nộp đơn" />
+                    </div>
                 </form>
             </div>
 
+        </div>
+        <div class="col-md-3">
+            <div class="box box-warning">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Giải thích nội dung</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <div class="box-body">
+                    <div class="form-group">
+                        <label>Chủ đầu tư</label>
+                        <span class="explain-field">- Là chủ đầu tư tạo ra sáng kiến ( trường hợp tác giả không đồng thời là chủ đàu tư tạo ra sáng kiến).</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Ngày áp dụng</label>
+                        <span class="explain-field">- Ngày sáng kiến được áp dụng lần đầu hoặc áp dụng thử (bắt buộc phải ghi để làm cơ sở đánh giá tính
+                            khả thi, hiệu quả của sáng kiến).</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mô tả bản chất của sáng kiến</label>
+                        <span class="explain-field">- Đề nghị làm rõ để làm cơ sở xét sáng kiến, nếu bỏ qua các bước này thì sáng kiến có thể không đề
+                            nghị công nhận.</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phân tích tình trạng của giải pháp đã biết</label>
+                        <span class="explain-field">- Là phân tích các ưu điểm, nhược điểm của nó.</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Nội dung cải tiến</label>
+                        <span class="explain-field">- Nêu nội dung cải tiến, sáng tạo để khắc phục những nhược điểm của giải pháp đã biết:</br>
+                            <i> * Đối với vấn đề giải quyết là các vấn đề cũ: Nêu vẫn đề cũ (kể cả các tài liệu công bố) và nêu
+                                cách thức, phương pháp giải quyết vấn đề và chứng minh tính mới của cách thức, phương pháp
+                                giải quyết (điểm khác nhau so với phương pháp, giải pháp cũ)</br>
+                                * Đối với vấn đề cần giải quyết là mới: Nêu cụ thể nội dung giải pháp, chứng minh vấn đề nêu là mới, không trùng lặp hoặc
+                                tương tự với vấn đề đã công bố hoặc công khai trên bất cứ phương tiện nào; nêu cách thức
+                                giải quyết, phương pháp giải quyết vấn đề.</i>
+                        </span>
+                    </div>
+
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer">
+                </div>
+                <!-- /.box-footer -->
+                </form>
+            </div>
         </div>
     </div>
 

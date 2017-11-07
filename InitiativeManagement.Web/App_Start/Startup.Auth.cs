@@ -32,7 +32,7 @@ namespace InitiativeManagement.Web.App_Start
             {
                 TokenEndpointPath = new PathString("/oauth/token"),
                 Provider = new AuthorizationServerProvider(),
-                AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(60),
+                AccessTokenExpireTimeSpan = TimeSpan.FromDays(60),
                 AllowInsecureHttp = true,
             });
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());

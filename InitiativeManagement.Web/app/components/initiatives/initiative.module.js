@@ -8,16 +8,17 @@
     function config($stateProvider, $urlRouterProvider) {
 
         $stateProvider.state('initiatives', {
-            url: "/initiatives",
+            url: "/sang-kien",
             templateUrl: "/app/components/initiatives/initiativeListView.html",
             parent: 'base',
-            controller: "initiativeListViewController"
-        }).state('add_initiatives', {
-                url: "/add_initiatives",
-                parent: 'base',
-                templateUrl: "/app/components/initiatives/initiativeAddView.html",
-                controller: "initiativeAddController",
-                css: '/app/components/initiatives/initiativeListView.css'
-            });
+            controller: "initiativeListViewController",
+            css: '/app/components/initiatives/initiativeListView.css'
+        }).state('add_initiative', {
+            url: "/sang-kien/nop-don",
+            parent: 'base',
+            templateUrl: "/app/components/initiatives/initiativeAddView.html",
+            controller: "initiativeAddController",
+            css: '/app/components/initiatives/initiativeListView.css'
+        });
     }
 })();

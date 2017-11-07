@@ -20,9 +20,11 @@ namespace InitiativeManagement.Service
 
         IEnumerable<Initiative> GetMulti();
 
-        IEnumerable<Initiative> GetAll(int page, int pageSize, out int totalRow, DynamicFilter filter, IEnumerable<ApplicationGroup> roles, string userId);
+        IEnumerable<Initiative> GetAll(int page, int pageSize, out int totalRow, DynamicFilter filter, List<string> roles, string userId);
 
         IEnumerable<Initiative> GetAll(string keyword);
+
+        IEnumerable<Initiative> DownloadWord(DynamicFilter filter, List<string> roles, string userId);
 
         void Save();
 
@@ -66,17 +68,17 @@ namespace InitiativeManagement.Service
             return _initiativeRepository.GetAll();
         }
 
-        public IEnumerable<Initiative> GetAll(int page, int pageSize, out int totalRow, DynamicFilter filter, IEnumerable<ApplicationGroup> roles, string userId)
+        public IEnumerable<Initiative> GetAll(int page, int pageSize, out int totalRow, DynamicFilter filter, List<string> roles, string userId)
         {
             IEnumerable<Initiative> query = Enumerable.Empty<Initiative>();
 
-            if (roles.FirstOrDefault(r => r.ID == (int)RoleGroup.Admin) == null)
+            if (roles.Any(x => x.Equals(CommonConstants.ADMIN) || x.Equals(CommonConstants.ADVANCEDROLE)))
             {
-                query = _initiativeRepository.GetMulti(x => !x.IsDeactive && x.AccountId == userId, new string[] { "Field" });
+                query = _initiativeRepository.GetMulti(x => !x.IsDeactive, new string[] { "Field" });
             }
             else
             {
-                query = _initiativeRepository.GetMulti(x => !x.IsDeactive, new string[] { "Field" });
+                query = _initiativeRepository.GetMulti(x => !x.IsDeactive && x.AccountId == userId, new string[] { "Field" });
             }
 
             if (!string.IsNullOrEmpty(filter.Keyword))
@@ -84,14 +86,40 @@ namespace InitiativeManagement.Service
                 x.ImprovedContent.ToUpper().Contains(filter.Keyword.ToUpper()));
 
             if (!string.IsNullOrEmpty(filter.Time))
-                query = query.Where(x => x.Title.ToUpper().Contains(filter.Keyword.ToUpper()));
+                query = query.Where(x => x.DeploymentTime.Year.ToString() == filter.Time);
 
-            if (filter.Field > 0)
+            if (filter.Field != null)
                 query = query.Where(x => x.FieldId == filter.Field);
 
             totalRow = query.Count();
 
             return query.OrderBy(x => x.Title).Skip(page * pageSize).Take(pageSize);
+        }
+
+        public IEnumerable<Initiative> DownloadWord(DynamicFilter filter, List<string> roles, string userId)
+        {
+            IEnumerable<Initiative> query = Enumerable.Empty<Initiative>();
+
+            if (roles.Any(x => x.Equals(CommonConstants.ADMIN) || x.Equals(CommonConstants.ADVANCEDROLE)))
+            {
+                query = _initiativeRepository.GetMulti(x => !x.IsDeactive, new string[] { "Field" });
+            }
+            else
+            {
+                query = _initiativeRepository.GetMulti(x => !x.IsDeactive && x.AccountId == userId, new string[] { "Field" });
+            }
+
+            if (!string.IsNullOrEmpty(filter.Keyword))
+                query = query.Where(x => x.Title.ToUpper().Contains(filter.Keyword.ToUpper()) || x.KnowSolutionContent.ToUpper().Contains(filter.Keyword.ToUpper()) ||
+                x.ImprovedContent.ToUpper().Contains(filter.Keyword.ToUpper()));
+
+            if (!string.IsNullOrEmpty(filter.Time))
+                query = query.Where(x => x.DeploymentTime.Year.ToString() == filter.Time);
+
+            if (filter.Field != null)
+                query = query.Where(x => x.FieldId == filter.Field);
+
+            return query.OrderBy(x => x.Title);
         }
 
         public IEnumerable<Initiative> GetAll(string keyword)

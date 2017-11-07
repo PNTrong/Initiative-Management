@@ -19,7 +19,7 @@
         function addSuccessed() {
             notificationService.displaySuccess($scope.account.Name + ' đã được thêm mới.');
 
-            $location.url('application_users');
+            $location.url('nguoi-dung');
         }
         function addFailed(response) {
             notificationService.displayError(response.data.Message);

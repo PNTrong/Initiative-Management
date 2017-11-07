@@ -8,7 +8,6 @@
         $scope.page = 0;
         $scope.pageCount = 0;
         $scope.search = search;
-        $scope.clearSearch = clearSearch;
         $scope.deleteItem = deleteItem;
         $scope.selectAll = selectAll;
         $scope.deleteMultiple = deleteMultiple;
@@ -76,28 +75,56 @@
 
         $scope.filter = {
             Keyword: '',
-            Field: -1,
+            Field: null,
             Time: ''
         }
         // $scope.fieldFilter = -1;
         function search(page) {
             page = page || 0;
-
-            $scope.loading = true;
             var config = {
                 params: {
                     page: page,
-                    pageSize: 10,
+                    pageSize: 5,
                     filter: JSON.stringify($scope.filter)
                     // fieldId: $scope.fieldFilter
                 }
             }
-            debugger;
             apiService.get('api/initiative/getlistpaging', config, dataLoadCompleted, dataLoadFailed);
         }
 
+        $scope.reloadGrid = function(){
+            $scope.filter = {
+                Keyword: '',
+                Field: null,
+                Time: ''
+            }
+            search(0);
+        }
+
         $scope.export = function () {
-            apiService.getword('api/initiative/export');
+            $scope.loading = true;
+            var config = {
+                responseType: 'blob',
+                params: {
+                    filter: JSON.stringify($scope.filter)
+                }
+            }
+            apiService.get('api/initiative/export',config,downloadFileComplete,downloadFileFailed);
+        }
+
+        $scope.loading = false;
+        // $scope.isDownloadDisable = true;
+        function downloadFileComplete(response){
+                $scope.loading = false;
+                var blob = response.data;
+                var contentType = response.headers("content-type");
+                var fileURL = URL.createObjectURL(blob);
+                window.open(fileURL,"_self");
+        }
+
+        function downloadFileFailed(){
+            $scope.loading = false;
+            notificationService.displayError("Xảy ra sự cố khi tải tệp.");
         }
 
         function dataLoadCompleted(result) {
@@ -113,11 +140,6 @@
         }
         function dataLoadFailed(response) {
             notificationService.displayError(response.data);
-        }
-
-        function clearSearch() {
-            $scope.filterExpression = '';
-            search();
         }
 
         function loadFields() {

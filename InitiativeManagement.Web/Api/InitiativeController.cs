@@ -10,6 +10,7 @@ using InitiativeManagement.Web.Models;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 using System;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -39,9 +40,15 @@ namespace InitiativeManagement.Web.Api
 
         [HttpGet]
         [Route("export")]
-        public void Export()
+        public void Export(string filter)
         {
-            var initiatives = _initiativeService.GetMulti();
+            var filterObj = JsonConvert.DeserializeObject<DynamicFilter>(filter);
+
+            var user = _userManager.FindById(User.Identity.GetUserId());
+
+            var roles = _applicationGroupService.GetRolesByUserId(user.Id).Select(x => x.Name).ToList();
+
+            var initiatives = _initiativeService.DownloadWord(filterObj, roles, user.Id);
 
             Document doc = new Document();
             DocumentBuilder builder = new DocumentBuilder(doc);
@@ -148,7 +155,7 @@ namespace InitiativeManagement.Web.Api
 
                 var user = _userManager.FindById(User.Identity.GetUserId());
 
-                var roles = _applicationGroupService.GetListGroupByUserId(user.Id);
+                var roles = _applicationGroupService.GetRolesByUserId(user.Id).Select(x => x.Name).ToList();
 
                 var initiatives = _initiativeService.GetAll(page, pageSize, out totalRow, filterObj, roles, user.Id);
 
@@ -166,9 +173,8 @@ namespace InitiativeManagement.Web.Api
             });
         }
 
-        [Route("add")]
         [HttpPost]
-        [AllowAnonymous]
+        [Route("add")]
         public HttpResponseMessage Create(HttpRequestMessage request, InitiativeViewModel initiativeVM)
         {
             return CreateHttpResponse(request, () =>
@@ -182,11 +188,12 @@ namespace InitiativeManagement.Web.Api
                 {
                     var initiative = Mapper.Map<InitiativeViewModel, Initiative>(initiativeVM);
 
-                    var userId = User.Identity.GetUserId();
-                    if (string.IsNullOrEmpty(userId))
-                        return request.CreateResponse(HttpStatusCode.BadRequest);
+                    if (initiative != null && string.IsNullOrEmpty(initiative.AccountId))
+                    {
+                        var userId = User.Identity.GetUserId();
 
-                    initiative.AccountId = userId;
+                        initiative.AccountId = userId;
+                    }
 
                     var initiativeDb = _initiativeService.Add(initiative);
 

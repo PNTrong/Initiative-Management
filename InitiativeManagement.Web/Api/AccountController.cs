@@ -1,8 +1,14 @@
-﻿using InitiativeManagement.Web.App_Start;
+﻿using InitiativeManagement.Common;
+using InitiativeManagement.Service;
+using InitiativeManagement.Web.App_Start;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using System;
+using System.Data.Entity;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
@@ -14,15 +20,13 @@ namespace InitiativeManagement.Web.Api
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private IApplicationGroupService _applicationGroupService;
 
-        public AccountController()
-        {
-        }
-
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IApplicationGroupService applicationGroupService)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            _applicationGroupService = applicationGroupService;
         }
 
         public ApplicationSignInManager SignInManager
@@ -75,6 +79,27 @@ namespace InitiativeManagement.Web.Api
         }
 
         [HttpGet]
+        [Route("users")]
+        [Authorize]
+        public async Task<HttpResponseMessage> GetUsers(HttpRequestMessage request)
+        {
+            try
+            {
+                var users = await UserManager.Users.Where(u => !u.IsAccountAdmin).Select(item => new CustomSelectList
+                {
+                    Text = item.FullName,
+                    Value = item.Id
+                }).ToListAsync();
+
+                return request.CreateResponse(HttpStatusCode.OK, users);
+            }
+            catch (Exception ex)
+            {
+                return request.CreateResponse(HttpStatusCode.OK, false);
+            }
+        }
+
+        [HttpGet]
         [Route("permission")]
         [AllowAnonymous]
         public HttpResponseMessage GetUserRoles(HttpRequestMessage request)
@@ -84,9 +109,17 @@ namespace InitiativeManagement.Web.Api
             if (user == null)
                 return request.CreateResponse(HttpStatusCode.OK, false);
 
-            var isAdmin = user.IsAccountAdmin;
+            //var userIdentity = (ClaimsIdentity)User.Identity;
 
-            return request.CreateResponse(HttpStatusCode.OK, isAdmin);
+            //var claims = userIdentity.Claims;
+
+            //var roleClaimType = userIdentity.RoleClaimType;
+
+            //var roles = claims.Where(c => c.Type == roleClaimType).Select(x => x.Value).ToList();
+
+            var roles = _applicationGroupService.GetRolesByUserId(user.Id).Select(x => x.Name).ToList();
+
+            return request.CreateResponse(HttpStatusCode.OK, roles);
         }
     }
 }

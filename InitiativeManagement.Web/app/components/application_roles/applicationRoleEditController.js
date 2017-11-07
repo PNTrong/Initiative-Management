@@ -27,7 +27,7 @@
         function addSuccessed() {
             notificationService.displaySuccess($scope.role.Name + ' đã được cập nhật thành công.');
 
-            $location.url('application_roles');
+            $location.url('quyen');
         }
         function addFailed(response) {
             notificationService.displayError(response.data.Message);

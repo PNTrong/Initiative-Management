@@ -9,6 +9,7 @@ using InitiativeManagement.Web.Infrastructure.Extensions;
 using InitiativeManagement.Web.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ using System.Web.Http;
 
 namespace InitiativeManagement.Web.Api
 {
-    [Authorize(Roles = "AdminUser")]
+    [Authorize(Roles = "ADMIN")]
     [RoutePrefix("api/applicationUser")]
     public class ApplicationUserController : ApiControllerBase
     {
@@ -38,14 +39,17 @@ namespace InitiativeManagement.Web.Api
 
         [Route("getlistpaging")]
         [HttpGet]
-        //[Authorize(Roles = "AdminUser")]
         public HttpResponseMessage GetListPaging(HttpRequestMessage request, int page, int pageSize, string filter = null)
         {
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
                 int totalRow = 0;
-                var model = _userManager.Users;
+
+                totalRow = _userManager.Users.Count();
+
+                var model = _userManager.Users.OrderBy(x => x.FullName).Skip(page * pageSize).Take(pageSize);
+
                 IEnumerable<ApplicationUserViewModel> modelVm = Mapper.Map<IEnumerable<ApplicationUser>, IEnumerable<ApplicationUserViewModel>>(model);
 
                 PaginationSet<ApplicationUserViewModel> pagedSet = new PaginationSet<ApplicationUserViewModel>()
@@ -64,7 +68,6 @@ namespace InitiativeManagement.Web.Api
 
         [Route("detail/{id}")]
         [HttpGet]
-        [Authorize(Roles = "AdminUser")]
         public HttpResponseMessage Details(HttpRequestMessage request, string id)
         {
             if (string.IsNullOrEmpty(id))
@@ -87,7 +90,6 @@ namespace InitiativeManagement.Web.Api
 
         [HttpPost]
         [Route("add")]
-        [Authorize(Roles = "AdminUser")]
         public async Task<HttpResponseMessage> Create(HttpRequestMessage request, ApplicationUserViewModel applicationUserViewModel)
         {
             if (ModelState.IsValid)
@@ -145,7 +147,6 @@ namespace InitiativeManagement.Web.Api
 
         [HttpPut]
         [Route("update")]
-        [Authorize(Roles = "AdminUser")]
         public async Task<HttpResponseMessage> Update(HttpRequestMessage request, ApplicationUserViewModel applicationUserViewModel)
         {
             if (ModelState.IsValid)

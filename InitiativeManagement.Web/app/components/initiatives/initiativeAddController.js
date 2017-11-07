@@ -1,9 +1,9 @@
 (function (app) {
     app.controller('initiativeAddController', initiativeAddController);
 
-    initiativeAddController.$inject = ['apiService', '$scope', 'notificationService', '$state','$location', 'commonService'];
+    initiativeAddController.$inject = ['apiService', '$scope', 'notificationService', '$state','$location', 'commonService','authData'];
 
-    function initiativeAddController(apiService, $scope, notificationService, $state, $location, commonService) {
+    function initiativeAddController(apiService, $scope, notificationService, $state, $location, commonService,authData) {
         // ckeditor config
         // $scope.editorOptions = {
         //     languague: 'vi',
@@ -62,10 +62,24 @@
         loadFields();
         //end Field
 
+        //load All Account
+        function loadAccounts() {
+            apiService.get('api/account/users', null, function (result) {
+                if(result.data){
+                    $scope.accounts = result.data;
+                }
+            }, function () {
+                console.log('Cannot get users');
+            });
+        }
+
+        if(authData.authenticationData.Role != "USER"){
+            loadAccounts();
+        }
         //initiative
         $scope.initiative = {
             Id: 0,
-            FielId: 0,
+            FieldId: 0,
             AuthorGroupId: 0,
             AppraisalBoardCommnetId: 0,
             Authors: []
@@ -79,13 +93,13 @@
         }
 
         function addSuccessed() {
-            notificationService.displaySuccess('đã thêm thành công');
+            notificationService.displaySuccess('Đã nộp đơn thành công');
 
-            $location.url('initiatives');
+            $location.url('sang-kien');
         }
 
         function addFailed(response) {
-            notificationService.displayError(response.data.Message);
+            notificationService.displayError("Nộp đơn thất bại");
         }
         //end-initiative
 

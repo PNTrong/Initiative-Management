@@ -1,3 +1,7 @@
+h1{
+    font-size: 18px!important;
+}
+
 .box-inside-header{
     display: inline-block;
     font-size: 18px;
@@ -22,5 +26,22 @@ table.row-style td{
     line-height: 20px; 
     font-size: 14px; 
     transition: none; 
-    background: none 0% 0% / auto repeat scroll padding-box border-box rgb(255, 255, 255);
+    background: none;
+}
+
+.year-filter{
+    width: 115px;
+}
+
+.filter-header{
+    padding: 10px 0 20px 0;
+}
+
+.pt-10{
+    padding-top:10px;
+}
+
+.explain-field{
+    display: inline-block;
+    font-size: 13px;
 }

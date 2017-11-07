@@ -13,9 +13,11 @@ namespace InitiativeManagement.Web.Models
 
         public int Id { set; get; }
 
-        public int FielId { set; get; }
+        public int FieldId { set; get; }
 
         public Field Field { set; get; }
+
+        public string AccountId { get; set; }
 
         public List<Author> Authors { get; set; }
 

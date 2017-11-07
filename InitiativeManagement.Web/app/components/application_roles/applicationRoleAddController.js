@@ -19,7 +19,7 @@
         function addSuccessed() {
             notificationService.displaySuccess($scope.role.Name + ' đã được thêm mới.');
 
-            $location.url('application_roles');
+            $location.url('quyen');
         }
         function addFailed(response) {
             notificationService.displayError(response.data.Message);

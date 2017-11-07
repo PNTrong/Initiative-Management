@@ -8,6 +8,7 @@ using System.Web.Http;
 
 namespace InitiativeManagement.Web.Api
 {
+    [Authorize]
     [RoutePrefix("api/fieldGroup")]
     public class FieldGroupController : ApiControllerBase
     {
@@ -74,22 +75,8 @@ namespace InitiativeManagement.Web.Api
             });
         }
 
-        [Route("getallbykeyword")]
-        [HttpGet]
-        public HttpResponseMessage GetAll(HttpRequestMessage request, string keyword)
-        {
-            return CreateHttpResponse(request, () =>
-            {
-                var model = _fieldGroupService.GetAll(keyword);
-
-                var response = request.CreateResponse(HttpStatusCode.OK, model);
-                return response;
-            });
-        }
-
         [Route("Add")]
         [HttpPost]
-        [AllowAnonymous]
         public HttpResponseMessage Create(HttpRequestMessage request, FieldGroup fieldGroup)
         {
             return CreateHttpResponse(request, () =>
@@ -113,7 +100,6 @@ namespace InitiativeManagement.Web.Api
 
         [Route("update")]
         [HttpPut]
-        [AllowAnonymous]
         public HttpResponseMessage Update(HttpRequestMessage request, FieldGroup fieldGroup)
         {
             return CreateHttpResponse(request, () =>
@@ -137,7 +123,6 @@ namespace InitiativeManagement.Web.Api
 
         [Route("delete/{id:int}")]
         [HttpDelete]
-        [AllowAnonymous]
         public HttpResponseMessage Delete(HttpRequestMessage request, int id)
         {
             return CreateHttpResponse(request, () =>

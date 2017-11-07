@@ -8,11 +8,10 @@
     function applicationGroupEditController($scope, apiService, notificationService, $location, $stateParams) {
         $scope.group = {}
 
-
         $scope.updateApplicationGroup = updateApplicationGroup;
 
         function updateApplicationGroup() {
-            apiService.put('/api/applicationGroup/update', $scope.group, addSuccessed, addFailed);
+            apiService.post('/api/applicationGroup/update', $scope.group, addSuccessed, addFailed);
         }
         function loadDetail() {
             apiService.get('/api/applicationGroup/detail/' + $stateParams.id, null,
@@ -27,11 +26,10 @@
         function addSuccessed() {
             notificationService.displaySuccess($scope.group.Name + ' đã được cập nhật thành công.');
 
-            $location.url('application_groups');
+            $location.url('nhom-quyen');
         }
         function addFailed(response) {
             notificationService.displayError(response.data.Message);
-            ""
         }
         function loadRoles() {
             apiService.get('/api/applicationRole/getlistall',

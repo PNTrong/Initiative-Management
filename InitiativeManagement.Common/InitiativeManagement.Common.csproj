@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="CommonConstants.cs" />
     <Compile Include="ConfigHelper.cs" />
+    <Compile Include="CustomSelectList.cs" />
     <Compile Include="DynamicFilter.cs" />
     <Compile Include="Exceptions\NameDuplicatedException.cs" />
     <Compile Include="MailHelper.cs" />

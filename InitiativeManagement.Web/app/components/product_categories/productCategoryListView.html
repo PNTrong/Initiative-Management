@@ -22,8 +22,8 @@
       </div>
     </div>
     <div class="box-body">
-      <di class="row">
-        <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-6 pd-0">
           <div class="input-group">
             <input type="text" class="form-control" ng-model="keyword" placeholder="Từ khóa">
             <span class="input-group-btn">
@@ -35,10 +35,10 @@
           <button class="btn btn-success" ui-sref="add_product_category">Thêm mới</button>
           <button class="btn btn-danger" ng-click="deleteMultiple()" id="btnDelete" disabled>Xóa</button>
         </div>
-      </di>
+      </div>
       <div class="row">
         <div class="col-md-12">
-          <table class="table table-bordered">
+          <table class="table">
             <tr>
               <td><input name="all" type="checkbox" ng-click="selectAll()" /></td>
               <th style="width: 5%">ID</th>

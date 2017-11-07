@@ -20,9 +20,11 @@ namespace InitiativeManagement.Common
 
         //
         //note: Don't edit this value.
-        public const string BaseLevelViewInitiative = "BaseLevelViewInitiative";
+        public const string BASEROLE = "BASEROLE";
 
-        public const string ProvinceLevelViewInitiative = "ProvinceLevelViewInitiative";
+        public const string ADVANCEDROLE = "ADVANCEDROLE";
+
+        public const string ADMIN = "ADMIN";
 
         public const int SupperAdminRole = 1;
     }

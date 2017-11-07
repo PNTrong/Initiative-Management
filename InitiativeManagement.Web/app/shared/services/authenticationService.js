@@ -56,7 +56,8 @@
             }
 
             this.setRole = function(role) {
-                localStorageService.set("role", role); 
+                authData.authenticationData.Role = role;
+                localStorageService.set("role", role);
             }
 
             this.init(); 
