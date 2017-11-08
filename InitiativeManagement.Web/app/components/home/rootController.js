@@ -11,12 +11,9 @@
 
         getRole();
         
-        // $scope.authentication = authData.authenticationData;
-
         function getRole() {
             if (authData.authenticationData.IsAuthenticated)
                 apiService.get('/api/account/permission', null, function (res) {
-                    debugger;
                     if(res.data){
                         var role = commonService.getRole(res.data);
                         authenticationService.setRole(role);
@@ -24,15 +21,5 @@
                     }
                 }, null);
         }
-
-        // $scope.sideBarClass = "main-sidebar";
-        // $scope.changeClass = function () {
-        //     if ($scope.sideBarClass === "main-sidebar")
-        //         $scope.sideBarClass = "main-sidebar-hide";
-        //     else
-        //         $scope.sideBarClass = "main-sidebar";
-        // };
-
-        //check route
     }
 })(angular.module('InitiativeManagement')); 

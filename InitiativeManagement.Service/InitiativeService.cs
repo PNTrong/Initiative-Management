@@ -129,7 +129,7 @@ namespace InitiativeManagement.Service
 
         public Initiative GetById(int id)
         {
-            throw new NotImplementedException();
+            return _initiativeRepository.GetSingleById(id);
         }
 
         public IEnumerable<Initiative> GetMulti()
@@ -144,7 +144,7 @@ namespace InitiativeManagement.Service
 
         public void Update(Initiative initiative)
         {
-            throw new NotImplementedException();
+            _initiativeRepository.Update(initiative);
         }
     }
 }

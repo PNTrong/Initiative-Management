@@ -32,12 +32,12 @@
                                     </select>
                                     <span ng-show="form.account.$error.required" class="has-error">Phải chọn đơn vị</span>
                                 </div>
-                        <div class="form-group" ng-class="{ 'has-error' : form.title.$invalid && !form.title.$pristine }">
+                        <div class="form-group">
                             <label for="send-to"><span class="label-number">1</span>Tên sáng kiến kinh nghiệm</label>
                             <input type="text" name="title" ng-model="initiative.Title" required class="form-control" placeholder="Nhập tại đây...">
                             <span ng-show="form.title.$error.required" class="has-error">Dữ liệu không được bỏ trống.</span>
                         </div>
-                        <div class="form-group" ng-class="{ 'has-error' : form.SendTo.$invalid && !form.SendTo.$pristine }">
+                        <div class="form-group">
                             <label for="send-to"><span class="label-number">2</span>Đơn vị nhận đơn</label>
                             <input type="text" name="sendTo" ng-model="initiative.SendTo" required class="form-control" placeholder="Đơn được gửi đến ai?">
                             <span ng-show="form.sendTo.$error.required" class="has-error">Dữ liệu không được bỏ trống.</span>

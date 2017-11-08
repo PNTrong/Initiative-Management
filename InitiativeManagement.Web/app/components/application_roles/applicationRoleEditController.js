@@ -14,6 +14,7 @@
         function updateApplicationRole() {
             apiService.put('/api/applicationRole/update', $scope.role, addSuccessed, addFailed);
         }
+        
         function loadDetail() {
             apiService.get('/api/applicationRole/detail/' + $stateParams.id, null,
             function (result) {
@@ -29,6 +30,7 @@
 
             $location.url('quyen');
         }
+
         function addFailed(response) {
             notificationService.displayError(response.data.Message);
         }

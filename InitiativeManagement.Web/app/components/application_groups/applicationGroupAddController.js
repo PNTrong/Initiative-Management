@@ -20,7 +20,7 @@
         function addSuccessed() {
             notificationService.displaySuccess($scope.group.Name + ' đã được thêm mới.');
 
-            $location.url('application_groups');
+            $location.url('nhom-quyen');
         }
         function addFailed(response) {
             notificationService.displayError(response.data.Message);

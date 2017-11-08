@@ -13,6 +13,10 @@
         $scope.deleteMultiple = deleteMultiple;
 
         function deleteMultiple() {
+            //
+            //Todo:
+            return;
+
             var listId = [];
             $.each($scope.selected, function (i, item) {
                 listId.push(item.Id);
@@ -22,7 +26,7 @@
                     checkedList: JSON.stringify(listId)
                 }
             }
-            apiService.del('api/field/deletemulti', config, function (result) {
+            apiService.del('api/initiative/deletemulti', config, function (result) {
                 notificationService.displaySuccess('Xóa thành công ' + result.data + ' bản ghi.');
                 search();
             }, function (error) {
@@ -63,9 +67,14 @@
                             id: id
                         }
                     }
-                    apiService.del('/api/field/delete', config, function () {
-                        notificationService.displaySuccess('Đã xóa thành công.');
-                        search();
+                    apiService.del('/api/initiative/deactive', config, function (res) {
+                        if (res.data) {
+                            notificationService.displaySuccess('Đã xóa thành công.');
+                            search();
+                        } else {
+                            notificationService.displayError('Xóa không thành công.');
+                        }
+
                     },
                         function () {
                             notificationService.displayError('Xóa không thành công.');

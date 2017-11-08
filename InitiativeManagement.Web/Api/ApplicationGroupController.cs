@@ -134,8 +134,8 @@ namespace InitiativeManagement.Web.Api
             }
         }
 
-        [HttpPost]
         [Route("update")]
+        [HttpPost]
         public async Task<HttpResponseMessage> Update(HttpRequestMessage request, ApplicationGroupViewModel appGroupViewModel)
         {
             if (ModelState.IsValid)

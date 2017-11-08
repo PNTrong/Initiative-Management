@@ -4,12 +4,7 @@
     initiativeAddController.$inject = ['apiService', '$scope', 'notificationService', '$state','$location', 'commonService','authData'];
 
     function initiativeAddController(apiService, $scope, notificationService, $state, $location, commonService,authData) {
-        // ckeditor config
-        // $scope.editorOptions = {
-        //     languague: 'vi',
-        //     height: '50px'
-        // }
-
+        //
         // author
         $scope.authors = [{
             'FullName': '',
@@ -73,7 +68,7 @@
             });
         }
 
-        if(authData.authenticationData.Role != "USER"){
+        if(authData.authenticationData.Role != "BASEROLE"){
             loadAccounts();
         }
         //initiative

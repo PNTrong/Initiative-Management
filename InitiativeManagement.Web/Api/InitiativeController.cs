@@ -219,5 +219,27 @@ namespace InitiativeManagement.Web.Api
                 return response;
             });
         }
+
+        [HttpDelete]
+        [Route("deactive")]
+        public HttpResponseMessage Deactive(HttpRequestMessage request, int id)
+        {
+            try
+            {
+                var initiative = _initiativeService.GetById(id);
+
+                initiative.IsDeactive = true;
+
+                _initiativeService.Update(initiative);
+
+                _initiativeService.Save();
+
+                return request.CreateResponse(HttpStatusCode.OK, true);
+            }
+            catch
+            {
+                return request.CreateResponse(HttpStatusCode.OK, false);
+            }
+        }
     }
 }
