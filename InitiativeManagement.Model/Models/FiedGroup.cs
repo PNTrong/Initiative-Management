@@ -13,8 +13,8 @@ namespace InitiativeManagement.Model.Models
 
         public string Name { set; get; }
 
-        public bool IsDeactive { set; get; }
-
         public virtual IEnumerable<Field> Fields { set; get; }
+
+        public bool IsDeactive { set; get; }
     }
 }

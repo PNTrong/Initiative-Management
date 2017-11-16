@@ -1,8 +1,8 @@
 (function (app) {
     app.controller('initiativeListViewController', initiativeListViewController);
-    initiativeListViewController.$inject = ['$scope', 'apiService', 'notificationService', '$ngBootbox', '$filter'];
+    initiativeListViewController.$inject = ['$scope', 'apiService', 'notificationService', '$ngBootbox', '$filter','authData'];
 
-    function initiativeListViewController($scope, apiService, notificationService, $ngBootbox, $filter) {
+    function initiativeListViewController($scope, apiService, notificationService, $ngBootbox, $filter,authData) {
         $scope.loading = true;
         $scope.data = [];
         $scope.page = 0;
@@ -11,7 +11,8 @@
         $scope.deleteItem = deleteItem;
         $scope.selectAll = selectAll;
         $scope.deleteMultiple = deleteMultiple;
-
+        debugger;
+        $scope.isAdminShow = authData.authenticationData.Role == 'ADMIN' || authData.authenticationData.Role == 'ADVANCEDROLE';
         function deleteMultiple() {
             //
             //Todo:
@@ -74,7 +75,6 @@
                         } else {
                             notificationService.displayError('Xóa không thành công.');
                         }
-
                     },
                         function () {
                             notificationService.displayError('Xóa không thành công.');
@@ -87,7 +87,7 @@
             Field: null,
             Time: ''
         }
-        // $scope.fieldFilter = -1;
+
         function search(page) {
             page = page || 0;
             var config = {
@@ -95,7 +95,6 @@
                     page: page,
                     pageSize: 5,
                     filter: JSON.stringify($scope.filter)
-                    // fieldId: $scope.fieldFilter
                 }
             }
             apiService.get('api/initiative/getlistpaging', config, dataLoadCompleted, dataLoadFailed);
@@ -122,7 +121,6 @@
         }
 
         $scope.loading = false;
-        // $scope.isDownloadDisable = true;
         function downloadFileComplete(response){
                 $scope.loading = false;
                 var blob = response.data;
@@ -136,13 +134,15 @@
             notificationService.displayError("Xảy ra sự cố khi tải tệp.");
         }
 
+        $scope.isDownloadDisable = true;
+        $scope.isSaveDisable = true;
         function dataLoadCompleted(result) {
             $scope.data = result.data.Items;
             $scope.page = result.data.Page;
             $scope.pagesCount = result.data.TotalPages;
             $scope.totalCount = result.data.TotalCount;
             $scope.loading = false;
-
+            $scope.isDownloadDisable = result.data.TotalCount == 0;
             if ($scope.filterExpression && $scope.filterExpression.length) {
                 notificationService.displayInfo(result.data.Items.length + ' được tìm thấy');
             }
@@ -151,11 +151,23 @@
             notificationService.displayError(response.data);
         }
 
+        $scope.saveGPA = function(id,value){
+            if(!value){
+                notificationService.displayInfo("Điểm cao nhất là 100 và thấp nhất là điểm 0.");
+                return 0;
+            }
+
+            apiService.post('api/initiative/savegpa/'+id+'/'+value, $scope.initiative, function (result) {
+                notificationService.displaySuccess("Lưu thành công.");
+            }, function () {
+                notificationService.displayError('Lưu điểm trung bình không thành công.');
+            });
+        }
+
         function loadFields() {
             apiService.get('api/field/getall', null, function (result) {
                 $scope.fields = result.data;
             }, function () {
-                console.log('Cannot get list parent');
             });
         }
 

@@ -1,16 +1,10 @@
-﻿using AutoMapper;
-using InitiativeManagement.Model.Models;
+﻿using InitiativeManagement.Model.Models;
 using InitiativeManagement.Service;
 using InitiativeManagement.Web.Infrastructure.Core;
-using InitiativeManagement.Web.Infrastructure.Extensions;
-using InitiativeManagement.Web.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Script.Serialization;
 
 namespace InitiativeManagement.Web.Api
 {

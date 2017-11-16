@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -46,8 +45,7 @@ namespace InitiativeManagement.Model.Models
 
         public string AchievedByAnothers { set; get; }
 
-        //public string IsBaselLevelApproved { set; get; }
-        public string IsProvinceLevelApproved { set; get; }
+        public bool IsProvinceLevelApproved { set; get; }
 
         public string TrialApplicantIds { set; get; }
 
@@ -55,10 +53,8 @@ namespace InitiativeManagement.Model.Models
 
         public string ProvinceLevelRank { set; get; }
 
-        public string ProvinceLevelGPA { set; get; }
+        public double ProvinceLevelGPA { set; get; }
 
-        //public string BaseLevelRank { set; get; }
-        //public string BaseLevelRantingGPA { set; get; }
         public bool IsDeactive { set; get; }
     }
 }

@@ -25,7 +25,7 @@
                 <div class="col-md-8 pd-0">
                     <div class="col-md-3 pd-0">
                         <select class="form-control year-filter" ng-model="filter.Time">
-                            <option value="">Chọn năm</option>
+                            <option value="">----Chọn năm----</option>
                             <option value="2017">2017</option>
                             <option value="2016">2016</option>
                             <option value="2015">2015</option>
@@ -37,49 +37,58 @@
                     </div>
                     <div class="col-md-3">
                         <select name="field" ng-model="filter.Field" class="form-control" ng-options="option.Id as option.FieldName for option in fields">
-                            <option value="">Chọn nhóm lĩnh vực</option>
+                            <option value="">----Chọn nhóm lĩnh vực----</option>
                         </select>
                     </div>
                     <div class="col-md-4">
                         <div class="input-group">
                             <input type="text" class="form-control" ng-model="filter.Keyword" placeholder="Nhập từ khóa...">
                             <span class="input-group-btn">
-                                <button class="btn btn-default" type="button" ng-click="search()">Tìm kiếm</button>
+                                <button class="btn btn-default" type="button" ng-click="search()"> <i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm</button>
                             </span>
                         </div>
                         <!-- /input-group -->
                     </div>
 
                     <div class="col-md-2">
-                        <button class="btn btn-default" type="button" ng-click="reloadGrid()">Tải lại</button>
+                        <button class="btn btn-default" type="button" ng-click="reloadGrid()"><i class="fa fa-refresh" aria-hidden="true"></i>  Tải lại</button>
                     </div>
                 </div>
                 <div class="col-md-4 text-right pd-0">
                     <span ng-if="loading">
                         <img src="./Assets/admin/img/loading.gif" width="30" height="30" alt="">
                     </span>
-                    <button class="btn btn-default" type="button" ng-disabled="" ng-click="export()">Xuất file</button>
+                    <button class="btn btn-default" type="button" ng-disabled="isDownloadDisable" ng-click="export()">Xuất file</button>
+                    <button class="btn btn-default" ng-hide="!isAdminShow" type="button" ng-click="isSaveDisable=false">Nhập điểm</button>
                     <button class="btn btn-success" ui-sref="add_initiative">Nộp đơn</button>
                     <!-- <button class="btn btn-danger" ng-click="deleteMultiple()" id="btnDelete" disabled>Xóa</button> -->
                 </div>
             </div>
             <div class="row mg-0 filter-header">
-                <table class="table">
+                <table class="table" id='initiative'>
                     <tr>
-                        <th>
+                        <!-- <th>
                             <input name="all" type="checkbox" ng-click="selectAll()" />
                         </th>
                         <th style="width:25%">Tên sáng kiến</th>
                         <th style="width:50%">Mô tả sáng kiến</th>
                         <th>Lĩnh vực</th>
-                        <th style="width:90px">Thao tác</th>
+                        <th style="width:90px">Thao tác</th> -->
+                        <th>Tên sáng kiến</th>
+                        <!-- <th>Mô tả sáng kiến</th> -->
+                        <!-- <th>Tác giả</th>                         -->
+                        <th>Ngày áp dụng</th>
+                        <th>Lĩnh vực</th>
+                        <th>Bậc đánh giá</th>
+                        <th>Điểm trung bình</th>
+                        <th>Thao tác</th>
                     </tr>
                     <tr ng-repeat="item in data">
-                        <td>
+                        <!-- <td>
                             <input type="checkbox" ng-model="item.checked" name="all" />
-                        </td>
+                        </td> -->
                         <td>{{item.Title}}</td>
-                        <td>
+                        <!-- <td>
                             <strong>1.Ngày áp dụng</strong>
                             <br /> - {{item.DeploymentTime}}
                             <br />
@@ -88,13 +97,28 @@
                             <i>2.1.Tình trạng giải pháp đã biết</i>
                             <br /> - {{item.KnowSolutionContent}}
                             <br />
-                            <!--<i>2.1.Nội dung đề nghị</i><br />
+                            <i>2.1.Nội dung đề nghị</i><br />
                                     {{item.ImprovedContent}}<br />
                                     <i>2.1.Tình trạng giải pháp đã biết</i><br />
-                                    {{item.ImprovedContent}}<br />-->
-                        </td>
+                                    {{item.ImprovedContent}}<br />
+                        </td> -->
+
+                        <td>{{item.DeploymentTime | date: "dd-MM-yyyy"}}</td>
                         <td>
                             {{item.Field.FieldName}}
+                        </td>
+                        <td>
+                            {{item.ProvinceLevelRank}}
+                        </td>
+                        <td class ="td-gpa" ng-if="isAdminShow">
+                            <input ng-disabled="isDownloadDisable" type="number" min="0" max="100" class="gpa-field" ng-model="item.ProvinceLevelGPA" />
+                            <div ng-if="isAdminShow" >
+                                <button class="btn btn-sm btn-default btn-save"  type="button" ng-hide="isSaveDisable" ng-click="saveGPA(item.Id,item.ProvinceLevelGPA)"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+                            </div>
+                        </td>
+                        <td ng-if="!isAdminShow">
+                            {{item.ProvinceLevelGPA}}
+                            
                         </td>
                         <td>
                             <button class="btn btn-sm btn-primary">

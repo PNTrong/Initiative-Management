@@ -45,3 +45,16 @@ table.row-style td{
     display: inline-block;
     font-size: 13px;
 }
+
+.td-gpa{
+    display: -webkit-box;
+}
+
+.gpa-field{
+    width: 65px!important;
+    margin-right: 5px;;
+    padding: 3px 12px 7px 12px;
+}
+.btn-save{
+    margin-left: 5px;
+}

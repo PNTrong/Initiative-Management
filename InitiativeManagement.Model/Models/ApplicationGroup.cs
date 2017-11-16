@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InitiativeManagement.Model.Models
 {
@@ -20,5 +15,7 @@ namespace InitiativeManagement.Model.Models
 
         [StringLength(250)]
         public string Description { set; get; }
+
+        public bool IsDeactive { set; get; }
     }
 }

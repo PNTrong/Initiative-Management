@@ -220,6 +220,31 @@ namespace InitiativeManagement.Web.Api
             });
         }
 
+        [HttpPost]
+        [Route("savegpa/{id}/{value}")]
+        public HttpResponseMessage SaveGPA(HttpRequestMessage request, int id, double value)
+        {
+            try
+            {
+                var initiative = _initiativeService.GetById(id);
+
+                if (initiative == null)
+                    return request.CreateResponse(HttpStatusCode.OK, false);
+
+                initiative.ProvinceLevelGPA = value;
+
+                _initiativeService.Update(initiative);
+
+                _initiativeService.Save();
+
+                return request.CreateResponse(HttpStatusCode.OK, true);
+            }
+            catch
+            {
+                return request.CreateResponse(HttpStatusCode.OK, false);
+            }
+        }
+
         [HttpDelete]
         [Route("deactive")]
         public HttpResponseMessage Deactive(HttpRequestMessage request, int id)

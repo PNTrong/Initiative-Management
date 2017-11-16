@@ -164,6 +164,10 @@
     <Compile Include="Migrations\201710292119516_updateFieldAll.Designer.cs">
       <DependentUpon>201710292119516_updateFieldAll.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711151939508_update-initiative-v4.cs" />
+    <Compile Include="Migrations\201711151939508_update-initiative-v4.Designer.cs">
+      <DependentUpon>201711151939508_update-initiative-v4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ApplicationGroupRepository.cs" />
@@ -280,6 +284,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710292119516_updateFieldAll.resx">
       <DependentUpon>201710292119516_updateFieldAll.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711151939508_update-initiative-v4.resx">
+      <DependentUpon>201711151939508_update-initiative-v4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
