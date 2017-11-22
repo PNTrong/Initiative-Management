@@ -111,17 +111,16 @@ namespace InitiativeManagement.Web.Api
                 }
                 else
                 {
-                    var dbFieldGroup = _fieldGroupService.GetById(fieldGroup.Id);
-                    _fieldGroupService.Update(dbFieldGroup);
+                    _fieldGroupService.Update(fieldGroup);
                     _fieldGroupService.Save();
-                    response = request.CreateResponse(HttpStatusCode.Created, dbFieldGroup);
+                    response = request.CreateResponse(HttpStatusCode.Created, fieldGroup);
                 }
 
                 return response;
             });
         }
 
-        [Route("delete/{id:int}")]
+        [Route("delete")]
         [HttpDelete]
         public HttpResponseMessage Delete(HttpRequestMessage request, int id)
         {

@@ -6,7 +6,8 @@
     <ol class="breadcrumb">
         <li>
             <a href="#">
-                <i class="fa fa-dashboard"></i> Trang chủ</a>
+                <i class="fa fa-dashboard"></i> Trang chủ
+            </a>
         </li>
         <li class="active">Lĩnh vực</li>
     </ol>
@@ -40,9 +41,9 @@
                         <tr>
                             <td>
                                 <input name="all" type="checkbox" ng-click="selectAll()" />
-                                <th style="width:55%">Tên lĩnh vực</th>
-                                <th style="width: 20%">Mô tả</th>
-                                <th style="width: 10%">Thao tác</th>
+                            <th style="width:55%">Tên lĩnh vực</th>
+                            <th style="width: 20%">Mô tả</th>
+                            <th style="width: 10%">Thao tác</th>
                         </tr>
                         <tr ng-repeat="item in data">
                             <td>
@@ -55,7 +56,7 @@
                                 {{item.FieldGroup.Name}}
                             </td>
                             <td>
-                                <button class="btn btn-sm btn-primary" ui-sref="edit_application_role({id:item.Id})">
+                                <button class="btn btn-sm btn-primary" ui-sref="edit_field({id:item.Id})">
                                     <i class="fa fa-pencil"></i>
                                 </button>
                                 <button class="btn  btn-sm btn-danger" ng-click="deleteItem(item.Id)">

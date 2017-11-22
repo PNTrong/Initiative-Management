@@ -6,7 +6,6 @@
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
     function config($stateProvider, $urlRouterProvider) {
-
         $stateProvider.state('fields', {
             url: "/linh-vuc",
             templateUrl: "/app/components/fields/fieldListView.html",
@@ -18,6 +17,12 @@
             parent: 'base',
             templateUrl: "/app/components/fields/fieldAddView.html",
             controller: "fieldAddController",
+            css: '/app/components/fields/fields.css'
+        }).state('edit_field', {
+            url: "/linh-vuc/cap-nhat/:id",
+            parent: 'base',
+            templateUrl: "/app/components/fields/fieldEditView.html",
+            controller: "fieldEditController",
             css: '/app/components/fields/fields.css'
         });
     }

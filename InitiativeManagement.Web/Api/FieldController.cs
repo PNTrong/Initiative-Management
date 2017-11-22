@@ -107,10 +107,9 @@ namespace InitiativeManagement.Web.Api
                 }
                 else
                 {
-                    var dbField = _fieldService.GetById(field.Id);
-                    _fieldService.Update(dbField);
+                    _fieldService.Update(field);
                     _fieldService.Save();
-                    response = request.CreateResponse(HttpStatusCode.Created, dbField);
+                    response = request.CreateResponse(HttpStatusCode.Created, field);
                 }
 
                 return response;
