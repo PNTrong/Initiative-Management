@@ -6,22 +6,21 @@
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
     function config($stateProvider, $urlRouterProvider) {
-
         $stateProvider.state('application_roles', {
             url: "/quyen",
-            templateUrl: "/app/components/application_roles/applicationRoleListView.html",
+            templateUrl: "/app/components/application_roles/applicationRoleListUIView.html",
             parent: 'base',
             controller: "applicationRoleListController"
         })
             .state('add_application_role', {
                 url: "/quyen/tao-moi",
                 parent: 'base',
-                templateUrl: "/app/components/application_roles/applicationRoleAddView.html",
+                templateUrl: "/app/components/application_roles/applicationRoleAddUIView.html",
                 controller: "applicationRoleAddController"
             })
             .state('edit_application_role', {
                 url: "/quyen/cap-nhap/:id",
-                templateUrl: "/app/components/application_roles/applicationRoleEditView.html",
+                templateUrl: "/app/components/application_roles/applicationRoleEditUIView.html",
                 controller: "applicationRoleEditController",
                 parent: 'base',
             });

@@ -14,8 +14,10 @@
             apiService.post('/api/applicationGroup/update', $scope.group, addSuccessed, addFailed);
         }
         function loadDetail() {
+            debugger;
             apiService.get('/api/applicationGroup/detail/' + $stateParams.id, null,
             function (result) {
+                debugger;
                 $scope.group = result.data;
             },
             function (result) {

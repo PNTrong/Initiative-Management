@@ -14,7 +14,7 @@
             'InitiativeManagement.common'])
         .config(config)
         .config(configAuthentication)
-        .run(['$rootScope', '$location','authData', function ($rootScope, $location,authData) {
+        .run(['$rootScope', '$location', 'authData', function ($rootScope, $location, authData) {
             // $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // });
             $rootScope.$on('$stateChangeStart', function (event) {
@@ -31,11 +31,13 @@
         $stateProvider
             .state('base', {
                 url: '',
-                templateUrl: '/app/shared/views/baseView.html',
+                //templateUrl: '/app/shared/views/baseView.html',
+                templateUrl: '/app/shared/views/layout.html',
                 abstract: true
             }).state('login', {
                 url: "/login",
-                templateUrl: "/app/components/login/loginView.html",
+                //templateUrl: "/app/components/login/loginView.html",
+                templateUrl: "/app/components/login/applogin.html",
                 controller: "loginController"
             })
             .state('home', {
@@ -46,14 +48,14 @@
             }).state('newhome', {
                 url: "/",
                 parent: 'base',
-                templateUrl: "/app/components/home/homeView.html",
+                templateUrl: "/app/components/home/homeViewUI.html",
                 controller: "homeController",
             });
         $urlRouterProvider.otherwise('/');
     }
 
     function configAuthentication($httpProvider) {
-        $httpProvider.interceptors.push(function ($q, $location,$window) {
+        $httpProvider.interceptors.push(function ($q, $location, $window) {
             return {
                 request: function (config) {
                     return config;
@@ -74,11 +76,10 @@
                     if (rejection.status == "401") {
                         $location.path('/login');
                         $window.location.reload();
-                        
                     }
                     return $q.reject(rejection);
                 }
             };
         });
     }
-})(); 
+})();

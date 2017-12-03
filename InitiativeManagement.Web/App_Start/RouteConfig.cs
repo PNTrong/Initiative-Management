@@ -95,7 +95,8 @@ namespace InitiativeManagement.Web
             routes.MapRoute(
                 "Default", // Route name
                 "{*catchall}", // URL with parameters
-                new { controller = "Admin", action = "Index" } // Parameter defaults
+            /*new { controller = "Admin", action = "Index" }*/ // Parameter defaults
+              new { controller = "App", action = "Index" }
                 );
         }
     }

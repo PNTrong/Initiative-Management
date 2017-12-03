@@ -1,9 +1,9 @@
 (function (app) {
     app.controller('initiativeAddController', initiativeAddController);
 
-    initiativeAddController.$inject = ['apiService', '$scope', 'notificationService', '$state','$location', 'commonService','authData'];
+    initiativeAddController.$inject = ['apiService', '$scope', 'notificationService', '$state', '$location', 'commonService', 'authData', '$timeout'];
 
-    function initiativeAddController(apiService, $scope, notificationService, $state, $location, commonService,authData) {
+    function initiativeAddController(apiService, $scope, notificationService, $state, $location, commonService, authData, $timeout) {
         //
         // author
         $scope.authors = [{
@@ -49,6 +49,10 @@
         function loadFields() {
             apiService.get('api/field/getall', null, function (result) {
                 $scope.fields = result.data;
+                $timeout(function () {
+                    $('.load-droplist').selectpicker('destroy');
+                    $('.load-droplist').selectpicker('render');
+                })
             }, function () {
                 console.log('Cannot get list parent');
             });
@@ -62,6 +66,10 @@
             apiService.get('api/account/users', null, function (result) {
                 if(result.data){
                     $scope.accounts = result.data;
+                    $timeout(function () {
+                        $('.load-droplist').selectpicker('destroy');
+                        $('.load-droplist').selectpicker('render');
+                    })
                 }
             }, function () {
                 console.log('Cannot get users');

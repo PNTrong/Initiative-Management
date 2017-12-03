@@ -30,13 +30,20 @@ namespace InitiativeManagement.Web.Api
         [HttpGet]
         public HttpResponseMessage GetAll(HttpRequestMessage request)
         {
-            Func<HttpResponseMessage> func = () =>
+            //Func<HttpResponseMessage> func = () =>
+            //{
+            //    var model = _fieldGroupService.GetAll();
+            //    var response = request.CreateResponse(HttpStatusCode.OK, model);
+            //    return response;
+            //};
+            //return CreateHttpResponse(request, func);
+            return CreateHttpResponse(request, () =>
             {
+                HttpResponseMessage response = null;
                 var model = _fieldGroupService.GetAll();
-                var response = request.CreateResponse(HttpStatusCode.OK, model);
+                response = request.CreateResponse(HttpStatusCode.OK, model);
                 return response;
-            };
-            return CreateHttpResponse(request, func);
+            });
         }
 
         [Route("getlistpaging")]
@@ -140,10 +147,10 @@ namespace InitiativeManagement.Web.Api
                     else
                     {
                         var fieldGroup = _fieldGroupService.GetById(id);
-                        fieldGroup.IsDeactive = false;
+                        fieldGroup.IsDeactive = true;
                         _fieldGroupService.Update(fieldGroup);
                         _fieldGroupService.Save();
-                        // response = request.CreateResponse(HttpStatusCode.Created, oldFieldGroup);
+                        response = request.CreateResponse(HttpStatusCode.Created, fieldGroup);
                     }
                 }
 

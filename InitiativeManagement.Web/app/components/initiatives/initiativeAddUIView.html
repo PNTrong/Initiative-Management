@@ -1,0 +1,262 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Danh mục sáng kiến
+    </h1>
+    <small></small>
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <i class="fa fa-dashboard"></i> Trang chủ
+            </a>
+        </li>
+        <li class="active">Lập đơn</li>
+    </ol>
+</section>
+
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-12 card">
+            <div class="col-md-12">
+                <div class="header">
+                    <h2>Lập đơn yêu cầu công nhận sáng kiến</h2>
+                </div>
+            </div>
+            <div class="col-md-12">
+
+                <div class="col-md-9">
+                    <div class="body">
+                        <form role="form" novalidate name="form" ng-submit="addInitiative()">
+                            <div class="form-group form-float" ng-if="(authentication.Role == 'ADMIN' || authentication.Role == 'ADVANCEDROLE')">
+                                <!--ng-class="{ 'has-error' : frmAddField.name.$invalid && !frmAddField.name.$pristine }"-->
+                                <select name="fieldgroup" required class="form-control load-droplist" ng-model="initiative.AccountId" ng-options="option.Value as option.Text for option in accounts">
+                                    <option required value="">--Chọn đơn vị --</option>
+                                </select>
+                            </div>
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input required type="text" class="form-control" name="name" ng-model="initiative.Title">
+                                    <label class="form-label"> 1. Tên sáng kiến kinh nghiệm</label>
+                                </div>
+                            </div>
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input required type="text" class="form-control" name="name" ng-model="initiative.SendTo">
+                                    <label class="form-label">2. Đơn vị nhận</label>
+                                </div>
+                            </div>
+                            <ng-form name="authorform" novalidate>
+                                <div class="box-header header-custom">
+                                    <label><span class="label-number"></span>3 Tác giả (nhóm tác giả) </label>
+                                    <div class="box-tools">
+                                        <table class="row-style">
+                                            <tr>
+                                                <td>
+                                                    <button type="button" ng-click="authorform.$valid && addNewAuthor()" class="btn btn-block btn-primary btn-sm">
+                                                        <i class="fa fa-plus" aria-hidden="true"></i> Thêm tác giả
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button ng-hide="!authors.length" type="button" class="btn btn-block btn-danger btn-sm" ng-click="removeAuthor()">
+                                                        <i class="fa fa-trash-o" aria-hidden="true"></i> Xóa
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="no-padding">
+                                    <table class="table ">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width: 10px">
+                                                    <input type="checkbox" id="checkbox" ng-click="checkAll()" ng-model="selectedAll" class="filled-in" name="all">
+                                                    <label  for="checkbox" style="height:0px !important;margin-left:0px; padding-bottom:41%"></label>
+                                                </th>
+                                                <th style="width: 15%">Họ và tên</th>
+                                                <th style="width: 160px">Ngày sinh</th>
+                                                <th>Nơi công tác (hoặc nơi thường trú)</th>
+                                                <th style="width: 85px">Chức danh</th>
+                                                <th style="width: 100px">Trình độ chuyên môn</th>
+                                                <th style="width: 75px">Tỷ lệ đóng góp</th>
+                                            </tr>
+                                            <tr ng-repeat="author in authors">
+                                                <td>
+
+                                                    <input type="checkbox" id="{{author.FullName}}" ng-model="author.selected"  class="chk-col-red" name="all">
+                                                    <label for="{{author.FullName}}" style="height:0px !important;margin-left:0px; padding-bottom:41%"></label>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" ng-model="author.FullName" required />
+                                                </td>
+                                                <td>
+                                                    <!-- <input type="text" class="form-control" ng-model="author.BirthDay" required /> -->
+                                                    <input type="date" ng-model="author.BirthDay" class="form-control" required>
+                                                    <!-- <input type="text" class="form-control" ng-model="author.BirthDay"  class="form-control" required data-inputmask="'alias': 'dd/mm/yyyy'" data-mask=""> -->
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" ng-model="author.OrganizationID" required />
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" ng-model="author.Position" required />
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" ng-model="author.Qualitification" required />
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" ng-model="author.ContributionRate" required />
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </ng-form>
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input required type="text" class="form-control" name="name" ng-model="initiative.Investor">
+                                    <label class="form-label">4 Chủ đầu tư</label>
+                                </div>
+                            </div>
+                            <div class="form-group form-float">
+                                <label><span class="label-number-mini"></span> 5 Lĩnh vực áp dụng sáng kiến</label>
+                                <select name="fieldgroup" required class="form-control load-droplist" ng-model="initiative.FieldId" ng-options="option.Id as option.FieldName for option in fields">
+                                    <option required value="">--Chọn nhóm lĩnh vực--</option>
+                                </select>
+                            </div>
+                            <div class="form-group form-float">
+                                <label><span class="label-number-mini"></span> 6 Ngày áp dụng</label>
+                            </div>
+                            <div class="form-group form-float">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-10">
+                                    <div class="form-line">
+                                        <input required type="date" class="form-control" name="name" reqired-message="Tên nhóm bắt buộc." ng-model="initiative.DeploymentTime">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group bg-aqua">
+                                <label><span class="label-number"></span> </label>
+                               
+                            </div>
+                            <div class="form-group form-float">
+                                <label><span class="label-number-mini">7</span>  Mô tả bản chất sáng kiến </label>
+                            </div>
+                        
+                            <div class="form-group">
+               
+                              
+                                <label><span class="label-number-mini">7.1</span> Phân tích tình trạng của giải pháp đã biết</label>
+                                <!-- <textarea ckeditor="editorOptions" ng-model="modelName"></textarea> -->
+                                <textarea class="form-line text-area-custom" name="knowSolution" ng-model="initiative.KnowSolutionContent" required rows="3"
+                                          placeholder="Nhập văn bản..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label><span class="label-number-mini">7.2</span>Nội dung cải tiến</label>
+                                <textarea class="form-line text-area-custom" name="improvedContent" ng-model="initiative.ImprovedContent" required rows="3"
+                                          placeholder="Nhập văn bản..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label><span class="label-number-mini">7.3</span> Điều kiện áp dụng</label>
+
+                                <textarea class="form-line text-area-custom" name="conditionApply" ng-model="initiative.ConditionApply" required rows="3"
+                                          placeholder="Nhập văn bản..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label><span class="label-number-mini">7.4</span> Các bước thực hiện</label>
+
+                                <textarea class="form-line text-area-custom" name="actionSteps" ng-model="initiative.ActionSteps" required rows="3" placeholder="Nhập văn bản..."></textarea>
+                            </div>
+                            <div class="form-group bg-aqua">
+                                <label><span class="label-number-mini">7.5</span> Chứng minh khả năng áp dụng</label>
+                                <!-- <textarea ckeditor="editorOptions" ng-model="modelName"></textarea> -->
+                                <textarea class="form-line text-area-custom" name="applicability" ng-model="initiative.InitiativeApplicability" required
+                                          rows="3" placeholder="Nhập văn bản..."></textarea>
+                            </div>
+                            <div class="form-group bg-aqua">
+                                <label><span class="label-number">8</span> Thông tin bảo mật</label>
+                                <textarea class="form-line text-area-custom" name="applicability" ng-model="initiative.SecurityInformation" required
+                                          rows="3" placeholder="Nhập văn bản..."></textarea>
+                            </div>
+                            <div class="form-group bg-aqua">
+                                <label><span class="label-number">9</span> Tác giả đánh giá</label>
+                                <textarea class="form-line text-area-custom" name="applicability" ng-model="initiative.AchievedByAuthors" required
+                                          rows="3" placeholder="Nhập văn bản..."></textarea>
+                            </div>
+                            <div class="form-group bg-aqua">
+                                <label><span class="label-number">10</span> Tổ chức hoặc cá nhân đánh giá</label>
+                                <textarea class="form-line text-area-custom" name="applicability" ng-model="initiative.AchievedByAnothers" required
+                                          rows="3" placeholder="Nhập văn bản..."></textarea>
+                            </div>
+
+
+                        
+
+                            <div class="form-group">
+                                <input type="checkbox" id="checkbox" name="checkbox">
+                                <label for="checkbox">Trạng thái</label>
+                            </div>
+                            <button ui-sref="fields" class="btn btn-danger waves-effect" type="submit">Hủy bỏ</button>
+
+                            <button class="btn btn-primary waves-effect" type="submit" ng-disabled="form.$invalid">Lưu Lại</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="box box-warning">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Giải thích nội dung</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <!-- form start -->
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label>Chủ đầu tư</label>
+                                <span class="explain-field">- Là chủ đầu tư tạo ra sáng kiến ( trường hợp tác giả không đồng thời là chủ đàu tư tạo ra sáng kiến).</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Ngày áp dụng</label>
+                                <span class="explain-field">
+                                    - Ngày sáng kiến được áp dụng lần đầu hoặc áp dụng thử (bắt buộc phải ghi để làm cơ sở đánh giá tính
+                                    khả thi, hiệu quả của sáng kiến).
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <label>Mô tả bản chất của sáng kiến</label>
+                                <span class="explain-field">
+                                    - Đề nghị làm rõ để làm cơ sở xét sáng kiến, nếu bỏ qua các bước này thì sáng kiến có thể không đề
+                                    nghị công nhận.
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <label>Phân tích tình trạng của giải pháp đã biết</label>
+                                <span class="explain-field">- Là phân tích các ưu điểm, nhược điểm của nó.</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Nội dung cải tiến</label>
+                                <span class="explain-field">
+                                    - Nêu nội dung cải tiến, sáng tạo để khắc phục những nhược điểm của giải pháp đã biết:</br>
+                                    <i>
+                                        * Đối với vấn đề giải quyết là các vấn đề cũ: Nêu vẫn đề cũ (kể cả các tài liệu công bố) và nêu
+                                        cách thức, phương pháp giải quyết vấn đề và chứng minh tính mới của cách thức, phương pháp
+                                        giải quyết (điểm khác nhau so với phương pháp, giải pháp cũ)</br>
+                                        * Đối với vấn đề cần giải quyết là mới: Nêu cụ thể nội dung giải pháp, chứng minh vấn đề nêu là mới, không trùng lặp hoặc
+                                        tương tự với vấn đề đã công bố hoặc công khai trên bất cứ phương tiện nào; nêu cách thức
+                                        giải quyết, phương pháp giải quyết vấn đề.
+                                    </i>
+                                </span>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                        </div>
+                        <!-- /.box-footer -->
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<script src="../../../Libs/NewUI/js/onFocus.js"></script>
