@@ -1,5 +1,5 @@
 <!-- Content Header (Page header) -->
-<section class="content-header">
+<!--<section class="content-header">
     <h1>
         Danh mục sáng kiến
     </h1>
@@ -12,113 +12,126 @@
         </li>
         <li class="active">Sáng kiến</li>
     </ol>
-</section>
+</section>-->
 <!-- Main content -->
 
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <div class="card">
-        <div class="header" style="padding-bottom: 6%;">
-            <h2>Danh mục sáng kiến</h2>
-            <div class="col-md-8" style="padding-top: 1%;">
-                <div class="col-md-4">
-                    <select class="form-control load-droplist" ng-model="filter.Time">
-                        <option value="">Chọn năm</option>
-                        <option value="2017">2017</option>
-                        <option value="2016">2016</option>
-                        <option value="2015">2015</option>
-                        <option value="2014">2014</option>
-                        <option value="2013">2013</option>
-                        <option value="2012">2012</option>
-                        <option value="2011">2011</option>
-                    </select>
+<div class="container-fluid">
+    <div class="block-header">
+        <h2>BASIC FORM ELEMENTS</h2>
+    </div>
+    <div class="row clearfix">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="card">
+                <div class="header">
+                    <h2>Danh mục sáng kiến</h2>
+                    <ul class="header-dropdown m-r--5">
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                                <i class="material-icons">more_vert</i>
+                            </a>
+                            <ul class="dropdown-menu pull-right" ng-hide="!isAdminShow" >
+                                <li><a href="javascript:void(0);" ui-sref="add_initiative" class=" waves-effect waves-block"> Nộp đơn</a></li>
+                                <li><a href="javascript:void(0);" ng-disabled="isDownloadDisable" ng-click="export()" class=" waves-effect waves-block">Xuất Word</a></li>
+                                <li><a href="javascript:void(0);" ng-click="isSaveDisable=false" class=" waves-effect waves-block">Nhập điểm</a></li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
-                <div class="col-md-4">
-                    <select name="fieldgroup" required class="form-control load-droplist" ng-model="field.Field" ng-options="option.Id as option.FieldName for option in fields">
-                        <option required value="">Chọn nhóm lĩnh vực</option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-line">
-                        <input type="text" ng-model="filter.Keyword" class="form-control" placeholder="Tìm kiếm">
+                <div class="body">
+                    <div class="row">
+                            <div class="col-md-3">
+                                <select class="form-control load-droplist" ng-model="filter.Time">
+                                    <option value="">Chọn năm</option>
+                                    <option value="2017">2017</option>
+                                    <option value="2016">2016</option>
+                                    <option value="2015">2015</option>
+                                    <option value="2014">2014</option>
+                                    <option value="2013">2013</option>
+                                    <option value="2012">2012</option>
+                                    <option value="2011">2011</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <select name="fieldgroup" required class="form-control load-droplist" ng-model="field.Field" ng-options="option.Id as option.FieldName for option in fields">
+                                    <option value="">Chọn nhóm lĩnh vực</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group display-flex mb-0">
+                                    <div class="form-line">
+                                        <input type="text" ng-model="filter.Keyword" class="form-control" placeholder="Tìm kiếm">
+                                    </div>
+                                    <button type="button" class="btn btn-default btn-circle waves-effect waves-circle waves-float">
+                                        <i class="material-icons">search</i>
+                                    </button>
+                                </div>
+                            </div>
+                            <!--<span ng-if="loading">
+                                <img src="./Assets/admin/img/loading.gif" width="30" height="30" alt="">
+                            </span>-->
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Tên sáng kiến</th>
+                                    <th>Ngày áp dụng</th>
+                                    <th>Lĩnh vực</th>
+                                    <th>Bậc đánh giá</th>
+                                    <th>Điểm trung bình</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in data">
+
+                                    <td>{{item.Title}}</td>
+                                    <td>{{item.DeploymentTime | date: "dd-MM-yyyy"}}</td>
+                                    <td>
+                                        {{item.Field.FieldName}}
+                                    </td>
+                                    <td>
+                                        {{item.ProvinceLevelRank}}
+                                    </td>
+                                    <td class="td-gpa" ng-if="isAdminShow">
+                                        <div class="col-md-12">
+                                            <div class="col-md-9">
+                                                <input ng-disabled="isDownloadDisable" type="number" min="0" max="100" class="form-control" ng-model="item.ProvinceLevelGPA" />
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div ng-if="isAdminShow">
+                                                    <button class="btn bg-cyan btn-xs waves-effect waves-circle waves-float" type="button" ng-hide="isSaveDisable" ng-click="saveGPA(item.Id,item.ProvinceLevelGPA)"><i class="material-icons">done</i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </td>
+                                    <td ng-if="!isAdminShow">
+                                        {{item.ProvinceLevelGPA}}
+                                    </td>
+                                    <td>
+
+                                        <button class="btn btn-small btn-primary"><i class="material-icons small">mode_edit</i></button>
+                                        <button class="btn  btn-sm btn-danger" ng-click="deleteItem(item.Id)"><i class="material-icons">delete</i></button>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                            <tfoot class="text-right">
+                                <tr>
+                                    <td colspan="6">
+                                        <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="search(page)"></pager-directive>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
                     </div>
                 </div>
-                <div class="col-md-1">
-                    <button style="margin-left: -29px;font-size: 2px" ng-click="search()" type="button" class="btn btn-primary waves-effect">
-                        <i class="material-icons">search</i>
-
-                    </button>
-                </div>
             </div>
-            <div class="col-md-4" style="padding-top: 1%;">
-                <span ng-if="loading">
-                    <img src="./Assets/admin/img/loading.gif" width="30" height="30" alt="">
-                </span>
-                <button style="padding:6px 7px" class="btn bg-red waves-effect" type="button" ng-disabled="isDownloadDisable" ng-click="export()"><i class="material-icons">print</i><span>Xuất file</span></button>
-                <button style="padding:6px 7px" class="btn bg-brown waves-effect" ng-hide="!isAdminShow" type="button" ng-click="isSaveDisable=false"> <i class="material-icons">border_color</i> <span>Nhập điểm</span></button>
-                <button style="padding:6px 7px" class="btn btn-success waves-effect" ui-sref="add_initiative"> <i class="material-icons">chat</i><span>Nộp đơn</span> </button>
-            </div>
-
-
-        </div>
-        <div class="body">
-            <div class="table-responsive">
-                <table class="table table-hover dashboard-task-infos">
-                    <thead>
-                        <tr>
-                            <th>Tên sáng kiến</th>
-
-                            <th>Ngày áp dụng</th>
-                            <th>Lĩnh vực</th>
-                            <th>Bậc đánh giá</th>
-                            <th>Điểm trung bình</th>
-                            <th>Thao tác</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="item in data">
-
-                            <td>{{item.Title}}</td>
-                            <td>{{item.DeploymentTime | date: "dd-MM-yyyy"}}</td>
-                            <td>
-                                {{item.Field.FieldName}}
-                            </td>
-                            <td>
-                                {{item.ProvinceLevelRank}}
-                            </td>
-                            <td class="td-gpa" ng-if="isAdminShow">
-                                <div class="col-md-12">
-                                    <div class="col-md-9">
-                                        <input ng-disabled="isDownloadDisable" type="number" min="0" max="100" class="form-control" ng-model="item.ProvinceLevelGPA" />
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div ng-if="isAdminShow">
-                                            <button class="btn bg-cyan btn-xs waves-effect waves-circle waves-float" type="button" ng-hide="isSaveDisable" ng-click="saveGPA(item.Id,item.ProvinceLevelGPA)"><i class="material-icons">done</i></button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </td>
-                            <td ng-if="!isAdminShow">
-                                {{item.ProvinceLevelGPA}}
-                            </td>
-                            <td>
-
-                                <button class="btn btn-small btn-primary"><i class="material-icons small">mode_edit</i></button>
-                                <button class="btn  btn-sm btn-danger" ng-click="deleteItem(item.Id)"><i class="material-icons">delete</i></button>
-                            </td>
-
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="6"><span class="pull-right">Trang: {{page+1}} - Tổng số bản ghi: {{totalCount}}</span></td>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
-        </div>
-        <div class="box-footer text-right pd-0">
-            <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="search(page)"></pager-directive>
         </div>
     </div>
+
 </div>
+
+

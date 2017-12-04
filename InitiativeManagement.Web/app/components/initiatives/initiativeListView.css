@@ -1,60 +1,27 @@
-h1{
-    font-size: 18px!important;
+
+/*Overide*/
+.card .body{
+    font-size:13px!important;
 }
 
-.box-inside-header{
-    display: inline-block;
-    font-size: 18px;
-    margin: 0;
-    line-height: 1;
-    padding-bottom: 10px;
-    width: 100%;
+body{
+    font-size:13px!important;
 }
 
-table.row-style td{
-    padding-left: 5px;
+.form-control {
+    font-size: 13px !important;
 }
 
-.header-custom{
-    padding-left: 0px;
-    padding-right: 0px;
+.display-flex{
+    display:inline-flex!important;
 }
 
-.text-area-custom{
-    z-index: auto;
-    position: relative; 
-    line-height: 20px; 
-    font-size: 14px; 
-    transition: none; 
-    background: none;
+.btn-circle {
+    width: 39px !important;
+    height: 35px !important;
 }
 
-.year-filter{
-    width: 115px;
-}
-
-.filter-header{
-    padding: 10px 0 20px 0;
-}
-
-.pt-10{
-    padding-top:10px;
-}
-
-.explain-field{
-    display: inline-block;
-    font-size: 13px;
-}
-
-.td-gpa{
-    display: -webkit-box;
-}
-
-.gpa-field{
-    width: 65px!important;
-    margin-right: 5px;;
-    padding: 3px 12px 7px 12px;
-}
-.btn-save{
-    margin-left: 5px;
+.mb-0 {
+    margin-bottom: 0px !important;
+    margin-top: -1px;
 }

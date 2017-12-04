@@ -8,7 +8,7 @@
             loginService.logOut();
             $state.go('login');
         }
-        $rootScope.bodylayout = 'theme-teal';
+        $rootScope.bodylayout = 'theme-red';
 
         getRole();
         
