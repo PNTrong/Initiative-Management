@@ -6,25 +6,53 @@
     function initiativeAddController(apiService, $scope, notificationService, $state, $location, commonService, authData, $timeout) {
         //
         // author
-        $scope.authors = [{
-            'FullName': '',
-            'BirthDay': null,
-            'OrganizationID': '',
-            'Position': '',
-            'Qualitification': '',
-            'ContributionRate': ''
-        }];
-
+        //$scope.authors = [{
+        //    'FullName': '',
+        //    'BirthDay': null,
+        //    'OrganizationID': '',
+        //    'Position': '',
+        //    'Qualitification': '',
+        //    'ContributionRate': ''
+        //}];
+        $scope.authors = [];
         $scope.addNewAuthor = function () {
             $scope.authors.push({
-                'FullName': '',
-                'BirthDay': null,
-                'OrganizationId': 0,
-                'Position': '',
-                'Qualitification': '',
-                'ContributionRate': ''
-            });
-        };
+                'FullName': $scope.author.FullName,
+                'BirthDay': $scope.author.BirthDay,
+                'OrganizationID': $scope.author.OrganizationID,
+                'Position': $scope.author.Position,
+                'Qualitification': $scope.author.Qualitification,
+                'ContributionRate': $scope.author.ContributionRate
+            })
+            $scope.author.FullName = '';
+            $scope.author.BirthDay = '';
+            $scope.author.OrganizationID = '';
+            $scope.author.Position = '';
+            $scope.author.Qualitification = '';
+            $scope.author.ContributionRate = '';
+            //$('#btnCancel').click();
+           // angular.element('#defaultModal').css('display', 'none');
+
+
+        }
+        $scope.deleteauthor = function (index) {
+            $scope.authors.splice(index, 1);
+        }
+        //$scope.addSkill = function () {
+        //    $scope.skills.push({ 'title': $scope.newSkill, 'done': false })
+        //    $scope.newSkill = ''
+        //}
+
+        //$scope.addNewAuthor = function () {
+        //    $scope.authors.push({
+        //        'FullName': '',
+        //        'BirthDay': null,
+        //        'OrganizationId': 0,
+        //        'Position': '',
+        //        'Qualitification': '',
+        //        'ContributionRate': ''
+        //    });
+        //};
 
         $scope.removeAuthor = function () {
             var newDataList = [];
@@ -64,7 +92,7 @@
         //load All Account
         function loadAccounts() {
             apiService.get('api/account/users', null, function (result) {
-                if(result.data){
+                if (result.data) {
                     $scope.accounts = result.data;
                     $timeout(function () {
                         $('.load-droplist').selectpicker('destroy');
@@ -76,7 +104,7 @@
             });
         }
 
-        if(authData.authenticationData.Role != "BASEROLE"){
+        if (authData.authenticationData.Role != "BASEROLE") {
             loadAccounts();
         }
         //initiative
@@ -105,6 +133,5 @@
             notificationService.displayError("Nộp đơn thất bại");
         }
         //end-initiative
-
     }
-})(angular.module('InitiativeManagement.initiatives')); 
+})(angular.module('InitiativeManagement.initiatives'));
