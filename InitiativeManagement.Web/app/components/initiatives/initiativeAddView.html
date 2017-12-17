@@ -1,7 +1,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        Danh mục sáng kiến
+        DANH MỤC SÁNG KIẾN
     </h1>
     <small></small>
     <ol class="breadcrumb">
@@ -25,7 +25,7 @@
                 <!-- form start -->
                 <form name="form" novalidate role="form" ng-submit="addInitiative()">
                     <div class="box-body">
-                            <div class="form-group" ng-if="(authentication.Role == 'ADMIN' || authentication.Role == 'ADVANCEDROLE')">
+                            <div class="form-group " ng-if="(authentication.Role == 'ADMIN' || authentication.Role == 'ADVANCEDROLE')">
                                     <label><span class="label-number">*</span> Đơn vị nộp đơn</label>
                                     <select name="account" required class="form-control" ng-model="initiative.AccountId" ng-options="option.Value as option.Text for option in accounts">
                                         <option value="">Chọn đơn vị</option>

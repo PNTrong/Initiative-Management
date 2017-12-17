@@ -1,4 +1,6 @@
-﻿$('.form-control').focus(function () {
+﻿
+//On focus event
+$('.form-control').focus(function () {
     $(this).parent().addClass('focused');
 });
 
@@ -10,5 +12,17 @@ $('.form-control').focusout(function () {
     }
     else {
         $this.parents('.form-line').removeClass('focused');
+    }
+});
+
+//On label click
+$('body').on('click', '.form-float .form-line .form-label', function () {
+    $(this).parent().find('input').focus();
+});
+
+//Not blank form
+$('.form-control').each(function () {
+    if ($(this).val() !== '') {
+        $(this).parents('.form-line').addClass('focused');
     }
 });

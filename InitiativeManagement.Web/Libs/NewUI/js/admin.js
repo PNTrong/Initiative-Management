@@ -446,6 +446,7 @@ $.AdminBSB.browser = {
 //==========================================================================================================================
 
 $(function () {
+    autosize($('textarea'));
     $.AdminBSB.browser.activate();
     $.AdminBSB.leftSideBar.activate();
     $.AdminBSB.rightSideBar.activate();
