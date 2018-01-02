@@ -8784,6 +8784,13 @@
     <Content Include="Libs\NewUI\plugins\waitme\waitMe.js" />
     <Content Include="Libs\NewUI\plugins\waitme\waitMe.min.css" />
     <Content Include="Libs\NewUI\plugins\waitme\waitMe.min.js" />
+    <Content Include="ngxApp\ngx\karma.conf.js" />
+    <Content Include="ngxApp\ngx\protractor.conf.js" />
+    <Content Include="ngxApp\ngx\src\app\app.component.css" />
+    <Content Include="ngxApp\ngx\src\app\app.component.html" />
+    <Content Include="ngxApp\ngx\src\favicon.ico" />
+    <Content Include="ngxApp\ngx\src\index.html" />
+    <Content Include="ngxApp\ngx\src\styles.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -8984,6 +8991,15 @@
     <TypeScriptCompile Include="Assets\admin\libs\ngBootbox\typings\angularjs\angular.d.ts" />
     <TypeScriptCompile Include="Assets\admin\libs\ngBootbox\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Assets\admin\libs\ngBootbox\typings\tsd.d.ts" />
+    <TypeScriptCompile Include="ngxApp\ngx\src\app\app.component.spec.ts" />
+    <TypeScriptCompile Include="ngxApp\ngx\src\app\app.component.ts" />
+    <TypeScriptCompile Include="ngxApp\ngx\src\app\app.module.ts" />
+    <TypeScriptCompile Include="ngxApp\ngx\src\environments\environment.prod.ts" />
+    <TypeScriptCompile Include="ngxApp\ngx\src\environments\environment.ts" />
+    <TypeScriptCompile Include="ngxApp\ngx\src\main.ts" />
+    <TypeScriptCompile Include="ngxApp\ngx\src\polyfills.ts" />
+    <TypeScriptCompile Include="ngxApp\ngx\src\test.ts" />
+    <TypeScriptCompile Include="ngxApp\ngx\src\typings.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
@@ -9513,6 +9529,17 @@
     <Content Include="Libs\NewUI\scss\_tooltippopovers.scss" />
     <Content Include="Libs\NewUI\scss\_variables.scss" />
     <Content Include="Libs\NewUI\scss\_waveseffect.scss" />
+    <Content Include="ngxApp\ngx\src\assets\.gitkeep" />
+    <Content Include="ngxApp\ngx\src\tsconfig.app.json" />
+    <Content Include="ngxApp\ngx\src\tsconfig.spec.json" />
+    <Content Include="ngxApp\ngx\.angular-cli.json" />
+    <Content Include="ngxApp\ngx\.editorconfig" />
+    <Content Include="ngxApp\ngx\.gitignore" />
+    <Content Include="ngxApp\ngx\package-lock.json" />
+    <Content Include="ngxApp\ngx\package.json" />
+    <Content Include="ngxApp\ngx\README.md" />
+    <Content Include="ngxApp\ngx\tsconfig.json" />
+    <Content Include="ngxApp\ngx\tslint.json" />
     <None Include="Properties\PublishProfiles\Local Publish.pubxml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Properties\PublishProfiles\publish.pubxml" />
