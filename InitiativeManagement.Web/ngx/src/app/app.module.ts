@@ -1,11 +1,13 @@
-import { NgModule } from '@angular/core';
+import { PagesModule } from './pages/pages.module';
+import { AuthenticationService } from './services/authentication.service';
+import { NgModule, Injector } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // this is needed!
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { APP_BASE_HREF } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { AppComponent }   from './app.component';
+import { AppComponent } from './app.component';
 
 import { SidebarModule } from './sidebar/sidebar.module';
 import { FixedPluginModule } from './shared/fixedplugin/fixedplugin.module';
@@ -15,6 +17,9 @@ import { PagesnavbarModule} from './shared/pagesnavbar/pagesnavbar.module';
 import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { AppRoutes } from './app.routing';
+import { BaseService } from 'app/services/base.service';
+import { DevExtremeModule } from 'devextreme-angular';
+
 
 @NgModule({
     imports:      [
@@ -26,14 +31,17 @@ import { AppRoutes } from './app.routing';
         NavbarModule,
         FooterModule,
         FixedPluginModule,
-        PagesnavbarModule
+        PagesnavbarModule,
+        DevExtremeModule,
+        PagesModule
     ],
     declarations: [
         AppComponent,
         AdminLayoutComponent,
         AuthLayoutComponent
     ],
-    bootstrap:    [ AppComponent ]
+    providers: [BaseService, AuthenticationService],
+    bootstrap: [ AppComponent ]
 })
 
-export class AppModule { }
+export class AppModule {}

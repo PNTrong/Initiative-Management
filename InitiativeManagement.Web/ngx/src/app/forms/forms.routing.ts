@@ -12,19 +12,19 @@ export const FormsRoutes: Routes = [
             path: 'regular',
             component: RegularFormsComponent
         }]
-    },{
+    }, {
         path: '',
         children: [{
             path: 'extended',
             component: ExtendedFormsComponent
         }]
-    },{
+    }, {
         path: '',
         children: [{
             path: 'validation',
             component: ValidationFormsComponent
         }]
-    },{
+    }, {
         path: '',
         children: [{
             path: 'wizard',

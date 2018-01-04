@@ -8,13 +8,18 @@ import { PagesRoutes } from './pages.routing';
 import { RegisterComponent } from './register/register.component';
 import { LockComponent } from './lock/lock.component';
 import { LoginComponent } from './login/login.component';
+import { DxButtonModule, DxTextBoxModule, DxValidationGroupModule, DxValidatorModule } from 'devextreme-angular';
 
 @NgModule({
     imports: [
         CommonModule,
         RouterModule.forChild(PagesRoutes),
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        DxButtonModule,
+        DxTextBoxModule,
+        DxValidationGroupModule,
+        DxValidatorModule
     ],
     declarations: [
         LoginComponent,

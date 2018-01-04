@@ -12,7 +12,7 @@ declare var $: any;
     templateUrl: './auth-layout.component.html'
 })
 
-export class AuthLayoutComponent {
+export class AuthLayoutComponent implements OnInit {
     location: Location;
     private _router: Subscription;
     // url: string;
