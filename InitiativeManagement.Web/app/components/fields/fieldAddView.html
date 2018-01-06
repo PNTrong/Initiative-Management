@@ -33,11 +33,11 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Danh mục lĩnh vực</label>
                                 <div class="col-sm-9">
-                                    <select name="fieldgroup" required class="form-control" ng-model="field.FieldGroupId" ng-options="option.Id as option.Name for option in fieldGroups">
+                                    <select name="fieldgroup" class="form-control" ng-model="field.FieldGroupId" ng-options="option.Id as option.Name for option in fieldGroups" required>
                                         <option value="">Chọn nhóm lĩnh vực</option>
                                     </select>
                                     <span ng-show="frmAddField.fieldgroup.$error.required" class="has-error">Phải chọn danh mục</span>
-                                    <!-- <input type="hidden" name="parentId" ng-model="field.FieldGroupId" /> -->
+                                   
                                 </div>
                               </div>
                             <div class="form-group">

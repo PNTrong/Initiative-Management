@@ -263,14 +263,14 @@
         <!-- Menu -->
         <div class="menu">
             <ul class="list">
-                <li class="header">MAIN NAVIGATION</li>
+                <!--<li class="header">MAIN NAVIGATION</li>-->
                 <li class="active">
                     <a href="index.html">
                         <i class="material-icons">home</i>
-                        <span>Home</span>
+                        <span>TRANG CHỦ</span>
                     </a>
                 </li>
-                <li>
+                <!--<li>
                     <a href="pages/typography.html">
                         <i class="material-icons">text_fields</i>
                         <span>Typography</span>
@@ -327,85 +327,50 @@
                             </ul>
                         </li>
                     </ul>
+                </li>-->
+                <li>
+                    <a ui-sref="initiatives">
+                        <i class="material-icons">view_list</i>
+                        <span>DANH MỤC SÁNG KIẾN</span>
+                    </a>
                 </li>
                 <li>
-                    <a href="javascript:void(0);" class="menu-toggle">
-                        <i class="material-icons">swap_calls</i>
-                        <span>User Interface (UI)</span>
+                    <a ui-sref="add_initiative">
+                        <i class="material-icons">mail_outline</i>
+                        <span>NỘP ĐƠN</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="javascript:void(0);">
+                        <i class="material-icons">help</i>
+                        <span>TRỢ GIÚP</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" ng-if="authentication.Role == 'ADMIN'" class="menu-toggle">
+                        <i class="material-icons">brightness_high</i>
+                        <span>HỆ THỐNG</span>
                     </a>
                     <ul class="ml-menu">
                         <li>
-                            <a href="pages/ui/alerts.html">Alerts</a>
+                            <a ui-sref="application_groups">Nhóm Người dùng</a>
                         </li>
                         <li>
-                            <a href="pages/ui/animations.html">Animations</a>
+                            <a ui-sref="application_users">Người dùng</a>
                         </li>
                         <li>
-                            <a href="pages/ui/badges.html">Badges</a>
+                            <a ui-sref="application_roles">Quyền</a>
                         </li>
                         <li>
-                            <a href="pages/ui/breadcrumbs.html">Breadcrumbs</a>
+                            <a ui-sref="field_groups">Nhóm Lĩnh vực</a>
                         </li>
                         <li>
-                            <a href="pages/ui/buttons.html">Buttons</a>
-                        </li>
-                        <li>
-                            <a href="pages/ui/collapse.html">Collapse</a>
-                        </li>
-                        <li>
-                            <a href="pages/ui/colors.html">Colors</a>
-                        </li>
-                        <li>
-                            <a href="pages/ui/dialogs.html">Dialogs</a>
-                        </li>
-                        <li>
-                            <a href="pages/ui/icons.html">Icons</a>
-                        </li>
-                        <li>
-                            <a href="pages/ui/labels.html">Labels</a>
-                        </li>
-                        <li>
-                            <a href="pages/ui/list-group.html">List Group</a>
-                        </li>
-                        <li>
-                            <a href="pages/ui/media-object.html">Media Object</a>
-                        </li>
-                        <li>
-                            <a href="pages/ui/modals.html">Modals</a>
-                        </li>
-                        <li>
-                            <a href="pages/ui/notifications.html">Notifications</a>
-                        </li>
-                        <li>
-                            <a href="pages/ui/pagination.html">Pagination</a>
-                        </li>
-                        <li>
-                            <a href="pages/ui/preloaders.html">Preloaders</a>
-                        </li>
-                        <li>
-                            <a href="pages/ui/progressbars.html">Progress Bars</a>
-                        </li>
-                        <li>
-                            <a href="pages/ui/range-sliders.html">Range Sliders</a>
-                        </li>
-                        <li>
-                            <a href="pages/ui/sortable-nestable.html">Sortable & Nestable</a>
-                        </li>
-                        <li>
-                            <a href="pages/ui/tabs.html">Tabs</a>
-                        </li>
-                        <li>
-                            <a href="pages/ui/thumbnails.html">Thumbnails</a>
-                        </li>
-                        <li>
-                            <a href="pages/ui/tooltips-popovers.html">Tooltips & Popovers</a>
-                        </li>
-                        <li>
-                            <a href="pages/ui/waves.html">Waves</a>
+                            <a ui-sref="fields">Lĩnh Vực</a>
                         </li>
                     </ul>
                 </li>
-                <li>
+                <!--<li>
                     <a href="javascript:void(0);" class="menu-toggle">
                         <i class="material-icons">assignment</i>
                         <span>Forms</span>
@@ -575,26 +540,19 @@
                         <i class="material-icons">update</i>
                         <span>Changelogs</span>
                     </a>
-                </li>
-                <li class="header">LABELS</li>
-                <li>
-                    <a href="javascript:void(0);">
-                        <i class="material-icons col-red">donut_large</i>
-                        <span>Important</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);">
-                        <i class="material-icons col-amber">donut_large</i>
-                        <span>Warning</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);">
-                        <i class="material-icons col-light-blue">donut_large</i>
-                        <span>Information</span>
-                    </a>
-                </li>
+                </li>-->
+                <!-- <li>
+                     <a href="javascript:void(0);">
+                         <i class="material-icons col-amber">donut_large</i>
+                         <span>Warning</span>
+                     </a>
+                 </li>
+                 <li>
+                     <a href="javascript:void(0);">
+                         <i class="material-icons col-light-blue">donut_large</i>
+                         <span>Information</span>
+                     </a>
+                 </li>-->
             </ul>
         </div>
         <!-- #Menu -->
@@ -755,59 +713,22 @@
     <!-- #END# Right Sidebar -->
 </section>
 <section class="content">
-    <div class="container-fluid">
-        <div class="block-header">
-            <h2>Trang chủ</h2>
-        </div>
-        <!-- Widgets -->
-        <div class="row clearfix">
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="info-box bg-pink hover-expand-effect">
-                    <div class="icon">
-                        <i class="material-icons">playlist_add_check</i>
-                    </div>
-                    <div class="content">
-                        <div class="text">Số lượng sáng kiến kinh nghiệm</div>
-                        <div class="number count-to" data-from="0" data-to="125" data-speed="15" data-fresh-interval="20"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="info-box bg-cyan hover-expand-effect">
-                    <div class="icon">
-                        <i class="material-icons">playlist_add</i>
-                    </div>
-                    <div class="content">
-                        <div class="text">Lập đơn</div>
-                        <div class="text">Nộp đơn cho đơn vị</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="info-box bg-light-green hover-expand-effect">
-                    <div class="icon">
-                        <i class="material-icons">forum</i>
-                    </div>
-                    <div class="content">
-                        <div class="text">NEW COMMENTS</div>
-                        <div class="number count-to" data-from="0" data-to="243" data-speed="1000" data-fresh-interval="20"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="info-box bg-orange hover-expand-effect">
-                    <div class="icon">
-                        <i class="material-icons">person_add</i>
-                    </div>
-                    <div class="content">
-                        <div class="text">NEW VISITORS</div>
-                        <div class="number count-to" data-from="0" data-to="1225" data-speed="1000" data-fresh-interval="20"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- #END# Widgets -->
-        <!-- CPU Usage -->
-
-    </div>
+    <div ui-view></div>
 </section>
+<script>
+
+    $('.form-control').focus(function () {
+        $(this).parent().addClass('focused');
+    });
+
+    //On focusout event
+    $('.form-control').focusout(function () {
+        var $this = $(this);
+        if ($this.parents('.form-group').hasClass('form-float')) {
+            if ($this.val() == '') { $this.parents('.form-line').removeClass('focused'); }
+        }
+        else {
+            $this.parents('.form-line').removeClass('focused');
+        }
+    });
+</script>

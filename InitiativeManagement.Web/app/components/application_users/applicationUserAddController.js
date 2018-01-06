@@ -13,6 +13,7 @@
         $scope.addAccount = addAccount;
 
         function addAccount() {
+            debugger;
             apiService.post('/api/applicationUser/add', $scope.account, addSuccessed, addFailed);
         }
 

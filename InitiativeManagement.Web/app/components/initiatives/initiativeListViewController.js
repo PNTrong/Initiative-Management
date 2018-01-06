@@ -1,8 +1,8 @@
 (function (app) {
     app.controller('initiativeListViewController', initiativeListViewController);
-    initiativeListViewController.$inject = ['$scope', 'apiService', 'notificationService', '$ngBootbox', '$filter','authData'];
+    initiativeListViewController.$inject = ['$scope', 'apiService', 'notificationService', '$ngBootbox', '$filter', 'authData', '$timeout'];
 
-    function initiativeListViewController($scope, apiService, notificationService, $ngBootbox, $filter,authData) {
+    function initiativeListViewController($scope, apiService, notificationService, $ngBootbox, $filter, authData, $timeout) {
         $scope.loading = true;
         $scope.data = [];
         $scope.page = 0;
@@ -11,7 +11,7 @@
         $scope.deleteItem = deleteItem;
         $scope.selectAll = selectAll;
         $scope.deleteMultiple = deleteMultiple;
-        debugger;
+       
         $scope.isAdminShow = authData.authenticationData.Role == 'ADMIN' || authData.authenticationData.Role == 'ADVANCEDROLE';
         function deleteMultiple() {
             //
@@ -167,6 +167,10 @@
         function loadFields() {
             apiService.get('api/field/getall', null, function (result) {
                 $scope.fields = result.data;
+                $timeout(function () {
+                    $('.load-droplist').selectpicker('destroy');
+                    $('.load-droplist').selectpicker('render');
+                })
             }, function () {
             });
         }

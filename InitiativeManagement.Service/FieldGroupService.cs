@@ -61,13 +61,13 @@ namespace InitiativeManagement.Service
 
         public IEnumerable<FieldGroup> GetAll()
         {
-            return _fieldGroupRepository.GetAll();
+            return _fieldGroupRepository.GetMulti(x => !x.IsDeactive);
         }
 
         public IEnumerable<FieldGroup> GetAll(string keyword)
         {
             if (!string.IsNullOrEmpty(keyword))
-                return _fieldGroupRepository.GetMulti(x => x.Name.Contains(keyword));
+                return _fieldGroupRepository.GetMulti(x => x.Name.Contains(keyword) && !x.IsDeactive);
             else
                 return _fieldGroupRepository.GetAll();
         }
@@ -79,7 +79,7 @@ namespace InitiativeManagement.Service
 
         public IEnumerable<FieldGroup> GetAll(int page, int pageSize, out int totalRow, string filter)
         {
-            var query = _fieldGroupRepository.GetAll();
+            var query = _fieldGroupRepository.GetMulti(x => !x.IsDeactive);
             if (!string.IsNullOrEmpty(filter))
                 query = query.Where(x => x.Name.Contains(filter));
 

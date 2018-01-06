@@ -81,7 +81,7 @@
                 params: {
                     page: page,
                     pageSize: 5,
-                    filter: $scope.keyword
+                    filter: $scope.filterExpression
                 }
             }
 

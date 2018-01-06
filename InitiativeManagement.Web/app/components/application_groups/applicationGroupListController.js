@@ -79,13 +79,12 @@
         }
         function search(page) {
             page = page || 0;
-
             $scope.loading = true;
             var config = {
                 params: {
                     page: page,
                     pageSize: 5,
-                    filter: $scope.filterExpression
+                    filter: $scope.keyword
                 }
             }
 
@@ -93,6 +92,7 @@
         }
 
         function dataLoadCompleted(result) {
+            debugger;
             $scope.data = result.data.Items;
             $scope.page = result.data.Page;
             $scope.pagesCount = result.data.TotalPages;

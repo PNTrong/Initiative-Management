@@ -1,8 +1,8 @@
 (function (app) {
     app.controller('fieldAddController', fieldAddController);
-    fieldAddController.$inject = ['$scope', 'apiService', 'notificationService', '$location', 'commonService'];
+    fieldAddController.$inject = ['$scope', 'apiService', 'notificationService', '$location', 'commonService','$timeout'];
 
-    function fieldAddController($scope, apiService, notificationService, $location, commonService) {
+    function fieldAddController($scope, apiService, notificationService, $location, commonService,$timeout) {
         $scope.field = {
             Id: 0,
             FieldGroupId:0
@@ -25,13 +25,26 @@
         }
 
         function loadFieldGroups() {
+           
             apiService.get('api/fieldGroup/getall', null, function (result) {
                 $scope.fieldGroups = result.data;
+                $timeout(function () {
+                    $('.load-droplist').selectpicker('destroy');
+                    $('.load-droplist').selectpicker('render');
+                })
             }, function () {
                 console.log('Cannot get list parent');
-            });
+            })
         }
 
+        //$scope.renderUI = function () {
+        //    $timeout(function () {
+        //        $('.load-droplist').selectpicker('destroy');
+        //        $('.load-droplist').selectpicker('render');
+            
+               
+        //    })
+        //}
         loadFieldGroups();
     }
 })(angular.module('InitiativeManagement.fields'));
