@@ -46,15 +46,18 @@
                 }); 
                 return deferred.promise; 
             }
-
+            
+            // todo: remove this
             this.getRole = function() {
                 return localStorageService.get("role"); 
             }; 
 
+            // todo: remove this
             this.removeRole = function() {
                 localStorageService.remove("role"); 
             }
 
+            // todo: remove this
             this.setRole = function(role) {
                 authData.authenticationData.Role = role;
                 localStorageService.set("role", role);

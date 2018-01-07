@@ -4,6 +4,7 @@ using InitiativeManagement.Web.App_Start;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -93,33 +94,29 @@ namespace InitiativeManagement.Web.Api
 
                 return request.CreateResponse(HttpStatusCode.OK, users);
             }
-            catch (Exception ex)
+            catch
             {
-                return request.CreateResponse(HttpStatusCode.OK, false);
+                return request.CreateResponse(HttpStatusCode.OK, new List<string>());
             }
         }
 
         [HttpGet]
         [Route("permission")]
-        [AllowAnonymous]
-        public HttpResponseMessage GetUserRoles(HttpRequestMessage request)
+        public async Task<HttpResponseMessage> GetUserRolesAsync(HttpRequestMessage request)
         {
-            var user = UserManager.FindById(User.Identity.GetUserId());
+            try
+            {
+                //var user = UserManager.FindById(User.Identity.GetUserId());
 
-            if (user == null)
-                return request.CreateResponse(HttpStatusCode.OK, false);
+                //var roles = _applicationGroupService.GetRolesByUserId(user.Id).Select(x => x.Name).ToList();
+                var roles = await UserManager.GetRolesAsync(User.Identity.GetUserId());
 
-            //var userIdentity = (ClaimsIdentity)User.Identity;
-
-            //var claims = userIdentity.Claims;
-
-            //var roleClaimType = userIdentity.RoleClaimType;
-
-            //var roles = claims.Where(c => c.Type == roleClaimType).Select(x => x.Value).ToList();
-
-            var roles = _applicationGroupService.GetRolesByUserId(user.Id).Select(x => x.Name).ToList();
-
-            return request.CreateResponse(HttpStatusCode.OK, roles);
+                return request.CreateResponse(HttpStatusCode.OK, roles);
+            }
+            catch
+            {
+                return request.CreateResponse(HttpStatusCode.OK, new List<string>());
+            }
         }
     }
 }

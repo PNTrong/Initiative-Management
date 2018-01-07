@@ -3,12 +3,12 @@
 (function (app) {
     app.factory('commonService', commonService);
 
-
     function commonService() {
         return {
             getSeoTitle: getSeoTitle,
             getRole: getRole
         }
+
         function getRole(roles){
             if(roles.indexOf("ADMIN") >= 0){
                 return "ADMIN";

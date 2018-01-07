@@ -14,14 +14,32 @@
             'InitiativeManagement.common'])
         .config(config)
         .config(configAuthentication)
-        .run(['$rootScope', '$location','authData', function ($rootScope, $location,authData) {
+        .run(['$location','$rootScope','authData','apiService','permissions', function ($location,$rootScope, authData, apiService, permissions) {
             // $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // });
-            $rootScope.$on('$stateChangeStart', function (event) {
+            $rootScope.$on('$stateChangeStart', function (event, toState) {
+                debugger;
                 if (!authData.authenticationData.IsAuthenticated) {
                     $location.path('/login');
+                }else {
+                    if(!authData.authenticationData.IsPermissionLoad){
+                        getPermission();
+                    }
                 }
             });
+
+            function getPermission() {
+                if (authData.authenticationData.IsAuthenticated) {
+                    apiService.get('/api/account/permission', null, function (res) {
+                        if (res.data) {
+                            permissions.setPermissions(res.data);
+                        }
+                        authData.authenticationData.IsPermissionLoad = true;
+                    }, function () {
+                        authData.authenticationData.IsPermissionLoad = false;
+                    });
+                 }
+            }
         }]);
 
     config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
@@ -36,7 +54,7 @@
             }).state('login', {
                 url: "/login",
                 templateUrl: "/app/components/login/loginView.html",
-                controller: "loginController"
+                controller: "loginController",                
             })
             .state('home', {
                 url: "/trang-chu",
@@ -47,13 +65,13 @@
                 url: "/",
                 parent: 'base',
                 templateUrl: "/app/components/home/homeView.html",
-                controller: "homeController",
+                controller: "homeController"
             });
         $urlRouterProvider.otherwise('/');
     }
 
     function configAuthentication($httpProvider) {
-        $httpProvider.interceptors.push(function ($q, $location,$window) {
+        $httpProvider.interceptors.push(function ($q, $location, $window) {
             return {
                 request: function (config) {
                     return config;
@@ -74,7 +92,6 @@
                     if (rejection.status == "401") {
                         $location.path('/login');
                         $window.location.reload();
-                        
                     }
                     return $q.reject(rejection);
                 }

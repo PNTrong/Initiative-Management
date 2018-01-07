@@ -1,7 +1,7 @@
 ﻿(function (app) {
     'use strict';
-    app.service('loginService', ['$http', '$q', 'authenticationService', 'authData', 'apiService','$location',
-        function ($http, $q, authenticationService, authData, apiService,$locationProvider,$location) {
+    app.service('loginService', ['$http', '$q', 'authenticationService', 'authData', 'apiService','permissions',
+        function ($http, $q, authenticationService, authData, apiService,permissions) {
             var userInfo;
             var deferred;
 
@@ -18,7 +18,7 @@
                     };
                     authenticationService.setTokenInfo(userInfo);
                     authData.authenticationData.IsAuthenticated = true;
-                    authData.authenticationData.userName = userName;                    
+                    authData.authenticationData.userName = userName;
                     deferred.resolve(null);
                 }, function (err, status) {
                     authData.authenticationData.IsAuthenticated = false;
@@ -31,10 +31,11 @@
             this.logOut = function () {
                 apiService.post('/api/account/logout', null,function (response) {
                     authenticationService.removeToken();
-                    authenticationService.removeRole();
                     authData.authenticationData.IsAuthenticated = false;
                     authData.authenticationData.userName = "";
                     authData.authenticationData.accessToken = "";
+                    authData.authenticationData.IsPermissionLoad = false;
+                    permissions.setPermissions([]);
                 },null);
             }
         }]);

@@ -1,4 +1,5 @@
-﻿using InitiativeManagement.Data;
+﻿using InitiativeManagement.Common;
+using InitiativeManagement.Data;
 using InitiativeManagement.Model.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -38,20 +39,20 @@ namespace InitiativeManagement.Web.App_Start
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
 
             // Configure the sign in cookie
-            app.UseCookieAuthentication(new CookieAuthenticationOptions
-            {
-                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/dang-nhap.html"),
-                Provider = new CookieAuthenticationProvider
-                {
-                    // Enables the application to validate the security stamp when the user logs in.
-                    // This is a security feature which is used when you change a password or add an external login to your account.
-                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser>(
-                        validateInterval: TimeSpan.FromMinutes(30),
-                        regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager, DefaultAuthenticationTypes.ApplicationCookie))
-                }
-            });
-            app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
+            //app.UseCookieAuthentication(new CookieAuthenticationOptions
+            //{
+            //    AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+            //    LoginPath = new PathString("/dang-nhap.html"),
+            //    Provider = new CookieAuthenticationProvider
+            //    {
+            //        // Enables the application to validate the security stamp when the user logs in.
+            //        // This is a security feature which is used when you change a password or add an external login to your account.
+            //        OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser>(
+            //            validateInterval: TimeSpan.FromMinutes(30),
+            //            regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager, DefaultAuthenticationTypes.ApplicationCookie))
+            //    }
+            //});
+            //app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseMicrosoftAccountAuthentication(
@@ -62,15 +63,15 @@ namespace InitiativeManagement.Web.App_Start
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            app.UseFacebookAuthentication(
-               appId: "1724156397871880",
-               appSecret: "398039cc7588d52f87a7adcefecc3210");
+            //app.UseFacebookAuthentication(
+            //   appId: "1724156397871880",
+            //   appSecret: "398039cc7588d52f87a7adcefecc3210");
 
-            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            {
-                ClientId = "712161982861-4d9bdgfvf6pti1vviifjogopqdqlft56.apps.googleusercontent.com",
-                ClientSecret = "T0cgiSG6Gi7BKMr-fCCkdErO"
-            });
+            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            //{
+            //    ClientId = "712161982861-4d9bdgfvf6pti1vviifjogopqdqlft56.apps.googleusercontent.com",
+            //    ClientSecret = "T0cgiSG6Gi7BKMr-fCCkdErO"
+            //});
         }
 
         public class AuthorizationServerProvider : OAuthAuthorizationServerProvider
@@ -104,6 +105,7 @@ namespace InitiativeManagement.Web.App_Start
                 if (user != null)
                 {
                     ClaimsIdentity identity = await userManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ExternalBearer);
+
                     context.Validated(identity);
                 }
                 else

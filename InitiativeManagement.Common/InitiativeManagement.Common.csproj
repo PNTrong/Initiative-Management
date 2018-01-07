@@ -49,6 +49,7 @@
     <Compile Include="Exceptions\NameDuplicatedException.cs" />
     <Compile Include="MailHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Role.cs" />
     <Compile Include="RoleGroup.cs" />
     <Compile Include="StringHelper.cs" />
     <Compile Include="ViewModels\RevenueStatisticViewModel.cs" />

@@ -32,8 +32,6 @@ namespace InitiativeManagement.Service
 
         IEnumerable<ApplicationRole> GetRolesByUserId(string userId);
 
-        bool IsAccountAdmin(string userId);
-
         void Save();
     }
 
@@ -94,27 +92,25 @@ namespace InitiativeManagement.Service
         {
             if (_appGroupRepository.CheckContains(x => x.Name == appGroup.Name && x.ID != appGroup.ID))
                 throw new NameDuplicatedException("Tên không được trùng");
+
             _appGroupRepository.Update(appGroup);
         }
 
         public bool AddUserToGroups(IEnumerable<ApplicationUserGroup> userGroups, string userId)
         {
             _appUserGroupRepository.DeleteMulti(x => x.UserId == userId);
+
             foreach (var userGroup in userGroups)
             {
                 _appUserGroupRepository.Add(userGroup);
             }
+
             return true;
         }
 
         public IEnumerable<ApplicationGroup> GetListGroupByUserId(string userId)
         {
             return _appGroupRepository.GetListGroupByUserId(userId);
-        }
-
-        public bool IsAccountAdmin(string userId)
-        {
-            return _appGroupRepository.IsAccountAdmin(userId);
         }
 
         public IEnumerable<ApplicationUser> GetListUserByGroupId(int groupId)

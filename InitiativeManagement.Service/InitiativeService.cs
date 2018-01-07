@@ -72,7 +72,7 @@ namespace InitiativeManagement.Service
         {
             IEnumerable<Initiative> query = Enumerable.Empty<Initiative>();
 
-            if (roles.Any(x => x.Equals(CommonConstants.ADMIN) || x.Equals(CommonConstants.ADVANCEDROLE)))
+            if (roles.Any(x => x.Equals(Role.ViewIntiniativeForAdmin)))
             {
                 query = _initiativeRepository.GetMulti(x => !x.IsDeactive, new string[] { "Field" });
             }

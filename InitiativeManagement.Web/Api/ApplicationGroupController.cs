@@ -14,10 +14,11 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Script.Serialization;
+using InitiativeManagement.Common;
 
 namespace InitiativeManagement.Web.Api
 {
-    [Authorize(Roles = "ADMIN")]
+    [Authorize]
     [RoutePrefix("api/applicationGroup")]
     public class ApplicationGroupController : ApiControllerBase
     {
@@ -140,12 +141,15 @@ namespace InitiativeManagement.Web.Api
         {
             if (ModelState.IsValid)
             {
-                var appGroup = _appGroupService.GetDetail(appGroupViewModel.ID);
                 try
                 {
+                    var appGroup = _appGroupService.GetDetail(appGroupViewModel.ID);
+
                     appGroup.UpdateApplicationGroup(appGroupViewModel);
+
                     _appGroupService.Update(appGroup);
-                    //_appGroupService.Save();
+
+                    _appGroupService.Save();
 
                     //save group
                     var listRoleGroup = new List<ApplicationRoleGroup>();
@@ -158,25 +162,33 @@ namespace InitiativeManagement.Web.Api
                         });
                     }
                     _appRoleService.AddRolesToGroup(listRoleGroup, appGroup.ID);
+
                     _appRoleService.Save();
 
                     //add role to user
                     var listRole = _appRoleService.GetListRoleByGroupId(appGroup.ID);
+
                     var listUserInGroup = _appGroupService.GetListUserByGroupId(appGroup.ID);
+
                     foreach (var user in listUserInGroup)
                     {
-                        var listRoleName = listRole.Select(x => x.Name).ToArray();
-                        foreach (var roleName in listRoleName)
+                        foreach (var roleName in listRole.Select(x => x.Name).ToArray())
                         {
                             await _userManager.RemoveFromRoleAsync(user.Id, roleName);
+
                             await _userManager.AddToRoleAsync(user.Id, roleName);
                         }
                     }
+
                     return request.CreateResponse(HttpStatusCode.OK, appGroupViewModel);
                 }
                 catch (NameDuplicatedException dex)
                 {
                     return request.CreateErrorResponse(HttpStatusCode.BadRequest, dex.Message);
+                }
+                catch (Exception ex)
+                {
+                    return request.CreateResponse(HttpStatusCode.OK, ex.Message);
                 }
             }
             else

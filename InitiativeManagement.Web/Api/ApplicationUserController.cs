@@ -17,7 +17,7 @@ using System.Web.Http;
 
 namespace InitiativeManagement.Web.Api
 {
-    [Authorize(Roles = "ADMIN")]
+    [Authorize]
     [RoutePrefix("api/applicationUser")]
     public class ApplicationUserController : ApiControllerBase
     {
@@ -152,21 +152,19 @@ namespace InitiativeManagement.Web.Api
             if (ModelState.IsValid)
             {
                 var appUser = await _userManager.FindByIdAsync(applicationUserViewModel.Id);
+
                 try
                 {
                     appUser.UpdateUser(applicationUserViewModel);
+
                     var result = await _userManager.UpdateAsync(appUser);
+
                     if (result.Succeeded)
                     {
-                        var isSupperAdmin = false;
                         var listAppUserGroup = new List<ApplicationUserGroup>();
+
                         foreach (var group in applicationUserViewModel.Groups)
                         {
-                            if (!isSupperAdmin)
-                            {
-                                isSupperAdmin = group.ID == Common.CommonConstants.SupperAdminRole;
-                            }
-
                             listAppUserGroup.Add(new ApplicationUserGroup()
                             {
                                 GroupId = group.ID,
@@ -174,16 +172,26 @@ namespace InitiativeManagement.Web.Api
                             });
                             //add role to user
                             var listRole = _appRoleService.GetListRoleByGroupId(group.ID);
+
+                            var claimRoles = await _userManager.GetRolesAsync(appUser.Id);
+
                             foreach (var role in listRole)
                             {
-                                await _userManager.RemoveFromRoleAsync(appUser.Id, role.Name);
-                                await _userManager.AddToRoleAsync(appUser.Id, role.Name);
+                                //await _userManager.RemoveFromRoleAsync(appUser.Id, role.Name);
+                                //await _userManager.AddToRoleAsync(appUser.Id, role.Name);
+                                if (!claimRoles.ToList().Contains(role.Name))
+                                {
+                                    await _userManager.AddToRoleAsync(appUser.Id, role.Name);
+                                }
                             }
                         }
-                        appUser.IsAccountAdmin = isSupperAdmin;
+
                         await _userManager.UpdateAsync(appUser);
+
                         _appGroupService.AddUserToGroups(listAppUserGroup, applicationUserViewModel.Id);
+
                         _appGroupService.Save();
+
                         return request.CreateResponse(HttpStatusCode.OK, applicationUserViewModel);
                     }
                     else
@@ -193,10 +201,14 @@ namespace InitiativeManagement.Web.Api
                 {
                     return request.CreateErrorResponse(HttpStatusCode.BadRequest, dex.Message);
                 }
+                catch (Exception ex)
+                {
+                    return request.CreateErrorResponse(HttpStatusCode.OK, ex.Message);
+                }
             }
             else
             {
-                return request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                return request.CreateErrorResponse(HttpStatusCode.OK, "Updating");
             }
         }
 

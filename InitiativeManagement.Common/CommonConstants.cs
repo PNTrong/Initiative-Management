@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace InitiativeManagement.Common
+﻿namespace InitiativeManagement.Common
 {
     public class CommonConstants
     {
@@ -25,7 +19,5 @@ namespace InitiativeManagement.Common
         public const string ADVANCEDROLE = "ADVANCEDROLE";
 
         public const string ADMIN = "ADMIN";
-
-        public const int SupperAdminRole = 1;
     }
 }

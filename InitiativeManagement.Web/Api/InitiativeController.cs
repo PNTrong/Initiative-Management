@@ -143,6 +143,7 @@ namespace InitiativeManagement.Web.Api
 
         [Route("getlistpaging")]
         [HttpGet]
+        [Authorize(Roles = Role.CreateIntiniativeForAdmin + "," + Role.CreateIntiniativeForUser)]
         public HttpResponseMessage GetListPaging(HttpRequestMessage request, int page, int pageSize, string filter)
         {
             return CreateHttpResponse(request, () =>

@@ -12,8 +12,6 @@ namespace InitiativeManagement.Data.Repositories
         IEnumerable<ApplicationUser> GetListUserByGroupId(int groupId);
 
         IEnumerable<ApplicationRole> GetRolesByUserId(string userId);
-
-        bool IsAccountAdmin(string userId);
     }
 
     public class ApplicationGroupRepository : RepositoryBase<ApplicationGroup>, IApplicationGroupRepository
@@ -44,19 +42,6 @@ namespace InitiativeManagement.Data.Repositories
                         where gr.GroupId == g.ID
                         select r;
             return query;
-        }
-
-        public bool IsAccountAdmin(string userId)
-        {
-            var query = from groupUser in DbContext.ApplicationUserGroups
-                        where groupUser.UserId == userId && groupUser.GroupId == Common.CommonConstants.SupperAdminRole
-                        select groupUser;
-            var groupId = query.FirstOrDefault();
-            if (groupId != null)
-            {
-                return true;
-            }
-            return false;
         }
 
         public IEnumerable<ApplicationUser> GetListUserByGroupId(int groupId)
