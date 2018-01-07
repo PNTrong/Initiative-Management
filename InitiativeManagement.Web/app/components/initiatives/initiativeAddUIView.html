@@ -1,0 +1,335 @@
+<!-- Content Header (Page header) -->
+
+<section class="content-header">
+    <h1>
+        Danh mục sáng kiến
+    </h1>
+    <small></small>
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <i class="fa fa-dashboard"></i> Trang chủ
+            </a>
+        </li>
+        <li class="active">Lập đơn</li>
+    </ol>
+</section>
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    Lập đơn yêu cầu công nhận sáng kiến
+                </h2>
+            </div>
+            <form role="form" novalidate name="form" ng-submit="addInitiative()">
+                <div class="body">
+                    <h2 class="card-inside-title">1.Chọn đơn vị</h2>
+                    <div class="row clearfix m-top-0">
+                        <div class="margin-0 col-lg-6">
+                            <div class="form-group form-float" ng-if="(authentication.Role == 'ADMIN' || authentication.Role == 'ADVANCEDROLE')">
+                                <select name="fieldgroup" required class="form-control load-droplist" ng-model="initiative.AccountId" ng-options="option.Value as option.Text for option in accounts">
+                                    <option required value="">--Chọn đơn vị --</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 class="card-inside-title m-top-0"> I. Thông tin cơ bản : </h2>
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input required type="text" class="form-control" name="name" ng-model="initiative.Title">
+                            <label class="form-label"> 1. Tên sáng kiến kinh nghiệm</label>
+                        </div>
+                    </div>
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input required type="text" class="form-control" name="name" ng-model="initiative.SendTo">
+                            <label class="form-label">2. Đơn vị nhận</label>
+                        </div>
+                    </div>
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input required type="text" class="form-control" name="name" ng-model="initiative.Investor">
+                            <label class="form-label">3. Chủ đầu tư</label>
+                        </div>
+                    </div>
+                    <h2 class="card-inside-title"> 4. Tác giả  </h2>
+                    <div>
+                        <button type="button" class="btn btn-primary  waves-effect" data-toggle="modal" data-target="#defaultModal">Thêm tác giả</button>
+
+                    </div>
+
+
+                    <div class="row clearfix">
+                        <!-- table authors start -->
+                        <div class="body table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead style="background-color: aliceblue">
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Tên tác giả</th>
+                                        <th>Nơi công tác</th>
+                                        <th>Chức danh</th>
+                                        <th style="width: 15%">Tỷ lệ đóng góp</th>
+                                        <th style="width: 11%">Tùy chọn</th>
+                                    </tr>
+                                </thead>
+                                <tbody ng-repeat="author in authors">
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>{{author.FullName}}</td>
+                                        <td>{{author.OrganizationID}}</td>
+                                        <td>{{author.Position}}</td>
+                                        <td>{{author.ContributionRate}}</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#defaultModalEdit{{author.FullName}}{{author.Birthday}}">
+                                                <i class="material-icons">mode_edit</i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger" ng-click="deleteauthor($index)">
+                                                <i class="material-icons">delete</i>
+                                            </button>
+
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- table authors start -->
+                        <!--  list author detail  -->
+                        <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12" ng-repeat="author in authors">
+                            <div class="header-dropdown m-r--5">
+
+                                <div class="modal fade" id="defaultModalEdit{{author.FullName}}{{author.Birthday}}" tabindex="-1" role="dialog">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg bg-blue">
+                                                <h4 class="modal-title" id="defaultModalLabel" style="text-align:center;line-height:">Thông tin tác giả</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="form-group form-float">
+                                                    <label class=""> 1. Tên tác giả</label>
+                                                    <div class="form-line">
+                                                        <input type="text" class="form-control" name="name" required ng-model="author.FullName">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group form-float">
+                                                    <label class="">2. Nơi công tác</label>
+                                                    <div class="form-line">
+                                                        <input type="text" class="form-control" name="name" required ng-model="author.OrganizationID">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group form-float">
+                                                    <label class="">3. Chức danh</label>
+                                                    <div class="form-line">
+                                                        <input type="text" class="form-control" name="name" required ng-model="author.Position">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group form-float">
+                                                    <label class="">4. Tỷ lệ đóng góp</label>
+                                                    <div class="form-line">
+                                                        <input type="text" class="form-control" name="name" required ng-model="author.ContributionRate">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group form-float">
+                                                    <label class="">5. Trình độ chuyên môn</label>
+                                                    <div class="form-line">
+                                                        <input type="text" class="form-control" name="name" required ng-model="author.Qualitification">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group form-float">
+                                                    6. Ngày sinh
+                                                    <div class="form-line col-md-12">
+                                                        <input type="date" class="form-control col-md-9" required name="name" ng-model="author.BirthDay">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-success waves-effect"> <i class="material-icons">add_circle</i><span>Cập nhật</span> </button>
+                                                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal"> <i class="material-icons">refresh</i> <span>  Quay lại</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- modal start (add author)-->
+                    <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog" ng-style="myStyle">
+                        <ng-form name="authorform" novalidate>
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header bg bg-blue">
+                                        <h4 class="modal-title" id="defaultModalLabel" style="text-align:center;">Thêm mới tác giả</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                                <input required type="text" class="form-control" ng-model="author.FullName" name="name">
+                                                <label class="form-label"> 1. Tên tác giả</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                                <input required type="text" ng-model="author.OrganizationID" class="form-control" name="name">
+                                                <label class="form-label">2. Nơi công tác hoặc nơi thường trú</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                                <input required type="text" ng-model="author.Position" class="form-control" name="name">
+                                                <label class="form-label">3. Chức danh</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                                <input required type="text" ng-model="author.ContributionRate" class="form-control" name="name">
+                                                <label class="form-label">4. Tỷ lệ đóng góp</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                                <input required type="text" class="form-control" ng-model="author.Qualitification" name="name">
+                                                <label class="form-label">5. Trình độ chuyên môn</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-float">
+                                            6. Ngày sinh
+                                            <div class="form-line col-md-12">
+                                                <input required ng-model="author.BirthDay" type="date" class="form-control col-md-9" name="name">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button ng-click="addNewAuthor()" ng-disabled="authorform.$invalid" type="submit" class="btn btn-success waves-effect"> <i class="material-icons">add_circle</i><span>Lưu lại</span> </button>
+                                        <button type="button" id="btnCancel" class="btn btn-danger waves-effect" data-dismiss="modal"> <i class="material-icons">refresh</i> <span> Hủy bỏ</span></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-form>
+                    </div>
+                    <!-- modal end -->
+
+                    <h2 class="card-inside-title">5.Lĩnh vực áp dụng sáng kiến</h2>
+                    <div class="row clearfix margin-0">
+                        <div class="padding-0 col-md-6 col-lg-6 col-xs-12">
+                            <select name="fieldgroup" required class="form-control load-droplist" ng-model="initiative.FieldId" ng-options="option.Id as option.FieldName for option in fields">
+                                <option required value="">--Chọn nhóm lĩnh vực--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <h2 class="card-inside-title m-top-0">  6. Ngày áp dụng</h2>
+                    <div class="row clearfix margin-0">
+                        <div class="padding-0 margin-0 col-md-6 col-lg-6 col-xs-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input required type="date" class="form-control" name="name" reqired-message="Tên nhóm bắt buộc." ng-model="initiative.DeploymentTime">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 class="card-inside-title m-top-0">7. Mô tả bản chất sáng kiến</h2>
+                    <div class="row clearfix">
+                        <div class="col-sm-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <textarea rows="4" class="form-control no-resize auto-growth" ng-model="initiative.KnowSolutionContent" required></textarea>
+                                    <label class="form-label">7.1 Phân tích tình trạng của giải pháp đã biết</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-sm-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <textarea rows="4" class="form-control no-resize auto-growth" ng-model="initiative.ImprovedContent" required></textarea>
+                                    <label class="form-label">7.2 Nội dung cải tiến</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-sm-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <textarea rows="4" class="form-control no-resize auto-growth" ng-model="initiative.ConditionApply" required></textarea>
+                                    <label class="form-label">7.3 Điều kiện áp dụng</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-sm-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <textarea rows="4" class="form-control no-resize auto-growth" ng-model="initiative.ActionSteps" required></textarea>
+                                    <label class="form-label">7.4 Các bước thực hiện</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-sm-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <textarea rows="4" class="form-control no-resize auto-growth" ng-model="initiative.InitiativeApplicability" required></textarea>
+                                    <label class="form-label">7.5 Chứng minh khả năng áp dụng</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <h2 class="card-inside-title">II. Nội dung</h2>
+                    <div class="row clearfix">
+                        <div class="col-sm-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <textarea rows="4" class="form-control no-resize auto-growth" ng-model="initiative.SecurityInformation" required></textarea>
+                                    <label class="form-label">8. Thông tin bảo mật</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-sm-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <textarea rows="4" class="form-control no-resize auto-growth" ng-model="initiative.AchievedByAuthors" required></textarea>
+                                    <label class="form-label">9.Tác giả đánh giá</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-sm-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <textarea rows="4" class="form-control no-resize auto-growth" ng-model="initiative.AchievedByAnothers" required></textarea>
+                                    <label class="form-label">10. Tổ chức hoặc cá nhân đánh giá</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button ui-sref="initiatives" class="btn btn-danger waves-effect" type="submit">Hủy bỏ</button>
+                    <button class="btn btn-primary waves-effect" type="submit" ng-disabled="form.$invalid">Lưu Lại</button>
+                    </div>
+</form>
+        </div>
+    </div>
+</div>
+
+<!--<div class="row clearfix">
+
+    <form role="form" novalidate name="form" ng-submit="addInitiative()">
+        <input required type="text" class="form-control" name="name" ng-model="initiative.Investor">
+    </form>
+</div>-->
+
+<script src="../../../Libs/NewUI/js/onFocus.js"></script>

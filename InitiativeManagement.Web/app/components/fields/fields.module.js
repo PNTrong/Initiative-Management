@@ -6,7 +6,6 @@
     config.$inject = ['$stateProvider', '$urlRouterProvider','CreateField','ViewField'];
 
     function config($stateProvider, $urlRouterProvider,CreateField,ViewField) {
-
         $stateProvider.state('fields', {
             url: "/linh-vuc",
             templateUrl: "/app/components/fields/fieldListView.html",

@@ -34,7 +34,8 @@
 
         $scope.isAll = false;
         function selectAll() {
-            if ($scope.isAll === false) {
+            debugger;
+            if ($scope.isAll == false) {
                 angular.forEach($scope.data, function (item) {
                     item.checked = true;
                 });
@@ -58,6 +59,7 @@
         }, true);
 
         function deleteItem(id) {
+            debugger;
             $ngBootbox.confirm('Bạn có chắc muốn xóa?')
                 .then(function () {
                     var config = {

@@ -5,63 +5,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Welcome To | Bootstrap Based Admin Template - Material Design</title>
+    <title>Sở Khoa Học và Công Nghệ</title>
     <!-- Favicon-->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
     <!-- Bootstrap Core Css -->
-    <link href="~/Libs/NewUI/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="~/Assets/admin/libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <!-- Waves Effect Css -->
-   
-    <link href="~/Libs/NewUI/plugins/node-waves/waves.css" rel="stylesheet" />
+    <link href="~/Assets/admin/libs/waves/dist/waves.css" rel="stylesheet" />
     <!-- Animation Css -->
     <link href="~/Libs/NewUI/plugins/animate-css/animate.css" rel="stylesheet" />
     <!-- Morris Chart Css-->
-    <link href="~/Libs/NewUI/plugins/morrisjs/morris.css" rel="stylesheet" />
+    <link href="~/Assets/admin/libs/morris.js/morris.css" rel="stylesheet" />
+    <link href="~/Assets/admin/libs/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" />
     <!-- Custom Css -->
     <link href="~/Libs/NewUI/css/style.css" rel="stylesheet">
-    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="~/Libs/NewUI/css/themes/all-themes.css" rel="stylesheet" />
-
-    @*<link rel="stylesheet" href="~/app/components/initiatives/initiativeListView.css" />
-    <link href="~/app/components/field_groups/fieldGroups.css" rel="stylesheet" />
-    <link href="~/app/components/fields/fields.css" rel="stylesheet" />*@
-    @*<link rel="stylesheet" href="/Assets/admin/css/skins/_all-skins.min.css">*@
+    <link rel="stylesheet" href="~/app/components/initiatives/initiativeListView.css" />
     @*<link href="~/Assets/admin/css/custom.css" rel="stylesheet" />*@
 </head>
 <body class="{{bodylayout}}" ng-app="InitiativeManagement" ng-controller="rootController" ui-view>
     <!-- Page Loader -->
-    <!-- Jquery Core Js -->
     <script src="~/Libs/NewUI/plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap Core Js -->
-    <script src="~/Libs/NewUI/plugins/bootstrap/js/bootstrap.js"></script>
-    <!-- Select Plugin Js -->
-    <script src="~/Libs/NewUI/plugins/bootstrap-select/js/bootstrap-select.js"></script>
-    <!-- Slimscroll Plugin Js -->
-    <script src="~/Libs/NewUI/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
-    <!-- Waves Effect Plugin Js -->
-    <script src="~/Libs/NewUI/plugins/node-waves/waves.js"></script>
-    <!-- Jquery CountTo Plugin Js -->
+    <script src="~/Assets/admin/libs/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/Assets/admin/libs/bootstrap-select/dist/js/bootstrap-select.js"></script>
+    <script src="~/Assets/admin/libs/slimScroll/jquery.slimscroll.js"></script>
+    <script src="~/Assets/admin/libs/waves/dist/waves.js"></script>
     <script src="~/Libs/NewUI/plugins/jquery-countto/jquery.countTo.js"></script>
-    <!-- Morris Plugin Js -->
-    <script src="~/Libs/NewUI/plugins/raphael/raphael.min.js"></script>
-    <script src="~/Libs/NewUI/plugins/morrisjs/morris.js"></script>
-    @*<!-- ChartJs -->
-    <script src="~/Libs/NewUI/plugins/chartjs/Chart.bundle.js"></script>
-    <!-- Flot Charts Plugin Js -->
-    <script src="~/Libs/NewUI/plugins/flot-charts/jquery.flot.js"></script>
-    <script src="~/Libs/NewUI/plugins/flot-charts/jquery.flot.resize.js"></script>
-    <script src="~/Libs/NewUI/plugins/flot-charts/jquery.flot.pie.js"></script>
-    <script src="~/Libs/NewUI/plugins/flot-charts/jquery.flot.categories.js"></script>
-    <script src="~/Libs/NewUI/plugins/flot-charts/jquery.flot.time.js"></script>*@
-    <!-- Sparkline Chart Plugin Js -->
+    <script src="~/Assets/admin/libs/raphael/raphael.min.js"></script>
+    <script src="~/Assets/admin/libs/morris.js/morris.js"></script>
+    <script src="~/Assets/admin/libs/bootstrap-notify/js/bootstrap-notify.js"></script>
     <script src="~/Libs/NewUI/plugins/jquery-sparkline/jquery.sparkline.js"></script>
-    <!-- Custom Js -->
+    <script src="~/Libs/NewUI/plugins/autosize/autosize.min.js"></script>
     <script src="~/Libs/NewUI/js/pages/index.js"></script>
-    @*<script src="~/Libs/NewUI/js/pages/examples/sign-in.js"></script>*@
-    <!-- Demo Js -->
+    <script src="~/Libs/NewUI/js/admin.js"></script>
     <script src="~/Libs/NewUI/js/demo.js"></script>
 
     <script src="~/Assets/admin/libs/angular/angular.js"></script>
@@ -76,7 +55,6 @@
     <script src="~/Assets/admin/libs/checklist-model/checklist-model.js"></script>
     <script src="~/Assets/admin/libs/Chart.js/Chart.js"></script>
     <script src="~/Assets/admin/libs/angular-chart.js/dist/angular-chart.js"></script>
-
     <script src="~/app/shared/modules/InitiativeManagement.common.js"></script>
     <script src="~/app/shared/filters/statusFilter.js"></script>
     <script src="~/app/shared/services/apiService.js"></script>
@@ -98,7 +76,6 @@
     <script src="~/app/components/field_groups/fieldGroups.module.js"></script>
     <script src="~/app/components/fields/fields.module.js"></script>
     <script src="~/app/app.js"></script>
-
     <script src="~/app/components/home/rootController.js"></script>
     <script src="~/app/components/product_categories/productCategoryListController.js"></script>
     <script src="~/app/components/product_categories/productCategoryAddController.js"></script>
@@ -122,14 +99,9 @@
     <script src="~/app/components/initiatives/initiativeListViewController.js"></script>
     <script src="~/app/components/field_groups/fieldGroupAddController.js"></script>
     <script src="~/app/components/field_groups/fieldGroupListController.js"></script>
+    <script src="~/app/components/field_groups/fieldGroupEditController.js"></script>
     <script src="~/app/components/fields/fieldAddController.js"></script>
     <script src="~/app/components/fields/fieldListController.js"></script>
-    <!-- Custom Js -->
-    <script src="~/Libs/NewUI/js/pages/index.js"></script>
-    <script src="~/Libs/NewUI/js/admin.js"></script>
-    @*<script src="~/Libs/NewUI/js/pages/examples/sign-in.js"></script>*@
-    <!-- Demo Js -->
-    <script src="~/Libs/NewUI/js/demo.js"></script>
-
+    <script src="~/app/components/fields/fieldEditController.js"></script>
 </body>
 </html>

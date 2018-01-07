@@ -64,15 +64,15 @@ namespace InitiativeManagement.Service
 
         public IEnumerable<Field> GetAll()
         {
-            return _fieldRepository.GetAll();
+            return _fieldRepository.GetMulti(x => !x.IsDeactive);
         }
 
         public IEnumerable<Field> GetAll(string keyword)
         {
             if (!string.IsNullOrEmpty(keyword))
-                return _fieldRepository.GetMulti(x => x.FieldName.Contains(keyword));
+                return _fieldRepository.GetMulti(x => x.FieldName.Contains(keyword) && !x.IsDeactive);
             else
-                return _fieldRepository.GetAll();
+                return _fieldRepository.GetMulti(x => !x.IsDeactive);
         }
 
         public Field GetById(int id)
@@ -82,12 +82,12 @@ namespace InitiativeManagement.Service
 
         public Field FindById(int id)
         {
-            return _fieldRepository.GetSingleByCondition(x => x.FieldGroupId == id);
+            return _fieldRepository.GetSingleByCondition(x => x.Id == id);
         }
 
         public IEnumerable<Field> GetAll(int page, int pageSize, out int totalRow, string filter)
         {
-            var query = _fieldRepository.GetAll();
+            var query = _fieldRepository.GetMulti(x => !x.IsDeactive);
             if (!string.IsNullOrEmpty(filter))
                 query = query.Where(x => x.FieldName.Contains(filter));
 

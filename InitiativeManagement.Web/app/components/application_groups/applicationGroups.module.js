@@ -6,22 +6,21 @@
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
     function config($stateProvider, $urlRouterProvider) {
-
         $stateProvider.state('application_groups', {
-            url: "/nhom-quyen",
-            templateUrl: "/app/components/application_groups/applicationGroupListView.html",
+            url: "/nhom-nguoi-dung",
+            templateUrl: "/app/components/application_groups/applicationGroupListUIView.html",
             parent: 'base',
             controller: "applicationGroupListController"
         })
             .state('add_application_group', {
-                url: "/nhom-quyen/tao-moi",
+                url: "/nhom-nguoi-dung/tao-moi",
                 parent: 'base',
-                templateUrl: "/app/components/application_groups/applicationGroupAddView.html",
+                templateUrl: "/app/components/application_groups/applicationGroupAddUIView.html",
                 controller: "applicationGroupAddController"
             })
             .state('edit_application_group', {
-                url: "/nhom-quyen/cap-nhap/:id",
-                templateUrl: "/app/components/application_groups/applicationGroupEditView.html",
+                url: "/nhom-nguoi-dung/cap-nhap/:id",
+                templateUrl: "/app/components/application_groups/applicationGroupEditUIView.html",
                 controller: "applicationGroupEditController",
                 parent: 'base',
             });

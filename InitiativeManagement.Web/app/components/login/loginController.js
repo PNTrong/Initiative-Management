@@ -1,12 +1,12 @@
 ﻿(function (app) {
-    app.controller('loginController', ['$scope', 'loginService', '$injector', 'notificationService', 'apiService', 'authenticationService',
-        function ($scope, loginService, $injector, notificationService, apiService, authenticationService) {
+    app.controller('loginController', ['$scope', '$rootScope', 'loginService', '$injector', 'notificationService', 'apiService', 'authenticationService',
+        function ($scope,$rootScope, loginService, $injector, notificationService, apiService, authenticationService) {
             
             $scope.loginData = {
                 userName: "",
                 password: ""
             };
-
+            $rootScope.bodylayout = 'login-page ls-closed';
             $scope.loginSubmit = function () {
                 loginService.login($scope.loginData.userName, $scope.loginData.password).then(function (response) {
                     if (response != null && response.data.error != undefined) {

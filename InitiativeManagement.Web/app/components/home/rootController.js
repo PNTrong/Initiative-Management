@@ -8,6 +8,7 @@
             loginService.logOut();
             $state.go('login');
         }
+        $rootScope.bodylayout = 'theme-red';
 
         $scope.authentication = authData.authenticationData;
     }

@@ -49,12 +49,13 @@
         $stateProvider
             .state('base', {
                 url: '',
-                templateUrl: '/app/shared/views/baseView.html',
+                //templateUrl: '/app/shared/views/baseView.html',
+                templateUrl: '/app/shared/views/layout.html',
                 abstract: true
             }).state('login', {
                 url: "/login",
                 templateUrl: "/app/components/login/loginView.html",
-                controller: "loginController",                
+                controller: "loginController",
             })
             .state('home', {
                 url: "/trang-chu",
@@ -98,4 +99,4 @@
             };
         });
     }
-})(); 
+})();
