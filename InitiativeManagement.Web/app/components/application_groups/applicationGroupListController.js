@@ -3,7 +3,7 @@
 
     app.controller('applicationGroupListController', applicationGroupListController);
 
-    applicationGroupListController.$inject = ['$scope', 'apiService', 'notificationService', '$ngBootbox','$filter'];
+    applicationGroupListController.$inject = ['$scope', 'apiService', 'notificationService', '$ngBootbox', '$filter'];
 
     function applicationGroupListController($scope, apiService, notificationService, $ngBootbox, $filter) {
         $scope.loading = true;
@@ -72,9 +72,9 @@
                         notificationService.displaySuccess('Đã xóa thành công.');
                         search();
                     },
-                    function () {
-                        notificationService.displayError('Xóa không thành công.');
-                    });
+                        function () {
+                            notificationService.displayError('Xóa không thành công.');
+                        });
                 });
         }
         function search(page) {
@@ -92,8 +92,7 @@
         }
 
         function dataLoadCompleted(result) {
-            debugger;
-            $scope.data = result.data.Items;
+            $scope.dasssta = result.data.Items;
             $scope.page = result.data.Page;
             $scope.pagesCount = result.data.TotalPages;
             $scope.totalCount = result.data.TotalCount;
