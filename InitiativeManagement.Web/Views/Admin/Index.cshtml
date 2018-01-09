@@ -19,10 +19,8 @@
     <link rel="stylesheet" href="/Assets/admin/css/AdminLTE.min.css">
     <link rel="stylesheet" href="/Assets/admin/css/skins/_all-skins.min.css">
     <link href="~/Assets/admin/css/custom.css" rel="stylesheet" />
-
-    <!-- DevExtreme themes -->
-    <link rel="stylesheet" type="text/css" href="/Assets/admin/libs/devextreme/css/dx.common.css" />
-    <link rel="stylesheet" type="text/css" href="/Assets/admin/libs/devextreme/css/dx.light.css" />
+    <link href="~/Assets/admin/libs/devextreme/css/dx.common.css" rel="stylesheet" />
+    <link href="~/Assets/admin/libs/devextreme/css/dx.light.css" rel="stylesheet" />
 </head>
 <body class="sidebar-mini skin-purple-light" ng-app="InitiativeManagement" ng-controller="rootController">
     <div ui-view></div>
@@ -39,17 +37,18 @@
     <script src="~/Assets/admin/libs/angular/angular.js"></script>
 
     <script src="~/Assets/admin/libs/angular-ui-router/release/angular-ui-router.js"></script>
-
-    @*<script type="text/javascript" src="/Assets/admin/libs/devextreme/js/dx.all.js"></script>*@
-
+    <!-- DevExtreme themes -->
+    @*<link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.2.4/css/dx.common.css" />
+        <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.2.4/css/dx.light.css" />*@
+    <!-- A DevExtreme library -->
+    @*<script type="text/javascript" src="https://cdn3.devexpress.com/jslib/17.2.4/js/dx.all.js"></script>*@
+    <script src="~/Assets/admin/libs/devextreme/js/dx.all.js"></script>
     <script src="~/Assets/admin/libs/toastr/toastr.js"></script>
     <script src="~/Assets/admin/libs/bootbox/bootbox.js"></script>
     <script src="~/Assets/admin/libs/ngBootbox/ngBootbox.js"></script>
     <script src="~/Assets/admin/libs/angular-local-storage/dist/angular-local-storage.js"></script>
     <script src="~/Assets/admin/libs/angular-loading-bar/build/loading-bar.js"></script>
     <script src="~/Assets/admin/libs/checklist-model/checklist-model.js"></script>
-    <script src="~/Assets/admin/libs/Chart.js/Chart.js"></script>
-    <script src="~/Assets/admin/libs/angular-chart.js/dist/angular-chart.js"></script>
     <script src="~/app/shared/modules/InitiativeManagement.common.js"></script>
     <script src="~/app/shared/constants/roleConstants.js"></script>
     <script src="~/app/shared/filters/statusFilter.js"></script>

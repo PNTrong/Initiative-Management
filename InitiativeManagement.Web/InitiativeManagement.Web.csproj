@@ -817,6 +817,8 @@
     <Content Include="Assets\admin\libs\cldrjs\test\unit_unresolved.html" />
     <Content Include="Assets\admin\libs\cldrjs\test\unit_unresolved.js" />
     <Content Include="Assets\admin\libs\cldrjs\test\util.js" />
+    <Content Include="Assets\admin\libs\devextreme\.bower.json" />
+    <Content Include="Assets\admin\libs\devextreme\bower.json" />
     <Content Include="Assets\admin\libs\devextreme\css\dx.android5.light.css" />
     <Content Include="Assets\admin\libs\devextreme\css\dx.carmine.compact.css" />
     <Content Include="Assets\admin\libs\devextreme\css\dx.carmine.css" />
@@ -841,6 +843,12 @@
     <Content Include="Assets\admin\libs\devextreme\css\dx.win10.white.css" />
     <Content Include="Assets\admin\libs\devextreme\css\dx.win8.black.css" />
     <Content Include="Assets\admin\libs\devextreme\css\dx.win8.white.css" />
+    <Content Include="Assets\admin\libs\devextreme\css\icons\dxicons.eot" />
+    <Content Include="Assets\admin\libs\devextreme\css\icons\dxicons.ttf" />
+    <Content Include="Assets\admin\libs\devextreme\css\icons\dxicons.woff" />
+    <Content Include="Assets\admin\libs\devextreme\css\icons\dxiconsios.eot" />
+    <Content Include="Assets\admin\libs\devextreme\css\icons\dxiconsios.ttf" />
+    <Content Include="Assets\admin\libs\devextreme\css\icons\dxiconsios.woff" />
     <Content Include="Assets\admin\libs\devextreme\js\dx.all.debug.js" />
     <Content Include="Assets\admin\libs\devextreme\js\dx.all.js" />
     <Content Include="Assets\admin\libs\devextreme\js\dx.aspnet.mvc.js" />
@@ -884,6 +892,7 @@
     <Content Include="Assets\admin\libs\devextreme\layouts\Split\SplitLayout.css" />
     <Content Include="Assets\admin\libs\devextreme\layouts\Split\SplitLayout.html" />
     <Content Include="Assets\admin\libs\devextreme\layouts\Split\SplitLayout.js" />
+    <Content Include="Assets\admin\libs\devextreme\README.md" />
     <Content Include="Assets\admin\libs\eve-raphael\e.html" />
     <Content Include="Assets\admin\libs\eve-raphael\eve.js" />
     <Content Include="Assets\admin\libs\fastclick\lib\fastclick.js" />
@@ -2567,15 +2576,6 @@
     <Content Include="Assets\admin\libs\cldrjs\src\.dist_jshintrc" />
     <Content Include="Assets\admin\libs\cldrjs\src\.jshintrc" />
     <Content Include="Assets\admin\libs\cldrjs\test\.jshintrc" />
-    <Content Include="Assets\admin\libs\devextreme\.bower.json" />
-    <Content Include="Assets\admin\libs\devextreme\bower.json" />
-    <Content Include="Assets\admin\libs\devextreme\css\icons\dxicons.eot" />
-    <Content Include="Assets\admin\libs\devextreme\css\icons\dxicons.ttf" />
-    <Content Include="Assets\admin\libs\devextreme\css\icons\dxicons.woff" />
-    <Content Include="Assets\admin\libs\devextreme\css\icons\dxiconsios.eot" />
-    <Content Include="Assets\admin\libs\devextreme\css\icons\dxiconsios.ttf" />
-    <Content Include="Assets\admin\libs\devextreme\css\icons\dxiconsios.woff" />
-    <Content Include="Assets\admin\libs\devextreme\README.md" />
     <Content Include="Assets\admin\libs\eve-raphael\.bower.json" />
     <Content Include="Assets\admin\libs\eve-raphael\bower.json" />
     <Content Include="Assets\admin\libs\eve-raphael\component.json" />
@@ -2811,8 +2811,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Assets\admin\libs\devextreme\ts\dx.all.d.ts" />
-    <TypeScriptCompile Include="Assets\admin\libs\devextreme\ts\dx.all.legacy.d.ts" />
     <TypeScriptCompile Include="Assets\admin\libs\ngBootbox\typings\angularjs\angular.d.ts" />
     <TypeScriptCompile Include="Assets\admin\libs\ngBootbox\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Assets\admin\libs\ngBootbox\typings\tsd.d.ts" />

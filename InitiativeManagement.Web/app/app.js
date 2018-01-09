@@ -2,7 +2,8 @@
 
 (function () {
     angular.module('InitiativeManagement',
-        ['InitiativeManagement.application_groups',
+        ['dx',
+            'InitiativeManagement.application_groups',
             'InitiativeManagement.application_roles',
             'InitiativeManagement.application_users',
             'InitiativeManagement.initiatives',
