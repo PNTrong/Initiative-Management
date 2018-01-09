@@ -14,15 +14,15 @@
             'InitiativeManagement.common'])
         .config(config)
         .config(configAuthentication)
-        .run(['$location','$rootScope','authData','apiService','permissions', function ($location,$rootScope, authData, apiService, permissions) {
+        .run(['$location', '$rootScope', 'authData', 'apiService', 'permissions', function ($location, $rootScope, authData, apiService, permissions) {
             // $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // });
             $rootScope.$on('$stateChangeStart', function (event, toState) {
                 debugger;
                 if (!authData.authenticationData.IsAuthenticated) {
                     $location.path('/login');
-                }else {
-                    if(!authData.authenticationData.IsPermissionLoad){
+                } else {
+                    if (!authData.authenticationData.IsPermissionLoad) {
                         getPermission();
                     }
                 }
@@ -38,7 +38,7 @@
                     }, function () {
                         authData.authenticationData.IsPermissionLoad = false;
                     });
-                 }
+                }
             }
         }]);
 
@@ -49,8 +49,7 @@
         $stateProvider
             .state('base', {
                 url: '',
-                //templateUrl: '/app/shared/views/baseView.html',
-                templateUrl: '/app/shared/views/layout.html',
+                templateUrl: '/app/shared/views/baseView.html',
                 abstract: true
             }).state('login', {
                 url: "/login",
