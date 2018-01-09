@@ -2,12 +2,9 @@
 
 (function () {
     angular.module('InitiativeManagement',
-        ['InitiativeManagement.products',
-            'InitiativeManagement.application_groups',
-            'InitiativeManagement.product_categories',
+        ['InitiativeManagement.application_groups',
             'InitiativeManagement.application_roles',
             'InitiativeManagement.application_users',
-            'InitiativeManagement.statistics',
             'InitiativeManagement.initiatives',
             'InitiativeManagement.fields',
             'InitiativeManagement.field_groups',
@@ -18,7 +15,6 @@
             // $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // });
             $rootScope.$on('$stateChangeStart', function (event, toState) {
-                debugger;
                 if (!authData.authenticationData.IsAuthenticated) {
                     $location.path('/login');
                 } else {
