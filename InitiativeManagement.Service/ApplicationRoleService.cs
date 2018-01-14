@@ -11,7 +11,7 @@ namespace InitiativeManagement.Service
     {
         ApplicationRole GetDetail(string id);
 
-        IEnumerable<ApplicationRole> GetAll(int page, int pageSize, out int totalRow, string filter);
+        IEnumerable<ApplicationRole> GetAll(int take, int skip, out int totalRow, string filter);
 
         IEnumerable<ApplicationRole> GetAll();
 
@@ -71,14 +71,13 @@ namespace InitiativeManagement.Service
             return _appRoleRepository.GetAll();
         }
 
-        public IEnumerable<ApplicationRole> GetAll(int page, int pageSize, out int totalRow, string filter = null)
+        public IEnumerable<ApplicationRole> GetAll(int take, int skip, out int totalRow, string filter = null)
         {
-            var query = _appRoleRepository.GetAll();
-            if (!string.IsNullOrEmpty(filter))
-                query = query.Where(x => x.Description.Contains(filter));
+            var query = _appRoleRepository.GetMulti(_ => !_.IsDeactive && (_.Name.Contains(filter) || _.Description.Contains(filter)));
 
             totalRow = query.Count();
-            return query.OrderBy(x => x.Description).Skip(page * pageSize).Take(pageSize);
+
+            return query.OrderBy(x => x.Name).Skip(skip).Take(take);
         }
 
         public ApplicationRole GetDetail(string id)

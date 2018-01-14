@@ -3,9 +3,9 @@
 
     app.controller('applicationRoleListController', applicationRoleListController);
 
-    applicationRoleListController.$inject = ['$scope', 'apiService', 'notificationService', '$ngBootbox', '$filter'];
+    applicationRoleListController.$inject = ['$scope','$http', 'authenticationService', 'apiService', 'notificationService', '$ngBootbox', '$filter'];
 
-    function applicationRoleListController($scope, apiService, notificationService, $ngBootbox, $filter) {
+    function applicationRoleListController($scope, $http, authenticationService , apiService, notificationService, $ngBootbox, $filter) {
         $scope.loading = true;
         $scope.data = [];
         $scope.page = 0;
@@ -15,6 +15,92 @@
         $scope.deleteItem = deleteItem;
         $scope.selectAll = selectAll;
         $scope.deleteMultiple = deleteMultiple;
+
+        var orders = new DevExpress.data.CustomStore({
+            load: function (loadOptions) {
+                var parameters = {};
+
+                // if (loadOptions.sort) {
+                //     parameters.orderby = loadOptions.sort[0].selector;
+                //     if (loadOptions.sort[0].desc)
+                //         parameters.orderby += " desc";
+                // }
+
+                parameters.skip = loadOptions.skip || 0;
+                parameters.take = loadOptions.take || 10;
+                parameters.filter = $scope.textBox.search.value;
+
+                console.log(loadOptions);
+                var config = {
+                    params: parameters
+                };
+
+                // authenticationService.setHeader();
+
+                return $http.get("api/applicationRole/getlistpaging", config)
+                    .then(function (response) {
+                        return { data: response.data.items, totalCount: response.data.totalCount };
+                    }, function (response) {
+                        return { data: [], totalCount: 0 };
+                    });
+            }
+        });
+
+        //
+        // grid
+        var gridInstance = null;
+        $scope.textBox = {
+            search: {
+                width: 300,
+                value:"",
+                showClearButton: true,
+                placeholder: "Tìm kiếm...",
+                onValueChanged: function(data) {
+                    $scope.textBox.search.value = data.value;
+                    gridInstance.refresh();
+                }
+            },
+        };
+
+        $scope.dataGridOptions = {
+            dataSource: {
+                store: orders
+            },
+            onInitialized: function(e) {
+                gridInstance = e.component;
+              },
+            remoteOperations: {
+                sorting: false,
+                paging: true
+            },
+            paging: {
+                pageSize: 10
+            },
+            pager: {
+                showPageSizeSelector: true,
+                allowedPageSizes: [5, 10, 20]
+            },
+            columns: [{
+                dataField: "Name",
+                caption: "Tên quyền",
+                alignment: "center"
+            },{
+                dataField: "Description",
+                caption: "Mô tả",
+                alignment: "center"
+            },{
+                dataField: "IsDeactive",
+                caption: "Trạng thái",
+                cellTemplate: "cellTemplate",
+                alignment: "center"
+            }],
+            bindingOptions: {
+                rowAlternationEnabled: 'true',
+                showRowLines: 'false',
+                showBorders: 'false',
+                showColumnLines: 'true'
+            }
+        };
 
         function deleteMultiple() {
             var listId = [];
@@ -111,6 +197,6 @@
             search();
         }
 
-        $scope.search();
+        // $scope.search();
     }
 })(angular.module('InitiativeManagement.application_roles'));

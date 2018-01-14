@@ -1,5 +1,4 @@
-﻿  <!-- Content Header (Page header) -->
-<section class="content-header">
+﻿<!-- <section class="content-header">
   <h1>
     Danh sách quyền
   </h1>
@@ -8,10 +7,9 @@
     <li><a href="#">Nhóm quyền</a></li>
     <li class="active">Danh mục quyền</li>
   </ol>
-</section>
-<!-- Main content -->
-<section class="content">
-  <!-- Default box -->
+</section> -->
+
+<!-- <section class="content">
   <div class="box box-primary">
     <div class="box-header with-border">
       <h3 class="box-title">Danh mục quyền</h3>
@@ -28,7 +26,7 @@
             <span class="input-group-btn">
               <button class="btn btn-default" type="button" ng-click="search()">Tìm kiếm</button>
             </span>
-          </div><!-- /input-group -->
+          </div>
         </div>
         <div class="col-md-6 text-right pd-0">
           <button class="btn btn-success" ui-sref="add_application_role">Thêm mới</button>
@@ -64,9 +62,46 @@
           </table>
         </div>
       </div>
-    </div><!-- /.box-body -->
+    </div>
     <div class="box-footer text-right">
       <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="search(page)"></pager-directive>
-    </div><!-- /.box-footer-->
-  </div><!-- /.box -->
-</section><!-- /.content -->
+    </div>
+  </div>
+</section> -->
+
+  <section class="content-header">
+      <h4>
+          Danh mục quyền
+      </h4>
+      <ol class="breadcrumb">
+          <li>
+              <a href="/">
+                  <i class="fa fa-dashboard"></i> Trang chủ</a>
+          </li>
+          <li>
+              <a ui-sref="application_groups">Quyền</a>
+          </li>
+          <li class="active">Danh mục Quyền</li>
+      </ol>
+  </section>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="">
+      <div class="card">
+          <div class="header">
+          </div>
+          <div class="body">
+              <div dx-text-box="textBox.search"></div>
+              <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="data">
+                  <div data-options="dxTemplate:{ name:'cellTemplate' }">
+                      <div ng-if="data.value">
+                          Khóa
+                      </div>
+                      <div ng-if="!data.value">
+                          Đang hoạt động
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="box-footer text-right pd-0">
+          </div>
+      </div>
+  </div>

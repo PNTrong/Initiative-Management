@@ -28,24 +28,25 @@ namespace InitiativeManagement.Web.Api
 
         [Route("getlistpaging")]
         [HttpGet]
-        public HttpResponseMessage GetListPaging(HttpRequestMessage request, int page, int pageSize, string filter = null)
+        public HttpResponseMessage GetListPaging(HttpRequestMessage request, string filter, int skip, int take)
         {
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
-                int totalRow = 0;
-                var model = _appRoleService.GetAll(page, pageSize, out totalRow, filter);
-                IEnumerable<ApplicationRoleViewModel> modelVm = Mapper.Map<IEnumerable<ApplicationRole>, IEnumerable<ApplicationRoleViewModel>>(model);
 
-                PaginationSet<ApplicationRoleViewModel> pagedSet = new PaginationSet<ApplicationRoleViewModel>()
+                filter = filter ?? "";
+
+                int totalRow = 0;
+
+                var model = _appRoleService.GetAll(take, skip, out totalRow, filter);
+
+                var data = new GridModel<ApplicationRole>()
                 {
-                    Page = page,
-                    TotalCount = totalRow,
-                    TotalPages = (int)Math.Ceiling((decimal)totalRow / pageSize),
-                    Items = modelVm
+                    items = model,
+                    totalCount = totalRow
                 };
 
-                response = request.CreateResponse(HttpStatusCode.OK, pagedSet);
+                response = request.CreateResponse(HttpStatusCode.OK, data);
 
                 return response;
             });
@@ -58,7 +59,9 @@ namespace InitiativeManagement.Web.Api
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
+
                 var model = _appRoleService.GetAll();
+
                 IEnumerable<ApplicationRoleViewModel> modelVm = Mapper.Map<IEnumerable<ApplicationRole>, IEnumerable<ApplicationRoleViewModel>>(model);
 
                 response = request.CreateResponse(HttpStatusCode.OK, modelVm);
