@@ -14,7 +14,7 @@ namespace InitiativeManagement.Service
     {
         ApplicationGroup GetDetail(int id);
 
-        IEnumerable<ApplicationGroup> GetAll(int page, int pageSize, out int totalRow, string filter);
+        IEnumerable<ApplicationGroup> GetAll(int skip, int take, out int totalRow, string filter);
 
         IEnumerable<ApplicationGroup> GetAll();
 
@@ -68,14 +68,13 @@ namespace InitiativeManagement.Service
             return _appGroupRepository.GetAll();
         }
 
-        public IEnumerable<ApplicationGroup> GetAll(int page, int pageSize, out int totalRow, string filter = null)
+        public IEnumerable<ApplicationGroup> GetAll(int skip, int take, out int totalRow, string filter)
         {
-            var query = _appGroupRepository.GetAll();
-            if (!string.IsNullOrEmpty(filter))
-                query = query.Where(x => x.Name.Contains(filter));
+            var query = _appGroupRepository.GetMulti(_ => !_.IsDeactive && (_.Name.Contains(filter) || _.Description.Contains(filter)));
 
             totalRow = query.Count();
-            return query.OrderBy(x => x.Name).Skip(page * pageSize).Take(pageSize);
+
+            return query.OrderBy(x => x.Name).Skip(skip).Take(take);
         }
 
         public ApplicationGroup GetDetail(int id)

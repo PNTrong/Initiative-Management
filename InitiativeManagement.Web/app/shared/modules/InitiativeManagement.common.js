@@ -1,3 +1,3 @@
 ﻿(function () {
-    angular.module('InitiativeManagement.common', ['ui.router', 'ngBootbox', 'checklist-model', 'LocalStorageModule'])
+    angular.module('InitiativeManagement.common', ['dx','ui.router', 'ngBootbox', 'checklist-model', 'LocalStorageModule'])
 })();

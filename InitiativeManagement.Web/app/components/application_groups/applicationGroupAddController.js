@@ -14,7 +14,6 @@
         $scope.addApplicationGroup = addApplicationGroup;
 
         function addApplicationGroup() {
-            debugger;
             apiService.post('/api/applicationGroup/add', $scope.group, addSuccessed, addFailed);
         }
 

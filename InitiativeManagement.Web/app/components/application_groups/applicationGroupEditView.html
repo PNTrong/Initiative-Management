@@ -1,11 +1,18 @@
-﻿<section class="content-header">
+﻿<!-- <section class="content-header">
   <h1>
-    Cập nhật nhóm
+    Cập nhật nhóm quyền
   </h1>
   <ol class="breadcrumb">
-    <li><a href="/dashboard"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
-    <li><a ui-sref="categories">Danh mục nhóm</a></li>
-    <li class="active"><a href="#">Cập nhật</a></li>
+    <li>
+      <a href="/dashboard">
+        <i class="fa fa-dashboard"></i> Trang chủ</a>
+    </li>
+    <li>
+      <a ui-sref="categories">Danh mục nhóm quyền</a>
+    </li>
+    <li class="active">
+      <a href="#">Cập nhật</a>
+    </li>
   </ol>
 </section>
 <section class="content">
@@ -14,23 +21,25 @@
       <div class="box box-primary">
         <div class="box-header with-border">
           <h3 class="box-title">{{group.Name}}</h3>
-        </div><!-- /.box-header -->
-        <!-- form start -->
+        </div>
         <form class="form-horizontal" role="form" novalidate name="frmUpdateAppGroup" ng-submit="updateApplicationGroup()">
+        <div dx-validation-group="{}">
           <div class="box-body">
             <div class="col-md-8">
-              <div class="form-group" ng-class="{ 'has-error' : frmUpdateAppGroup.name.$invalid && !frmUpdateAppGroup.name.$pristine }">
-                <label class="col-sm-2 control-label">Tên danh mục</label>
-                <div class="col-sm-10">
-                  <input type="text" name="name" class="form-control"
-                         required reqired-message="Tên nhóm bắt buộc." ng-model="group.Name">
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Tên nhóm quyền</label>
+                <div class="col-sm-9">
+                  <div dx-text-box="textBox.groupName"></div>
                 </div>
               </div>
               <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                  <label ng-repeat="role in roles">
-                    <input type="checkbox" checklist-model="group.Roles" checklist-value="role"> {{role.Description}}
-                  </label>
+                <label class="col-sm-3 control-label">Quyền</label>
+                <div class="col-sm-9">
+                  <div dx-list="listOptions" dx-item-alias="role">
+                    <div data-options="dxTemplate: {name: 'item'}">
+                      <div>{{role.Description}}</div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="form-group">
@@ -40,9 +49,61 @@
                 </div>
               </div>
             </div>
-          </div><!-- /.box-body -->
+          </div>
+        </div>
         </form>
-      </div><!-- /.box -->
+      </div>
     </div>
   </div>
-</section>
+</section> -->
+<section class="content-header">
+    <h4>
+      Cập nhật nhóm
+    </h4>
+    <ol class="breadcrumb">
+      <li><a href="/dashboard"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+      <li><a ui-sref="categories">Danh mục nhóm</a></li>
+      <li class="active"><a href="#">Cập nhật</a></li>
+    </ol>
+  </section>
+  <section class="content">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="box">
+          <div class="box-header with-border">
+            <h3 class="box-title">{{group.Name}}</h3>
+          </div>
+          <form class="form-horizontal" role="form" novalidate name="frmUpdateAppGroup" ng-submit="updateApplicationGroup()">
+            <div class="box-body">
+              <div class="col-md-8">
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Tên danh mục</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="name" class="form-control" disabled required reqired-message="Tên nhóm bắt buộc." ng-model="group.Name">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Chọn quyền</label>
+                  <div class="col-sm-9">
+                    <div ng-repeat="role in roles">
+                        <label class="checkbox-container">{{role.Description}}
+                            <input type="checkbox" checklist-model="group.Roles" checklist-value="role"> 
+                            <span class="checkmark"></span>
+                          </label>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-offset-3 col-sm-9">
+                    <input type="submit" class="btn btn-success" value="Lưu lại" />
+                    <a ui-sref="application_groups" class="btn btn-default">Hủy bỏ</a>
+                  </div>
+                </div>
+              </div>
+            </div><!-- /.box-body -->
+          </form>
+        </div><!-- /.box -->
+      </div>
+    </div>
+  </section>

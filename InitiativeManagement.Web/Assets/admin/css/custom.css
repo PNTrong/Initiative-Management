@@ -5,6 +5,11 @@
     margin-left: 2px;
 }
 
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+}
+
 .display-hidden {
     visibility: hidden;
 }
@@ -13,50 +18,44 @@
     display: none;
 }
 
-.header-login {
-    color: #336699;
+.mg-0 {
+    margin: 0 !important;
 }
 
-.login-box-body, .register-box-body {
-    background: #fff;
-    padding: 20px;
-    border-top: 0;
-    width: 350px;
-    color: #666;
-    margin: auto;
+.pd-0 {
+    padding: 0 !important;
 }
 
-.login-box, .register-box {
-    width: 100% !important;
+.pdb-30 {
+    margin-bottom: 30px !important;
 }
 
-.login-logo, .register-logo {
-    font-size: 35px;
-    text-align: center;
-    margin-bottom: 25px;
-    font-weight: 300;
-    color: #336699;
+.content-wrapper, .right-side {
+    min-height: 100%;
+    background-color: #ffffff;
+    z-index: 800;
 }
 
-.hot-line {
-    margin-top: 20px;
-    text-align: left;
-    color: red;
+/*Overide Devextreme*/
+.dx-widget {
+    color: #333;
+    font-weight: normal;
+    font-size: 13px;
+    /*font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;*/
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.35715;
 }
 
-.main-header .logo {
-    font-size: 15px !important;
+.dx-texteditor {
+    border-radius: unset;
 }
 
-/*style for sidebar-menu*/
-.skin-blue .sidebar-menu > li:hover > a, .skin-blue .sidebar-menu > li.active > a {
-    color: #fff;
-    background: #3c8dbc !important;
-    border-left-color: #3c8dbc !important;
+.dx-datagrid-content .dx-datagrid-table .dx-row > td {
+    vertical-align: middle !important;
 }
 
-.skin-blue .wrapper, .skin-blue .main-sidebar, .skin-blue .left-side {
-    background-color: #367fa9 !important;
+.dx-datagrid .dx-row-alt > td {
+    background-color: #f9fafc;
 }
 
 .skin-blue .sidebar-menu > li > .treeview-menu {
@@ -92,238 +91,118 @@
     background: #f4f7f8 !important;
 }
 
-    .box input[type="text"],
-    .box input[type="date"],
-    .box input[type="datetime"],
-    .box input[type="email"],
-    .box input[type="number"],
-    .box input[type="search"],
-    .box input[type="time"],
-    .box input[type="url"],
-    .box input[type="password"],
-    .box textarea,
-    .box select {
-        background: rgba(255,255,255,.1);
-        border: none;
-        border-radius: 5px;
-        margin: 0;
-        outline: 0;
-        width: 100%;
-        box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        background-color: #e8eeef;
-        color: #8a97a0;
-        -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
-        box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
-    }
+.box input[type="text"],
+.box input[type="date"],
+.box input[type="datetime"],
+.box input[type="email"],
+.box input[type="number"],
+.box input[type="search"],
+.box input[type="time"],
+.box input[type="url"],
+.box input[type="password"],
+.box textarea,
+.box select {
+    background: rgba(255,255,255,.1);
+    border: none;
+    border-radius: 5px;
+    margin: 0;
+    outline: 0;
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    background-color: #e8eeef;
+    color: #8a97a0;
+    -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+}
 
-        .box input[type="text"]:focus,
-        .box input[type="date"]:focus,
-        .box input[type="datetime"]:focus,
-        .box input[type="email"]:focus,
-        .box input[type="number"]:focus,
-        .box input[type="search"]:focus,
-        .box input[type="time"]:focus,
-        .box input[type="url"]:focus,
-        .box input[type="password"]:focus,
-        .box textarea:focus,
-        .box select:focus {
-            background: #d2d9dd;
-        }
+    .box input[type="text"]:focus,
+    .box input[type="date"]:focus,
+    .box input[type="datetime"]:focus,
+    .box input[type="email"]:focus,
+    .box input[type="number"]:focus,
+    .box input[type="search"]:focus,
+    .box input[type="time"]:focus,
+    .box input[type="url"]:focus,
+    .box input[type="password"]:focus,
+    .box textarea:focus,
+    .box select:focus {
+        background: #d2d9dd;
+    }
 
 .custom-submit {
     position: relative;
-    display: block;
-    padding: 19px 39px 18px 39px;
-    color: #FFF;
-    margin: 0 auto;
-    /* background: #1abc9c; */
-    background: rgb(54, 127, 169);
-    font-size: 18px;
-    text-align: center;
-    font-style: normal;
-    width: 100%;
-    border: 1px solid #2b6687;
-    border-width: 1px 1px 3px;
-    margin-bottom: 10px;
+    padding-left: 35px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: 'Roboto', sans-serif;
+    color: rgb(68, 68, 68);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
-.content-wrapper, right-side {
-    background: #ffffff !important;
-}
+    .checkbox-container input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
 
-.label-number {
-    /*background: #1abc9c;*/
-    background: rgb(43, 102, 135);
-    color: #ffffff;
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
     height: 20px;
     width: 20px;
-    display: inline-block;
-    font-size: 13px;
-    margin-right: 4px;
-    line-height: 20px;
-    text-align: center;
-    text-shadow: 0 1px 0 rgba(255,255,255,0.2);
-    border-radius: 15px 15px 15px 0;
+    background-color: #eee;
 }
 
-.label-number-mini {
-    /*background: #1abc9c;*/
-    background: rgb(54, 127, 169);
-    color: #fff;
-    padding: 2px;
-    display: inline-block;
-    font-size: 11px;
-    margin-right: 4px;
-    margin-left: 0px;
-    text-align: center;
-    text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+.checkbox-container:hover input ~ .checkmark {
+    background-color: #605ca8;
 }
 
-.label-standard {
-    /*background: #1abc9c;*/
-    background: rgba(60, 141, 188, 0.73);
-    color: #fff;
-    padding: 5px;
-    display: inline-block;
-    font-size: .8em;
-    margin-right: 4px;
-    margin-left: 0px;
-    text-align: center;
-    text-shadow: 0 1px 0 rgba(255,255,255,0.2);
-    border-radius: 12px;
+.checkbox-container input:checked ~ .checkmark {
+    background-color: #605ca8;
 }
 
-.form-group {
-    margin-bottom: 20px !important;
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
 }
 
-.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
-    border-top: 1px solid #ddd;
-}
-
+.checkbox-container input:checked ~ .checkmark:after {
+    display: block;
 .box-header.with-border {
     border-bottom: 1px solid rgba(54, 127, 169, 0.07) !important;
 }
 
 .mg-0 {
     margin: 0 !important;
+.checkbox-container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
 }
 
+/*form*/
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+    background-color: #f9fafc;
 .pd-0 {
     padding: 0 !important;
 }
 
-.filter-row {
-    margin: 0px 0px 10px 0px;
-}
-/*css login page*/
-.lead {
-    text-align: center;
-    padding-bottom: 5%;
-}
-
-.headerLogin {
-    text-align: center;
-    font-weight: 600;
-    padding-top: 14%;
-    margin-bottom: 0%;
-}
-
-.wrapperLogin {
-    background-color: #F3F5F8;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    overflow: auto;
-}
-
-.contain {
-    padding-top: 7%;
-    padding-right: 14%;
-    padding-bottom: 7%;
-    padding-left: 14%;
-    height: 590px;
-}
-
-.loginleft {
-    height: 100%;
-    background-color: #FFFFFF;
-}
-
-.loginright {
-    height: 100%;
-    background-image: url('../img/login.PNG');
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-.checkbox, .radio {
-    padding-left: 20px;
-}
-
-.btnLogin {
-    background-color: #39AAFD;
-    border-color: #39AAFD;
-}
-
-    .btnLogin:hover {
-        border-color: #39AAFD;
-        background-color: #337ab7;
-    }
-
-.overlay {
-    display: inline-block;
-    vertical-align: middle;
-    position: absolute;
-    top: 0;
-    display: block;
-    width: 100%;
-    height: 100%;
-    background: rgba(99, 156, 185, 0.92);
-}
-
-.textLogin {
-    position: relative;
-    font-size: 26px;
-    font-weight: 300;
-    font-family: inherit;
-    padding-left: 5%;
-    color: #fff;
-    padding-top: 30%;
-}
-
-.textLoginContent {
-    position: relative;
-    font-size: 26px;
-    font-weight: 300;
-    font-family: inherit;
-    padding-left: 5%;
-    color: #fff;
-}
-/*css custom navbar*/
-.skin-purple-light .main-header .navbar {
-    height: 95px;
-   
-}
-.skin-purple-light .main-header .navbar .sidebar-toggle {
-    font-size: 30px;
-    line-height:67px;
-   
-}
-.skin-purple-light .main-header .logo{
-     height: 95px;
-}
-.main-header .logo{
-    line-height:100px;
-}
-.navbar-custom-menu{
-    padding-top:22px;
-}
-.sidebar{
-    padding-top: 50px;
+.btn {
+    font-size: 13px;
+    border: unset;
+    border-radius: unset !important;
 }

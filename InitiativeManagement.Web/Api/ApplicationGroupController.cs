@@ -38,24 +38,25 @@ namespace InitiativeManagement.Web.Api
 
         [Route("getlistpaging")]
         [HttpGet]
-        public HttpResponseMessage GetListPaging(HttpRequestMessage request, int page, int pageSize, string filter = null)
+        public HttpResponseMessage GetListPaging(HttpRequestMessage request, string filter, int skip, int take)
         {
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
-                int totalRow = 0;
-                var model = _appGroupService.GetAll(page, pageSize, out totalRow, filter);
-                IEnumerable<ApplicationGroupViewModel> modelVm = Mapper.Map<IEnumerable<ApplicationGroup>, IEnumerable<ApplicationGroupViewModel>>(model);
 
-                PaginationSet<ApplicationGroupViewModel> pagedSet = new PaginationSet<ApplicationGroupViewModel>()
+                filter = filter ?? "";
+
+                var totalRow = 0;
+
+                var model = _appGroupService.GetAll(skip, take, out totalRow, filter);
+
+                var data = new GridModel<ApplicationGroup>()
                 {
-                    Page = page,
-                    TotalCount = totalRow,
-                    TotalPages = (int)Math.Ceiling((decimal)totalRow / pageSize),
-                    Items = modelVm
+                    items = model,
+                    totalCount = totalRow
                 };
 
-                response = request.CreateResponse(HttpStatusCode.OK, pagedSet);
+                response = request.CreateResponse(HttpStatusCode.OK, data);
 
                 return response;
             });
@@ -92,7 +93,9 @@ namespace InitiativeManagement.Web.Api
                 return request.CreateErrorResponse(HttpStatusCode.NoContent, "No group");
             }
             var listRole = _appRoleService.GetListRoleByGroupId(appGroupViewModel.ID);
+
             appGroupViewModel.Roles = Mapper.Map<IEnumerable<ApplicationRole>, IEnumerable<ApplicationRoleViewModel>>(listRole);
+
             return request.CreateResponse(HttpStatusCode.OK, appGroupViewModel);
         }
 
@@ -153,6 +156,7 @@ namespace InitiativeManagement.Web.Api
 
                     //save group
                     var listRoleGroup = new List<ApplicationRoleGroup>();
+
                     foreach (var role in appGroupViewModel.Roles)
                     {
                         listRoleGroup.Add(new ApplicationRoleGroup()

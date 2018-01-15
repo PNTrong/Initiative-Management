@@ -16,7 +16,6 @@
                         accessToken: response.data.access_token,
                         userName: userName
                     };
-                    debugger;
                     authenticationService.setTokenInfo(userInfo);
                     authData.authenticationData.IsAuthenticated = true;
                     authData.authenticationData.userName = userName;
