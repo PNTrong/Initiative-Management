@@ -1,4 +1,4 @@
-﻿<div >
+﻿<div>
     <section class="content-header">
         <h4>
             Danh mục nhóm quyền
@@ -15,40 +15,13 @@
         </ol>
     </section>
 
-    <!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="">
-        <div class="card">
-            <div class=" header">
-            </div>
-            <div class="body">
-                <div dx-text-box="textBox.search"></div>
-                <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="data">
-                    <div data-options="dxTemplate:{ name:'cellTemplate' }">
-                        <div ng-if="data.value">
-                            Khóa
-                        </div>
-                        <div ng-if="!data.value">
-                            Đang hoạt động
-                        </div>
-                    </div>
-                    <div data-options="dxTemplate:{ name:'actionCellTemplate' }">
-                            <div class="btn-group">
-                                    <button type="button" class="btn btn-default" ui-sref="edit_application_group({id:data.value})"><i class="fa fa-edit"></i></button>
-                            </div>
-                        </div>
-                </div>
-            </div>
-            <div class="box-footer text-right pd-0">
-            </div>
-        </div>
-    </div> -->
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="">
-            <div class="box">
-                <div class="box-header">
-                  <div dx-text-box="textBox.search"></div>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-            
+        <div class="box">
+            <div class="box-header">
+                <div dx-text-box="textBox.search"></div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
                 <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="data">
                     <div data-options="dxTemplate:{ name:'cellTemplate' }">
                         <div ng-if="data.value">
@@ -59,12 +32,14 @@
                         </div>
                     </div>
                     <div data-options="dxTemplate:{ name:'actionCellTemplate' }">
-                            <div class="btn-group">
-                                    <button type="button" class="btn btn-default" ui-sref="edit_application_group({id:data.value})"><i class="fa fa-edit"></i></button>
-                            </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default" ui-sref="edit_application_group({id:data.value})">
+                                <i class="fa fa-edit"></i>
+                            </button>
                         </div>
+                    </div>
                 </div>
-                </div>
-              </div>
+            </div>
         </div>
+    </div>
 </div>
