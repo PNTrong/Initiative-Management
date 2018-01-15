@@ -92,45 +92,45 @@
     background: #f4f7f8 !important;
 }
 
-.box input[type="text"],
-.box input[type="date"],
-.box input[type="datetime"],
-.box input[type="email"],
-.box input[type="number"],
-.box input[type="search"],
-.box input[type="time"],
-.box input[type="url"],
-.box input[type="password"],
-.box textarea,
-.box select {
-    background: rgba(255,255,255,.1);
-    border: none;
-    border-radius: 5px;
-    margin: 0;
-    outline: 0;
-    width: 100%;
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    background-color: #e8eeef;
-    color: #8a97a0;
-    -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
-    box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
-}
-
-    .box input[type="text"]:focus,
-    .box input[type="date"]:focus,
-    .box input[type="datetime"]:focus,
-    .box input[type="email"]:focus,
-    .box input[type="number"]:focus,
-    .box input[type="search"]:focus,
-    .box input[type="time"]:focus,
-    .box input[type="url"]:focus,
-    .box input[type="password"]:focus,
-    .box textarea:focus,
-    .box select:focus {
-        background: #d2d9dd;
+    .box input[type="text"],
+    .box input[type="date"],
+    .box input[type="datetime"],
+    .box input[type="email"],
+    .box input[type="number"],
+    .box input[type="search"],
+    .box input[type="time"],
+    .box input[type="url"],
+    .box input[type="password"],
+    .box textarea,
+    .box select {
+        background: rgba(255,255,255,.1);
+        border: none;
+        border-radius: 5px;
+        margin: 0;
+        outline: 0;
+        width: 100%;
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        background-color: #e8eeef;
+        color: #8a97a0;
+        -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+        box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
     }
+
+        .box input[type="text"]:focus,
+        .box input[type="date"]:focus,
+        .box input[type="datetime"]:focus,
+        .box input[type="email"]:focus,
+        .box input[type="number"]:focus,
+        .box input[type="search"]:focus,
+        .box input[type="time"]:focus,
+        .box input[type="url"]:focus,
+        .box input[type="password"]:focus,
+        .box textarea:focus,
+        .box select:focus {
+            background: #d2d9dd;
+        }
 
 .custom-submit {
     position: relative;
@@ -204,18 +204,126 @@
 }
 
 .box-header.with-border {
-    border-bottom: 1px solid rgba(54, 127, 169, 0.07)!important;
+    border-bottom: 1px solid rgba(54, 127, 169, 0.07) !important;
 }
 
 .mg-0 {
-    margin: 0!important;
+    margin: 0 !important;
 }
 
 .pd-0 {
-    padding: 0!important;
+    padding: 0 !important;
 }
-
 
 .filter-row {
     margin: 0px 0px 10px 0px;
+}
+/*css login page*/
+.lead {
+    text-align: center;
+    padding-bottom: 5%;
+}
+
+.headerLogin {
+    text-align: center;
+    font-weight: 600;
+    padding-top: 14%;
+    margin-bottom: 0%;
+}
+
+.wrapperLogin {
+    background-color: #F3F5F8;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: auto;
+}
+
+.contain {
+    padding-top: 7%;
+    padding-right: 14%;
+    padding-bottom: 7%;
+    padding-left: 14%;
+    height: 590px;
+}
+
+.loginleft {
+    height: 100%;
+    background-color: #FFFFFF;
+}
+
+.loginright {
+    height: 100%;
+    background-image: url('../img/login.PNG');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.checkbox, .radio {
+    padding-left: 20px;
+}
+
+.btnLogin {
+    background-color: #39AAFD;
+    border-color: #39AAFD;
+}
+
+    .btnLogin:hover {
+        border-color: #39AAFD;
+        background-color: #337ab7;
+    }
+
+.overlay {
+    display: inline-block;
+    vertical-align: middle;
+    position: absolute;
+    top: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: rgba(99, 156, 185, 0.92);
+}
+
+.textLogin {
+    position: relative;
+    font-size: 26px;
+    font-weight: 300;
+    font-family: inherit;
+    padding-left: 5%;
+    color: #fff;
+    padding-top: 30%;
+}
+
+.textLoginContent {
+    position: relative;
+    font-size: 26px;
+    font-weight: 300;
+    font-family: inherit;
+    padding-left: 5%;
+    color: #fff;
+}
+/*css custom navbar*/
+.skin-purple-light .main-header .navbar {
+    height: 95px;
+   
+}
+.skin-purple-light .main-header .navbar .sidebar-toggle {
+    font-size: 30px;
+    line-height:67px;
+   
+}
+.skin-purple-light .main-header .logo{
+     height: 95px;
+}
+.main-header .logo{
+    line-height:100px;
+}
+.navbar-custom-menu{
+    padding-top:22px;
+}
+.sidebar{
+    padding-top: 50px;
 }
