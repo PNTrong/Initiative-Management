@@ -122,7 +122,7 @@ namespace InitiativeManagement.Web.Infrastructure.Extensions
         public static void UpdateApplicationGroup(this ApplicationGroup appGroup, ApplicationGroupViewModel appGroupViewModel)
         {
             appGroup.ID = appGroupViewModel.ID;
-            appGroup.Name = appGroupViewModel.Name;
+            appGroup.Description = appGroupViewModel.Description;
         }
 
         public static void UpdateApplicationRole(this ApplicationRole appRole, ApplicationRoleViewModel appRoleViewModel, string action = "add")

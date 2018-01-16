@@ -15,10 +15,11 @@
       </ol>
   </section>
 
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
       <div class="box">
-          <div class="box-header">
-              <div dx-text-box="textBox.search"></div>
+          <div class="box-header clearfix">
+              <div class="pull-left" dx-text-box="textBox.search"></div>
+              <div class="pull-right" dx-button="{icon: 'plus',text: 'Thêm mới'}" ui-sref="add_application_user"></div>
           </div>
           <div class="box-body">
               <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="data">

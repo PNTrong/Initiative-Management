@@ -77,9 +77,15 @@
             <div class="box-body">
               <div class="col-md-8">
                 <div class="form-group">
-                  <label class="col-sm-3 control-label">Tên danh mục</label>
+                  <label class="col-sm-3 control-label">Tên nhóm quyền</label>
                   <div class="col-sm-9">
                     <input type="text" name="name" class="form-control" disabled required reqired-message="Tên nhóm bắt buộc." ng-model="group.Name">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Mô tả</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="name" class="form-control" required  ng-model="group.Description">
                   </div>
                 </div>
                 <div class="form-group">
@@ -96,7 +102,7 @@
                 </div>
                 <div class="form-group">
                   <div class="col-sm-offset-3 col-sm-9">
-                    <input type="submit" class="btn btn-success" value="Lưu lại" />
+                    <input type="submit" class="btn btn-success" ng-disabled="frmUpdateAppGroup.$invalid" value="Lưu lại" />
                     <a ui-sref="application_groups" class="btn btn-default">Hủy bỏ</a>
                   </div>
                 </div>

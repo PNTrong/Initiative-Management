@@ -42,7 +42,6 @@
                     });
             }
         });
-        // $scope.gridInstance.refresh();
        
         
         $scope.dataGridOptions = {
@@ -100,9 +99,9 @@
             }
         };
 
-        function loadData() {
-            apiService.get('api/applicationUser/getlistpaging', null, dataLoadCompleted, dataLoadFailed);
-        }
+        // function loadData() {
+        //     apiService.get('api/applicationUser/getlistpaging', null, dataLoadCompleted, dataLoadFailed);
+        // }
 
         
         // function dataLoadCompleted(result) {

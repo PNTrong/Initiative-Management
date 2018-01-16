@@ -10,6 +10,15 @@
             Groups: []
         }
 
+        $scope.dateBox = {
+            type: "date",
+            max: new Date(),
+            min: new Date(1900, 0, 1),
+            bindingOptions: {
+                value: "account.BirthDay"
+            }
+        };
+
         $scope.addAccount = addAccount;
 
         function addAccount() {
