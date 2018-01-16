@@ -30,8 +30,6 @@
                 parameters.take = loadOptions.take || 10;
                 parameters.filter = $scope.textBox.search.value;
                 
-                console.log(parameters);
-
                 var config = {
                     params: parameters
                 };

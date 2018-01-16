@@ -32,6 +32,22 @@ body {
     background-color: #f9fafc;
 }
 
+/*Overide Theme*/
+
+.content-header > .breadcrumb {
+    float: right;
+    background: #f9fafc;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 11px;
+    padding: 7px 8px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    border-radius: 0px;
+}
+/*end theme*/
+
 .display-hidden {
     visibility: hidden;
 }

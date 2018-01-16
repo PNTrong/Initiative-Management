@@ -39,28 +39,31 @@ namespace InitiativeManagement.Web.Api
 
         [Route("getlistpaging")]
         [HttpGet]
-        public HttpResponseMessage GetListPaging(HttpRequestMessage request, int page, int pageSize, string filter = null)
+        public HttpResponseMessage GetListPaging(HttpRequestMessage request, string filter, int skip, int take)
         {
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
+
                 int totalRow = 0;
+
+                filter = filter ?? "";
 
                 totalRow = _userManager.Users.Count();
 
-                var model = _userManager.Users.OrderBy(x => x.FullName).Skip(page * pageSize).Take(pageSize);
+                var model = _userManager.Users.Where(_ => _.FullName.Contains(filter) ||
+                _.Email.Contains(filter) ||
+                _.UserName.Contains(filter)).OrderBy(x => x.UserName).Skip(skip).Take(take);
 
                 IEnumerable<ApplicationUserViewModel> modelVm = Mapper.Map<IEnumerable<ApplicationUser>, IEnumerable<ApplicationUserViewModel>>(model);
 
-                PaginationSet<ApplicationUserViewModel> pagedSet = new PaginationSet<ApplicationUserViewModel>()
+                var data = new GridModel<ApplicationUser>()
                 {
-                    Page = page,
-                    TotalCount = totalRow,
-                    TotalPages = (int)Math.Ceiling((decimal)totalRow / pageSize),
-                    Items = modelVm
+                    items = model,
+                    totalCount = totalRow
                 };
 
-                response = request.CreateResponse(HttpStatusCode.OK, pagedSet);
+                response = request.CreateResponse(HttpStatusCode.OK, data);
 
                 return response;
             });
