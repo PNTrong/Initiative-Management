@@ -1,6 +1,7 @@
 ﻿using InitiativeManagement.Model.Models;
 using InitiativeManagement.Service;
 using InitiativeManagement.Web.Infrastructure.Core;
+using InitiativeManagement.Web.Models;
 using System;
 using System.Net;
 using System.Net.Http;
@@ -48,23 +49,25 @@ namespace InitiativeManagement.Web.Api
 
         [Route("getlistpaging")]
         [HttpGet]
-        public HttpResponseMessage GetListPaging(HttpRequestMessage request, int page, int pageSize, string filter = null)
+        public HttpResponseMessage GetListPaging(HttpRequestMessage request, string filter, int skip, int take)
         {
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
-                int totalRow = 0;
-                var model = _fieldGroupService.GetAll(page, pageSize, out totalRow, filter);
 
-                PaginationSet<FieldGroup> pagedSet = new PaginationSet<FieldGroup>()
+                int totalRow = 0;
+
+                filter = filter ?? "";
+
+                var model = _fieldGroupService.GetAll(skip, take, out totalRow, filter);
+
+                var data = new GridModel<FieldGroup>()
                 {
-                    Page = page,
-                    TotalCount = totalRow,
-                    TotalPages = (int)Math.Ceiling((decimal)totalRow / pageSize),
-                    Items = model
+                    items = model,
+                    totalCount = totalRow
                 };
 
-                response = request.CreateResponse(HttpStatusCode.OK, pagedSet);
+                response = request.CreateResponse(HttpStatusCode.OK, data);
 
                 return response;
             });
@@ -134,24 +137,25 @@ namespace InitiativeManagement.Web.Api
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
-                if (!ModelState.IsValid)
+
+                try
                 {
-                    response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
-                }
-                else
-                {
-                    Field field = _fieldService.FindById(id);
-                    if (field != null)
+                    if (!ModelState.IsValid)
                     {
+                        response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
                     }
                     else
                     {
-                        var fieldGroup = _fieldGroupService.GetById(id);
-                        fieldGroup.IsDeactive = true;
-                        _fieldGroupService.Update(fieldGroup);
+                        var fieldGroup = _fieldGroupService.Delete(id);
+
                         _fieldGroupService.Save();
-                        response = request.CreateResponse(HttpStatusCode.Created, fieldGroup);
+
+                        response = request.CreateResponse(HttpStatusCode.OK, fieldGroup);
                     }
+                }
+                catch
+                {
+                    response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
                 }
 
                 return response;

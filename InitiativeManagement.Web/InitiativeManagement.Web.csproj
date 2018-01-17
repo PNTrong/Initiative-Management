@@ -404,6 +404,8 @@
     <Content Include="Assets\admin\img\default-50x50.gif" />
     <Content Include="Assets\admin\img\icons.png" />
     <Content Include="Assets\admin\img\loading.gif" />
+    <Content Include="Assets\admin\img\login.PNG" />
+    <Content Include="Assets\admin\img\logo.png" />
     <Content Include="Assets\admin\js\app.js" />
     <Content Include="Assets\admin\js\app.min.js" />
     <Content Include="Assets\admin\js\demo.js" />

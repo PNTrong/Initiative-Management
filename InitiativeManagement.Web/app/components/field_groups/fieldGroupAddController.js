@@ -15,7 +15,7 @@
         function addSuccessed() {
             notificationService.displaySuccess($scope.fieldGroup.Name + ' đã được thêm mới.');
 
-            $location.url('field_groups');
+            $location.url('nhom-linh-vuc');
         }
 
         function addFailed(response) {

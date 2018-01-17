@@ -12,35 +12,27 @@
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">Cập nhật nhóm lĩnh vực</h3>
-                </div><!-- /.box-header -->
-                <!-- form start -->
+                </div>
                 <form class="form-horizontal" role="form" novalidate name="frmAddFieldGroup" ng-submit="editFieldGroup()">
                     <div class="box-body">
                         <div class="col-md-8">
                             <div class="form-group" ng-class="{ 'has-error' : frmAddFieldGroup.name.$invalid && !frmAddFieldGroup.name.$pristine }">
-                                <label class="col-sm-4 control-label">Tên Nhóm  Lĩnh Vực</label>
-                                <div class="col-sm-6">
+                                <label class="col-sm-3 control-label">Tên Nhóm  Lĩnh Vực</label>
+                                <div class="col-sm-9">
                                     <input type="text" name="name" class="form-control"
                                            required reqired-message="Tên nhóm bắt buộc." ng-model="fieldGroup.Name">
                                 </div>
                             </div>
-                            <!-- <div class="form-group">
-                              <label class="col-sm-2 control-label">Mô tả</label>
-                              <div class="col-sm-10">
-                                <textarea type="text" class="form-control" ng-model="role.Description"></textarea>
-                              </div>
-                            </div> -->
-
                             <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <input type="submit" ng-disabled="frmAddFieldGroup.$invalid" class="btn btn-success" value="Lưu lại" />
                                     <a ui-sref="field_groups" class="btn btn-default">Hủy bỏ</a>
-                                    <input type="submit" ng-disabled="frmAddFieldGroup.$invalid" class="btn btn-primary" value="Lưu lại" />
                                 </div>
                             </div>
                         </div>
-                    </div><!-- /.box-body -->
+                    </div>
                 </form>
-            </div><!-- /.box -->
+            </div>
         </div>
     </div>
 </section>

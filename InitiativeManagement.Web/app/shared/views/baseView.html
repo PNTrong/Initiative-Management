@@ -1,15 +1,20 @@
 ﻿<div class="wrapper">
     <header class="main-header">
         <!-- Logo -->
-        <a href="javascript:void(0);" class="logo">
-            <!-- mini logo for sidebar mini 50x50 pixels -->
+        <!--<a href="javascript:void(0);" class="logo">
             <span class="logo-mini">
                 <b></b>KHOA HỌC & CÔNG NGHỆ</span>
-            <!-- logo for regular state and mobile devices -->
             <span class="logo-lg">
                 <b></b> KHOA HỌC & CÔNG NGHỆ</span>
-                <!-- <img src="/Assets/admin/img/skhcn.gif" alt=""> -->
+        </a>-->
+        <!-- Logo -->
+        <a href="index2.html" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>A</b>LT</span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>Admin</b>LTE</span>
         </a>
+
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
             <!-- Sidebar toggle button-->
@@ -24,29 +29,29 @@
                 <ul class="nav navbar-nav">
                     <li class="dropdown user user-menu">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                          <img src="/Assets/admin/img/avatar5.png" class="user-image" alt="User Image">
-                          <span class="hidden-xs">{{authentication.userName}}</span>
+                            <img src="/Assets/admin/img/avatar5.png" class="user-image" alt="User Image">
+                            <span class="hidden-xs">{{authentication.userName}}</span>
                         </a>
                         <ul class="dropdown-menu">
-                          <!-- User image -->
-                          <li class="user-header">
-                            <img src="./Assets/admin/img/avatar5.png" class="img-circle" alt="User Image">
-                            <p>
-                             {{authentication.userName}}
-                            </p>
-                          </li>
-                          <!-- Menu Body -->
-                          <!-- Menu Footer-->
-                          <li class="user-footer">
-                            <div class="pull-left">
-                              <a href="javascript:void(0);" class="btn btn-default btn-flat">Profile</a>
-                            </div>
-                            <div class="pull-right">
-                              <a href="javascript:void(0);" ng-click="logOut()" class="btn btn-default btn-flat">Thoát</a>
-                            </div>
-                          </li>
+                            <!-- User image -->
+                            <li class="user-header">
+                                <img src="./Assets/admin/img/avatar5.png" class="img-circle" alt="User Image">
+                                <p>
+                                    {{authentication.userName}}
+                                </p>
+                            </li>
+                            <!-- Menu Body -->
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                    <a href="javascript:void(0);" class="btn btn-default btn-flat">Profile</a>
+                                </div>
+                                <div class="pull-right">
+                                    <a href="javascript:void(0);" ng-click="logOut()" class="btn btn-default btn-flat">Thoát</a>
+                                </div>
+                            </li>
                         </ul>
-                      </li>
+                    </li>
                     <!-- <li>
                         <a href="javascript:void(0)" data-toggle="control-sidebar">
                             <i class="fa fa-gears"></i>
@@ -76,23 +81,28 @@
                     <ul class="treeview-menu">
                         <li>
                             <a ui-sref="application_groups">
-                                <i class="fa fa-circle-o"></i> Nhóm người dùng</a>
+                                <i class="fa fa-circle-o"></i> Nhóm người dùng
+                            </a>
                         </li>
                         <li>
                             <a ui-sref="application_roles">
-                                <i class="fa fa-circle-o"></i> Quyền</a>
+                                <i class="fa fa-circle-o"></i> Quyền
+                            </a>
                         </li>
                         <li>
                             <a ui-sref="application_users">
-                                <i class="fa fa-circle-o"></i> Người dùng</a>
+                                <i class="fa fa-circle-o"></i> Người dùng
+                            </a>
                         </li>
                         <li>
                             <a ui-sref="field_groups">
-                                <i class="fa fa-circle-o"></i> Nhóm lĩnh vực</a>
+                                <i class="fa fa-circle-o"></i> Nhóm lĩnh vực
+                            </a>
                         </li>
                         <li>
                             <a ui-sref="fields">
-                                <i class="fa fa-circle-o"></i> Lĩnh vực</a>
+                                <i class="fa fa-circle-o"></i> Lĩnh vực
+                            </a>
                         </li>
                     </ul>
                 </li>
@@ -104,7 +114,8 @@
                 </li>
                 <li>
                     <a ui-sref="add_initiative">
-                        <i class="fa fa-file-word-o" aria-hidden="true"></i> Nộp đơn</a>
+                        <i class="fa fa-file-word-o" aria-hidden="true"></i> Nộp đơn
+                    </a>
                 </li>
                 <li>
                     <a><i class="fa fa-life-ring" aria-hidden="true"></i> Trợ giúp</a>
@@ -153,8 +164,10 @@
             <b>Thiết kế bởi:</b>
             <a target="_blank" href="http://mientrungxanh.com/"> mientrungxanh.com</a>
         </div>
-        <strong>Copyright &copy; 2017
-            <a href="">Sở Khoa Học va Công Nghệ Quảng Nam</a>.</strong>
+        <strong>
+            Copyright &copy; 2017
+            <a href="">Sở Khoa Học va Công Nghệ Quảng Nam</a>.
+        </strong>
     </footer>
     <!-- <aside class="control-sidebar control-sidebar-dark">
     </aside> -->
