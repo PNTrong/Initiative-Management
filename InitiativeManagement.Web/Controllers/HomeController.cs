@@ -13,184 +13,189 @@ namespace InitiativeManagement.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private IProductCategoryService _productCategoryService;
-        private IProductService _productService;
-        private ICommonService _commonService;
-        private IInitiativeService _initiativeService;
-        private ApplicationUserManager _userManager;
-
-        public HomeController(IProductCategoryService productCategoryService,
-            IProductService productService,
-            ICommonService commonService,
-             IInitiativeService initiativeService,
-            ApplicationUserManager userManager)
+        public HomeController()
         {
-            _productCategoryService = productCategoryService;
-            _commonService = commonService;
-            _productService = productService;
-            _userManager = userManager;
-            this._initiativeService = initiativeService;
         }
 
-        [OutputCache(Duration = 60, Location = System.Web.UI.OutputCacheLocation.Client)]
-        public ActionResult Index()
-        {
-            var slideModel = _commonService.GetSlides();
-            var slideView = Mapper.Map<IEnumerable<Slide>, IEnumerable<SlideViewModel>>(slideModel);
-            var homeViewModel = new HomeViewModel();
-            homeViewModel.Slides = slideView;
+        //    private IProductCategoryService _productCategoryService;
+        //    private IProductService _productService;
+        //    private ICommonService _commonService;
+        //    private IInitiativeService _initiativeService;
+        //    private ApplicationUserManager _userManager;
 
-            var lastestProductModel = _productService.GetLastest(3);
-            var topSaleProductModel = _productService.GetHotProduct(3);
-            var lastestProductViewModel = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(lastestProductModel);
-            var topSaleProductViewModel = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(topSaleProductModel);
-            homeViewModel.LastestProducts = lastestProductViewModel;
-            homeViewModel.TopSaleProducts = topSaleProductViewModel;
+        //    public HomeController(IProductCategoryService productCategoryService,
+        //        IProductService productService,
+        //        ICommonService commonService,
+        //         IInitiativeService initiativeService,
+        //        ApplicationUserManager userManager)
+        //    {
+        //        _productCategoryService = productCategoryService;
+        //        _commonService = commonService;
+        //        _productService = productService;
+        //        _userManager = userManager;
+        //        this._initiativeService = initiativeService;
+        //    }
 
-            try
-            {
-                homeViewModel.Title = _commonService.GetSystemConfig(CommonConstants.HomeTitle).ValueString;
-                homeViewModel.MetaKeyword = _commonService.GetSystemConfig(CommonConstants.HomeMetaKeyword).ValueString;
-                homeViewModel.MetaDescription = _commonService.GetSystemConfig(CommonConstants.HomeMetaDescription).ValueString;
-            }
-            catch
-            {
-            }
+        //    [OutputCache(Duration = 60, Location = System.Web.UI.OutputCacheLocation.Client)]
+        //    public ActionResult Index()
+        //    {
+        //        var slideModel = _commonService.GetSlides();
+        //        var slideView = Mapper.Map<IEnumerable<Slide>, IEnumerable<SlideViewModel>>(slideModel);
+        //        var homeViewModel = new HomeViewModel();
+        //        homeViewModel.Slides = slideView;
 
-            return View(homeViewModel);
-        }
+        //        var lastestProductModel = _productService.GetLastest(3);
+        //        var topSaleProductModel = _productService.GetHotProduct(3);
+        //        var lastestProductViewModel = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(lastestProductModel);
+        //        var topSaleProductViewModel = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(topSaleProductModel);
+        //        homeViewModel.LastestProducts = lastestProductViewModel;
+        //        homeViewModel.TopSaleProducts = topSaleProductViewModel;
 
-        [ChildActionOnly]
-        [OutputCache(Duration = 3600)]
-        public ActionResult Footer()
-        {
-            var footerModel = _commonService.GetFooter();
-            var footerViewModel = Mapper.Map<Footer, FooterViewModel>(footerModel);
-            return PartialView(footerViewModel);
-        }
+        //        try
+        //        {
+        //            homeViewModel.Title = _commonService.GetSystemConfig(CommonConstants.HomeTitle).ValueString;
+        //            homeViewModel.MetaKeyword = _commonService.GetSystemConfig(CommonConstants.HomeMetaKeyword).ValueString;
+        //            homeViewModel.MetaDescription = _commonService.GetSystemConfig(CommonConstants.HomeMetaDescription).ValueString;
+        //        }
+        //        catch
+        //        {
+        //        }
 
-        [ChildActionOnly]
-        public ActionResult Header()
-        {
-            return PartialView();
-        }
+        //        return View(homeViewModel);
+        //    }
 
-        [ChildActionOnly]
-        [OutputCache(Duration = 3600)]
-        public ActionResult Category()
-        {
-            var model = _productCategoryService.GetAll();
-            var listProductCategoryViewModel = Mapper.Map<IEnumerable<ProductCategory>, IEnumerable<ProductCategoryViewModel>>(model);
-            return PartialView(listProductCategoryViewModel);
-        }
+        //    [ChildActionOnly]
+        //    [OutputCache(Duration = 3600)]
+        //    public ActionResult Footer()
+        //    {
+        //        var footerModel = _commonService.GetFooter();
+        //        var footerViewModel = Mapper.Map<Footer, FooterViewModel>(footerModel);
+        //        return PartialView(footerViewModel);
+        //    }
 
-        public string Test()
-        {
-            var initiatives = _initiativeService.GetMulti();
+        //    [ChildActionOnly]
+        //    public ActionResult Header()
+        //    {
+        //        return PartialView();
+        //    }
 
-            Document doc = new Document();
-            DocumentBuilder builder = new DocumentBuilder(doc);
+        //    [ChildActionOnly]
+        //    [OutputCache(Duration = 3600)]
+        //    public ActionResult Category()
+        //    {
+        //        var model = _productCategoryService.GetAll();
+        //        var listProductCategoryViewModel = Mapper.Map<IEnumerable<ProductCategory>, IEnumerable<ProductCategoryViewModel>>(model);
+        //        return PartialView(listProductCategoryViewModel);
+        //    }
 
-            builder.PageSetup.Orientation = Orientation.Landscape;
-            Font font = builder.Font;
-            font.Size = 13;
-            font.Bold = true;
-            font.Name = "Arial";
+        //    public string Test()
+        //    {
+        //        var initiatives = _initiativeService.GetMulti();
 
-            var headerTemplate = "<p style='text-align:left;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UBND TỈNH QUẢNG NAM&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;" +
-            " &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;" +
-            "CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</strong></p>" +
-            "<p style='text-align:left;'><strong><span style='text-decoration:underline;'> SỞ KHOA HỌC VÀ CÔNG NGHỆ</span>" +
-            " &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;" +
-            " &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;" +
-            "<span style='text-decoration:underline;'> Độc lập -Tự do -Hạnh phúc </ span ></ strong ></p></br></br>" +
-            "<p style='text-align:center;'><strong> DANH MỤC SÁNG KIẾN THUỘC LĨNH VỰC QUẢN LÝ VÀ HOẠT ĐỘNG ĐOÀN ĐỘI</strong></p></br>";
+        //        Document doc = new Document();
+        //        DocumentBuilder builder = new DocumentBuilder(doc);
 
-            builder.InsertHtml(headerTemplate);
+        //        builder.PageSetup.Orientation = Orientation.Landscape;
+        //        Font font = builder.Font;
+        //        font.Size = 13;
+        //        font.Bold = true;
+        //        font.Name = "Arial";
 
-            Table table = builder.StartTable();
+        //        var headerTemplate = "<p style='text-align:left;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UBND TỈNH QUẢNG NAM&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;" +
+        //        " &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;" +
+        //        "CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</strong></p>" +
+        //        "<p style='text-align:left;'><strong><span style='text-decoration:underline;'> SỞ KHOA HỌC VÀ CÔNG NGHỆ</span>" +
+        //        " &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;" +
+        //        " &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;" +
+        //        "<span style='text-decoration:underline;'> Độc lập -Tự do -Hạnh phúc </ span ></ strong ></p></br></br>" +
+        //        "<p style='text-align:center;'><strong> DANH MỤC SÁNG KIẾN THUỘC LĨNH VỰC QUẢN LÝ VÀ HOẠT ĐỘNG ĐOÀN ĐỘI</strong></p></br>";
 
-            builder.InsertCell();
-            builder.Write("TT");
-            // Insert a cell
-            builder.InsertCell();
-            builder.Write("Tên sáng kiến");
-            // Insert a cell
-            builder.InsertCell();
-            builder.Write("Mô tả sáng kiến");
-            // Insert a cell
-            builder.InsertCell();
-            builder.Write("Ý kiến tổ thẩm định");
+        //        builder.InsertHtml(headerTemplate);
 
-            builder.InsertCell();
-            builder.Write("Điểm trung bình Tổ thẩm định");
+        //        Table table = builder.StartTable();
 
-            builder.EndRow();
+        //        builder.InsertCell();
+        //        builder.Write("TT");
+        //        // Insert a cell
+        //        builder.InsertCell();
+        //        builder.Write("Tên sáng kiến");
+        //        // Insert a cell
+        //        builder.InsertCell();
+        //        builder.Write("Mô tả sáng kiến");
+        //        // Insert a cell
+        //        builder.InsertCell();
+        //        builder.Write("Ý kiến tổ thẩm định");
 
-            var count = 1;
-            font.Bold = false;
+        //        builder.InsertCell();
+        //        builder.Write("Điểm trung bình Tổ thẩm định");
 
-            foreach (var initiative in initiatives)
-            {
-                // Insert a cell
-                builder.InsertCell();
-                builder.Write(count.ToString());
-                // Insert a cell
-                builder.InsertCell();
-                builder.Write(initiative.Title);
-                // Insert a cell
-                builder.InsertCell();
-                builder.InsertHtml(GetInitiativeInfo(initiative));
-                // Insert a cell
-                builder.InsertCell();
-                builder.Write("");
+        //        builder.EndRow();
 
-                builder.InsertCell();
-                builder.Write("");
+        //        var count = 1;
+        //        font.Bold = false;
 
-                builder.EndRow();
+        //        foreach (var initiative in initiatives)
+        //        {
+        //            // Insert a cell
+        //            builder.InsertCell();
+        //            builder.Write(count.ToString());
+        //            // Insert a cell
+        //            builder.InsertCell();
+        //            builder.Write(initiative.Title);
+        //            // Insert a cell
+        //            builder.InsertCell();
+        //            builder.InsertHtml(GetInitiativeInfo(initiative));
+        //            // Insert a cell
+        //            builder.InsertCell();
+        //            builder.Write("");
 
-                count++;
-            }
+        //            builder.InsertCell();
+        //            builder.Write("");
 
-            builder.EndTable();
+        //            builder.EndRow();
 
-            var fileName = "danh_sach_de_tai.docx";
+        //            count++;
+        //        }
 
-            doc.Save(System.Web.HttpContext.Current.Response, fileName, ContentDisposition.Inline, null);
+        //        builder.EndTable();
 
-            System.Web.HttpContext.Current.Response.End();
-            return "";
-        }
+        //        var fileName = "danh_sach_de_tai.docx";
 
-        private string GetInitiativeInfo(Initiative initiative)
-        {
-            var info = "<p><strong>1. Thông tin chung:</strong></p>" +
-               "<p><strong>- Ngày sáng kiến được áp dụng lần đầu: " + initiative.DeploymentTime + "</strong></p>" +
-               "<p><strong>2. Bản chất của sáng kiến</strong></p>" +
-               "<p>2.1. Tình trạng của giải pháp đã biết</p>" +
-               "<p>" + initiative.KnowSolutionContent + "</p>" +
-               "<p>2.2. Nội dung giải pháp đề nghị công nhận là sáng kiến</p>" +
-               "<p>" + initiative.ImprovedContent + "</p>" +
-               "<p>2.3. Khả năng áp dụng</p>" +
-               "<p>" + initiative.InitiativeApplicability + "</p>" +
-               "<p><strong>3. Hiệu quả đem lại</strong></p>" +
-               "<p>" + initiative.AchievedByAnothers + "</p>";
+        //        doc.Save(System.Web.HttpContext.Current.Response, fileName, ContentDisposition.Inline, null);
 
-            return info;
-        }
+        //        System.Web.HttpContext.Current.Response.End();
+        //        return "";
+        //    }
 
-        private static void CopyHeadersFootersFromPreviousSection(Section section)
-        {
-            Section previousSection = (Section)section.PreviousSibling;
+        //    private string GetInitiativeInfo(Initiative initiative)
+        //    {
+        //        var info = "<p><strong>1. Thông tin chung:</strong></p>" +
+        //           "<p><strong>- Ngày sáng kiến được áp dụng lần đầu: " + initiative.DeploymentTime + "</strong></p>" +
+        //           "<p><strong>2. Bản chất của sáng kiến</strong></p>" +
+        //           "<p>2.1. Tình trạng của giải pháp đã biết</p>" +
+        //           "<p>" + initiative.KnowSolutionContent + "</p>" +
+        //           "<p>2.2. Nội dung giải pháp đề nghị công nhận là sáng kiến</p>" +
+        //           "<p>" + initiative.ImprovedContent + "</p>" +
+        //           "<p>2.3. Khả năng áp dụng</p>" +
+        //           "<p>" + initiative.InitiativeApplicability + "</p>" +
+        //           "<p><strong>3. Hiệu quả đem lại</strong></p>" +
+        //           "<p>" + initiative.AchievedByAnothers + "</p>";
 
-            if (previousSection == null)
-                return;
+        //        return info;
+        //    }
 
-            section.HeadersFooters.Clear();
+        //    private static void CopyHeadersFootersFromPreviousSection(Section section)
+        //    {
+        //        Section previousSection = (Section)section.PreviousSibling;
 
-            foreach (HeaderFooter headerFooter in previousSection.HeadersFooters)
-                section.HeadersFooters.Add(headerFooter.Clone(true));
-        }
+        //        if (previousSection == null)
+        //            return;
+
+        //        section.HeadersFooters.Clear();
+
+        //        foreach (HeaderFooter headerFooter in previousSection.HeadersFooters)
+        //            section.HeadersFooters.Add(headerFooter.Clone(true));
+        //    }
+        //}
     }
 }

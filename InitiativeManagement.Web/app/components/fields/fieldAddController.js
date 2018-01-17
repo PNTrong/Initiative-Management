@@ -1,12 +1,24 @@
 (function (app) {
     app.controller('fieldAddController', fieldAddController);
-    fieldAddController.$inject = ['$scope', 'apiService', 'notificationService', '$location', 'commonService','$timeout'];
 
-    function fieldAddController($scope, apiService, notificationService, $location, commonService,$timeout) {
+    fieldAddController.$inject = ['$scope', 'apiService', 'notificationService', '$location', 'commonService'];
+
+    function fieldAddController($scope, apiService, notificationService, $location, commonService) {
         $scope.field = {
             Id: 0,
-            FieldGroupId:0
+            FieldGroupId:null
         }
+
+        $scope.selectBox = {
+            placeholder: "Chọn nhóm lĩnh vực",
+            displayExpr: "Name",
+            valueExpr: "Id",
+            showClearButton: true,
+            bindingOptions: {
+                dataSource: "fieldGroups",
+                value: "field.FieldGroupId"
+            }
+        };
 
         $scope.addField = addField;
 
@@ -17,7 +29,7 @@
         function addSuccessed() {
             notificationService.displaySuccess($scope.field.FieldName + ' đã thêm thành công');
 
-            $location.url('fields');
+            $location.url('linh-vuc');
         }
 
         function addFailed(response) {
@@ -25,26 +37,13 @@
         }
 
         function loadFieldGroups() {
-           
             apiService.get('api/fieldGroup/getall', null, function (result) {
                 $scope.fieldGroups = result.data;
-                $timeout(function () {
-                    $('.load-droplist').selectpicker('destroy');
-                    $('.load-droplist').selectpicker('render');
-                })
             }, function () {
                 console.log('Cannot get list parent');
             })
         }
 
-        //$scope.renderUI = function () {
-        //    $timeout(function () {
-        //        $('.load-droplist').selectpicker('destroy');
-        //        $('.load-droplist').selectpicker('render');
-            
-               
-        //    })
-        //}
         loadFieldGroups();
     }
 })(angular.module('InitiativeManagement.fields'));

@@ -31,13 +31,6 @@ namespace InitiativeManagement.Web.Api
         [HttpGet]
         public HttpResponseMessage GetAll(HttpRequestMessage request)
         {
-            //Func<HttpResponseMessage> func = () =>
-            //{
-            //    var model = _fieldGroupService.GetAll();
-            //    var response = request.CreateResponse(HttpStatusCode.OK, model);
-            //    return response;
-            //};
-            //return CreateHttpResponse(request, func);
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;

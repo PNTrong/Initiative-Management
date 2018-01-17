@@ -28,7 +28,7 @@ namespace InitiativeManagement.Model.Models
             return userIdentity;
         }
 
-        public virtual IEnumerable<Order> Orders { set; get; }
+        //public virtual IEnumerable<Order> Orders { set; get; }
 
         public bool IsDeactive { set; get; }
     }

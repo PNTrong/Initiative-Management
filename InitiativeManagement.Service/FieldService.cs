@@ -17,7 +17,7 @@ namespace InitiativeManagement.Service
 
         IEnumerable<Field> GetAll();
 
-        IEnumerable<Field> GetAll(int page, int pageSize, out int totalRow, string filter);
+        IEnumerable<Field> GetAll(int skip, int take, out int totalRow, string filter);
 
         IEnumerable<Field> GetAll(string keyword);
 
@@ -85,14 +85,13 @@ namespace InitiativeManagement.Service
             return _fieldRepository.GetSingleByCondition(x => x.Id == id);
         }
 
-        public IEnumerable<Field> GetAll(int page, int pageSize, out int totalRow, string filter)
+        public IEnumerable<Field> GetAll(int skip, int take, out int totalRow, string filter)
         {
-            var query = _fieldRepository.GetMulti(x => !x.IsDeactive);
-            if (!string.IsNullOrEmpty(filter))
-                query = query.Where(x => x.FieldName.Contains(filter));
+            var query = _fieldRepository.GetMulti(_ => !_.IsDeactive && (_.FieldName.Contains(filter)), new string[] { "FieldGroup" });
 
             totalRow = query.Count();
-            return query.OrderBy(x => x.FieldName).Skip(page * pageSize).Take(pageSize);
+
+            return query.OrderBy(x => x.FieldName).Skip(skip).Take(take);
         }
     }
 }

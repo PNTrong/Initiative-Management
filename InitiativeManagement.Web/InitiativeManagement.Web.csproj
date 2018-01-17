@@ -233,10 +233,6 @@
     <Compile Include="Api\GroupAuthorController.cs" />
     <Compile Include="Api\HomeController.cs" />
     <Compile Include="Api\InitiativeController.cs" />
-    <Compile Include="Api\PostCategoryController.cs" />
-    <Compile Include="Api\ProductCategoryController.cs" />
-    <Compile Include="Api\ProductController.cs" />
-    <Compile Include="Api\StatisticController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -245,17 +241,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AppController.cs" />
-    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\ExportToWordController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PageController.cs" />
-    <Compile Include="Controllers\PostController.cs" />
-    <Compile Include="Controllers\ProductController.cs" />
-    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -2285,10 +2275,8 @@
     <Folder Include="app\shared\navigation\" />
     <Folder Include="Assets\admin\js\pages\" />
     <Folder Include="Assets\admin\libs\checklist-model\test\" />
-    <Folder Include="Views\About\" />
     <Folder Include="Views\FieldGroup\" />
     <Folder Include="Views\Field\" />
-    <Folder Include="Views\Post\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -2326,31 +2314,10 @@
     <Content Include="Views\Shared\Category.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Product\Category.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Product\Search.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Product\Detail.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Product\ListByTag.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Page\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Contact\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Account\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Account\Login.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\ShoppingCart\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\fontawesome-webfont.eot" />
@@ -2784,8 +2751,6 @@
     <None Include="Properties\PublishProfiles\Local Publish.pubxml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Properties\PublishProfiles\publish.pubxml" />
-    <Content Include="Views\ShoppingCart\CancelOrder.cshtml" />
-    <Content Include="Views\ShoppingCart\ConfirmOrder.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\ExportToWord\Index.cshtml" />

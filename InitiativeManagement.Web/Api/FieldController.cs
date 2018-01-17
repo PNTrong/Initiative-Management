@@ -1,6 +1,7 @@
 ﻿using InitiativeManagement.Model.Models;
 using InitiativeManagement.Service;
 using InitiativeManagement.Web.Infrastructure.Core;
+using InitiativeManagement.Web.Models;
 using System;
 using System.Net;
 using System.Net.Http;
@@ -36,23 +37,25 @@ namespace InitiativeManagement.Web.Api
 
         [Route("getlistpaging")]
         [HttpGet]
-        public HttpResponseMessage GetListPaging(HttpRequestMessage request, int page, int pageSize, string filter = null)
+        public HttpResponseMessage GetListPaging(HttpRequestMessage request, string filter, int skip, int take)
         {
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
-                int totalRow = 0;
-                var model = _fieldService.GetAll(page, pageSize, out totalRow, filter);
 
-                var pagedSet = new PaginationSet<Field>()
+                int totalRow = 0;
+
+                filter = filter ?? "";
+
+                var model = _fieldService.GetAll(skip, take, out totalRow, filter);
+
+                var data = new GridModel<Field>()
                 {
-                    Page = page,
-                    TotalCount = totalRow,
-                    TotalPages = (int)Math.Ceiling((decimal)totalRow / pageSize),
-                    Items = model
+                    items = model,
+                    totalCount = totalRow
                 };
 
-                response = request.CreateResponse(HttpStatusCode.OK, pagedSet);
+                response = request.CreateResponse(HttpStatusCode.OK, data);
 
                 return response;
             });
@@ -72,7 +75,6 @@ namespace InitiativeManagement.Web.Api
 
         [Route("add")]
         [HttpPost]
-        [Authorize(Roles = "ADMIN")]
         public HttpResponseMessage Create(HttpRequestMessage request, Field field)
         {
             return CreateHttpResponse(request, () =>
@@ -118,7 +120,6 @@ namespace InitiativeManagement.Web.Api
 
         [Route("delete")]
         [HttpDelete]
-        [Authorize(Roles = "ADMIN")]
         public HttpResponseMessage Delete(HttpRequestMessage request, int id)
         {
             return CreateHttpResponse(request, () =>
@@ -131,7 +132,9 @@ namespace InitiativeManagement.Web.Api
                 else
                 {
                     var oldField = _fieldService.Delete(id);
+
                     _fieldService.Save();
+
                     response = request.CreateResponse(HttpStatusCode.Created, oldField);
                 }
 

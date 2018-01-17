@@ -42,6 +42,7 @@
         }
 
         loadFieldGroups();
+        
         loadDetail();
     }
 })(angular.module('InitiativeManagement.fields'));

@@ -62,22 +62,12 @@
     <Compile Include="AppraisalBoardCommnentService.cs" />
     <Compile Include="AppraisalBoardMemberCommnentService.cs" />
     <Compile Include="AuthorService.cs" />
-    <Compile Include="CommonService.cs" />
-    <Compile Include="ContactDetailService.cs" />
     <Compile Include="ErrorService.cs" />
-    <Compile Include="FeedbackService.cs" />
     <Compile Include="FieldGroupService.cs" />
     <Compile Include="FieldService.cs" />
     <Compile Include="AuthorGroupService.cs" />
     <Compile Include="InitiativeService.cs" />
-    <Compile Include="OrderService.cs" />
-    <Compile Include="PageService.cs" />
-    <Compile Include="PostCategoryService.cs" />
-    <Compile Include="PostService.cs" />
-    <Compile Include="ProductCategoryService.cs" />
-    <Compile Include="ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StatisticService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -12,8 +12,7 @@
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">Cập nhật lĩnh vực</h3>
-                </div><!-- /.box-header -->
-                <!-- form start -->
+                </div>
                 <form class="form-horizontal" role="form" novalidate name="frmAddField" ng-submit="editField()">
                     <div class="box-body">
                         <div class="col-md-8">
@@ -24,12 +23,6 @@
                                     <span ng-show="frmAddField.name.$invalid" class="has-error">Vui lòng nhập vào tên lĩnh vực.</span>
                                 </div>
                             </div>
-                            <!-- <div class="form-group">
-                              <label class="col-sm-2 control-label">Mô tả</label>
-                              <div class="col-sm-10">
-                                <textarea type="text" class="form-control" ng-model="role.Description"></textarea>
-                              </div>
-                            </div> -->
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Danh mục lĩnh vực</label>
                                 <div class="col-sm-9">
@@ -37,20 +30,18 @@
                                         <option value="">Chọn nhóm lĩnh vực</option>
                                     </select>
                                     <span ng-show="frmAddField.fieldgroup.$error.required" class="has-error">Phải chọn danh mục</span>
-                                    <!-- <input type="hidden" name="parentId" ng-model="field.FieldGroupId" /> -->
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <input type="submit" ng-disabled="frmAddField.$invalid" class="btn btn-success" value="Lưu lại" />
                                     <a ui-sref="fields" class="btn btn-default">Hủy bỏ</a>
-                                    <input type="submit" ng-disabled="frmAddField.$invalid" class="btn btn-primary" value="Lưu lại" />
                                 </div>
                             </div>
-                            <mat-checkbox>Check me!</mat-checkbox>
                         </div>
-                    </div><!-- /.box-body -->
+                    </div>
                 </form>
-            </div><!-- /.box -->
+            </div>
         </div>
     </div>
 </section>

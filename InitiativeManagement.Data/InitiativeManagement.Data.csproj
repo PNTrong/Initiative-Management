@@ -168,6 +168,10 @@
     <Compile Include="Migrations\201711151939508_update-initiative-v4.Designer.cs">
       <DependentUpon>201711151939508_update-initiative-v4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801172340417_remove_old_data.cs" />
+    <Compile Include="Migrations\201801172340417_remove_old_data.Designer.cs">
+      <DependentUpon>201801172340417_remove_old_data.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ApplicationGroupRepository.cs" />
@@ -178,29 +182,10 @@
     <Compile Include="Repositories\AppraisalBoardMemberCommnentRepository.cs" />
     <Compile Include="Repositories\AuthorGroupRepository.cs" />
     <Compile Include="Repositories\AuthorRepository.cs" />
-    <Compile Include="Repositories\ContactDetailRepository.cs" />
     <Compile Include="Repositories\ErrorRepository.cs" />
-    <Compile Include="Repositories\FeedbackRepository.cs" />
     <Compile Include="Repositories\FieldGroupRepository.cs" />
     <Compile Include="Repositories\FieldRepository.cs" />
-    <Compile Include="Repositories\FooterRepository.cs" />
     <Compile Include="Repositories\InitiativeRepository.cs" />
-    <Compile Include="Repositories\MenuGroupRepository.cs" />
-    <Compile Include="Repositories\MenuRepository.cs" />
-    <Compile Include="Repositories\OrderDetailRepository.cs" />
-    <Compile Include="Repositories\OrderRepository.cs" />
-    <Compile Include="Repositories\PageRepository.cs" />
-    <Compile Include="Repositories\PostCategoryRepository.cs" />
-    <Compile Include="Repositories\PostRepository.cs" />
-    <Compile Include="Repositories\PostTagRepository.cs" />
-    <Compile Include="Repositories\ProductCategoryRepository.cs" />
-    <Compile Include="Repositories\ProductRepository.cs" />
-    <Compile Include="Repositories\ProductTagRepository.cs" />
-    <Compile Include="Repositories\SlideRepository.cs" />
-    <Compile Include="Repositories\SupportOnlineRepository.cs" />
-    <Compile Include="Repositories\SystemConfigRepository.cs" />
-    <Compile Include="Repositories\TagRepository.cs" />
-    <Compile Include="Repositories\VisitorStatisticRepository.cs" />
     <Compile Include="TeduShopDbContext.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -287,6 +272,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711151939508_update-initiative-v4.resx">
       <DependentUpon>201711151939508_update-initiative-v4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801172340417_remove_old_data.resx">
+      <DependentUpon>201801172340417_remove_old_data.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -11,45 +11,38 @@
         <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Thêm mới lĩnh vực</h3>
-                </div><!-- /.box-header -->
-                <!-- form start -->
+                    <h3 class="box-title">Thêm mới Lĩnh Vực</h3>
+                </div>
                 <form class="form-horizontal" role="form" novalidate name="frmAddField" ng-submit="addField()">
                     <div class="box-body">
                         <div class="col-md-8">
                             <div class="form-group" ng-class="{ 'has-error' : frmAddField.name.$invalid && !frmAddField.name.$pristine }">
-                                <label class="col-sm-3 control-label">Tên lĩnh vực</label>
+                                <label class="col-sm-3 control-label">Tên Lĩnh Vực</label>
                                 <div class="col-sm-9">
                                     <input type="text" name="name" class="form-control" required reqired-message="Tên nhóm bắt buộc." ng-model="field.FieldName">
-                                    <span ng-show="frmAddField.name.$invalid" class="has-error">Vui lòng nhập vào tên lĩnh vực.</span>
+                                    <span ng-show="frmAddField.name.$invalid" class="has-error">Vui lòng nhập vào tên Lĩnh Vực</span>
                                 </div>
                             </div>
-                            <!-- <div class="form-group">
-                              <label class="col-sm-2 control-label">Mô tả</label>
-                              <div class="col-sm-10">
-                                <textarea type="text" class="form-control" ng-model="role.Description"></textarea>
-                              </div>
-                            </div> -->
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">Danh mục lĩnh vực</label>
+                                <label class="col-sm-3 control-label">Nhóm Lĩnh Vực</label>
                                 <div class="col-sm-9">
                                     <select name="fieldgroup" class="form-control" ng-model="field.FieldGroupId" ng-options="option.Id as option.Name for option in fieldGroups" required>
-                                        <option value="">Chọn nhóm lĩnh vực</option>
+                                        <option value="">Chọn nhóm Lĩnh Vực</option>
                                     </select>
-                                    <span ng-show="frmAddField.fieldgroup.$error.required" class="has-error">Phải chọn danh mục</span>
-                                   
+                                    <span ng-show="frmAddField.fieldgroup.$error.required" class="has-error">Vui lòng chọn nhóm lĩnh vực</span>
+                                    <!-- <div dx-select-box="selectBox" dx-validator="fieldGroupValidationRules"></div> -->
                                 </div>
                               </div>
                             <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <input type="submit" ng-disabled="frmAddField.$invalid" class="btn btn-success" value="Lưu lại" />
                                     <a ui-sref="fields" class="btn btn-default">Hủy bỏ</a>
-                                    <input type="submit" ng-disabled="frmAddField.$invalid" class="btn btn-primary" value="Lưu lại" />
                                 </div>
                             </div>
                         </div>
-                    </div><!-- /.box-body -->
+                    </div>
                 </form>
-            </div><!-- /.box -->
+            </div>
         </div>
     </div>
 </section>

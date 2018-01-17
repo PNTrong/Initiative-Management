@@ -11,14 +11,18 @@
             templateUrl: "/app/components/fields/fieldListView.html",
             parent: 'base',
             controller: "fieldListController",
-            css: '/app/components/fields/fields.css',
             permission: ViewField
         }).state('add_field', {
             url: "/linh-vuc/tao-moi",
             parent: 'base',
             templateUrl: "/app/components/fields/fieldAddView.html",
             controller: "fieldAddController",
-            css: '/app/components/fields/fields.css',
+            permission: CreateField
+        }).state('edit_field', {
+            url: "/linh-vuc/cap-nhap/:id",
+            parent: 'base',
+            templateUrl: "/app/components/fields/fieldEditView.html",
+            controller: "fieldEditController",
             permission: CreateField
         });
     }

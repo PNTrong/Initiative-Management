@@ -48,12 +48,12 @@ namespace InitiativeManagement.Web.App_Start
             builder.Register(c => app.GetDataProtectionProvider()).InstancePerRequest();
 
             // Repositories
-            builder.RegisterAssemblyTypes(typeof(PostCategoryRepository).Assembly)
+            builder.RegisterAssemblyTypes(typeof(IInitiativeRepository).Assembly)
                 .Where(t => t.Name.EndsWith("Repository"))
                 .AsImplementedInterfaces().InstancePerRequest();
 
             // Services
-            builder.RegisterAssemblyTypes(typeof(PostCategoryService).Assembly)
+            builder.RegisterAssemblyTypes(typeof(IInitiativeService).Assembly)
                .Where(t => t.Name.EndsWith("Service"))
                .AsImplementedInterfaces().InstancePerRequest();
 

@@ -14,6 +14,7 @@
         .run(['$location', '$rootScope', 'authData', 'apiService', 'permissions', function ($location, $rootScope, authData, apiService, permissions) {
             // $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // });
+
             $rootScope.$on('$stateChangeStart', function (event, toState) {
                 if (!authData.authenticationData.IsAuthenticated) {
                     $location.path('/login');
