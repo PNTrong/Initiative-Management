@@ -20,9 +20,9 @@ body {
     line-height: 1.35715;
 }
 
-.dx-texteditor {
+/*.dx-texteditor {
     border-radius: unset;
-}
+}*/
 
 .dx-datagrid-content .dx-datagrid-table .dx-row > td {
     vertical-align: middle !important;
@@ -46,6 +46,12 @@ body {
     right: 15px;
     border-radius: 0px;
 }
+
+.form-control {
+    border-radius: 4px;
+    height: 36px !important;
+}
+
 /*end theme*/
 
 .display-hidden {
@@ -99,6 +105,7 @@ body {
     }
 
 .checkmark {
+    border-radius: 4px;
     position: absolute;
     top: 0;
     left: 0;
@@ -144,8 +151,8 @@ body {
 
 .btn {
     font-size: 13px;
-    border: unset;
-    border-radius: unset !important;
+    /*border: unset;
+    border-radius: unset !important;*/
 }
 
 /*css login page*/

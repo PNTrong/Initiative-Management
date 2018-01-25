@@ -12,13 +12,11 @@
             templateUrl: "/app/components/initiatives/initiativeListUIView.html",
             parent: 'base',
             controller: "initiativeListViewController",
-            css: '/app/components/initiatives/initiativeListView.css'
         }).state('add_initiative', {
             url: "/sang-kien/nop-don",
             parent: 'base',
             templateUrl: "/app/components/initiatives/initiativeAddUIView.html",
             controller: "initiativeAddController",
-            css: '/app/components/initiatives/initiativeListView.css'
         });
     }
 })();

@@ -144,7 +144,7 @@ namespace InitiativeManagement.Web.Api
         [Route("getlistpaging")]
         [HttpGet]
         [Authorize(Roles = Role.CreateIntiniativeForAdmin + "," + Role.CreateIntiniativeForUser)]
-        public HttpResponseMessage GetListPaging(HttpRequestMessage request, int page, int pageSize, string filter)
+        public HttpResponseMessage GetListPaging(HttpRequestMessage request, string filter, int skip, int take)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -158,13 +158,11 @@ namespace InitiativeManagement.Web.Api
 
                 var roles = _applicationGroupService.GetRolesByUserId(user.Id).Select(x => x.Name).ToList();
 
-                var initiatives = _initiativeService.GetAll(page, pageSize, out totalRow, filterObj, roles, user.Id);
+                var initiatives = _initiativeService.GetAll(skip, take, out totalRow, filterObj, roles, user.Id);
 
                 var pagedSet = new PaginationSet<Initiative>()
                 {
-                    Page = page,
                     TotalCount = totalRow,
-                    TotalPages = (int)Math.Ceiling((decimal)totalRow / pageSize),
                     Items = initiatives
                 };
 

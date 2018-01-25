@@ -3,18 +3,15 @@
 (function () {
     angular.module('InitiativeManagement',
         ['InitiativeManagement.application_groups',
+            'InitiativeManagement.projects',
             'InitiativeManagement.application_roles',
             'InitiativeManagement.application_users',
-            'InitiativeManagement.initiatives',
             'InitiativeManagement.fields',
             'InitiativeManagement.field_groups',
             'InitiativeManagement.common'])
         .config(config)
         .config(configAuthentication)
         .run(['$location', '$rootScope', 'authData', 'apiService', 'permissions', function ($location, $rootScope, authData, apiService, permissions) {
-            // $rootScope.$on('$locationChangeStart', function (event, next, current) {
-            // });
-
             $rootScope.$on('$stateChangeStart', function (event, toState) {
                 if (!authData.authenticationData.IsAuthenticated) {
                     $location.path('/login');

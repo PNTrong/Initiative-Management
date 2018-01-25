@@ -310,7 +310,6 @@
     <Content Include="app\components\fields\fieldEditView.html" />
     <Content Include="app\components\fields\fieldListController.js" />
     <Content Include="app\components\fields\fieldListView.html" />
-    <Content Include="app\components\fields\fields.css" />
     <Content Include="app\components\fields\fields.module.js" />
     <Content Include="app\components\field_groups\fieldGroupAddController.js" />
     <Content Include="app\components\field_groups\fieldGroupAddView.html" />
@@ -327,12 +326,15 @@
     <Content Include="app\components\initiatives\initiative.module.js" />
     <Content Include="app\components\initiatives\initiativeAddController.js" />
     <Content Include="app\components\initiatives\initiativeAddView.html" />
-    <Content Include="app\components\initiatives\initiativeController.js" />
     <Content Include="app\components\initiatives\initiativeListView.css" />
     <Content Include="app\components\initiatives\initiativeListView.html" />
     <Content Include="app\components\initiatives\initiativeListViewController.js" />
     <Content Include="app\components\login\loginController.js" />
     <Content Include="app\components\login\loginView.html" />
+    <Content Include="app\components\projects\projectAddController.js" />
+    <Content Include="app\components\projects\projectAddView.html" />
+    <Content Include="app\components\projects\projectListController.js" />
+    <Content Include="app\components\projects\projectListView.html" />
     <Content Include="app\shared\constants\roleConstants.js" />
     <Content Include="app\shared\directives\asDateDirective.js" />
     <Content Include="app\shared\directives\hasPermission.js" />
@@ -2748,6 +2750,7 @@
     <Content Include="Assets\admin\libs\toastr\toastr.js.map" />
     <Content Include="Assets\admin\libs\toastr\toastr.less" />
     <Content Include="Assets\admin\libs\toastr\toastr.scss" />
+    <Content Include="app\components\projects\projects.module.js" />
     <None Include="Properties\PublishProfiles\Local Publish.pubxml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Properties\PublishProfiles\publish.pubxml" />

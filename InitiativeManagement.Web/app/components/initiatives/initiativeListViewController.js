@@ -1,8 +1,8 @@
 (function (app) {
     app.controller('initiativeListViewController', initiativeListViewController);
-    initiativeListViewController.$inject = ['$scope', 'apiService', 'notificationService', '$ngBootbox', '$filter', 'authData', '$timeout'];
+    initiativeListViewController.$inject = ['$scope', 'apiService', 'notificationService', '$ngBootbox', '$filter', 'authData'];
 
-    function initiativeListViewController($scope, apiService, notificationService, $ngBootbox, $filter, authData, $timeout) {
+    function initiativeListViewController($scope, apiService, notificationService, $ngBootbox, $filter, authData) {
         $scope.loading = true;
         $scope.data = [];
         $scope.page = 0;
@@ -167,16 +167,12 @@
         function loadFields() {
             apiService.get('api/field/getall', null, function (result) {
                 $scope.fields = result.data;
-                $timeout(function () {
-                    $('.load-droplist').selectpicker('destroy');
-                    $('.load-droplist').selectpicker('render');
-                })
             }, function () {
             });
         }
 
-        loadFields();
+        // loadFields();
 
-        $scope.search();
+        // $scope.search();
     }
 })(angular.module('InitiativeManagement.initiatives'));

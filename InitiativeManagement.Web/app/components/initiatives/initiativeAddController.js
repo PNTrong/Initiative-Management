@@ -1,19 +1,10 @@
 (function (app) {
     app.controller('initiativeAddController', initiativeAddController);
 
-    initiativeAddController.$inject = ['apiService', '$scope', 'notificationService', '$state', '$location', 'commonService', 'authData', '$timeout'];
+    initiativeAddController.$inject = ['apiService', '$scope', 'notificationService', '$state', '$location', 'authData'];
 
-    function initiativeAddController(apiService, $scope, notificationService, $state, $location, commonService, authData, $timeout) {
-        //
-        // author
-        //$scope.authors = [{
-        //    'FullName': '',
-        //    'BirthDay': null,
-        //    'OrganizationID': '',
-        //    'Position': '',
-        //    'Qualitification': '',
-        //    'ContributionRate': ''
-        //}];
+    function initiativeAddController(apiService, $scope, notificationService, $state, $location, authData) {
+
         $scope.authors = [];
         $scope.addNewAuthor = function () {
             $scope.authors.push({
@@ -30,29 +21,10 @@
             $scope.author.Position = '';
             $scope.author.Qualitification = '';
             $scope.author.ContributionRate = '';
-            //$('#btnCancel').click();
-           // angular.element('#defaultModal').css('display', 'none');
-
-
         }
         $scope.deleteauthor = function (index) {
             $scope.authors.splice(index, 1);
         }
-        //$scope.addSkill = function () {
-        //    $scope.skills.push({ 'title': $scope.newSkill, 'done': false })
-        //    $scope.newSkill = ''
-        //}
-
-        //$scope.addNewAuthor = function () {
-        //    $scope.authors.push({
-        //        'FullName': '',
-        //        'BirthDay': null,
-        //        'OrganizationId': 0,
-        //        'Position': '',
-        //        'Qualitification': '',
-        //        'ContributionRate': ''
-        //    });
-        //};
 
         $scope.removeAuthor = function () {
             var newDataList = [];
@@ -71,33 +43,20 @@
             });
         };
 
-        // end-author
-
-        //Field
         function loadFields() {
             apiService.get('api/field/getall', null, function (result) {
                 $scope.fields = result.data;
-                $timeout(function () {
-                    $('.load-droplist').selectpicker('destroy');
-                    $('.load-droplist').selectpicker('render');
-                })
             }, function () {
                 console.log('Cannot get list parent');
             });
         }
 
         loadFields();
-        //end Field
 
-        //load All Account
         function loadAccounts() {
             apiService.get('api/account/users', null, function (result) {
                 if (result.data) {
                     $scope.accounts = result.data;
-                    $timeout(function () {
-                        $('.load-droplist').selectpicker('destroy');
-                        $('.load-droplist').selectpicker('render');
-                    })
                 }
             }, function () {
                 console.log('Cannot get users');
