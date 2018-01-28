@@ -26,6 +26,8 @@ namespace InitiativeManagement.Service
         Field GetById(int id);
 
         Field FindById(int id);
+
+        IEnumerable<Field> GetByGroupId(int id);
     }
 
     public class FieldService : IFieldService
@@ -65,6 +67,11 @@ namespace InitiativeManagement.Service
         public IEnumerable<Field> GetAll()
         {
             return _fieldRepository.GetMulti(x => !x.IsDeactive);
+        }
+
+        public IEnumerable<Field> GetByGroupId(int id)
+        {
+            return _fieldRepository.GetMulti(x => !x.IsDeactive && x.FieldGroupId == id);
         }
 
         public IEnumerable<Field> GetAll(string keyword)

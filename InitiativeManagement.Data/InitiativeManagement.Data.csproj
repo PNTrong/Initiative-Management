@@ -172,6 +172,26 @@
     <Compile Include="Migrations\201801172340417_remove_old_data.Designer.cs">
       <DependentUpon>201801172340417_remove_old_data.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801262356476_addAuthor.cs" />
+    <Compile Include="Migrations\201801262356476_addAuthor.Designer.cs">
+      <DependentUpon>201801262356476_addAuthor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801270020299_addAdminAccountId.cs" />
+    <Compile Include="Migrations\201801270020299_addAdminAccountId.Designer.cs">
+      <DependentUpon>201801270020299_addAdminAccountId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801280709336_update_author.cs" />
+    <Compile Include="Migrations\201801280709336_update_author.Designer.cs">
+      <DependentUpon>201801280709336_update_author.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801281657246_update_initiative.cs" />
+    <Compile Include="Migrations\201801281657246_update_initiative.Designer.cs">
+      <DependentUpon>201801281657246_update_initiative.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801282049299_update_initiative_DateCreated.cs" />
+    <Compile Include="Migrations\201801282049299_update_initiative_DateCreated.Designer.cs">
+      <DependentUpon>201801282049299_update_initiative_DateCreated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ApplicationGroupRepository.cs" />
@@ -275,6 +295,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801172340417_remove_old_data.resx">
       <DependentUpon>201801172340417_remove_old_data.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801262356476_addAuthor.resx">
+      <DependentUpon>201801262356476_addAuthor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801270020299_addAdminAccountId.resx">
+      <DependentUpon>201801270020299_addAdminAccountId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801280709336_update_author.resx">
+      <DependentUpon>201801280709336_update_author.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801281657246_update_initiative.resx">
+      <DependentUpon>201801281657246_update_initiative.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801282049299_update_initiative_DateCreated.resx">
+      <DependentUpon>201801282049299_update_initiative_DateCreated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

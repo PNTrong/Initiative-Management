@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -17,7 +18,17 @@ namespace InitiativeManagement.Model.Models
         [ForeignKey("FieldId")]
         public virtual Field Field { set; get; }
 
+        public int FieldGroupId { get; set; }
+
+        /// <summary>
+        /// the account that create new a initiative from admin account
+        /// </summary>
         public string AccountId { get; set; }
+
+        /// <summary>
+        /// the admin account added a new initiative for sub-account ( for a specific account user)
+        /// </summary>
+        public string AdminAccountId { get; set; }
 
         public int AppraisalBoardCommnetId { set; get; }
 
@@ -56,5 +67,9 @@ namespace InitiativeManagement.Model.Models
         public double ProvinceLevelGPA { set; get; }
 
         public bool IsDeactive { set; get; }
+
+        public DateTime DateCreated { set; get; }
+
+        public List<Author> Authors { get; set; }
     }
 }

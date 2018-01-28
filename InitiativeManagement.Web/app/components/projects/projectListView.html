@@ -1,55 +1,99 @@
-﻿<div class="form">
-    <div class="dx-fieldset">    
-        <div class="dx-field">
-            <div class="dx-field-label">Default mode</div>
-            <div class="dx-field-value">
-                <div dx-text-box="textBox.simple"></div>
+﻿<div>
+    <section class="content-header">
+        <h4>
+            Danh Mục Sáng Kiến
+        </h4>
+        <ol class="breadcrumb">
+            <li>
+                <a href="/">
+                    <i class="fa fa-dashboard"></i> Trang chủ</a>
+            </li>
+            <li>
+                <a ui-sref="application_groups">Lĩnh vực</a>
+            </li>
+            <li class="active">Danh sách</li>
+        </ol>
+    </section>
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="box">
+            <div class="box-header" style="display: inline-flex">
+                <div style="margin-right: 10px" dx-text-box="textBox.search"></div>
+                <div dx-button="{icon: 'plus',text: 'Nộp đơn'}" ui-sref="add_project"></div>
+                <div dx-button="filterButton"></div>
             </div>
-        </div>    
-        <div class="dx-field">
-            <div class="dx-field-label">With placeholder</div>
-            <div class="dx-field-value">
-                <div dx-text-box="textBox.withPlaceholder"></div>
+            <div class="box-body">
+                <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="data">
+                    <div data-options="dxTemplate:{ name:'cellTemplate' }">
+                        <div ng-if="data.value">
+                            Khóa
+                        </div>
+                        <div ng-if="!data.value">
+                            Đang hoạt động
+                        </div>
+                    </div>
+                    <div data-options="dxTemplate:{ name:'actionCellTemplate' }">
+                        <div class="btn-group">
+                            <button type="button" style="margin-right: 10px;" class="btn btn-default" ui-sref="edit_field({id:data.value})">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                            <button class="btn btn-danger" ng-click="deleteItem(data.value)">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="dx-field">
-            <div class="dx-field-label">With clear button</div>
-            <div class="dx-field-value">
-                <div dx-text-box="textBox.withClearButton"></div>
+    </div>
+</div>
+
+<div class="popup" dx-popup="filterPopup">
+    <div data-options="dxTemplate: { name:'info' }">
+        <div class="widget-container">
+            <div class="widget-container">
+                <div class="form-group">
+                    <label class="control-label">Nhóm Lĩnh vực</label>
+                    <div dx-select-box="fieldGroupSelectBox"></div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Lĩnh vực</label>
+                    <div dx-select-box="{
+                        displayExpr: 'FieldName',
+                        placeholder:'Chọn giá trị',
+                        valueExpr: 'Id',
+                        width: 300,
+                        bindingOptions: {
+                            dataSource: 'fields',
+                            value: 'filterOption.fieldId',
+                            disabled: 'isFieldDisabled'
+                        }
+                    }"></div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Ngày nộp đơn từ:</label>
+                    <div dx-date-box="{
+                        showClearButton: true,
+                        type: 'date',
+                        width: 300,
+                        bindingOptions: {
+                            value: 'filterOption.startDate'
+                        }
+                    }"></div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Đến ngày:</label>
+                    <div dx-date-box="{
+                        showClearButton: true,
+                        type: 'date',
+                        width: 300,
+                        bindingOptions: {
+                            value: 'filterOption.endDate'
+                        }
+                    }"></div>
+                </div>
             </div>
-        </div>
-        <div class="dx-field">
-            <div class="dx-field-label">Password mode</div>
-            <div class="dx-field-value">
-                <div dx-text-box="textBox.passwordMode"></div>
-            </div>
-        </div>
-        <div class="dx-field">
-            <div class="dx-field-label">Text mask</div>
-            <div class="dx-field-value">
-                <div dx-text-box="textBox.maskUsage"></div>
-            </div>
-        </div>
-        <div class="dx-field">
-            <div class="dx-field-label">Disabled</div>
-            <div class="dx-field-value">
-                <div dx-text-box="textBox.disabled"></div>
-            </div>
-        </div>
-    </div>    
-    <div class="dx-fieldset">
-    <div class="dx-fieldset-header">Events and API</div>
-        <div class="dx-field">
-            <div class="dx-field-label">Full Name</div>
-            <div class="dx-field-value">
-                <div dx-text-box="textBox.fullName"></div>
-            </div>
-        </div>
-        <div class="dx-field">
-            <div class="dx-field-label">Email (read only)</div>
-            <div class="dx-field-value">
-                <div dx-text-box="textBox.email"></div>
-            </div>
+            <div dx-button="addFilterButtonOptions"></div>
         </div>
     </div>
 </div>

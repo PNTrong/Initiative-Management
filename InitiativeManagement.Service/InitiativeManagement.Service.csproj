@@ -61,11 +61,9 @@
     <Compile Include="ApplicationRoleService.cs" />
     <Compile Include="AppraisalBoardCommnentService.cs" />
     <Compile Include="AppraisalBoardMemberCommnentService.cs" />
-    <Compile Include="AuthorService.cs" />
     <Compile Include="ErrorService.cs" />
     <Compile Include="FieldGroupService.cs" />
     <Compile Include="FieldService.cs" />
-    <Compile Include="AuthorGroupService.cs" />
     <Compile Include="InitiativeService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

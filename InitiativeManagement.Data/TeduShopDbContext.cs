@@ -33,14 +33,15 @@ namespace InitiativeManagement.Data
         //public DbSet<VisitorStatistic> VisitorStatistics { set; get; }
         //public DbSet<ContactDetail> ContactDetails { set; get; }
         //public DbSet<Feedback> Feedbacks { set; get; }
+        //public DbSet<Author> Authors { set; get; }
+        //public DbSet<AuthorGroup> AuthorGroups { set; get; }
+
         public DbSet<Error> Errors { set; get; }
 
         public DbSet<ApplicationGroup> ApplicationGroups { set; get; }
         public DbSet<ApplicationRole> ApplicationRoles { set; get; }
         public DbSet<ApplicationRoleGroup> ApplicationRoleGroups { set; get; }
         public DbSet<ApplicationUserGroup> ApplicationUserGroups { set; get; }
-        public DbSet<Author> Authors { set; get; }
-        public DbSet<AuthorGroup> AuthorGroups { set; get; }
         public DbSet<Field> Fields { set; get; }
         public DbSet<FieldGroup> FieldGroups { set; get; }
         public DbSet<Initiative> Initiatives { set; get; }

@@ -1,16 +1,16 @@
-﻿using InitiativeManagement.Data.Infrastructure;
+﻿using InitiativeManagement.Common;
+using InitiativeManagement.Data.Infrastructure;
 using InitiativeManagement.Data.Repositories;
 using InitiativeManagement.Model.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using InitiativeManagement.Common;
 
 namespace InitiativeManagement.Service
 {
     public interface IInitiativeService
     {
-        Initiative Add(Initiative initiative);
+        bool Add(Initiative initiative, string userId);
 
         void Update(Initiative initiative);
 
@@ -20,7 +20,7 @@ namespace InitiativeManagement.Service
 
         IEnumerable<Initiative> GetMulti();
 
-        IEnumerable<Initiative> GetAll(int page, int pageSize, out int totalRow, DynamicFilter filter, List<string> roles, string userId);
+        IEnumerable<Initiative> GetAll(DynamicFilter fiter, out int totalCount, List<string> roles, string userId);
 
         IEnumerable<Initiative> GetAll(string keyword);
 
@@ -38,19 +38,32 @@ namespace InitiativeManagement.Service
         private IInitiativeRepository _initiativeRepository;
         private IUnitOfWork _unitOfWork;
 
-        public InitiativeService(IInitiativeRepository initiativeRepository, IUnitOfWork unitOfWork)
+        public InitiativeService(IInitiativeRepository initiativeRepository,
+            IUnitOfWork unitOfWork)
         {
-            this._initiativeRepository = initiativeRepository;
-            this._unitOfWork = unitOfWork;
+            _initiativeRepository = initiativeRepository;
+            _unitOfWork = unitOfWork;
         }
 
-        public Initiative Add(Initiative initiative)
+        /// <summary>
+        /// For Add initiative
+        /// </summary>
+        /// <param name="initiative"></param>
+        /// <param name="userId">The account which added initiave</param>
+        /// <param name="authors"></param>
+        /// <returns></returns>
+        public bool Add(Initiative initiative, string userId)
         {
-            var initiativeSaved = _initiativeRepository.Add(initiative);
+            // the user which is the name of the initiative
+            initiative.AccountId = userId;
 
-            _unitOfWork.Commit();
+            initiative.IsDeactive = false;
 
-            return initiativeSaved;
+            _initiativeRepository.Add(initiative);
+
+            Save();
+
+            return true;
         }
 
         public Initiative Delete(int id)
@@ -68,32 +81,42 @@ namespace InitiativeManagement.Service
             return _initiativeRepository.GetAll();
         }
 
-        public IEnumerable<Initiative> GetAll(int page, int pageSize, out int totalRow, DynamicFilter filter, List<string> roles, string userId)
+        public IEnumerable<Initiative> GetAll(DynamicFilter filter, out int totalCount, List<string> roles, string userId)
         {
-            IEnumerable<Initiative> query = Enumerable.Empty<Initiative>();
+            var query = new List<Initiative>();
+
+            // has permission to view all
+            var keyword = filter.Keyword.ToLower();
 
             if (roles.Any(x => x.Equals(Role.ViewIntiniativeForAdmin)))
             {
-                query = _initiativeRepository.GetMulti(x => !x.IsDeactive, new string[] { "Field" });
+                query = _initiativeRepository.GetMulti(x => !x.IsDeactive && x.DateCreated >= filter.StartTime && x.DateCreated <= filter.EndTime && x.AccountId.Contains(filter.AccountId)
+                && (x.Title.ToLower().Contains(keyword)
+                || x.KnowSolutionContent.ToLower().Contains(keyword)
+                || x.ImprovedContent.ToLower().Contains(keyword)), new string[] { "Field" }).ToList();
             }
             else
             {
-                query = _initiativeRepository.GetMulti(x => !x.IsDeactive && x.AccountId == userId, new string[] { "Field" });
+                query = _initiativeRepository.GetMulti(x => !x.IsDeactive && x.AccountId == userId
+                    && x.DateCreated.Date >= filter.StartTime.Date && x.DateCreated.Date <= filter.EndTime.Date
+                    && (x.Title.ToLower().Contains(keyword)
+                    || x.KnowSolutionContent.ToLower().Contains(keyword)
+                    || x.ImprovedContent.ToLower().Contains(keyword)), new string[] { "Field" }).ToList();
             }
 
-            if (!string.IsNullOrEmpty(filter.Keyword))
-                query = query.Where(x => x.Title.ToUpper().Contains(filter.Keyword.ToUpper()) || x.KnowSolutionContent.ToUpper().Contains(filter.Keyword.ToUpper()) ||
-                x.ImprovedContent.ToUpper().Contains(filter.Keyword.ToUpper()));
+            if (filter.FieldId > -1)
+            {
+                query.Where(_ => _.FieldId == filter.FieldId);
+            }
 
-            if (!string.IsNullOrEmpty(filter.Time))
-                query = query.Where(x => x.DeploymentTime.Year.ToString() == filter.Time);
+            if (filter.FieldGroupId > -1)
+            {
+                query.Where(_ => _.FieldId == filter.FieldGroupId);
+            }
 
-            if (filter.Field != null)
-                query = query.Where(x => x.FieldId == filter.Field);
+            totalCount = query.Count();
 
-            totalRow = query.Count();
-
-            return query.OrderBy(x => x.Title).Skip(page * pageSize).Take(pageSize);
+            return query.OrderByDescending(x => x.DateCreated).Skip(filter.Skip).Take(filter.Take);
         }
 
         public IEnumerable<Initiative> DownloadWord(DynamicFilter filter, List<string> roles, string userId)
@@ -109,15 +132,15 @@ namespace InitiativeManagement.Service
                 query = _initiativeRepository.GetMulti(x => !x.IsDeactive && x.AccountId == userId, new string[] { "Field" });
             }
 
-            if (!string.IsNullOrEmpty(filter.Keyword))
-                query = query.Where(x => x.Title.ToUpper().Contains(filter.Keyword.ToUpper()) || x.KnowSolutionContent.ToUpper().Contains(filter.Keyword.ToUpper()) ||
-                x.ImprovedContent.ToUpper().Contains(filter.Keyword.ToUpper()));
+            //if (!string.IsNullOrEmpty(filter.Keyword))
+            //    query = query.Where(x => x.Title.ToLower().Contains(filter.Keyword.ToLower()) || x.KnowSolutionContent.ToLower().Contains(filter.Keyword.ToLower()) ||
+            //    x.ImprovedContent.ToLower().Contains(filter.Keyword.ToLower()));
 
-            if (!string.IsNullOrEmpty(filter.Time))
-                query = query.Where(x => x.DeploymentTime.Year.ToString() == filter.Time);
+            //if (!string.IsNullOrEmpty(filter.Time))
+            //    query = query.Where(x => x.DeploymentTime.Year.ToString() == filter.Time);
 
-            if (filter.Field != null)
-                query = query.Where(x => x.FieldId == filter.Field);
+            //if (filter.Field != null)
+            //    query = query.Where(x => x.FieldId == filter.Field);
 
             return query.OrderBy(x => x.Title);
         }

@@ -61,6 +61,20 @@ namespace InitiativeManagement.Web.Api
             });
         }
 
+        [Route("getbygroupid/{id:int}")]
+        [HttpGet]
+        public HttpResponseMessage GetByGroupId(HttpRequestMessage request, int id)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                var models = _fieldService.GetByGroupId(id);
+
+                var response = request.CreateResponse(HttpStatusCode.OK, models);
+
+                return response;
+            });
+        }
+
         [Route("getbyid/{id:int}")]
         [HttpGet]
         public HttpResponseMessage GetById(HttpRequestMessage request, int id)

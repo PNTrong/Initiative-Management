@@ -5,8 +5,12 @@
 
     function projectListController(authenticationService, $scope, $window, $rootScope, apiService) {
 
+        // variables
+        $scope.fieldGroups = [];
+        $scope.fields = [];
+
         // load data
-        loadFields();
+        loadFieldGroups();
         loadUsers();
 
         // auto complete name
@@ -18,10 +22,37 @@
         }
 
         // Fields
-        function loadFields() {
-            apiService.get('api/field/getall', null, function (result) {
-                $scope.fields = result.data;
+        $scope.isFieldDisabled = true;
+
+        $scope.fieldGroupSelectBox = {
+            displayExpr: 'Name',
+            placeholder:'Chọn giá trị',
+            valueExpr: 'Id',
+            width: 300,
+            noDataText: "Không có dữ liệu để hiển thị",
+            bindingOptions: {
+                dataSource: 'fieldGroups'
+            }, 
+            onValueChanged: function (e) {
+                $scope.isFieldDisabled = true;
+                loadFields(e.value);
+            }
+        }
+
+        function loadFieldGroups() {
+            apiService.get('api/fieldGroup/getall', null, function (result) {
+                $scope.fieldGroups = result.data;
             }, function () {
+                $scope.fieldGroups = [];
+            });
+        }
+
+        function loadFields(id) {
+            apiService.get('api/field/getbygroupid/' + id, null, function (result) {
+                $scope.fields = result.data;
+                $scope.isFieldDisabled = false;
+            }, function () {
+                $scope.fields = [];
             });
         }
 
@@ -161,7 +192,7 @@
         };
 
         $scope.addAuthorButtonOptions = {
-            text: "Thêm mới",
+            text: "Tạo mới",
             type: "success",
             useSubmitBehavior: true,
             validationGroup: "customerData"
@@ -200,7 +231,7 @@
             AchievedByAnothers:"",
             AuthorGroupId: null,
             AppraisalBoardCommnetId: null,
-            AccountId: null,
+            AdminAccountId: null,
             Authors: [],
         }
 
@@ -218,7 +249,7 @@
             }
             $scope.initiative.Authors = $scope.authors;
             console.log($scope.initiative);
-            // apiService.post('api/initiative/add', $scope.initiative, addSuccessed, addFailed);
+            apiService.post('api/initiative/add', $scope.initiative, addSuccessed, addFailed);
         }
 
         function addInitiative(e) {

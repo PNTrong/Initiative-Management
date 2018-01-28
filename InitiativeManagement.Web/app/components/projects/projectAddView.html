@@ -43,7 +43,7 @@
                                 }"></div>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" has-permission='CreateIntiniativeForAdmin'>
                                 <label class="control-label">Đơn vị nộp đơn</label>
                                 <div class="">
                                     <div dx-select-box="{
@@ -53,7 +53,7 @@
                                     width: 300,
                                     bindingOptions: {
                                         dataSource: 'users',
-                                        value: 'initiative.AccountId'
+                                        value: 'initiative.AdminAccountId'
                                     }
                                 }" dx-validator="{
                                     validationRules: [{
@@ -138,17 +138,31 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="control-label">Nhóm Lĩnh vực áp dụng sáng kiến</label>
+                                <div class="">
+                                    <div dx-select-box="fieldGroupSelectBox" dx-validator="{
+                                    validationRules: [{
+                                        type: 'required',
+                                        message: 'Thông tin không được bỏ trống'
+                                    }]
+                                }"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="control-label">Lĩnh vực áp dụng sáng kiến</label>
                                 <div class="">
                                     <div dx-select-box="{
                                     displayExpr: 'FieldName',
                                     placeholder:'Chọn lĩnh vực',
                                     valueExpr: 'Id',
+                                    disabled: 'isFieldDisabled',
                                     width: 300,
+                                    noDataText: 'Không có dữ liệu để hiển thị',
                                     bindingOptions: {
                                         dataSource: 'fields',
-                                        value: 'initiative.FieldId'
-                                    }
+                                        value: 'initiative.FieldId',
+                                        disabled: 'isFieldDisabled',
+                                    },
                                 }" dx-validator="{
                                     validationRules: [{
                                         type: 'required',
@@ -311,11 +325,6 @@
                                     bindingOptions: {
                                         value: 'initiative.AchievedByAnothers'
                                     }                               
-                                }" dx-validator="{
-                                    validationRules: [{
-                                        type: 'required',
-                                        message: 'Thông tin không được bỏ trống'
-                                    }]
                                 }"></div>
                                 </div>
                             </div>

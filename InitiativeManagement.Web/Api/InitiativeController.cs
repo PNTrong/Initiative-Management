@@ -26,13 +26,10 @@ namespace InitiativeManagement.Web.Api
         private IApplicationRoleService _appRoleService;
         private ApplicationUserManager _userManager;
 
-        private IAuthorService _authorService;
-
         public InitiativeController(IErrorService errorService, ApplicationUserManager userManager, IApplicationGroupService applicationGroupService,
-            IInitiativeService initiativeService, IAuthorService authorService, IApplicationRoleService appRoleService) : base(errorService)
+            IInitiativeService initiativeService, IApplicationRoleService appRoleService) : base(errorService)
         {
             this._initiativeService = initiativeService;
-            this._authorService = authorService;
             this._applicationGroupService = applicationGroupService;
             this._appRoleService = appRoleService;
             _userManager = userManager;
@@ -144,13 +141,13 @@ namespace InitiativeManagement.Web.Api
         [Route("getlistpaging")]
         [HttpGet]
         [Authorize(Roles = Role.CreateIntiniativeForAdmin + "," + Role.CreateIntiniativeForUser)]
-        public HttpResponseMessage GetListPaging(HttpRequestMessage request, string filter, int skip, int take)
+        public HttpResponseMessage GetListPaging(HttpRequestMessage request, string filter)
         {
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
 
-                int totalRow = 0;
+                int totalCount = 0;
 
                 var filterObj = JsonConvert.DeserializeObject<DynamicFilter>(filter);
 
@@ -158,15 +155,15 @@ namespace InitiativeManagement.Web.Api
 
                 var roles = _applicationGroupService.GetRolesByUserId(user.Id).Select(x => x.Name).ToList();
 
-                var initiatives = _initiativeService.GetAll(skip, take, out totalRow, filterObj, roles, user.Id);
+                var initiatives = _initiativeService.GetAll(filterObj, out totalCount, roles, user.Id);
 
-                var pagedSet = new PaginationSet<Initiative>()
+                var data = new GridModel<Initiative>()
                 {
-                    TotalCount = totalRow,
-                    Items = initiatives
+                    items = initiatives,
+                    totalCount = totalCount
                 };
 
-                response = request.CreateResponse(HttpStatusCode.OK, pagedSet);
+                response = request.CreateResponse(HttpStatusCode.OK, data);
 
                 return response;
             });
@@ -179,6 +176,7 @@ namespace InitiativeManagement.Web.Api
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
+
                 if (!ModelState.IsValid)
                 {
                     response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
@@ -187,32 +185,11 @@ namespace InitiativeManagement.Web.Api
                 {
                     var initiative = Mapper.Map<InitiativeViewModel, Initiative>(initiativeVM);
 
-                    if (initiative != null && string.IsNullOrEmpty(initiative.AccountId))
-                    {
-                        var userId = User.Identity.GetUserId();
+                    var userId = User.Identity.GetUserId();
 
-                        initiative.AccountId = userId;
-                    }
+                    var res = _initiativeService.Add(initiative, userId);
 
-                    var initiativeDb = _initiativeService.Add(initiative);
-
-                    if (initiativeDb == null)
-                        response = request.CreateResponse(HttpStatusCode.BadGateway, ModelState);
-
-                    var initiativeId = initiativeDb.Id;
-
-                    var authors = initiativeVM.Authors;
-
-                    foreach (var author in authors)
-                    {
-                        author.InitiativeId = initiativeId;
-                        author.DateCreate = DateTime.Now;
-                        _authorService.Add(author);
-                    }
-
-                    _initiativeService.Save();
-
-                    response = request.CreateResponse(HttpStatusCode.Created, initiativeDb);
+                    response = res ? request.CreateResponse(HttpStatusCode.Created, new Initiative()) : request.CreateResponse(HttpStatusCode.BadRequest, new Initiative());
                 }
 
                 return response;

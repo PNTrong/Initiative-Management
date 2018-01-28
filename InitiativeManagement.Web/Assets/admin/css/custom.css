@@ -12,18 +12,20 @@ body {
 
 /*Overide Devextreme*/
 .dx-widget {
-    color: #333;
+    /*color: #333;*/
     font-weight: normal;
     font-size: 13px;
-    /*font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;*/
     font-family: 'Roboto', sans-serif;
     line-height: 1.35715;
 }
 
+.dx-toolbar {
+    background-color: #605ca8;
+    color:white;
+}
 /*.dx-texteditor {
     border-radius: unset;
 }*/
-
 .dx-datagrid-content .dx-datagrid-table .dx-row > td {
     vertical-align: middle !important;
 }
