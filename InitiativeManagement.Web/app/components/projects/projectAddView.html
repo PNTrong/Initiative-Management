@@ -27,56 +27,48 @@
                         <div class="box-body">
                             <div class="form-group">
                                 <label>Tên sáng kiến kinh nghiệm</label>
-                                <div class="">
-                                    <div dx-text-box="{ showClearButton: true,
-                                        bindingOptions: {
-                                            value: 'initiative.Title'
-                                        }
-                                    }" dx-validator="{
-                                    validationRules: [{
-                                        type: 'required',
-                                        message: 'Thông tin không được bỏ trống' 
-                                    }, {
-                                    type: 'stringLength',
-                                    min: 10,
-                                    message: 'Tên sáng kiến kinh nghiệm phải ít nhất 10 ký tự'}]
-                                }"></div>
-                                </div>
+                                    <div dx-text-box="nameTextBox" dx-validator="{
+                                        validationRules: [{
+                                            type: 'required',
+                                            message: 'Thông tin không được bỏ trống' 
+                                        }, {
+                                        type: 'stringLength',
+                                        min: 10,
+                                        message: 'Tên sáng kiến kinh nghiệm phải ít nhất 10 ký tự'}]
+                                    }"></div>
                             </div>
                             <div class="form-group" has-permission='CreateIntiniativeForAdmin'>
                                 <label class="control-label">Đơn vị nộp đơn</label>
-                                <div class="">
                                     <div dx-select-box="{
-                                    displayExpr: 'Text',
-                                    placeholder:'Chọn đơn vị',
-                                    valueExpr: 'Value',
-                                    width: 300,
-                                    bindingOptions: {
-                                        dataSource: 'users',
-                                        value: 'initiative.AdminAccountId'
-                                    }
-                                }" dx-validator="{
-                                    validationRules: [{
-                                        type: 'required',
-                                        message: 'Thông tin không được bỏ trống'
-                                    }]
+                                        displayExpr: 'Text',
+                                        placeholder:'Chọn đơn vị',
+                                        valueExpr: 'Value',
+                                        width: 300,
+                                        height:40,
+                                        bindingOptions: {
+                                            dataSource: 'users',
+                                            value: 'initiative.AdminAccountId'
+                                        }
+                                    }" dx-validator="{
+                                        validationRules: [{
+                                            type: 'required',
+                                            message: 'Thông tin không được bỏ trống'
+                                        }]
                                 }"></div>
-                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Đơn vị nhận đơn</label>
-                                <div class="">
                                     <div dx-text-box="{ showClearButton: true,
-                                        bindingOptions: {
-                                            value: 'initiative.SendTo'
-                                        }
-                                    }" dx-validator="{
-                                    validationRules: [{
-                                        type: 'required',
-                                        message: 'Thông tin không được bỏ trống'
-                                    }]
-                                }"></div>
-                                </div>
+                                            height:40,
+                                            bindingOptions: {
+                                                value: 'initiative.SendTo'
+                                            }
+                                        }" dx-validator="{
+                                        validationRules: [{
+                                            type: 'required',
+                                            message: 'Thông tin không được bỏ trống'
+                                        }]
+                                    }"></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Tác giả (nhóm tác giả)</label>
@@ -130,33 +122,32 @@
                                 <label class="control-label">Chủ đầu tư tạo ra sáng kiến</label>
                                 <div class="">
                                     <div dx-text-box="{ showClearButton: true,
-                                    placeholder:'Trường hợp tác giả không đồng thời là chủ đầu tư tạo ra sáng kiến...',
-                                    bindingOptions: {
-                                        value: 'initiative.Investor'
-                                    }
-                                }"></div>
+                                        height:40,
+                                        placeholder:'Trường hợp tác giả không đồng thời là chủ đầu tư tạo ra sáng kiến...',
+                                        bindingOptions: {
+                                            value: 'initiative.Investor'
+                                        }
+                                    }"></div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Nhóm Lĩnh vực áp dụng sáng kiến</label>
-                                <div class="">
-                                    <div dx-select-box="fieldGroupSelectBox" dx-validator="{
-                                    validationRules: [{
-                                        type: 'required',
-                                        message: 'Thông tin không được bỏ trống'
-                                    }]
-                                }"></div>
-                                </div>
+                                <div dx-select-box="fieldGroupSelectBox" dx-validator="{
+                                        validationRules: [{
+                                            type: 'required',
+                                            message: 'Thông tin không được bỏ trống'
+                                        }]
+                                    }"></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Lĩnh vực áp dụng sáng kiến</label>
-                                <div class="">
-                                    <div dx-select-box="{
+                                <div dx-select-box="{
                                     displayExpr: 'FieldName',
                                     placeholder:'Chọn lĩnh vực',
                                     valueExpr: 'Id',
                                     disabled: 'isFieldDisabled',
                                     width: 300,
+                                    height:40,
                                     noDataText: 'Không có dữ liệu để hiển thị',
                                     bindingOptions: {
                                         dataSource: 'fields',
@@ -169,82 +160,70 @@
                                         message: 'Thông tin không được bỏ trống'
                                     }]
                                 }"></div>
-                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Ngày áp dụng</label>
-                                <div class="">
-                                    <div dx-date-box="{
-                                showClearButton: true,
-                                type: 'date',
-                                width: 300,
-                                bindingOptions: {
-                                    value: 'initiative.DeploymentTime'
-                                }
-                            }" dx-validator="{
-                                validationRules: [{
-                                    type: 'required',
-                                    message: 'Thông tin không được bỏ trống'
-                                }]
-                            }"></div>
-                                </div>
+                                <div dx-date-box="{
+                                        showClearButton: true,
+                                        type: 'date',
+                                        width: 300,
+                                        height:40,
+                                        bindingOptions: {
+                                            value: 'initiative.DeploymentTime'
+                                        }
+                                    }" dx-validator="{
+                                        validationRules: [{
+                                            type: 'required',
+                                            message: 'Thông tin không được bỏ trống'
+                                        }]
+                                }"></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Mô tả bản chất sáng kiến</label>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Phân tích tình trạng của giải pháp đã biết</label>
-                                <div class="">
-                                    <div dx-text-area="{ 
-                                    minHeight:90,
-                                    placeholder:'Nhập thông tin...',
-                                    autoResizeEnabled:true,
-                                    bindingOptions: {
-                                        value: 'initiative.KnowSolutionContent'
-                                    }    
-                                }" dx-validator="{
-                                    validationRules: [{
-                                        type: 'required',
-                                        message: 'Thông tin không được bỏ trống'
-                                    }]
-                                }"></div>
-                                </div>
+                                <div dx-text-area="{ 
+                                        minHeight:90,
+                                        placeholder:'Nhập thông tin...',
+                                        autoResizeEnabled:true,
+                                        bindingOptions: {
+                                            value: 'initiative.KnowSolutionContent'
+                                        }}" dx-validator="{
+                                                validationRules: [{
+                                                    type: 'required',
+                                                    message: 'Thông tin không được bỏ trống'
+                                                }]
+                                        }"></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Nội dung cải tiến</label>
                                 <div class="">
                                     <div dx-text-area="{ 
-                                minHeight:90,
-                                placeholder:'Nhập thông tin...',
-                                autoResizeEnabled:true,
-                                bindingOptions: {
-                                    value: 'initiative.ImprovedContent'
-                                }    
-                            }" dx-validator="{
-                                validationRules: [{
-                                    type: 'required',
-                                    message: 'Thông tin không được bỏ trống'
-                                }]
-                            }"></div>
+                                        minHeight:90,
+                                        placeholder:'Nhập thông tin...',
+                                        autoResizeEnabled:true,
+                                        bindingOptions: {
+                                        value: 'initiative.ImprovedContent'}}" dx-validator="{
+                                            validationRules: [{
+                                            type: 'required',
+                                            message: 'Thông tin không được bỏ trống'}]
+                                    }"></div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label"> Điều kiện áp dụng</label>
-                                <div class="">
-                                    <div dx-text-area="{
-                                minHeight:90,
-                                placeholder:'Nhập thông tin...',
-                                autoResizeEnabled:true,
-                                bindingOptions: {
-                                    value: 'initiative.ConditionApply'
-                                }                                
-                            }" dx-validator="{
-                                validationRules: [{
-                                    type: 'required',
-                                    message: 'Thông tin không được bỏ trống'
-                                }]
-                            }"></div>
-                                </div>
+                                <div dx-text-area="{
+                                        minHeight:90,
+                                        placeholder:'Nhập thông tin...',
+                                        autoResizeEnabled:true,
+                                        bindingOptions: {
+                                            value: 'initiative.ConditionApply'
+                                        }}" dx-validator="{
+                                                validationRules: [{
+                                                type: 'required',
+                                                message: 'Thông tin không được bỏ trống'}]
+                                }"></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Các bước thực hiện</label>
@@ -344,5 +323,26 @@
                 <br />
                 <div dx-button="addAuthorButtonOptions"></div>
             </form>
+        </div>
+    </div>
+    <div class="popup" dx-popup="similarNamePopup">
+        <div data-options="dxTemplate: { name:'similarNameInfo' }">
+            <div class="widget-container">
+                <div dx-scroll-view="{
+                    height: 280
+                }">
+                    <div id="content">
+                        <ul style="list-style-type:none; padding: 0px;">
+                            <li>
+                                <strong>Dưới đây là các đề tài đã tồn tại với tên đề tài tương tự. Bạn có muốn giữ tên đề tài vừa
+                                    nhập? </strong>
+                            </li>
+                            <li style="padding: 5px 0px; border-bottom:1px solid #ccc" ng-repeat="x in similarNames">{{x}}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div dx-button="confirmButton"></div>
+                <div dx-button="cancelButton"></div>
+            </div>
         </div>
     </div>

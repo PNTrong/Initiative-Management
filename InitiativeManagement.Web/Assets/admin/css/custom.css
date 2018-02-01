@@ -12,20 +12,15 @@ body {
 
 /*Overide Devextreme*/
 .dx-widget {
-    /*color: #333;*/
-    font-weight: normal;
     font-size: 13px;
     font-family: 'Roboto', sans-serif;
-    line-height: 1.35715;
 }
 
-.dx-toolbar {
+.dx-popup-title.dx-toolbar {
     background-color: #605ca8;
-    color:white;
+    color: white;
 }
-/*.dx-texteditor {
-    border-radius: unset;
-}*/
+
 .dx-datagrid-content .dx-datagrid-table .dx-row > td {
     vertical-align: middle !important;
 }
@@ -54,8 +49,15 @@ body {
     height: 36px !important;
 }
 
-/*end theme*/
+.form-group label {
+    padding-bottom: 1px;
+}
 
+.dx-texteditor-input {
+    width: 99%;
+    padding: 9px 9px 9px;
+}
+/*end theme*/
 .display-hidden {
     visibility: hidden;
 }
@@ -153,8 +155,6 @@ body {
 
 .btn {
     font-size: 13px;
-    /*border: unset;
-    border-radius: unset !important;*/
 }
 
 /*css login page*/
@@ -244,28 +244,3 @@ body {
     padding-left: 5%;
     color: #fff;
 }
-/*css custom navbar*/
-/*.skin-purple-light .main-header .navbar {
-    height: 95px;
-}
-
-    .skin-purple-light .main-header .navbar .sidebar-toggle {
-        font-size: 30px;
-        line-height: 67px;
-    }
-
-.skin-purple-light .main-header .logo {
-    height: 95px;
-}
-
-.main-header .logo {
-    line-height: 100px;
-}
-
-.navbar-custom-menu {
-    padding-top: 22px;
-}
-
-.sidebar {
-    padding-top: 50px;
-}*/

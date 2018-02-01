@@ -15,6 +15,8 @@ namespace InitiativeManagement.Web.Models
 
         public int FieldId { set; get; }
 
+        public int FieldGroupId { set; get; }
+
         public Field Field { set; get; }
 
         public string AccountId { get; set; }

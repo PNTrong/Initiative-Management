@@ -63,9 +63,10 @@
                         placeholder:'Chọn giá trị',
                         valueExpr: 'Id',
                         width: 300,
+                        showClearButton: true,
                         bindingOptions: {
                             dataSource: 'fields',
-                            value: 'filterOption.fieldId',
+                            value: 'filterOption.FieldId',
                             disabled: 'isFieldDisabled'
                         }
                     }"></div>
@@ -77,7 +78,7 @@
                         type: 'date',
                         width: 300,
                         bindingOptions: {
-                            value: 'filterOption.startDate'
+                            value: 'filterOption.StartDate'
                         }
                     }"></div>
                 </div>
@@ -88,7 +89,7 @@
                         type: 'date',
                         width: 300,
                         bindingOptions: {
-                            value: 'filterOption.endDate'
+                            value: 'filterOption.EndDate'
                         }
                     }"></div>
                 </div>

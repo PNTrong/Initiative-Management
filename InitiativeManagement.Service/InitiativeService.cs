@@ -24,6 +24,8 @@ namespace InitiativeManagement.Service
 
         IEnumerable<Initiative> GetAll(string keyword);
 
+        IList<string> GetNames(string name);
+
         IEnumerable<Initiative> DownloadWord(DynamicFilter filter, List<string> roles, string userId);
 
         void Save();
@@ -59,11 +61,32 @@ namespace InitiativeManagement.Service
 
             initiative.IsDeactive = false;
 
+            initiative.DateCreated = DateTime.Now;
+
             _initiativeRepository.Add(initiative);
 
             Save();
 
             return true;
+        }
+
+        public IList<string> GetNames(string name)
+        {
+            var result = new List<string>();
+
+            var listNames = _initiativeRepository.GetMulti(_ => !_.IsDeactive).Select(item => item.Title).ToList();
+
+            foreach (var item in listNames)
+            {
+                var resultCompare = Compute(name, item);
+
+                if (resultCompare < 50)
+                {
+                    result.Add(item);
+                }
+            }
+
+            return result;
         }
 
         public Initiative Delete(int id)
@@ -83,7 +106,7 @@ namespace InitiativeManagement.Service
 
         public IEnumerable<Initiative> GetAll(DynamicFilter filter, out int totalCount, List<string> roles, string userId)
         {
-            var query = new List<Initiative>();
+            IEnumerable<Initiative> query;
 
             // has permission to view all
             var keyword = filter.Keyword.ToLower();
@@ -93,7 +116,7 @@ namespace InitiativeManagement.Service
                 query = _initiativeRepository.GetMulti(x => !x.IsDeactive && x.DateCreated >= filter.StartTime && x.DateCreated <= filter.EndTime && x.AccountId.Contains(filter.AccountId)
                 && (x.Title.ToLower().Contains(keyword)
                 || x.KnowSolutionContent.ToLower().Contains(keyword)
-                || x.ImprovedContent.ToLower().Contains(keyword)), new string[] { "Field" }).ToList();
+                || x.ImprovedContent.ToLower().Contains(keyword)), new string[] { "Field" });
             }
             else
             {
@@ -101,17 +124,17 @@ namespace InitiativeManagement.Service
                     && x.DateCreated.Date >= filter.StartTime.Date && x.DateCreated.Date <= filter.EndTime.Date
                     && (x.Title.ToLower().Contains(keyword)
                     || x.KnowSolutionContent.ToLower().Contains(keyword)
-                    || x.ImprovedContent.ToLower().Contains(keyword)), new string[] { "Field" }).ToList();
+                    || x.ImprovedContent.ToLower().Contains(keyword)), new string[] { "Field" });
             }
 
             if (filter.FieldId > -1)
             {
-                query.Where(_ => _.FieldId == filter.FieldId);
+                query = query.Where(_ => _.FieldId == filter.FieldId);
             }
 
             if (filter.FieldGroupId > -1)
             {
-                query.Where(_ => _.FieldId == filter.FieldGroupId);
+                query = query.Where(_ => _.FieldGroupId == filter.FieldGroupId);
             }
 
             totalCount = query.Count();
@@ -157,7 +180,7 @@ namespace InitiativeManagement.Service
 
         public IEnumerable<Initiative> GetMulti()
         {
-            return _initiativeRepository.GetMulti(item => item.IsDeactive != true);
+            return _initiativeRepository.GetMulti(item => !item.IsDeactive);
         }
 
         public void Save()
@@ -168,6 +191,51 @@ namespace InitiativeManagement.Service
         public void Update(Initiative initiative)
         {
             _initiativeRepository.Update(initiative);
+        }
+
+        /// <summary>
+        ///  Levenshtein distance computations
+        /// </summary>
+        /// <param name="s">the new value</param>
+        /// <param name="t">the compare value</param>
+        /// <returns></returns>
+        private static int Compute(string s, string t)
+        {
+            if (string.IsNullOrEmpty(s))
+            {
+                if (string.IsNullOrEmpty(t))
+                    return 0;
+                return t.Length;
+            }
+
+            if (string.IsNullOrEmpty(t))
+            {
+                return s.Length;
+            }
+
+            int n = s.Length;
+            int m = t.Length;
+            int[,] d = new int[n + 1, m + 1];
+
+            // initialize the top and right of the table to 0, 1, 2, ...
+            for (int i = 0; i <= n; d[i, 0] = i++) ;
+            for (int j = 1; j <= m; d[0, j] = j++) ;
+
+            for (int i = 1; i <= n; i++)
+            {
+                for (int j = 1; j <= m; j++)
+                {
+                    int cost = (t[j - 1] == s[i - 1]) ? 0 : 1;
+                    int min1 = d[i - 1, j] + 1;
+                    int min2 = d[i, j - 1] + 1;
+                    int min3 = d[i - 1, j - 1] + cost;
+                    d[i, j] = Math.Min(Math.Min(min1, min2), min3);
+                }
+            }
+
+            var differenceValue = d[n, m];
+
+            return differenceValue * 100 / m;
         }
     }
 }

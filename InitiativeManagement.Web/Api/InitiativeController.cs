@@ -140,7 +140,7 @@ namespace InitiativeManagement.Web.Api
 
         [Route("getlistpaging")]
         [HttpGet]
-        [Authorize(Roles = Role.CreateIntiniativeForAdmin + "," + Role.CreateIntiniativeForUser)]
+        [Authorize(Roles = Role.ViewIntiniativeForAdmin + "," + Role.ViewIntiniativeForUser)]
         public HttpResponseMessage GetListPaging(HttpRequestMessage request, string filter)
         {
             return CreateHttpResponse(request, () =>
@@ -162,6 +162,23 @@ namespace InitiativeManagement.Web.Api
                     items = initiatives,
                     totalCount = totalCount
                 };
+
+                response = request.CreateResponse(HttpStatusCode.OK, data);
+
+                return response;
+            });
+        }
+
+        [Route("getnames")]
+        [HttpGet]
+        [Authorize(Roles = Role.ViewIntiniativeForAdmin + "," + Role.ViewIntiniativeForUser)]
+        public HttpResponseMessage GetNames(HttpRequestMessage request, string name)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+
+                var data = _initiativeService.GetNames(name);
 
                 response = request.CreateResponse(HttpStatusCode.OK, data);
 

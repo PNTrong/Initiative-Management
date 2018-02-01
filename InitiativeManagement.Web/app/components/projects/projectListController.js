@@ -32,14 +32,13 @@
             FieldGroupId: -1,
             StartDate: new Date(),
             EndDate: new Date(),
-            AccountId: -1
+            AccountId: ""
         }
 
         $scope.visiblePopup = false;
 
         $scope.filterButton = {
-            icon: 'plus',
-            text: 'Lọc',
+            icon: 'filter',
             onClick: function (e) {
                 $scope.visiblePopup = true;
             }
@@ -59,20 +58,20 @@
         };
 
         $scope.addFilterButtonOptions = {
-            icon: 'plus',
+            icon: 'filter',
             text: 'Lọc',
             onClick: function (e) {
                 $scope.visiblePopup = false;
                 $scope.gridInstance.refresh();
-                $scope.filterOption = {
-                    Skip: 0,
-                    Take: 10,
-                    FieldId: -1,
-                    FieldGroupId: -1,
-                    StartDate: new Date(),
-                    EndDate: new Date(),
-                    AccountId: -1
-                }
+                // $scope.filterOption = {
+                //     Skip: 0,
+                //     Take: 10,
+                //     FieldId: -1,
+                //     FieldGroupId: -1,
+                //     StartDate: new Date(),
+                //     EndDate: new Date(),
+                //     AccountId: ""
+                // }
             }
         }
 
@@ -82,8 +81,10 @@
             placeholder:'Chọn giá trị',
             valueExpr: 'Id',
             width: 300,
+            showClearButton: true,
             bindingOptions: {
-                dataSource: 'fieldGroups'
+                dataSource: 'fieldGroups',
+                value: 'filterOption.FieldGroupId',
             }, 
             onValueChanged: function (e) {
                 $scope.isFieldDisabled = true;
@@ -101,7 +102,7 @@
                 var config = {
                     params: parameters
                 };
-                console.log(loadOptions);
+                console.log(parameters);
                 
                 authenticationService.setHeader();
 
