@@ -30,7 +30,7 @@
             Take: 10,
             FieldId: -1,
             FieldGroupId: -1,
-            StartDate: new Date(),
+            StartDate: moment(),
             EndDate: new Date(),
             AccountId: ""
         }
