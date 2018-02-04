@@ -6,7 +6,9 @@
                 userName: "",
                 password: ""
             };
-            
+
+            $scope.year = new Date().getFullYear();
+
             $rootScope.bodylayout = 'login-page ls-closed';
             
             $scope.loginSubmit = function () {

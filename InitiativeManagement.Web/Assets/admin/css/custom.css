@@ -157,90 +157,153 @@ body {
     font-size: 13px;
 }
 
-/*css login page*/
-.lead {
-    text-align: center;
-    padding-bottom: 5%;
-}
 
-.headerLogin {
-    text-align: center;
-    font-weight: 600;
-    padding-top: 14%;
-    margin-bottom: 0%;
-}
-
-.wrapperLogin {
-    background-color: #F3F5F8;
+/*Add login*/
+body {
     height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    overflow: auto;
+    position: relative;
 }
 
-.contain {
-    padding-top: 7%;
-    padding-right: 14%;
-    padding-bottom: 7%;
-    padding-left: 14%;
-    height: 590px;
+.mg-0 {
+    margin: 0;
 }
 
-.loginleft {
-    height: 100%;
-    background-color: #FFFFFF;
+.pd-0 {
+    padding: 0;
 }
 
-.loginright {
-    height: 100%;
-    background-image: url('../img/login.PNG');
-    background-repeat: no-repeat;
+.pt-0 {
+    padding-top: 0;
+}
+
+.pb-0 {
+    padding-bottom: 0;
+}
+
+.mt-30 {
+    margin-top: 30px;
+}
+
+.mt-50 {
+    margin-top: 50px;
+}
+
+.background {
+    background: #605ca8;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.bg-border {
+    position: absolute;
+    background: white;
+    width: 100px;
+    height: 105%;
+    right: -52px;
+    top: -10px;
+    z-index: 1;
+    transform: rotate(-6deg);
+    -ms-transform: rotate(-6deg); /* IE 9 */
+    -webkit-transform: rotate(-6deg); /* Safari */
+}
+
+.bg-image {
+    height: 100vh;
+    background: url("../img/back-ground.jpg") transparent no-repeat;
     background-size: cover;
+    width: 100%;
+    opacity: 0.4;
 }
 
-.checkbox, .radio {
-    padding-left: 20px;
+.texts {
+    position: absolute;
+    top: 30%;
+    left: 35%;
+    max-width: 260px;
 }
 
-.btnLogin {
-    background-color: #39AAFD;
-    border-color: #39AAFD;
-}
-
-    .btnLogin:hover {
-        border-color: #39AAFD;
-        background-color: #337ab7;
+    .texts .you-cannot {
+        font-family: "Times New Roman";
+        color: white;
+        font-size: 26px;
+        margin-bottom: 30px;
     }
 
-.overlay {
-    display: inline-block;
-    vertical-align: middle;
-    position: absolute;
-    top: 0;
-    display: block;
-    width: 100%;
-    height: 100%;
-    background: rgba(99, 156, 185, 0.92);
+    .texts .start-tracking {
+        font-family: "Times New Roman";
+        font-size: 18px;
+        color: white;
+    }
+
+.login-form {
+    padding: 0;
 }
 
-.textLogin {
-    position: relative;
-    font-size: 26px;
-    font-weight: 300;
-    font-family: inherit;
-    padding-left: 5%;
-    color: #fff;
-    padding-top: 30%;
+.login-box {
+    max-width: 500px;
+    margin-left: 50px;
 }
 
-.textLoginContent {
-    position: relative;
-    font-size: 26px;
-    font-weight: 300;
-    font-family: inherit;
-    padding-left: 5%;
-    color: #fff;
+.field {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.login-title {
+    padding-bottom: 50px;
+    padding-top: 100px;
+    height: 25px;
+    font-family: 'Times New Roman';
+    font-size: 24px;
+    text-align: center;
+    color: #777777;
+}
+
+.rectangle {
+    padding: 30px 30px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.05);
+}
+
+.login-title .title {
+    text-align: left;
+    color: #777777;
+}
+
+.forgot-password {
+    font-family: 'Times New Roman';
+    font-size: 14px;
+    text-align: right;
+    color: #39a0d3;
+}
+
+.do-not-have-an-acc {
+    padding: 20px 0px;
+    font-family: 'Times New Roman';
+    font-size: 14px;
+    text-align: center;
+    margin-top: 30px;
+    color: #777777;
+    border-top: 1px solid #eeeeee;
+}
+
+.footer-box {
+    position: fixed;
+    bottom: 15px;
+}
+
+.footer-text-left {
+    font-family: 'Times New Roman';
+    font-size: 12px;
+    text-align: center;
+    color: #02a798;
+}
+
+.footer-text-right {
+    font-family: 'Times New Roman';
+    font-size: 12px;
+    text-align: center;
+    color: #777777;
 }

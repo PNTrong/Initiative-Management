@@ -49,7 +49,7 @@
                 abstract: true
             }).state('login', {
                 url: "/login",
-                templateUrl: "/app/components/login/loginViewNew.html",
+                templateUrl: "/app/components/login/loginView.html",
                 controller: "loginController",
             })
             .state('home', {
