@@ -23,11 +23,6 @@
     <link href="~/Assets/admin/libs/devextreme/css/dx.common.css" rel="stylesheet" />
     <link href="~/Assets/admin/libs/devextreme/css/dx.light.css" rel="stylesheet" />
     <link href="~/Assets/admin/css/custom.css" rel="stylesheet" />
-</head>
-<body class="sidebar-mini skin-purple-light" ng-app="InitiativeManagement" ng-controller="rootController">
-    <div ui-view></div>
-    <!-- Site wrapper -->
-    <!-- jQuery 2.1.4 -->
     <script src="~/Assets/admin/libs/jquery/dist/jquery.js"></script>
     <!-- Bootstrap 3.3.5 -->
     <script src="~/Assets/admin/libs/bootstrap/dist/js/bootstrap.js"></script>
@@ -47,12 +42,14 @@
     <script src="~/Assets/admin/libs/ngBootbox/ngBootbox.js"></script>
     <script src="~/Assets/admin/libs/angular-local-storage/dist/angular-local-storage.js"></script>
     <script src="~/Assets/admin/libs/angular-loading-bar/build/loading-bar.js"></script>
+    <script src="~/Assets/admin/libs/angular-animate/angular-animate.min.js"></script>
     <script src="~/Assets/admin/libs/checklist-model/checklist-model.js"></script>
     <script src="~/app/shared/modules/InitiativeManagement.common.js"></script>
     <script src="~/app/shared/constants/roleConstants.js"></script>
     <script src="~/app/shared/filters/statusFilter.js"></script>
     <script src="~/app/shared/services/apiService.js"></script>
     <script src="~/app/shared/directives/hasPermission.js"></script>
+    <script src="~/app/shared/directives/hasUserPermission.js"></script>
     <script src="~/app/shared/directives/pagerDirective.js"></script>
     <script src="~/app/shared/directives/asDateDirective.js"></script>
     <script src="~/app/shared/services/notificationService.js"></script>
@@ -81,8 +78,6 @@
     <script src="~/app/components/application_users/applicationUserAddController.js"></script>
     <script src="~/app/components/application_users/applicationUserEditController.js"></script>
     <script src="~/app/components/application_users/applicationUserListController.js"></script>
-    @*<script src="~/app/components/initiatives/initiativeAddController.js"></script>
-        <script src="~/app/components/initiatives/initiativeListViewController.js"></script>*@
     <script src="~/app/components/field_groups/fieldGroupAddController.js"></script>
     <script src="~/app/components/field_groups/fieldGroupListController.js"></script>
     <script src="~/app/components/fields/fieldAddController.js"></script>
@@ -92,5 +87,10 @@
     <!-- sang kien -->
     <script src="~/app/components/projects/projectListController.js"></script>
     <script src="~/app/components/projects/projectAddController.js"></script>
+</head>
+<body class="sidebar-mini skin-purple-light" ng-app="InitiativeManagement" ng-controller="rootController">
+    <div ui-view></div>
+    <!-- Site wrapper -->
+    <!-- jQuery 2.1.4 -->
 </body>
 </html>

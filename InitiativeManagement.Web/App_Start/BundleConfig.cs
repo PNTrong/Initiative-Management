@@ -25,6 +25,9 @@ namespace InitiativeManagement.Web
                 .Include("~/Assets/client/css/style.css", new CssRewriteUrlTransform())
                 .Include("~/Assets/client/css/custom.css", new CssRewriteUrlTransform())
                 );
+
+            bundles.Add(new ScriptBundle("~/js/jsBundle").Include("~/Assets/admin/libs/jquery/dist/jquery.js",
+                "~/Assets/admin/libs/devextreme/js/dx.all.js"));
             BundleTable.EnableOptimizations = bool.Parse(ConfigHelper.GetByKey("EnableBundles"));
         }
     }

@@ -23,7 +23,11 @@ namespace InitiativeManagement.Model.Models
         /// <summary>
         /// the account that create new a initiative from admin account
         /// </summary>
+        [Required]
         public string AccountId { get; set; }
+
+        [ForeignKey("AccountId")]
+        public virtual ApplicationUser ApplicationUser { set; get; }
 
         /// <summary>
         /// the admin account added a new initiative for sub-account ( for a specific account user)

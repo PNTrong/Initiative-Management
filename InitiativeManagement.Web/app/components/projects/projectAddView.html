@@ -37,7 +37,7 @@
                                         message: 'Tên sáng kiến kinh nghiệm phải ít nhất 10 ký tự'}]
                                     }"></div>
                             </div>
-                            <div class="form-group" has-permission='CreateIntiniativeForAdmin'>
+                            <div class="form-group" has-permission="CreateIntiniativeForAdmin">
                                 <label class="control-label">Đơn vị nộp đơn</label>
                                     <div dx-select-box="{
                                         displayExpr: 'Text',
@@ -47,7 +47,7 @@
                                         height:40,
                                         bindingOptions: {
                                             dataSource: 'users',
-                                            value: 'initiative.AdminAccountId'
+                                            value: 'initiative.AccountId'
                                         }
                                     }" dx-validator="{
                                         validationRules: [{

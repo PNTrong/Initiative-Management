@@ -6,14 +6,14 @@ namespace InitiativeManagement.Common
     {
         public DynamicFilter()
         {
-            EndTime = DateTime.MaxValue;
-            StartTime = DateTime.MinValue;
             Skip = 0;
             Take = 10;
             FieldId = -1;
             FieldGroupId = -1;
             AccountId = "";
             Keyword = "";
+            StartDate = "";
+            EndDate = "";
         }
 
         public int Skip { get; set; }
@@ -32,8 +32,8 @@ namespace InitiativeManagement.Common
 
         public int? FieldGroupId { get; set; }
 
-        public DateTime StartTime { get; set; }
+        public string StartDate { get; set; }
 
-        public DateTime EndTime { get; set; }
+        public string EndDate { get; set; }
     }
 }

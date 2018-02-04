@@ -8,6 +8,8 @@
             'InitiativeManagement.application_users',
             'InitiativeManagement.fields',
             'InitiativeManagement.field_groups',
+            'dx',
+            'ngAnimate',
             'InitiativeManagement.common'])
         .config(config)
         .config(configAuthentication)

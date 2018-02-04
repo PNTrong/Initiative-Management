@@ -297,7 +297,7 @@
             AchievedByAnothers: "",
             AuthorGroupId: null,
             AppraisalBoardCommnetId: null,
-            AdminAccountId: null,
+            AccountId: null,
             Authors: [],
         }
 

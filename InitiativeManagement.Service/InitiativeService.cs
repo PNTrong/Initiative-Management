@@ -4,6 +4,7 @@ using InitiativeManagement.Data.Repositories;
 using InitiativeManagement.Model.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace InitiativeManagement.Service
@@ -19,6 +20,8 @@ namespace InitiativeManagement.Service
         IEnumerable<Initiative> GetAll();
 
         IEnumerable<Initiative> GetMulti();
+
+        IEnumerable<Initiative> GetByIds(List<int> ids);
 
         IEnumerable<Initiative> GetAll(DynamicFilter fiter, out int totalCount, List<string> roles, string userId);
 
@@ -57,7 +60,18 @@ namespace InitiativeManagement.Service
         public bool Add(Initiative initiative, string userId)
         {
             // the user which is the name of the initiative
-            initiative.AccountId = userId;
+            //
+            if (string.IsNullOrEmpty(initiative.AccountId))
+            {
+                //
+                // For User role
+                initiative.AccountId = userId;
+            } else
+            {
+                //
+                // For Admin and SAdmin role
+                initiative.AdminAccountId = userId;
+            }
 
             initiative.IsDeactive = false;
 
@@ -89,6 +103,11 @@ namespace InitiativeManagement.Service
             return result;
         }
 
+        public IEnumerable<Initiative> GetByIds(List<int> ids)
+        {
+            return _initiativeRepository.GetMulti(x => ids.Contains(x.Id), new string[] { "Field", "ApplicationUser" });
+        }
+
         public Initiative Delete(int id)
         {
             throw new NotImplementedException();
@@ -111,20 +130,34 @@ namespace InitiativeManagement.Service
             // has permission to view all
             var keyword = filter.Keyword.ToLower();
 
+            DateTime startTime;
+            if (!DateTime.TryParse(filter.StartDate, out startTime))
+            {
+                // handle parse failure
+                startTime = DateTime.MinValue;
+            }
+
+            DateTime endTime;
+            if (!DateTime.TryParse(filter.EndDate, out endTime))
+            {
+                // handle parse failure
+                endTime = DateTime.MaxValue;
+            }
+
             if (roles.Any(x => x.Equals(Role.ViewIntiniativeForAdmin)))
             {
-                query = _initiativeRepository.GetMulti(x => !x.IsDeactive && x.DateCreated >= filter.StartTime && x.DateCreated <= filter.EndTime && x.AccountId.Contains(filter.AccountId)
+                query = _initiativeRepository.GetMulti(x => !x.IsDeactive && DbFunctions.TruncateTime(x.DateCreated) >= startTime && DbFunctions.TruncateTime(x.DateCreated) <= endTime && x.AccountId.Contains(filter.AccountId)
                 && (x.Title.ToLower().Contains(keyword)
                 || x.KnowSolutionContent.ToLower().Contains(keyword)
-                || x.ImprovedContent.ToLower().Contains(keyword)), new string[] { "Field" });
+                || x.ImprovedContent.ToLower().Contains(keyword)), new string[] { "Field", "ApplicationUser" });
             }
             else
             {
                 query = _initiativeRepository.GetMulti(x => !x.IsDeactive && x.AccountId == userId
-                    && x.DateCreated.Date >= filter.StartTime.Date && x.DateCreated.Date <= filter.EndTime.Date
+                    && DbFunctions.TruncateTime(x.DateCreated) >= startTime && DbFunctions.TruncateTime(x.DateCreated) <= endTime
                     && (x.Title.ToLower().Contains(keyword)
                     || x.KnowSolutionContent.ToLower().Contains(keyword)
-                    || x.ImprovedContent.ToLower().Contains(keyword)), new string[] { "Field" });
+                    || x.ImprovedContent.ToLower().Contains(keyword)), new string[] { "Field", "ApplicationUser" });
             }
 
             if (filter.FieldId > -1)

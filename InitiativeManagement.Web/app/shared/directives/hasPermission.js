@@ -1,7 +1,7 @@
 (function (app) {
     'use strict';
-
-    app.directive('hasPermission', function (permissions) {
+    // TODO: not use this
+    app.directive('hasPermissionSource', function (permissions) {
         return {
             link: function (scope, element, attrs) {
                 // if (!_.isString(attrs.hasPermission)) {

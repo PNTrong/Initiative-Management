@@ -6,19 +6,27 @@
     function commonService() {
         return {
             getSeoTitle: getSeoTitle,
-            getRole: getRole
+            getMonthAgo: getMonthAgo,
+            formatTime: formatTime,
+            compareDateTime: compareDateTime            
         }
 
-        function getRole(roles){
-            if(roles.indexOf("ADMIN") >= 0){
-                return "ADMIN";
-            }
+        function getMonthAgo() {
+            return moment().subtract(1, 'months');
+        }
 
-            if(roles.indexOf("ADVANCEDROLE") >= 0){
-                return "ADVANCEDROLE";
-            }
+        function formatTime(input) {
+            if(!input) {return "";}
 
-            return "BASEROLE";
+            return moment(input).format("YYYY-MM-DD");;
+        }
+
+        function compareDateTime(dateTimeA, dateTimeB) {
+            var momentA = moment(dateTimeA,"DD/MM/YYYY");
+            var momentB = moment(dateTimeB,"DD/MM/YYYY");
+            if (momentA > momentB) return 1;
+            else if (momentA < momentB) return -1;
+            else return 0;
         }
 
         function getSeoTitle(input) {

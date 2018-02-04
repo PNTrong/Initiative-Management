@@ -10,6 +10,7 @@ using InitiativeManagement.Web.Models;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -37,17 +38,14 @@ namespace InitiativeManagement.Web.Api
 
         [HttpGet]
         [Route("export")]
-        public void Export(string filter)
+        public void Export(string ids)
         {
-            var filterObj = JsonConvert.DeserializeObject<DynamicFilter>(filter);
+            var listId = JsonConvert.DeserializeObject<List<int>>(ids);
 
-            var user = _userManager.FindById(User.Identity.GetUserId());
-
-            var roles = _applicationGroupService.GetRolesByUserId(user.Id).Select(x => x.Name).ToList();
-
-            var initiatives = _initiativeService.DownloadWord(filterObj, roles, user.Id);
+            var initiatives = _initiativeService.GetByIds(listId);
 
             Document doc = new Document();
+
             DocumentBuilder builder = new DocumentBuilder(doc);
 
             builder.PageSetup.Orientation = Orientation.Landscape;
@@ -169,6 +167,12 @@ namespace InitiativeManagement.Web.Api
             });
         }
 
+        /// <summary>
+        /// For get the list of the similar initiative name
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="name">The Initiative name</param>
+        /// <returns></returns>
         [Route("getnames")]
         [HttpGet]
         [Authorize(Roles = Role.ViewIntiniativeForAdmin + "," + Role.ViewIntiniativeForUser)]

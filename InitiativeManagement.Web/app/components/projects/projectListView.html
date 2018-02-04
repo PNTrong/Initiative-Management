@@ -17,12 +17,17 @@
 
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="box">
-            <div class="box-header" style="display: inline-flex">
-                <div style="margin-right: 10px" dx-text-box="textBox.search"></div>
-                <div dx-button="{icon: 'plus',text: 'Nộp đơn'}" ui-sref="add_project"></div>
-                <div dx-button="filterButton"></div>
-            </div>
+
             <div class="box-body">
+                <div class="box-header" style="display: inline-flex;position: absolute;top: 0;left: 0;z-index: 1;">
+                    <div style="margin-right: 10px" dx-text-box="textBox.search"></div>
+                    <div dx-button="{icon: 'plus',text: 'Nộp đơn'}" ui-sref="add_project"></div>
+                    <div dx-button="filterButton"></div>
+                    <div dx-button="{
+                        icon: 'download',
+                        onClick: export
+                    }"></div>
+                </div>
                 <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="data">
                     <div data-options="dxTemplate:{ name:'cellTemplate' }">
                         <div ng-if="data.value">
@@ -43,6 +48,7 @@
                         </div>
                     </div>
                 </div>
+                <div style="padding:5px 15px 5px; background-color: #ddd" ng-if="selectedRowKeys.length > 0">Tổng số sáng kiến bạn đã chọn: {{selectedRowKeys.length}}</div>
             </div>
         </div>
     </div>
@@ -79,7 +85,8 @@
                         width: 300,
                         bindingOptions: {
                             value: 'filterOption.StartDate'
-                        }
+                        },
+                        onValueChanged:compareDateFrom
                     }"></div>
                 </div>
                 <div class="form-group">
@@ -90,7 +97,8 @@
                         width: 300,
                         bindingOptions: {
                             value: 'filterOption.EndDate'
-                        }
+                        },
+                        onValueChanged:compareDateTo
                     }"></div>
                 </div>
             </div>
