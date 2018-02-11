@@ -10,6 +10,14 @@ body {
     font-size: 13px;
 }
 
+.content-header h4 {
+    font-size: 18px;
+    color: #000; 
+    margin: 0;
+    padding-bottom: 15px;
+    line-height: 28px;
+}
+
 /*Overide Devextreme*/
 .dx-widget {
     font-size: 13px;
