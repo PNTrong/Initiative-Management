@@ -3,7 +3,6 @@
 
     app.directive('hasPermission', function ($animate, permissions) {
         function toBoolean(value, scope) {
-            debugger;
             if (!value || value.length === 0) {
                 return false;
             }
@@ -34,7 +33,6 @@
             terminal: true,
             link: function ($scope, $element, $attr, ctrl, $transclude) {
                 var block, childScope;
-                debugger;
                 $scope.$watch($attr.hasPermission, function () {
                     if (toBoolean($attr.hasPermission, $scope)) {
                         if (!childScope) {

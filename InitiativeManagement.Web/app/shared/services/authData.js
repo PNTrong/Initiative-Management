@@ -6,7 +6,7 @@
         var authentication = {
             IsAuthenticated: false,
             userName: "",
-            IsPermissionLoad: false,
+            IsPermissionLoad: false
         };
 
         authDataFactory.authenticationData = authentication;

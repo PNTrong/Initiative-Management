@@ -4,9 +4,9 @@
     function homeController(authenticationService, $scope, $window, $rootScope, apiService) {
         $rootScope.$on('$locationChangeStart', function (event, current, previous) {
             //reload when user is logged in.
-            if (previous.includes('login')) {
-                $window.location.reload(); 
-            }
+            // if (previous.includes('login')) {
+            //     $window.location.reload(); 
+            // }
         }); 
 
         $scope.doneButtonOptions = {

@@ -3,7 +3,7 @@ using InitiativeManagement.Service;
 using InitiativeManagement.Web.App_Start;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using System;
+using Microsoft.Owin.Security;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -13,6 +13,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using System.Web.Script.Serialization;
 
 namespace InitiativeManagement.Web.Api
 {
@@ -70,12 +71,15 @@ namespace InitiativeManagement.Web.Api
         }
 
         [HttpPost]
-        [Authorize]
         [Route("logout")]
         public HttpResponseMessage Logout(HttpRequestMessage request)
         {
             var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
             authenticationManager.SignOut();
+            // This does not actually perform logout! The OWIN OAuth implementation
+            // does not support "revoke OAuth token" (logout) by design.
+            authenticationManager.SignOut(DefaultAuthenticationTypes.ExternalBearer);
+            // Delete the user's session from the database (revoke its bearer token)
             return request.CreateResponse(HttpStatusCode.OK, new { success = true });
         }
 

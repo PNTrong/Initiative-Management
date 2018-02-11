@@ -255,7 +255,6 @@
         }
 
         function downloadFileFailed(){
-            debugger;
         }
 
         // load data

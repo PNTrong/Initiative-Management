@@ -1,8 +1,9 @@
 ﻿(function (app) {
     'use strict'; 
-    app.service('authenticationService', ['$http', '$q', 'localStorageService', 'authData', 
-        function ($http, $q, localStorageService, authData, ) {
+    app.service('authenticationService', ['$http', '$q', 'localStorageService', 'authData', 'permissions',
+        function ($http, $q, localStorageService, authData, permissions ) {
             var tokenInfo; 
+            var userAuthData;
 
             this.setTokenInfo = function (data) {
                 tokenInfo = data; 
@@ -20,11 +21,21 @@
 
             this.init = function () {
                 var tokenInfo = localStorageService.get("TokenInfo"); 
+                var userAuthData = localStorageService.get("userAuthData"); 
+                
                 if (tokenInfo) {
                     tokenInfo = JSON.parse(tokenInfo); 
                     authData.authenticationData.IsAuthenticated = true; 
                     authData.authenticationData.userName = tokenInfo.userName; 
                     authData.authenticationData.accessToken = tokenInfo.accessToken; 
+                }
+
+                if (userAuthData) {
+
+                    console.log("init data...");
+                    
+                    userAuthData = JSON.parse(userAuthData); 
+                    permissions.setPermissions(userAuthData);
                 }
             }
 
@@ -46,21 +57,19 @@
                 }); 
                 return deferred.promise; 
             }
+        
+            this.setPermissions = function (data) {
+                userAuthData = data; 
+                localStorageService.set("userAuthData", JSON.stringify(userAuthData)); 
+            }
             
-            // todo: remove this
-            this.getRole = function() {
-                return localStorageService.get("role"); 
-            }; 
-
-            // todo: remove this
-            this.removeRole = function() {
-                localStorageService.remove("role"); 
+            this.getPermissions = function () {
+                return userAuthData; 
             }
 
-            // todo: remove this
-            this.setRole = function(role) {
-                authData.authenticationData.Role = role;
-                localStorageService.set("role", role);
+            this.removePermissions = function () {
+                userAuthData = null; 
+                localStorageService.set("userAuthData", null); 
             }
 
             this.init(); 

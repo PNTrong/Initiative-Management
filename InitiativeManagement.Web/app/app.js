@@ -17,25 +17,8 @@
             $rootScope.$on('$stateChangeStart', function (event, toState) {
                 if (!authData.authenticationData.IsAuthenticated) {
                     $location.path('/login');
-                } else {
-                    if (!authData.authenticationData.IsPermissionLoad) {
-                        getPermission();
-                    }
                 }
             });
-
-            function getPermission() {
-                if (authData.authenticationData.IsAuthenticated) {
-                    apiService.get('/api/account/permission', null, function (res) {
-                        if (res.data) {
-                            permissions.setPermissions(res.data);
-                        }
-                        authData.authenticationData.IsPermissionLoad = true;
-                    }, function () {
-                        authData.authenticationData.IsPermissionLoad = false;
-                    });
-                }
-            }
         }]);
 
     config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];

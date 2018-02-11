@@ -19,7 +19,18 @@
                     authenticationService.setTokenInfo(userInfo);
                     authData.authenticationData.IsAuthenticated = true;
                     authData.authenticationData.userName = userName;
-                    deferred.resolve(null);
+                    //
+                    // get permission
+                    $http.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.access_token; 
+                    $http.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8'; 
+                    $http.get('/api/account/permission', null).then(function (res) {
+                        if (res.data) {
+                            permissions.setPermissions(res.data);
+                            authenticationService.setPermissions(res.data);
+                            authData.authenticationData.IsPermissionLoad = true;
+                            deferred.resolve(null);
+                        }
+                    });
                 }, function (err, status) {
                     authData.authenticationData.IsAuthenticated = false;
                     authData.authenticationData.userName = "";
